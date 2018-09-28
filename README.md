@@ -1,9 +1,9 @@
 # College Friend App - Let's talk about universities
 An amazing application to talk about public and private universities.
 
-[![Build Status](https://travis-ci.org/saidl14s/College-Friend-App.png?branch=master)]()
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/saidl14s/College-Friend-App/issues)
 
-[![Inline docs](http://inch-ci.org/github/saidl14s/College-Friend-App.svg?branch=master)]()
+[![Inline docs](http://inch-ci.org/github/saidl14s/College-Friend-App.svg?branch=master)](http://inch-ci.org/github/saidl14s/College-Friend-App)
 
 ## Problem detected
 At the time of graduating from high school, choosing which university to continue your studies becomes a problem when:  
