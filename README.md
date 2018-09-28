@@ -1,9 +1,11 @@
 # College Friend App - Let's talk about universities
 An amazing application to talk about public and private universities.
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/saidl14s/College-Friend-App/issues)
+![GitHub (pre-)release](https://img.shields.io/github/release/saidl14s/College-Friend-App/all.svg)
 
-[![Inline docs](http://inch-ci.org/github/saidl14s/College-Friend-App.svg?branch=master)](http://inch-ci.org/github/saidl14s/College-Friend-App)
+![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
+
+![Inline docs](http://inch-ci.org/github/saidl14s/College-Friend-App.svg?branch=master)
 
 ## Problem detected
 At the time of graduating from high school, choosing which university to continue your studies becomes a problem when:  
@@ -44,9 +46,7 @@ I have participated in various programming competitions, technological innovatio
 Active member of IEEE and president of IEEE Student Branch of the Technological Institute of Ciudad Guzmán, webmaster of IEEE Seccion Guadalajara.
 
 **Website:** [www.saidllamas.com](https://www.saidllamas.com)
-
 **Linkedin:** [saidllamas](https://www.linkedin.com/in/saidllamas/)
-
 **Twitter:** [@said_llamas](https://twitter.com/said_llamas)
 
 # Installation
