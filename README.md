@@ -20,7 +20,7 @@ An amazing application to talk about public and private universities.
 - [License](#license)
 # Project description
 ## Problem detected
-At the time of graduating from high school, choosing which university to continue your studies becomes a problem when:  
+At the time of graduating from middle school, choosing which university to continue your studies becomes a problem when:  
 
  - You do not have information about the professional careers that are offered or each time the registrations are opened.  
  - You do not know the qualities of the universities near you, such as economic and transportation support, sports or cultural activities, and even more important, what is their academic level and what graduate profiles they promise.  
@@ -44,11 +44,11 @@ College Friend App seeks to create an active community of people who share infor
 
 ## About me
 
-My specialty is project management in information technologies. I have several certifications in mobile programming, computer security, project management, algorithms and video games with augmented reality. I have solid knowledge in Java, C #, PHP, JavaScript, SQL. Experience in various frameworks such as Laravel, jQuery, Ajax. Experience with Wordpress, Joomla, Shopify, WHM, cPanel, VPS (Heroku and Digital Ocean).
+Hello, my name is Said Llamas, my specialty is project management in information technologies. I have several certifications in mobile programming, computer security, project management, algorithms and video games with augmented reality. I have solid knowledge in Java, C #, PHP, JavaScript, SQL. Experience in various frameworks such as Laravel, jQuery, Ajax. Experience with Wordpress, Joomla, Shopify, WHM, cPanel, VPS (Heroku and Digital Ocean).
 
 I have participated in various programming competitions, technological innovation and autumn programs.
 
-Active member of IEEE and president of IEEE Student Branch of the Technological Institute of Ciudad Guzmán, webmaster of IEEE Seccion Guadalajara.
+Active member of IEEE and president of IEEE Student Branch of the Technological Institute of Ciudad Guzmán, webmaster of IEEE Guadalajara Section.
 
 **Website:** [www.saidllamas.com](https://www.saidllamas.com)
 **Linkedin:** [saidllamas](https://www.linkedin.com/in/saidllamas/)
