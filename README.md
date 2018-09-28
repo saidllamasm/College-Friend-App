@@ -33,9 +33,13 @@ College Friend App seeks to create an active community of people who share infor
 # Team
 
 **Team Name:** DamVeloper Team
+
 **Category:** Social Networking
+
 **App Platfrom:** Android, iOS, Web
+
 **Referance:** Social media, Facebook
+
 **Technology Stack:** Ionic, Firebase, Digital Ocean with Debian.
 
 ## About me
