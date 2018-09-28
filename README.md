@@ -1,5 +1,6 @@
 # College Friend App - Let's talk about universities
 An amazing application to talk about public and private universities.
+
 [![Build Status](https://travis-ci.org/saidl14s/College-Friend-App.png?branch=master)]()
 
 [![Inline docs](http://inch-ci.org/github/saidl14s/College-Friend-App.svg?branch=master)]()
@@ -43,7 +44,9 @@ I have participated in various programming competitions, technological innovatio
 Active member of IEEE and president of IEEE Student Branch of the Technological Institute of Ciudad Guzmán, webmaster of IEEE Seccion Guadalajara.
 
 **Website:** [www.saidllamas.com](https://www.saidllamas.com)
+
 **Linkedin:** [saidllamas](https://www.linkedin.com/in/saidllamas/)
+
 **Twitter:** [@said_llamas](https://twitter.com/said_llamas)
 
 # Installation
