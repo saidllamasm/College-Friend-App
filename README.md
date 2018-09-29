@@ -1,13 +1,14 @@
 # College Friend App - Let's talk about universities
 An amazing application to talk about public and private universities.
 
+<img src="http://api.saidllamas.com/img/bg-blue.png" width="250px">
+
 ![GitHub (pre-)release](https://img.shields.io/github/release/saidl14s/College-Friend-App/all.svg)
 
 ![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 
 ![Inline docs](http://inch-ci.org/github/saidl14s/College-Friend-App.svg?branch=master)
 
-<img src="http://api.saidllamas.com/img/bg-blue.png" width="200px">
 
 # Table of content
 - [Project description](#project-description)
@@ -66,4 +67,4 @@ Version 3, 29 June 2007**
 
 
 ### Keywords:
-College, Student, Graduate, Friend, Inbox, Share, Picture, Ranking.
+College, Student, School, Social, Network, Graduate, Friend, Inbox, Share, Picture, Ranking.
