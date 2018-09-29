@@ -7,6 +7,8 @@ An amazing application to talk about public and private universities.
 
 ![Inline docs](http://inch-ci.org/github/saidl14s/College-Friend-App.svg?branch=master)
 
+![](http://api.saidllamas.com/img/bg-blue.png)
+
 # Table of content
 - [Project descriptionn](#project-description)
   * [Problem detected](#problem-detected)
