@@ -1,0 +1,48 @@
+// Hacks for font awesome icons in tabbar
+// see https://forum.ionicframework.com/t/anyway-to-custom-the-tabbars-icon-with-my-own-svg-file/46131/2
+// the content code of each fa-icon can be found here: 'node_modules/font-awesome/css/font-awesome.css'
+.fa-icons-general {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+}
+
+.ion-ios-fa-home::before,
+.ion-ios-fa-home-outline::before,
+.ion-md-fa-home::before {
+    @extend .fa-icons-general;
+    content: "\f015";
+}
+
+.ion-ios-fa-opinion::before,
+.ion-ios-fa-opinion-outline::before,
+.ion-md-fa-opinion::before {
+    @extend .fa-icons-general;
+    content: "\f044";
+}
+
+.ion-ios-fa-saved::before,
+.ion-ios-fa-saved-outline::before,
+.ion-md-fa-saved::before {
+    @extend .fa-icons-general;
+    //content: "\f02e";
+    content: "\f004";
+}
+
+.ion-ios-fa-chat::before,
+.ion-ios-fa-chat-outline::before,
+.ion-md-fa-chat::before {
+    @extend .fa-icons-general;
+    content: "\f086";
+}
+
+.ion-ios-fa-user::before,
+.ion-ios-fa-user-outline::before,
+.ion-md-fa-user::before {
+    @extend .fa-icons-general;
+    content: "\f007";
+}
