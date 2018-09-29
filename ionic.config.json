@@ -1,0 +1,7 @@
+{
+  "name": "College-Friend-App",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
