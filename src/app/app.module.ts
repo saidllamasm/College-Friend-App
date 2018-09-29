@@ -15,9 +15,21 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
-} 
+};
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCMu3nzZSdZ0Rde7fPU5naWYkx67E4SaII",
+  authDomain: "college-friend-app.firebaseapp.com",
+  databaseURL: "https://college-friend-app.firebaseio.com",
+  projectId: "college-friend-app",
+  storageBucket: "college-friend-app.appspot.com",
+  messagingSenderId: "330246446378"
+};
 
 @NgModule({
   declarations: [
@@ -37,7 +49,9 @@ export function HttpLoaderFactory(http: HttpClient) {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
       }
-    })      
+    }),
+    AngularFireModule.initializeApp(firebaseConfig,'demo104'),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

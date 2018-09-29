@@ -1,3 +1,7 @@
 page-home {
-
+    .search-toolbar {
+        height: 100px;
+        background-color: map-get($colors, primary);
+        ;
+    }
 }
