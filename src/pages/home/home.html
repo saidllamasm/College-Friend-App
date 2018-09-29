@@ -26,5 +26,7 @@
     <div class="list-universities-nearby">
         <ion-img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg"></ion-img>
         <span class="name-university">Academia de Música Fermatta</span>
+        <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+
     </div>
 </ion-content>

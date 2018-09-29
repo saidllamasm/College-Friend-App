@@ -82,4 +82,8 @@ export class HomePage {
     });
   }
 
+  onModelChange(event){
+alert(event);
+  }
+
 }

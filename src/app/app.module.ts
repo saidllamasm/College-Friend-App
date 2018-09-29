@@ -20,6 +20,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { GoogleMaps } from '@ionic-native/google-maps';
 
+// Import ionic2-rating module
+import { Ionic2RatingModule } from 'ionic2-rating';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 };
@@ -53,7 +56,8 @@ const firebaseConfig = {
       }
     }),
     AngularFireModule.initializeApp(firebaseConfig,'demo104'),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    Ionic2RatingModule // Put ionic2-rating module here
   ],
   bootstrap: [IonicApp],
   entryComponents: [
