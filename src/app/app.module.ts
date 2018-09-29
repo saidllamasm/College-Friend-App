@@ -25,6 +25,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 // Import ionic2-rating module
 import { Ionic2RatingModule } from 'ionic2-rating';
 
+import { Calendar } from '@ionic-native/calendar';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 };
@@ -77,6 +79,7 @@ const firebaseConfig = {
     StatusBar,
     SplashScreen,
     GoogleMaps,
+    Calendar,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -35,28 +35,118 @@ page-home {
         width: 100%;
         //background: map-get($colors, light);
     }
-    .list-universities-nearby {}
+    .single-university {
+        border: 2px solid #F5F5F5;
+    }
+    .list-universities-nearby,
+    .list-universities-valuet {
+        margin-bottom: 15px;
+    }
     .img-circle {
         border-radius: 50%;
     }
     .img-university {
         height: 60px;
         width: 60px;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
     .name-university {
         color: #707070;
+        font-size: 14px;
     }
     // ranking
     ul {
         padding: 0px;
         &.rating li {
-            padding: 5px 10px !important;
+            padding: 0px 5px !important;
             background: none;
             color: map-get($colors, primary);
             ;
             ion-icon {
                 font-size: 30px;
             }
+        }
+    }
+    //calendario
+    [col-1] {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 8.33333%;
+        -ms-flex: 0 0 8.33333%;
+        flex: 0 0 14.285714285714286%;
+        width: 14.285714285714286%;
+        max-width: 14.285714285714286%;
+    }
+    .col {
+        text-align: center;
+        padding: 5px;
+    }
+    .last-month,
+    .next-month {
+        color: #999999;
+        font-size: 90%;
+    }
+    .currentDate,
+    .otherDate {
+        padding: 5px;
+    }
+    .currentDate {
+        font-weight: bold;
+        background-color: map-get($colors, dark);
+        color: white;
+        border-radius: 30px;
+    }
+    .calendar-header {
+        background-color: map-get($colors, primary);
+        ;
+        -webkit-border-top-left-radius: 20px;
+        -webkit-border-top-right-radius: 20px;
+        -moz-border-radius-topleft: 20px;
+        -moz-border-radius-topright: 20px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        color: #FFFFFF;
+    }
+    .event-bullet {
+        margin: 2px auto;
+        height: 5px;
+        width: 5px;
+        background-color: map-get($colors, primary);
+        ;
+        border-radius: 30px;
+    }
+    .selected-date {
+        width: 20px;
+        height: 2px;
+        background-color: red;
+    }
+    .unselected-date {
+        border: none;
+    }
+    .calendar-body {
+        .grid {
+            padding: 0;
+        }
+        .col:last-child {
+            border-right: none;
+        }
+        .calendar-weekday,
+        .calendar-date {
+            text-align: center;
+            margin: 0;
+        }
+        .calendar-weekday {
+            font-weight: bold;
+            border-bottom: solid 1px map-get($colors, primary);
+            ;
+            background-color: map-get($colors, primary);
+            ;
+        }
+        .calendar-date {
+            border-top: solid 1px map-get($colors, primary);
+            ;
+            border-bottom: solid 1px map-get($colors, primary);
+            ;
         }
     }
 }

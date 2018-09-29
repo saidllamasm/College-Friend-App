@@ -9,6 +9,16 @@
     "Inicio": {
         "buscar_universidad": "Search Universities",
         "universidades_destacadas": "Featured Universities",
-        "universidades_cercanas": "Nearby Universities"
+        "universidades_cercanas": "Nearby Universities",
+        "universidades_evaluadas": "Most Valued Universities"
+    },
+    "Semana": {
+        "Lunes": "Su",
+        "Martes": "Mo",
+        "Miercoles": "Tu",
+        "Jueves": "We",
+        "Viernes": "Th",
+        "Sabado": "Fr",
+        "Domingo": "Sa"
     }
 }
