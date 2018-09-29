@@ -13,8 +13,11 @@ log.txt
 npm-debug.log*
 
 .idea/
+<<<<<<< HEAD
 .ionic/
 .sourcemaps/
+=======
+>>>>>>> e5a728859e97c315fe75a768d30d092d104d2f74
 .sass-cache/
 .tmp/
 .versions/
@@ -23,10 +26,19 @@ dist/
 node_modules/
 tmp/
 temp/
+<<<<<<< HEAD
+=======
+hooks/
+>>>>>>> e5a728859e97c315fe75a768d30d092d104d2f74
 platforms/
 plugins/
 plugins/android.json
 plugins/ios.json
+<<<<<<< HEAD
+=======
+resources/android/
+resources/ios/
+>>>>>>> e5a728859e97c315fe75a768d30d092d104d2f74
 www/
 $RECYCLE.BIN/
 
