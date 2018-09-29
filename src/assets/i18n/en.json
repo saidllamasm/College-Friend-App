@@ -8,6 +8,7 @@
     },
     "Inicio": {
         "buscar_universidad": "Search Universities",
-        "universidades_destacadas": "Featured Universities"
+        "universidades_destacadas": "Featured Universities",
+        "universidades_cercanas": "Nearby Universities"
     }
 }

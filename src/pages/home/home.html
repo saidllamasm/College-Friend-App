@@ -1,8 +1,30 @@
 <ion-header>
-    <div class="search-toolbar"></div>
+    <div class="search-toolbar">
+        <input type="text" class="txt-search" placeholder="{{ 'Inicio.buscar_universidad' | translate}}">
+    </div>
 </ion-header>
 
-<ion-content>
-    <!--{{"Inicio.buscar_universidad" | translate}} {{"Inicio.universidades_destacadas" | translate}}-->
-
+<ion-content padding>
+    <span class="title">{{"Inicio.universidades_destacadas" | translate}}</span>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-img class="img-round img-university-feature" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg"></ion-img>
+            </ion-col>
+            <ion-col>
+                <ion-img class="img-round img-university-feature" src="https://pix10.agoda.net/hotelImages/179/179339/179339_14061817480019911570.jpg?s=1024x768"></ion-img>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-img class="img-round img-university-feature" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg"></ion-img>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <span class="title">{{"Inicio.universidades_cercanas" | translate}}</span>
+    <div id="map_canvas"></div>
+    <div class="list-universities-nearby">
+        <ion-img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg"></ion-img>
+        <span class="name-university">Academia de Música Fermatta</span>
+    </div>
 </ion-content>
