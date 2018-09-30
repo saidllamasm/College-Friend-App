@@ -21,5 +21,15 @@
         "Viernes": "Th",
         "Sabado": "Fr",
         "Domingo": "Sa"
+    },
+    "Perfil": {
+        "user_name": "Name",
+        "user_phone": "Phone number",
+        "user_email": "Email address",
+        "Ajustes": {
+            "Ajustes": "Settings",
+            "Miembro": "looking for university",
+            "Notificaciones": "receive notifications"
+        }
     }
 }

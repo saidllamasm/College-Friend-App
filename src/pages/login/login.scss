@@ -1,0 +1,50 @@
+page-login {
+    .link-white {
+        color: #fff;
+    }
+    .bg-primary {
+        background-color: #3880FF;
+        color: #fff;
+        font-family: 'Comfortaa', Regular
+    }
+    .btn {
+        padding: 10px;
+        width: 100%;
+        font-size: 16px;
+        -webkit-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.75);
+    }
+    .btn-login {
+        background-color: #7CAFFF;
+        color: #fff;
+    }
+    .btn.active {
+        border-top: 1px solid #fff;
+    }
+    .btn-action {
+        background-color: #4DD87B;
+        color: #fff;
+        border-radius: 10px;
+    }
+    .btn-twitter {
+        background-color: #39AAF3;
+        color: #fff;
+    }
+    .btn-facebook {
+        background-color: #3D539E;
+        color: #fff;
+    }
+    .input-blank {
+        background-color: #fff;
+    }
+    .input-border_down {
+        border-bottom: 1px solid #F2F2F2;
+    }
+    .img-logo {
+        width: 140px;
+        height: 140px;
+    }
+    .tabs-login {
+        display: flex;
+    }
+}

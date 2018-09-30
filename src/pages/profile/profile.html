@@ -5,14 +5,47 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Profile</ion-title>
-  </ion-navbar>
-
+    <div class="header-container">
+        <div class="ctrol-profile">
+            <button class="btn btn-circle white left"> <i class="fa fa-door-pencil" aria-hidden="true"></i> </button>
+            <button class="btn btn-circle white right"> <i class="fa fa-door-pencil" aria-hidden="true"></i> </button>
+        </div>
+        <img class="photo-user" src="http://placehold.it/80x80" alt="">
+    </div>
 </ion-header>
 
 
 <ion-content padding>
-
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <label>{{"Perfil.user_name" | translate}}</label>
+                <input type="text" placeholder="Jesus Said Llamas Manriquez">
+            </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+            <ion-col>
+                <label>{{"Perfil.user_phone" | translate}}</label>
+                <input type="tel" placeholder="341 124 4332">
+            </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+            <ion-col>
+                <label>{{"Perfil.user_email" | translate}}</label>
+                <input type="email" placeholder="said@ieee.org">
+            </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+            <ion-col>
+                <label>{{"Perfil.Ajustes.Ajustes" | translate}}</label>
+                <label>{{"Perfil.Ajustes.Miembro" | translate}}</label>
+                <ion-checkbox [(ngModel)]="sausage" disabled="true"></ion-checkbox>
+                <label>{{"Perfil.Ajustes.Notificaciones" | translate}}</label>
+                <ion-checkbox [(ngModel)]="sausage" disabled="true"></ion-checkbox>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
