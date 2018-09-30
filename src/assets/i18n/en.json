@@ -31,5 +31,11 @@
             "Miembro": "looking for university",
             "Notificaciones": "receive notifications"
         }
+    },
+    "Universidad": {
+        "Sitio_web": "Website",
+        "Telefono": "Phone",
+        "Mapa": "Map",
+        "Opinar": "review"
     }
 }

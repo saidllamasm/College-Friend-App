@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Calendar } from '@ionic-native/calendar';
 import { mapStyle } from './mapStyle';
+import { SingleUniversityPage } from '../single-university/single-university';
 
 import {
   GoogleMaps,
@@ -226,5 +227,9 @@ alert(event);
 
   fun(){
     alert('calendar');
+  }
+
+  viewUniversity(){
+    this.navCtrl.setRoot(SingleUniversityPage);
   }
 }

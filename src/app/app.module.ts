@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
+import { SingleUniversityPage } from '../pages/single-university/single-university';
 import { OpinionsPage } from '../pages/opinions/opinions';
 import { SavedPage } from '../pages/saved/saved';
 import { InboxPage } from '../pages/inbox/inbox';
@@ -48,7 +49,8 @@ const firebaseConfig = {
     InboxPage,
     ProfilePage,
     HomePage,
-    TabsPage
+    TabsPage,
+    SingleUniversityPage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ const firebaseConfig = {
     InboxPage,
     ProfilePage,
     HomePage,
-    TabsPage
+    TabsPage,
+    SingleUniversityPage
   ],
   providers: [
     StatusBar,
