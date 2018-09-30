@@ -224,4 +224,7 @@ alert(event);
     alert.present();
   }
 
+  fun(){
+    alert('calendar');
+  }
 }

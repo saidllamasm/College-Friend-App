@@ -1,6 +1,6 @@
 {
     "Tabs": {
-        "Inicio": "HOME",
+        "Inicio": "Home",
         "Opiniones": "Opinions",
         "Guardado": "Saved",
         "Chat": "Chat",
@@ -10,7 +10,8 @@
         "buscar_universidad": "Search Universities",
         "universidades_destacadas": "Featured Universities",
         "universidades_cercanas": "Nearby Universities",
-        "universidades_evaluadas": "Most Valued Universities"
+        "universidades_evaluadas": "Most Valued Universities",
+        "inicio_proximo": "Start of courses soon"
     },
     "Semana": {
         "Lunes": "Su",

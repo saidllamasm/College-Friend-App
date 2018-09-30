@@ -112,7 +112,6 @@ page-home {
         height: 5px;
         width: 5px;
         background-color: map-get($colors, primary);
-        ;
         border-radius: 30px;
     }
     .selected-date {
@@ -138,15 +137,58 @@ page-home {
         .calendar-weekday {
             font-weight: bold;
             border-bottom: solid 1px map-get($colors, primary);
-            ;
             background-color: map-get($colors, primary);
-            ;
         }
         .calendar-date {
             border-top: solid 1px map-get($colors, primary);
-            ;
             border-bottom: solid 1px map-get($colors, primary);
-            ;
         }
+    }
+    .single-university-soon {
+        padding: 0px;
+    }
+    .button-view {
+        float: left;
+        position: absolute;
+        left: -2px;
+        top: 0px;
+        background-color: map-get($colors, primary);
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        -webkit-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
+        -moz-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
+        box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
+    }
+    .button-view ion-icon {
+        margin-top: 8px;
+        color: #fff;
+        font-size: 38px;
+    }
+    .border-blue {
+        -webkit-border-radius: 100px;
+        -webkit-border-top-right-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -moz-border-radius: 100px;
+        -moz-border-radius-topright: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-radius: 100px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border: 1px solid map-get($colors, primary);
+        color: #707070;
+        -webkit-box-shadow: 0px 4px 15px -4px rgba(0, 0, 0, 0.65);
+        -moz-box-shadow: 0px 4px 15px -4px rgba(0, 0, 0, 0.65);
+        box-shadow: 0px 4px 15px -4px rgba(0, 0, 0, 0.65);
+    }
+    .date-soon {
+        font-size: 11px;
+    }
+    .content-soon {
+        margin-left: 35px;
+        display: block;
+    }
+    .border-blue {
+        padding: 12px;
     }
 }
