@@ -59,7 +59,6 @@ export class HomePage {
   ) {
     if (this.plt.is('android')) {
       statusBar.backgroundColorByHexString('#0055CB');
-      alert('jupi! android');
     }
     
     this.loadMap();

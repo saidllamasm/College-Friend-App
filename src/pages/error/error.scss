@@ -2,4 +2,55 @@ page-error {
     .bg {
         background-color: map-get($colors, primary);
     }
+    .title-red {
+        color: map-get($colors, danger);
+    }
+    .txt {
+        color: #707070;
+    }
+    .center-content {
+        width: 100%;
+        text-align: center;
+    }
+    .btn-reload {
+        height: 48px;
+        width: 48px;
+        border-radius: 50%;
+        background-color: map-get($colors, primary);
+        color: #fff;
+        -webkit-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
+        -moz-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
+        box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
+        transition: all .35s;
+    }
+    .btn-reload:hover {
+        height: 56px;
+        width: 56px;
+        font-size: 20px;
+        -webkit-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.85);
+        -moz-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.85);
+        box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.85);
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+    .container-bg {
+        float: unset;
+        width: 100%;
+        text-align: center;
+    }
+    svg {
+        width: 45%;
+        color: #fff;
+    }
+    .icon-swing {
+        text-align: center;
+    }
+    .olas {
+        float: left;
+        width: 80%;
+    }
+    .rigth {
+        float: right;
+        width: 50%;
+    }
 }
