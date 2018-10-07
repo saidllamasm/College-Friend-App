@@ -1,0 +1,44 @@
+{
+    "Tabs": {
+        "Inicio": " ",
+        "Opiniones": " ",
+        "Guardado": " ",
+        "Chat": " ",
+        "Perfil": " "
+    },
+    "Inicio": {
+        "buscar_universidad": " ",
+        "universidades_destacadas": " ",
+        "universidades_cercanas": " ",
+        "universidades_evaluadas": " ",
+        "inicio_proximo": " "
+    },
+    "Semana": {
+        "Lunes": " ",
+        "Martes": " ",
+        "Miercoles": " ",
+        "Jueves": " ",
+        "Viernes": " ",
+        "Sabado": " ",
+        "Domingo": " "
+    },
+    "Perfil": {
+        "user_name": " ",
+        "user_phone": " ",
+        "user_email": " ",
+        "Ajustes": {
+            "Ajustes": " ",
+            "Miembro": " ",
+            "Notificaciones": " "
+        }
+    },
+    "Universidad": {
+        "Sitio_web": " ",
+        "Telefono": " ",
+        "Mapa": " ",
+        "Opinar": " "
+    },
+    "Opiniones": {
+        "Opiniones": " "
+    }
+}

@@ -58,9 +58,52 @@ Active member of IEEE and president of IEEE Student Branch of the Technological 
 **Twitter:** [@said_llamas](https://twitter.com/said_llamas)
 
 # Installation
-# Usage
+# Language
+ - Español
+ - English
+ - Português
+ - Francais
+
+## ISO Language Code Table
+| Code | Name |
+|--|--|
+| es  | Español
+| es-AR | Spanish (Argentina)
+| es-BO  |
+| es-CL |
+| es-CO |
+| es-CR |
+| es-DO  |
+| es-EC"  |
+| es-ES |
+| es-GT  |
+| es-HN |
+| es-MX |
+| es-NI  |
+| es-PA |
+| es-PE  |
+| es-PR |
+| es-PY |
+| es-SV  |
+|es-UY |
+| es-VE  |
+
 # Contributing
 # Credits
+
+### Libraries
+- [https://github.com/ionic-team/ionic-native-google-maps/blob/master/documents/README.md](https://github.com/ionic-team/ionic-native-google-maps/blob/master/documents/README.md)
+- [https://github.com/andrucz/ionic2-rating](https://github.com/andrucz/ionic2-rating)
+### Tutorials
+
+ - [https://luiscabrera.site/tech/2017/01/09/fontawesome-in-ionic2.html](https://luiscabrera.site/tech/2017/01/09/fontawesome-in-ionic2.html)
+ - [https://ionicthemes.com/tutorials/about/internationalize-and-localize-your-ionic2-app-with-ngtranslate](https://ionicthemes.com/tutorials/about/internationalize-and-localize-your-ionic2-app-with-ngtranslate)
+- [https://blog.ng-classroom.com/blog/ionic2/firebase-database-and-ionic/](https://blog.ng-classroom.com/blog/ionic2/firebase-database-and-ionic/)
+
+- [https://blog.ng-classroom.com/blog/ionic2/google-maps-native/](https://blog.ng-classroom.com/blog/ionic2/google-maps-native/)
+
+- [https://www.djamware.com/post/5a0bb8f780aca75eadc12d6b/build-ionic-3-angular-5-calendar-ui-with-event-integration](https://www.djamware.com/post/5a0bb8f780aca75eadc12d6b/build-ionic-3-angular-5-calendar-ui-with-event-integration)
+
 # License
 **GNU GENERAL PUBLIC LICENSE
 Version 3, 29 June 2007**

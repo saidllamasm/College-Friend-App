@@ -30,6 +30,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 
 import { Calendar } from '@ionic-native/calendar';
 
+import { Globalization } from '@ionic-native/globalization';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 };
@@ -89,6 +91,7 @@ const firebaseConfig = {
     SplashScreen,
     GoogleMaps,
     Calendar,
+    Globalization,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
   schemas: [
