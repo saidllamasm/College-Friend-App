@@ -1,12 +1,44 @@
 {
     "Tabs": {
-        "Inicio": "Inicio",
-        "Opiniones": "Opiniones",
-        "Guardado": "Guardado",
+        "Inicio": "Home",
+        "Opiniones": "Opinions",
+        "Guardado": "Saved",
         "Chat": "Chat",
-        "Perfil": "Perfil"
+        "Perfil": "Profile"
     },
     "Inicio": {
-
+        "buscar_universidad": "Search Universities",
+        "universidades_destacadas": "Featured Universities",
+        "universidades_cercanas": "Nearby Universities",
+        "universidades_evaluadas": "Most Valued Universities",
+        "inicio_proximo": "Start of courses soon"
+    },
+    "Semana": {
+        "Lunes": "Su",
+        "Martes": "Mo",
+        "Miercoles": "Tu",
+        "Jueves": "We",
+        "Viernes": "Th",
+        "Sabado": "Fr",
+        "Domingo": "Sa"
+    },
+    "Perfil": {
+        "user_name": "Name",
+        "user_phone": "Phone number",
+        "user_email": "Email address",
+        "Ajustes": {
+            "Ajustes": "Settings",
+            "Miembro": "looking for university",
+            "Notificaciones": "receive notifications"
+        }
+    },
+    "Universidad": {
+        "Sitio_web": "Website",
+        "Telefono": "Phone",
+        "Mapa": "Map",
+        "Opinar": "review"
+    },
+    "Opiniones": {
+        "Opiniones": "Opinions"
     }
 }

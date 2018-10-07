@@ -1,3 +1,4 @@
+import { SlidesPage } from './../pages/slides/slides';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -11,7 +12,7 @@ import { TabsPage } from '../pages/tabs/tabs';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any = SlidesPage;
 
   constructor(
     platform: Platform, 
@@ -71,7 +72,11 @@ export class MyApp {
           }
         } 
       )
-      .catch(e => alert("error lang "+e));
+      .catch(e => {
+        translate.setDefaultLang("en");
+        console.log("error detected lang "+e)
+      });
+      
       statusBar.styleLightContent();
       splashScreen.hide();
       

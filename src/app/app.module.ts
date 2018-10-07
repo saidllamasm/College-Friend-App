@@ -12,6 +12,9 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { OpinionSinglePage } from '../pages/opinion-single/opinion-single';
 import { ErrorPage } from '../pages/error/error';
+import { InboxSinglePage } from '../pages/inbox-single/inbox-single';
+import { ChatPage } from './../pages/chat/chat';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -56,7 +59,9 @@ const firebaseConfig = {
     SingleUniversityPage,
     SlidesPage,
     OpinionSinglePage,
-    ErrorPage
+    ErrorPage,
+    InboxSinglePage,
+    ChatPage
   ],
   imports: [
     BrowserModule,
@@ -84,7 +89,9 @@ const firebaseConfig = {
     SingleUniversityPage,
     SlidesPage,
     OpinionSinglePage,
-    ErrorPage
+    ErrorPage,
+    InboxSinglePage,
+    ChatPage
   ],
   providers: [
     StatusBar,

@@ -64,30 +64,6 @@ Active member of IEEE and president of IEEE Student Branch of the Technological 
  - Português
  - Francais
 
-## ISO Language Code Table
-| Code | Name |
-|--|--|
-| es  | Español
-| es-AR | Spanish (Argentina)
-| es-BO  |
-| es-CL |
-| es-CO |
-| es-CR |
-| es-DO  |
-| es-EC"  |
-| es-ES |
-| es-GT  |
-| es-HN |
-| es-MX |
-| es-NI  |
-| es-PA |
-| es-PE  |
-| es-PR |
-| es-PY |
-| es-SV  |
-|es-UY |
-| es-VE  |
-
 # Contributing
 # Credits
 
@@ -110,4 +86,4 @@ Version 3, 29 June 2007**
 
 
 ### Keywords:
-College, Student, School, Social, Network, Graduate, Friend, Inbox, Share, Picture, Ranking.
+College, Student, School, Social, Network, Graduate, Friend, Inbox, Share, Picture, Ranking, Firebase, Ionic, Android, iOS.

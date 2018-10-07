@@ -1,4 +1,10 @@
 page-slides {
+    .slider-pager-page {
+        color: white !important;
+    }
+    .slider-pager-page.active {
+        color: white !important;
+    }
     ion-slide {
         height: 100vh;
         flex-direction: column;
@@ -8,16 +14,44 @@ page-slides {
         max-height: 50vh;
         overflow: hidden;
     }
+    .bold {
+        font-weight: 600;
+    }
+    h1 {
+        font-size: 18px;
+    }
+    p {
+        padding: 10px;
+        font-size: 14px;
+    }
     .step-one {
-        background: red;
+        background: map-get($colors, primary);
         color: #fff;
     }
     .step-two {
-        background: green;
+        background: map-get($colors, secondary);
         color: #fff;
     }
     .step-three {
-        background: yellow;
+        background: map-get($colors, danger);
         color: #fff;
+    }
+    .btn-finish {
+        width: 30%;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        background-color: map-get($colors, danger);
+        color: #fff;
+        text-transform: lowercase;
+        padding: 10px;
+        transition: all .15;
+    }
+    .btn-finish:hover {
+        background-color: #fff;
+        border: 1px solid map-get($colors, danger);
+        color: map-get($colors, danger);
+        -webkit-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
+        -moz-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
+        box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
     }
 }

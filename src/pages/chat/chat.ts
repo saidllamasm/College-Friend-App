@@ -1,9 +1,8 @@
-import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the SlidesPage page.
+ * Generated class for the ChatPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-slides',
-  templateUrl: 'slides.html',
+  selector: 'page-chat',
+  templateUrl: 'chat.html',
 })
-export class SlidesPage {
+export class ChatPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  home(){
-      this.navCtrl.setRoot(TabsPage);
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ChatPage');
   }
 
 }
