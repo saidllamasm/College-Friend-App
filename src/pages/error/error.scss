@@ -3,6 +3,7 @@ page-error {
         background-color: map-get($colors, primary);
     }
     .title-red {
+        text-transform: capitalize;
         color: map-get($colors, danger);
     }
     .txt {

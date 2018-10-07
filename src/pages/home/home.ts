@@ -33,6 +33,10 @@ import {
 })
 export class HomePage {
 
+  txtSearch : string = "";
+
+  results: boolean = false;
+
   map: GoogleMap;
 
   //calendario
@@ -57,23 +61,21 @@ export class HomePage {
     private alertCtrl: AlertController,
     public plt: Platform
   ) {
-    if (this.plt.is('android')) {
-      statusBar.backgroundColorByHexString('#0055CB');
-    }
+    
     
     this.loadMap();
   }
 
-  ionViewDidLoad(){
+  /*ionViewDidLoad(){
     this.loadMap();
-  }
+  }*/
 
   loadMap(){
     let mapOptions: GoogleMapOptions = {
       camera: {
         target: {
-          lat: 43.0741904, // default location
-          lng: -89.3809802 // default location
+          lat: 19.42847, // default location
+          lng: -99.12766 // default location
         },
         zoom: 18,
         tilt: 30
@@ -90,7 +92,7 @@ export class HomePage {
       this.getPosition();
     })
     .catch(error =>{
-      console.log(error);
+      alert("map error " +error);
     });
 
   }
@@ -109,7 +111,7 @@ export class HomePage {
       });
     })
     .catch(error =>{
-      alert(error);
+      alert("error postion " +error);
       console.log(error);
     });
   }
@@ -243,7 +245,17 @@ export class HomePage {
   }
 
   viewUniversity(){
-    //this.navCtrl.setRoot(SingleUniversityPage);
-    this.navCtrl.setRoot(SlidesPage);
+    this.navCtrl.setRoot(SingleUniversityPage);
+  }
+
+  viewResults(){
+    // comprobar contenido del input, si es vacio llamar a resetResults, sino proceder a resultados = true
+    if(this.txtSearch.length > 0)
+      this.results = true;
+    else 
+      this.resetResults(  );
+  }
+  resetResults(){
+    this.results = false;
   }
 }

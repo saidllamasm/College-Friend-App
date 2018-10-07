@@ -34,6 +34,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 import { Calendar } from '@ionic-native/calendar';
 
 import { Globalization } from '@ionic-native/globalization';
+import { LoginPage } from '../pages/login/login';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -53,15 +54,19 @@ const firebaseConfig = {
     MyApp,
     TabsPage,
     HomePage,
+    // for debug
     OpinionsPage,
     SavedPage,
     ProfilePage,
+    HomePage,
+    TabsPage,
     SingleUniversityPage,
     SlidesPage,
     OpinionSinglePage,
     ErrorPage,
     InboxSinglePage,
-    ChatPage
+    ChatPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -91,7 +96,8 @@ const firebaseConfig = {
     OpinionSinglePage,
     ErrorPage,
     InboxSinglePage,
-    ChatPage
+    ChatPage,
+    LoginPage
   ],
   providers: [
     StatusBar,

@@ -7,20 +7,20 @@
 <ion-slides pager="true">
     <ion-slide class="step-one">
         <img src="../assets/imgs/bg-white.png" style="height:180px;" alt="logo">
-        <h1>What is <span class="bold">College Friend App?</span></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed eros iaculis, viverra tellus id, aliquam mauris. Nullam rhoncus consequat augue, a tincidunt dolor laoreet a.</p>
+        <h1>{{ 'Slides.Que' | translate }} <span class="bold">College Friend App?</span></h1>
+        <p>{{ 'Slides.ContentOne' | translate }}</p>
     </ion-slide>
 
     <ion-slide class="step-two ">
         <img src="../assets/imgs/bg-slideTwo.png" style="height:180px;" alt=" ">
-        <h1>How Does It <span class="bold">Work?</span> </h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed eros iaculis, viverra tellus id, aliquam mauris. Nullam rhoncus consequat augue, a tincidunt dolor laoreet a.</p>
+        <h1>{{ 'Slides.Como' | translate }} <span class="bold">{{ 'Slides.Trabaja' | translate }}?</span> </h1>
+        <p>{{ 'Slides.ContentTwo' | translate }}</p>
     </ion-slide>
 
     <ion-slide class="step-three ">
         <img src="../assets/imgs/bg-slideThree.png" style="height:180px;" alt=" ">
-        <h1>Powered by <span class="bold">Said Llamas</span></h1>
+        <h1>{{ 'Slides.Creado' | translate }} <span class="bold">Said Llamas</span></h1>
         <p></p>
-        <button (click)="home()" class="btn-finish ">{{"Slides.Inicio " || translate}}</button>
+        <button (click)="goToLogin()" class="btn-finish ">{{ 'Slides.Inicio' | translate }}</button>
     </ion-slide>
 </ion-slides>

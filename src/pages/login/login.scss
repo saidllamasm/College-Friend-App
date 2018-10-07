@@ -7,6 +7,10 @@ page-login {
         color: #fff;
         font-family: 'Comfortaa', Regular
     }
+    .container-logo {
+        width: 100%;
+        text-align: center;
+    }
     .btn {
         padding: 10px;
         width: 100%;
@@ -21,11 +25,6 @@ page-login {
     .btn.active {
         border-top: 1px solid #fff;
     }
-    .btn-action {
-        background-color: #4DD87B;
-        color: #fff;
-        border-radius: 10px;
-    }
     .btn-twitter {
         background-color: #39AAF3;
         color: #fff;
@@ -36,15 +35,46 @@ page-login {
     }
     .input-blank {
         background-color: #fff;
+        width: 100%;
+        padding: 12px;
+        color: #707070;
+        border: 0px;
     }
     .input-border_down {
         border-bottom: 1px solid #F2F2F2;
     }
     .img-logo {
+        margin-top: 30px;
         width: 140px;
         height: 140px;
     }
     .tabs-login {
         display: flex;
+    }
+    ion-footer {
+        padding: 0px!important;
+    }
+    .btn-actions {
+        color: #fff;
+        background-color: map-get($colors, light) !important;
+    }
+    .btn-actions svg {
+        height: 30px;
+    }
+    .container-form {
+        margin-top: 30px;
+    }
+    .btn-action {
+        background-color: #4DD87B;
+        color: #fff;
+        border-radius: 10px;
+        transition: all .3s;
+    }
+    .btn-action:hover {
+        color: #4DD87B;
+        background-color: #fff;
+        -webkit-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
+        -moz-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
+        box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.65);
     }
 }

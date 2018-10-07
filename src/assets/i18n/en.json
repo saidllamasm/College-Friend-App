@@ -1,6 +1,12 @@
 {
     "Slides": {
-        "Inicio": "Start"
+        "Inicio": "Start",
+        "Creado": "Powered by",
+        "Como": "How Does It",
+        "Trabaja": "Work",
+        "Que": "What is",
+        "ContentOne": "",
+        "ContentTwo": ""
     },
     "Tabs": {
         "Inicio": "Home",
@@ -14,7 +20,9 @@
         "universidades_destacadas": "Featured Universities",
         "universidades_cercanas": "Nearby Universities",
         "universidades_evaluadas": "Most Valued Universities",
-        "inicio_proximo": "Start of courses soon"
+        "inicio_proximo": "Start of courses soon",
+        "Resultados": "Results",
+        "Ver": "Show"
     },
     "Semana": {
         "Lunes": "Su",
@@ -29,19 +37,33 @@
         "user_name": "Name",
         "user_phone": "Phone number",
         "user_email": "Email address",
+        "user_pass": "Password",
         "Ajustes": {
             "Ajustes": "Settings",
             "Miembro": "looking for university",
-            "Notificaciones": "receive notifications"
+            "Notificaciones": "receive notifications",
+            "Guardar": "Save"
         }
     },
     "Universidad": {
-        "Sitio_web": "Website",
+        "Sitioweb": "Website",
         "Telefono": "Phone",
         "Mapa": "Map",
         "Opinar": "review"
     },
     "Opiniones": {
         "Opiniones": "Opinions"
+    },
+    "Errores": {
+        "Error": "An error has occurred",
+        "Mensaje": "… our programmers are working to solve it"
+    },
+    "Login": {
+        "Nombre": "Full Name",
+        "Telefono": "Phone Number",
+        "Login": "Login",
+        "Registro": "Register",
+        "Email": "Email Address",
+        "Password": "Password"
     }
 }

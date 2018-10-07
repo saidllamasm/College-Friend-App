@@ -1,4 +1,4 @@
-import { TabsPage } from './../tabs/tabs';
+import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -19,8 +19,8 @@ export class SlidesPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  home(){
-      this.navCtrl.setRoot(TabsPage);
+  goToLogin(){
+      this.navCtrl.setRoot(LoginPage);
   }
 
 }

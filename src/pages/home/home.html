@@ -1,185 +1,288 @@
 <ion-header>
     <div class="search-toolbar">
         <i class="fa fa-search " aria-hidden="true"></i>
-        <input type="text" class="txt-search" placeholder="{{ 'Inicio.buscar_universidad' | translate}}">
+        <input [(ngModel)]="txtSearch" type="text" class="txt-search" placeholder="{{ 'Inicio.buscar_universidad' | translate}}" (onchange)="viewResults()" (keydown)="viewResults()" (keypress)="viewResults()">
     </div>
 </ion-header>
 
 <ion-content padding>
-    <span class="title">{{"Inicio.universidades_destacadas" | translate}}</span>
-    <div class="columns">
-        <figure (click)="viewUniversity()">
-            <img src="https://k31.kn3.net/taringa/A/3/2/1/D/2/Clanlec/B5F.jpg" alt="" srcset="">
-        </figure>
-        <figure (click)="viewUniversity()" (click)="viewUniversity()">
-            <img src="https://s3-media3.fl.yelpcdn.com/bphoto/4dOlCPL1NMuUemm4rYEXMg/o.jpg" alt="" srcset=""></figure>
-        <figure (click)="viewUniversity()">
-            <img src="http://www.educacionyculturaaz.com/wp-content/uploads/2014/12/udlap_Universidad_de_las_Am%C3%A9ricas_Puebla_.jpg">
-        </figure>
+    <div *ngIf="!results">
+        <span class="title">{{"Inicio.universidades_destacadas" | translate}}</span>
+        <div class="columns">
+            <figure (click)="viewUniversity()">
+                <img src="https://k31.kn3.net/taringa/A/3/2/1/D/2/Clanlec/B5F.jpg" alt="" srcset="">
+            </figure>
+            <figure (click)="viewUniversity()" (click)="viewUniversity()">
+                <img src="https://s3-media3.fl.yelpcdn.com/bphoto/4dOlCPL1NMuUemm4rYEXMg/o.jpg" alt="" srcset=""></figure>
+            <figure (click)="viewUniversity()">
+                <img src="http://www.educacionyculturaaz.com/wp-content/uploads/2014/12/udlap_Universidad_de_las_Am%C3%A9ricas_Puebla_.jpg">
+            </figure>
 
-        <figure (click)="viewUniversity()">
-            <img src="http://www.unionpuebla.mx/sites/default/files/styles/galeria/public/field/image/itp_convocatoria.jpg?itok=yL6snYY6">
-        </figure>
+            <figure (click)="viewUniversity()">
+                <img src="http://www.unionpuebla.mx/sites/default/files/styles/galeria/public/field/image/itp_convocatoria.jpg?itok=yL6snYY6">
+            </figure>
 
-        <figure (click)="viewUniversity()">
-            <img src="http://www.heraldoleon.mx/wp-content/uploads/2018/01/universidad-de-guanajuato.jpg">
-        </figure>
+            <figure (click)="viewUniversity()">
+                <img src="http://www.heraldoleon.mx/wp-content/uploads/2018/01/universidad-de-guanajuato.jpg">
+            </figure>
 
-        <figure (click)="viewUniversity()">
-            <img src="https://www.contrapuntonews.com/wp-content/uploads/2017/06/Guanajuato_Universidad-de-Guanajuato.jpg">
-        </figure>
+            <figure (click)="viewUniversity()">
+                <img src="https://www.contrapuntonews.com/wp-content/uploads/2017/06/Guanajuato_Universidad-de-Guanajuato.jpg">
+            </figure>
 
-        <figure (click)="viewUniversity()">
-            <img src="http://s2.glbimg.com/VOI6oVG-EZJEbHhb7J7beX1AdhM=/620x430/e.glbimg.com/og/ed/f/original/2017/03/27/gettyimages-609456460.jpg">
-        </figure>
+            <figure (click)="viewUniversity()">
+                <img src="http://s2.glbimg.com/VOI6oVG-EZJEbHhb7J7beX1AdhM=/620x430/e.glbimg.com/og/ed/f/original/2017/03/27/gettyimages-609456460.jpg">
+            </figure>
 
-        <figure (click)="viewUniversity()">
-            <img src="https://www.nvinoticias.com/sites/default/files/styles/node/public/image_15_252.jpg?itok=9gWzHjMj">
-        </figure>
+            <figure (click)="viewUniversity()">
+                <img src="https://www.nvinoticias.com/sites/default/files/styles/node/public/image_15_252.jpg?itok=9gWzHjMj">
+            </figure>
 
-        <figure>
-            <img src="https://i1.wp.com/www.sopitas.com/wp-content/uploads/2018/07/universidades-mexico-mejores-latinoamerica.jpg">
-        </figure>
+            <figure>
+                <img src="https://i1.wp.com/www.sopitas.com/wp-content/uploads/2018/07/universidades-mexico-mejores-latinoamerica.jpg">
+            </figure>
 
-        <figure (click)="viewUniversity()">
-            <img src="http://jetnews.com.mx/wp-content/uploads/2016/04/jet-news-mejores-universidades-universidad-nacional-autonoma-de-mexico-unam.jpg">
+            <figure (click)="viewUniversity()">
+                <img src="http://jetnews.com.mx/wp-content/uploads/2016/04/jet-news-mejores-universidades-universidad-nacional-autonoma-de-mexico-unam.jpg">
 
-        </figure>
+            </figure>
 
-        <figure (click)="viewUniversity()">
-            <img src="http://www.udg.mx/sites/default/files/img_noticias/170217_cucea_archivo_0.jpg">
-        </figure>
-    </div>
-
-    <br><br>
-    <span class="title">{{"Inicio.universidades_cercanas" | translate}}</span>
-    <div id="map_canvas"></div>
-    <div class="list-universities-nearby">
-        <div class="single-university">
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-3>
-                        <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
-                    </ion-col>
-                    <ion-col col-9>
-                        <span class="name-university">Academia de Música Fermatta</span>
-                        <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+            <figure (click)="viewUniversity()">
+                <img src="http://www.udg.mx/sites/default/files/img_noticias/170217_cucea_archivo_0.jpg">
+            </figure>
         </div>
-        <div class="single-university">
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-3>
-                        <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
-                    </ion-col>
-                    <ion-col col-9>
-                        <span class="name-university">Academia de Música Fermatta</span>
-                        <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </div>
-    </div>
-    <br><br>
-    <span class="title">{{"Inicio.universidades_evaluadas" | translate}}</span>
-    <br><br>
-    <div class="list-universities-valuet">
-        <div class="single-university">
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-3>
-                        <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
-                    </ion-col>
-                    <ion-col col-9>
-                        <span class="name-university">Academia de Música Fermatta</span>
-                        <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </div>
-        <div class="single-university">
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-3>
-                        <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
-                    </ion-col>
-                    <ion-col col-9>
-                        <span class="name-university">Academia de Música Fermatta</span>
-                        <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </div>
-    </div>
-    <br><br>
-    <span class="title">{{"Inicio.inicio_proximo" | translate}}</span>
-    <br><br>
-    <!--calendario-->
-    <div class="calendar-header">
-        <ion-row class="calendar-month">
-            <ion-col col-2></ion-col>
-            <ion-col col-8>{{currentMonth}} {{currentYear}}</ion-col>
 
-        </ion-row>
-    </div>
-    <div class="calendar-body">
-        <ion-grid>
-            <ion-row class="calendar-weekday">
-                <ion-col><span style="color:#fff;">{{"Semana.Lunes" | translate}}</span></ion-col>
-                <ion-col><span style="color:#fff;">{{"Semana.Martes" | translate}}</span></ion-col>
-                <ion-col><span style="color:#fff;">{{"Semana.Miercoles" | translate}}</span></ion-col>
-                <ion-col><span style="color:#fff;">{{"Semana.Jueves" | translate}}</span></ion-col>
-                <ion-col><span style="color:#fff;">{{"Semana.Viernes" | translate}}</span></ion-col>
-                <ion-col><span style="color:#fff;">{{"Semana.Sabado" | translate}}</span></ion-col>
-                <ion-col><span style="color:#fff;">{{"Semana.Domingo" | translate}}</span></ion-col>
+        <br><br>
+        <span class="title">{{"Inicio.universidades_cercanas" | translate}}</span>
+        <div id="map_canvas"></div>
+        <div class="list-universities-nearby">
+            <div class="single-university">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-3>
+                            <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
+                        </ion-col>
+                        <ion-col col-9>
+                            <span class="name-university">Academia de Música Fermatta</span>
+                            <rating [(ngModel)]="raSte" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <div class="single-university">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-3>
+                            <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
+                        </ion-col>
+                        <ion-col col-9>
+                            <span class="name-university">Academia de Música Fermatta</span>
+                            <rating [(ngModel)]="raFte" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
+        <br><br>
+        <span class="title">{{"Inicio.universidades_evaluadas" | translate}}</span>
+        <br><br>
+        <div class="list-universities-valuet">
+            <div class="single-university">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-3>
+                            <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
+                        </ion-col>
+                        <ion-col col-9>
+                            <span class="name-university">Academia de Música Fermatta</span>
+                            <rating [(ngModel)]="ratGe" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <div class="single-university">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-3>
+                            <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
+                        </ion-col>
+                        <ion-col col-9>
+                            <span class="name-university">Academia de Música Fermatta</span>
+                            <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
+        <br><br>
+        <span class="title">{{"Inicio.inicio_proximo" | translate}}</span>
+        <br><br>
+        <!--calendario-->
+        <div class="calendar-header">
+            <ion-row class="calendar-month">
+                <ion-col col-2></ion-col>
+                <ion-col col-8>{{currentMonth}} {{currentYear}}</ion-col>
+
             </ion-row>
-            <ion-row class="calendar-date">
-                <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month">{{lastDay}}</ion-col>
-                <ion-col col-1 *ngFor="let day of daysInThisMonth">
-                    <span class="currentDate" *ngIf="currentDate === day; else otherDate">{{day}}</span>
-                    <ng-template #otherDate class="otherDate">
-                        {{day}}<br>
-                        <div class="event-bullet" *ngIf="checkEvent(day)"></div>
-                    </ng-template>
-                </ion-col>
-                <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month">{{nextDay}}</ion-col>
-            </ion-row>
-        </ion-grid>
+        </div>
+        <div class="calendar-body">
+            <ion-grid>
+                <ion-row class="calendar-weekday">
+                    <ion-col><span style="color:#fff;">{{"Semana.Lunes" | translate}}</span></ion-col>
+                    <ion-col><span style="color:#fff;">{{"Semana.Martes" | translate}}</span></ion-col>
+                    <ion-col><span style="color:#fff;">{{"Semana.Miercoles" | translate}}</span></ion-col>
+                    <ion-col><span style="color:#fff;">{{"Semana.Jueves" | translate}}</span></ion-col>
+                    <ion-col><span style="color:#fff;">{{"Semana.Viernes" | translate}}</span></ion-col>
+                    <ion-col><span style="color:#fff;">{{"Semana.Sabado" | translate}}</span></ion-col>
+                    <ion-col><span style="color:#fff;">{{"Semana.Domingo" | translate}}</span></ion-col>
+                </ion-row>
+                <ion-row class="calendar-date">
+                    <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month">{{lastDay}}</ion-col>
+                    <ion-col col-1 *ngFor="let day of daysInThisMonth">
+                        <span class="currentDate" *ngIf="currentDate === day; else otherDate">{{day}}</span>
+                        <ng-template #otherDate class="otherDate">
+                            {{day}}<br>
+                            <div class="event-bullet" *ngIf="checkEvent(day)"></div>
+                        </ng-template>
+                    </ion-col>
+                    <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month">{{nextDay}}</ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <!--end calendario-->
+        <br>
+        <div class="comming-soon">
+            <div class="single-university-soon">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col class="border-blue">
+                            <div class="button-view" (click)="fun()">
+                                <ion-icon name="calendar"></ion-icon>
+                            </div>
+                            <div class="content-soon">
+                                <span class="title-soon"> Centro de Estudios Univer Arandas</span>
+                                <span class="date-soon">Monday 15 September</span>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <div class="single-university-soon">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col class="border-blue">
+                            <div class="button-view" (click)="fun()">
+                                <ion-icon name="calendar"></ion-icon>
+                            </div>
+                            <div class="content-soon">
+                                <span class="title-soon"> Centro de Estudios Univer Arandas</span>
+                                <span class="date-soon">Monday 15 September</span>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
     </div>
-    <!--end calendario-->
-    <br>
-    <div class="comming-soon">
-        <div class="single-university-soon">
-            <ion-grid>
+
+
+
+
+    <!---->
+    <div *ngIf="results">
+        <span class="title">{{"Inicio.Resultados" | translate}}</span>
+        <div class="result-single">
+            <ion-card>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-PAoJLgZVF5T0y2DjY9ZElKgm4OpHkXsGdMXEhCswBWBa_fng" />
+                <ion-card-content>
+                    <ion-card-title>
+                        <span>Nine Inch Nails Live</span>
+                    </ion-card-title>
+                    <p class="card-text">
+                        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+                    </p>
+                </ion-card-content>
                 <ion-row>
-                    <ion-col class="border-blue">
-                        <div class="button-view" (click)="fun()">
-                            <ion-icon name="calendar"></ion-icon>
-                        </div>
-                        <div class="content-soon">
-                            <span class="title-soon"> Centro de Estudios Univer Arandas</span>
-                            <span class="date-soon">Monday 15 September</span>
-                        </div>
+                    <ion-col col-9>
+                        <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                    </ion-col>
+                    <ion-col col-3 center text-center>
+                        <ion-note>
+                            <button (click)="viewUniversity()" class="btn-show">{{"Inicio.Ver" | translate}}</button>
+                        </ion-note>
                     </ion-col>
                 </ion-row>
-            </ion-grid>
+            </ion-card>
         </div>
-        <div class="single-university-soon">
-            <ion-grid>
+        <div class="result-single">
+            <ion-card>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-PAoJLgZVF5T0y2DjY9ZElKgm4OpHkXsGdMXEhCswBWBa_fng" />
+                <ion-card-content>
+                    <ion-card-title>
+                        <span>Nine Inch Nails Live</span>
+                    </ion-card-title>
+                    <p class="card-text">
+                        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+                    </p>
+                </ion-card-content>
                 <ion-row>
-                    <ion-col class="border-blue">
-                        <div class="button-view" (click)="fun()">
-                            <ion-icon name="calendar"></ion-icon>
-                        </div>
-                        <div class="content-soon">
-                            <span class="title-soon"> Centro de Estudios Univer Arandas</span>
-                            <span class="date-soon">Monday 15 September</span>
-                        </div>
+                    <ion-col col-9>
+                        <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                    </ion-col>
+                    <ion-col col-3 center text-center>
+                        <ion-note>
+                            <button (click)="viewUniversity()" class="btn-show">{{"Inicio.Ver" | translate}}</button>
+                        </ion-note>
                     </ion-col>
                 </ion-row>
-            </ion-grid>
+            </ion-card>
         </div>
+        <div class="result-single">
+            <ion-card>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-PAoJLgZVF5T0y2DjY9ZElKgm4OpHkXsGdMXEhCswBWBa_fng" />
+                <ion-card-content>
+                    <ion-card-title>
+                        <span>Nine Inch Nails Live</span>
+                    </ion-card-title>
+                    <p class="card-text">
+                        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+                    </p>
+                </ion-card-content>
+                <ion-row>
+                    <ion-col col-9>
+                        <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                    </ion-col>
+                    <ion-col col-3 center text-center>
+                        <ion-note>
+                            <button (click)="viewUniversity()" class="btn-show">{{"Inicio.Ver" | translate}}</button>
+                        </ion-note>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </div>
+        <div class="result-single">
+            <ion-card>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-PAoJLgZVF5T0y2DjY9ZElKgm4OpHkXsGdMXEhCswBWBa_fng" />
+                <ion-card-content>
+                    <ion-card-title>
+                        <span>Nine Inch Nails Live</span>
+                    </ion-card-title>
+                    <p class="card-text">
+                        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+                    </p>
+                </ion-card-content>
+                <ion-row>
+                    <ion-col col-9>
+                        <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                    </ion-col>
+                    <ion-col col-3 center text-center>
+                        <ion-note>
+                            <button (click)="viewUniversity()" class="btn-show">{{"Inicio.Ver" | translate}}</button>
+                        </ion-note>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </div>
+
     </div>
 </ion-content>

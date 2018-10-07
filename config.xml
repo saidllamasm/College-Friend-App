@@ -87,6 +87,6 @@
     </plugin>
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-calendar" spec="^5.1.2" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
+    <engine name="android" spec="7.0.0" />
 </widget>

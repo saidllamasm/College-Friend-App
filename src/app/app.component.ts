@@ -1,4 +1,3 @@
-import { SlidesPage } from './../pages/slides/slides';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -7,15 +6,20 @@ import { TranslateService } from '@ngx-translate/core';
 import { Globalization } from '@ionic-native/globalization';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from './../pages/login/login';
+import { SlidesPage } from './../pages/slides/slides';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = SlidesPage;
+  
+  //rootPage:any = SlidesPage;
+  rootPage:any = TabsPage;
+  //rootPage:any = LoginPage;
 
   constructor(
-    platform: Platform, 
+    public platform: Platform, 
     statusBar: StatusBar, 
     splashScreen: SplashScreen, 
     translate: TranslateService,
@@ -76,6 +80,9 @@ export class MyApp {
         translate.setDefaultLang("en");
         console.log("error detected lang "+e)
       });
+      if (this.platform.is('android')) {
+        statusBar.backgroundColorByHexString('#0055CB');
+      }
       
       statusBar.styleLightContent();
       splashScreen.hide();

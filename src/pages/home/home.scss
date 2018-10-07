@@ -26,6 +26,24 @@ page-home {
         font-size: 17px;
         color: #707070;
     }
+    ion-card-title span {
+        color: #707070;
+        font-size: 14px;
+    }
+    .card-text {
+        color: #A0A0A0;
+        font-size: 10px;
+    }
+    .btn-show {
+        background-color: map-get($colors, secondary);
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        color: #fff;
+        border-radius: 5px;
+        text-transform: lowercase;
+    }
     .img-round {
         border-radius: 10px;
         background-color: map-get($colors, primary);

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
+import { SingleUniversityPage } from '../single-university/single-university';
 
 /**
  * Generated class for the SavedPage page.
@@ -24,7 +25,7 @@ export class SavedPage {
     statusBar.backgroundColorByHexString('#0055CB');
   }
 
-  theFunction(){
-    alert('click');
+  goToUniversity(){
+    this.navCtrl.setRoot(SingleUniversityPage);
   }
 }
