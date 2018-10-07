@@ -1,3 +1,5 @@
+import { NgModule } from '@angular/core';
+import { SlidesPage } from './../slides/slides';
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
@@ -7,6 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Calendar } from '@ionic-native/calendar';
 import { mapStyle } from './mapStyle';
 import { SingleUniversityPage } from '../single-university/single-university';
+import { Platform } from 'ionic-angular';
+import { Ionic2RatingModule } from 'ionic2-rating';
 
 import {
   GoogleMaps,
@@ -18,6 +22,11 @@ import {
   Marker
 } from '@ionic-native/google-maps';
 
+@NgModule({
+  imports: [
+    Ionic2RatingModule
+  ],
+})
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -45,9 +54,14 @@ export class HomePage {
     private googleMaps: GoogleMaps,
     public statusBar: StatusBar,
     private calendar: Calendar,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    public plt: Platform
   ) {
-    statusBar.backgroundColorByHexString('#0055CB');
+    if (this.plt.is('android')) {
+      statusBar.backgroundColorByHexString('#0055CB');
+      alert('jupi! android');
+    }
+    
     this.loadMap();
   }
 
@@ -102,7 +116,7 @@ export class HomePage {
   }
 
   onModelChange(event){
-alert(event);
+    alert(event);
   }
 
 
@@ -230,6 +244,7 @@ alert(event);
   }
 
   viewUniversity(){
-    this.navCtrl.setRoot(SingleUniversityPage);
+    //this.navCtrl.setRoot(SingleUniversityPage);
+    this.navCtrl.setRoot(SlidesPage);
   }
 }

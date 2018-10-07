@@ -1,12 +1,12 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
+import { SlidesPage } from '../pages/slides/slides';
 import { SingleUniversityPage } from '../pages/single-university/single-university';
 import { OpinionsPage } from '../pages/opinions/opinions';
 import { SavedPage } from '../pages/saved/saved';
-import { InboxPage } from '../pages/inbox/inbox';
 import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -44,18 +44,14 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    OpinionsPage,
-    SavedPage,
-    InboxPage,
-    ProfilePage,
-    HomePage,
     TabsPage,
-    SingleUniversityPage
+    HomePage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    Ionic2RatingModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -64,19 +60,18 @@ const firebaseConfig = {
       }
     }),
     AngularFireModule.initializeApp(firebaseConfig,'demo104'),
-    AngularFireDatabaseModule,
-    Ionic2RatingModule // Put ionic2-rating module here
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     OpinionsPage,
     SavedPage,
-    InboxPage,
     ProfilePage,
     HomePage,
     TabsPage,
-    SingleUniversityPage
+    SingleUniversityPage,
+    SlidesPage
   ],
   providers: [
     StatusBar,
@@ -84,6 +79,9 @@ const firebaseConfig = {
     GoogleMaps,
     Calendar,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ],
+  schemas: [
+    NO_ERRORS_SCHEMA
   ]
 })
 export class AppModule {}

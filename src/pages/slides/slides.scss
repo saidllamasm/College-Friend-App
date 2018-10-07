@@ -1,0 +1,23 @@
+page-slides {
+    ion-slide {
+        height: 100vh;
+        flex-direction: column;
+    }
+    ion-img {
+        max-width: 50vw;
+        max-height: 50vh;
+        overflow: hidden;
+    }
+    .step-one {
+        background: red;
+        color: #fff;
+    }
+    .step-two {
+        background: green;
+        color: #fff;
+    }
+    .step-three {
+        background: yellow;
+        color: #fff;
+    }
+}
