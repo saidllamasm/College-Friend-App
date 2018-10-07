@@ -1,3 +1,5 @@
 page-error {
-
+    .bg {
+        background-color: map-get($colors, primary);
+    }
 }

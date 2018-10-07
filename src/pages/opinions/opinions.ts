@@ -1,3 +1,5 @@
+import { ErrorPage } from './../error/error';
+import { OpinionSinglePage } from './../opinion-single/opinion-single';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -22,4 +24,10 @@ export class OpinionsPage {
     console.log('ionViewDidLoad OpinionsPage');
   }
 
+  test(){
+    this.navCtrl.setRoot(OpinionSinglePage);
+  }
+  testOpenPageError(){
+    this.navCtrl.setRoot(ErrorPage);
+  }
 }

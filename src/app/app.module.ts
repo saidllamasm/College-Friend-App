@@ -10,6 +10,8 @@ import { SavedPage } from '../pages/saved/saved';
 import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { OpinionSinglePage } from '../pages/opinion-single/opinion-single';
+import { ErrorPage } from '../pages/error/error';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -45,7 +47,14 @@ const firebaseConfig = {
   declarations: [
     MyApp,
     TabsPage,
-    HomePage
+    HomePage,
+    OpinionsPage,
+    SavedPage,
+    ProfilePage,
+    SingleUniversityPage,
+    SlidesPage,
+    OpinionSinglePage,
+    ErrorPage
   ],
   imports: [
     BrowserModule,
@@ -71,7 +80,9 @@ const firebaseConfig = {
     HomePage,
     TabsPage,
     SingleUniversityPage,
-    SlidesPage
+    SlidesPage,
+    OpinionSinglePage,
+    ErrorPage
   ],
   providers: [
     StatusBar,
