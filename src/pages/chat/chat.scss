@@ -1,3 +1,74 @@
 page-chat {
-
+    .header {
+        height: 100px;
+        width: 100%;
+        background-color: map-get($colors, primary);
+        padding: 10px;
+        padding-top: 15px;
+        padding-bottom: 30px;
+    }
+    .img-round {
+        border-radius: 50%;
+        height: 70px;
+        width: 70px;
+    }
+    .img-profile {
+        float: left;
+    }
+    .info {
+        margin-top: 10px;
+        padding: 4px;
+        text-align: center;
+        color: #fff;
+    }
+    .separator {
+        height: 6px;
+    }
+    .number {
+        font-size: 12px;
+        text-transform: lowercase;
+    }
+    .name {
+        text-transform: capitalize;
+        word-wrap: break-word;
+        font-size: 15px;
+    }
+    .img-circle {
+        border-radius: 50%;
+    }
+    .img-inbox {
+        height: 60px;
+        width: 60px;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .message-abs {
+        font-size: 12px;
+        color: #A0A0A0;
+    }
+    .name-inbox {
+        font-size: 14px;
+    }
+    .border-down {
+        border-bottom: 1px solid #F5F5F5;
+    }
+    .hour-inbox,
+    .name-inbox {
+        color: #707070;
+    }
+    .tabs-actions {
+        vertical-align: text-bottom;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        width: 100%;
+        background-color: map-get($colors, light);
+        color: #fff;
+    }
+    .btn-actions {
+        color: #fff;
+        font-size: 13px;
+        width: 40%;
+        background: none!important;
+    }
 }

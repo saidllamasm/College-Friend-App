@@ -11,6 +11,7 @@ import { mapStyle } from './mapStyle';
 import { SingleUniversityPage } from '../single-university/single-university';
 import { Platform } from 'ionic-angular';
 import { Ionic2RatingModule } from 'ionic2-rating';
+import { CreateUniversityPage } from '../create-university/create-university';
 
 import {
   GoogleMaps,
@@ -239,23 +240,22 @@ export class HomePage {
     });
     alert.present();
   }
-
-  fun(){
-    alert('calendar');
-  }
-
   viewUniversity(){
     this.navCtrl.setRoot(SingleUniversityPage);
   }
 
   viewResults(){
     // comprobar contenido del input, si es vacio llamar a resetResults, sino proceder a resultados = true
-    if(this.txtSearch.length > 0)
+    if(this.txtSearch.length > 1)
       this.results = true;
     else 
       this.resetResults(  );
   }
   resetResults(){
     this.results = false;
+  }
+
+  createUniversity(){
+    this.navCtrl.setRoot(CreateUniversityPage);
   }
 }

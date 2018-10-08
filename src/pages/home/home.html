@@ -156,7 +156,7 @@
                 <ion-grid>
                     <ion-row>
                         <ion-col class="border-blue">
-                            <div class="button-view" (click)="fun()">
+                            <div class="button-view" (click)="viewUniversity()">
                                 <ion-icon name="calendar"></ion-icon>
                             </div>
                             <div class="content-soon">
@@ -171,7 +171,7 @@
                 <ion-grid>
                     <ion-row>
                         <ion-col class="border-blue">
-                            <div class="button-view" (click)="fun()">
+                            <div class="button-view" (click)="viewUniversity()">
                                 <ion-icon name="calendar"></ion-icon>
                             </div>
                             <div class="content-soon">
@@ -283,6 +283,50 @@
                 </ion-row>
             </ion-card>
         </div>
+
+
+        <ion-card class="bg-error">
+            <ion-card-content>
+                <ion-card-title>
+                    <ion-icon class="icon-white" name="sad"></ion-icon><span class="title-error">&nbsp;&nbsp;{{"Inicio.TituloResNo" | translate}}</span>
+                </ion-card-title>
+                <p class="card-text-error">
+                    {{"Inicio.ContenidoResNo" | translate}}
+                </p>
+            </ion-card-content>
+            <ion-row>
+                <ion-col col-9>
+                </ion-col>
+                <ion-col col-3 center text-center>
+                    <ion-note>
+                        <button (click)="createUniversity()" class="btn-create red">{{"Inicio.Crear" | translate}}</button>
+                    </ion-note>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+
+        <ion-card class="bg-warning">
+            <ion-card-content>
+                <ion-card-title>
+                    <ion-icon class="icon-white" name="happy"></ion-icon><span class="title-error">&nbsp;&nbsp;{{"Inicio.TituloResEnd" | translate}}</span>
+                </ion-card-title>
+                <p class="card-text-error">
+                    {{"Inicio.ContenidoResEnd" | translate}}
+
+                </p>
+            </ion-card-content>
+            <ion-row>
+                <ion-col col-9>
+                </ion-col>
+                <ion-col col-3 center text-center>
+                    <ion-note>
+                        <button (click)="createUniversity()" class="btn-create yellow">{{"Inicio.Crear" | translate}}</button>
+                    </ion-note>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+
+
 
     </div>
 </ion-content>

@@ -22,7 +22,13 @@
         "universidades_evaluadas": "Most Valued Universities",
         "inicio_proximo": "Start of courses soon",
         "Resultados": "Results",
-        "Ver": "Show"
+        "Ver": "Show",
+        "Crear": "Create",
+        "TituloResEnd": "Here the results end…",
+        "ContenidoResEnd": "If it was not what you were looking for help us to register it",
+        "ContenidoResNo": "Help us see this university next time",
+        "TituloResNo": "Without result"
+
     },
     "Semana": {
         "Lunes": "Su",
@@ -49,7 +55,8 @@
         "Sitioweb": "Website",
         "Telefono": "Phone",
         "Mapa": "Map",
-        "Opinar": "review"
+        "Opinar": "review",
+        "Ubicacion": "Location"
     },
     "Opiniones": {
         "Opiniones": "Opinions"
@@ -65,5 +72,8 @@
         "Registro": "Register",
         "Email": "Email Address",
         "Password": "Password"
+    },
+    "Chat": {
+        "Conversaciones": "Conversations"
     }
 }

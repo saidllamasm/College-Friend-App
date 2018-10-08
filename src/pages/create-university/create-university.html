@@ -1,0 +1,49 @@
+<!--
+  Generated template for the CreateUniversityPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content>
+    <div class="header">
+        <button class="btn-addPic"><ion-icon class="icon" name="camera"></ion-icon> </button>
+    </div>
+    <div padding>
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <label>{{"Perfil.user_name" | translate}}</label>
+                    <input type="text" placeholder="Instituto Tecnológico de Ciudad Guzmán" [disabled]="!edited">
+                </ion-col>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-col>
+                    <label>{{"Universidad.Telefono" | translate}} </label>
+                    <input type="tel" placeholder="+52 341 554 1352" [disabled]="!edited">
+                </ion-col>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-col>
+                    <label>{{"Universidad.Sitioweb" | translate}}</label>
+                    <input type="text" placeholder="www.itcg.edu.mx" [disabled]="!edited">
+                </ion-col>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-col>
+                    <ion-row>
+                        <label>{{"Universidad.Ubicacion" | translate}}</label>
+                        <input type="text" placeholder="Av. Santos #34 Guadalajara" [disabled]="!edited">
+                    </ion-row>
+                    <ion-row>
+                        <div id="map_canvas"></div>
+                    </ion-row>
+
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+    </div>
+</ion-content>

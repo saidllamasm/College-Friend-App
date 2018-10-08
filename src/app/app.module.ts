@@ -14,6 +14,7 @@ import { OpinionSinglePage } from '../pages/opinion-single/opinion-single';
 import { ErrorPage } from '../pages/error/error';
 import { InboxSinglePage } from '../pages/inbox-single/inbox-single';
 import { ChatPage } from './../pages/chat/chat';
+import { CreateUniversityPage } from './../pages/create-university/create-university';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -66,7 +67,8 @@ const firebaseConfig = {
     ErrorPage,
     InboxSinglePage,
     ChatPage,
-    LoginPage
+    LoginPage,
+    CreateUniversityPage
   ],
   imports: [
     BrowserModule,
@@ -97,7 +99,8 @@ const firebaseConfig = {
     ErrorPage,
     InboxSinglePage,
     ChatPage,
-    LoginPage
+    LoginPage,
+    CreateUniversityPage
   ],
   providers: [
     StatusBar,

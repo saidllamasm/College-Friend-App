@@ -1,0 +1,38 @@
+page-create-university {
+    .header {
+        height: 140px;
+        text-align: center;
+        background-color: #F5F5F5;
+        vertical-align: middle;
+        -webkit-box-shadow: 0px 4px 15px -4px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: 0px 4px 15px -4px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 4px 15px -4px rgba(0, 0, 0, 0.25);
+    }
+    .icon {
+        font-size: 45px;
+        color: #707070;
+    }
+    .btn-addPic {
+        margin: 30px;
+        background: none!important;
+    }
+    input,
+    .input {
+        margin-top: 5px;
+        width: 100%;
+        padding: 14px;
+        background-color: #fff;
+        border: 0px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.35);
+        -moz-box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.35);
+        box-shadow: 0px 4px 10px -4px rgba(0, 0, 0, 0.35);
+    }
+    #map_canvas {
+        border-radius: 5px;
+        display: block;
+        height: 300px;
+        width: 100%;
+        //background: map-get($colors, light);
+    }
+}

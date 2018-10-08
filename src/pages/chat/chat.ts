@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { InboxSinglePage } from '../inbox-single/inbox-single';
 
 /**
  * Generated class for the ChatPage page.
@@ -18,8 +19,7 @@ export class ChatPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatPage');
+  openConversation(){
+    this.navCtrl.setRoot(InboxSinglePage);
   }
-
 }

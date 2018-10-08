@@ -1,18 +1,69 @@
 <!--
-  Generated template for the ChatPage page.
+  Generated template for the OpinionsPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!--<ion-header>-->
 
-  <ion-navbar>
-    <ion-title>Chat</ion-title>
-  </ion-navbar>
-
-</ion-header>
+<!--</ion-header>-->
 
 
-<ion-content padding>
+<ion-content>
+    <div class="header">
+        <img class="img-round img-profile" src="https://www.gravatar.com/avatar/a2054c801b081f625bd2881471715701" alt="" srcset="">
+        <div class="info">
+            <span class="name">Jesus said Llamas Manriquez</span>
+            <div class="separator"></div>
+            <span class="number">21 {{"Chat.Conversaciones" | translate}} </span>
+        </div>
+    </div>
+    <div class="tabs-actions">
+        <button class="btn-actions ">Mensajes</button>
+        <button class="btn-actions active ">Solicitudes</button>
+    </div>
+
+    <div class="list-conversations">
+        <div class="single-conversation border-down" (click)="openConversation()">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <img class="img-circle img-inbox" src="https://pbs.twimg.com/profile_images/854424193483583488/BJiy2IFJ_400x400.jpg">
+                    </ion-col>
+                    <ion-col col-9>
+                        <ion-row>
+                            <ion-col col-9>
+                                <span class="name-inbox">Juan Martinez</span>
+                            </ion-col>
+                            <ion-col col-3>
+                                <span class="hour-inbox">9:50pm</span>
+                            </ion-col>
+                        </ion-row>
+                        <span class="message-abs">Lorem ipsum dolor sit amet consectetur adipisicing elit. </span>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div class="single-conversation border-down" (click)="openConversation()">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <img class="img-circle img-inbox" src="https://persona.ie/wp-content/uploads/2017/04/persona_0000_Jason-Keegan.jpg">
+                    </ion-col>
+                    <ion-col col-9>
+                        <ion-row>
+                            <ion-col col-9>
+                                <span class="name-inbox">Juan Martinez</span>
+                            </ion-col>
+                            <ion-col col-3>
+                                <span class="hour-inbox">4:24pm</span>
+                            </ion-col>
+                        </ion-row>
+                        <span class="message-abs">Lorem ipsum dolor sit amet consectetur adipisicing elit. </span>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
 
 </ion-content>
