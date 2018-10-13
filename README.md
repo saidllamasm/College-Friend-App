@@ -58,6 +58,8 @@ Active member of IEEE and president of IEEE Student Branch of the Technological 
 **Twitter:** [@said_llamas](https://twitter.com/said_llamas)
 
 # Installation
+`npm install`
+`ionic cordova run android`
 # Language
  - Español
  - English
