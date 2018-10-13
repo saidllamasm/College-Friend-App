@@ -1,3 +1,4 @@
+import { CreateUniversityPage } from './../pages/create-university/create-university';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -15,8 +16,9 @@ import { SlidesPage } from './../pages/slides/slides';
 export class MyApp {
   
   //rootPage:any = SlidesPage;
-  rootPage:any = TabsPage;
+  //rootPage:any = TabsPage;
   //rootPage:any = LoginPage;
+  rootPage:any = CreateUniversityPage;
 
   constructor(
     public platform: Platform, 

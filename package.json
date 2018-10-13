@@ -21,6 +21,7 @@
         "@angular/platform-browser": "5.2.11",
         "@angular/platform-browser-dynamic": "5.2.11",
         "@ionic-native/calendar": "^4.15.0",
+        "@ionic-native/camera": "^4.15.0",
         "@ionic-native/core": "^4.15.0",
         "@ionic-native/globalization": "^4.15.0",
         "@ionic-native/google-maps": "^4.14.0",
@@ -32,6 +33,7 @@
         "angularfire2": "^5.0.2",
         "cordova-android": "7.0.0",
         "cordova-plugin-calendar": "^5.1.2",
+        "cordova-plugin-camera": "^4.0.3",
         "cordova-plugin-device": "^2.0.2",
         "cordova-plugin-globalization": "^1.11.0",
         "cordova-plugin-googlemaps": "^2.4.6",
@@ -75,7 +77,8 @@
             },
             "cordova-plugin-ionic-keyboard": {},
             "cordova-plugin-calendar": {},
-            "cordova-plugin-globalization": {}
+            "cordova-plugin-globalization": {},
+            "cordova-plugin-camera": {}
         },
         "platforms": [
             "android"

@@ -35,4 +35,13 @@ page-create-university {
         width: 100%;
         //background: map-get($colors, light);
     }
+    .btn.btn-save {
+        width: 100%;
+        color: #fff;
+        border-radius: 5px;
+        padding: 10px 5px 10px 5px;
+        font-size: 15px;
+        text-transform: lowercase;
+        background-color: map-get($colors, secondary);
+    }
 }

@@ -75,5 +75,8 @@
     },
     "Chat": {
         "Conversaciones": "Conversations"
+    },
+    "InboxSingle": {
+        "MensajeAqui": "Message here"
     }
 }

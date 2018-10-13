@@ -15,7 +15,7 @@ import { ErrorPage } from '../pages/error/error';
 import { InboxSinglePage } from '../pages/inbox-single/inbox-single';
 import { ChatPage } from './../pages/chat/chat';
 import { CreateUniversityPage } from './../pages/create-university/create-university';
-
+import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,19 +35,13 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 import { Calendar } from '@ionic-native/calendar';
 
 import { Globalization } from '@ionic-native/globalization';
-import { LoginPage } from '../pages/login/login';
+
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
+import { environment } from '../environments/environment';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
-};
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCMu3nzZSdZ0Rde7fPU5naWYkx67E4SaII",
-  authDomain: "college-friend-app.firebaseapp.com",
-  databaseURL: "https://college-friend-app.firebaseio.com",
-  projectId: "college-friend-app",
-  storageBucket: "college-friend-app.appspot.com",
-  messagingSenderId: "330246446378"
 };
 
 @NgModule({
@@ -82,7 +76,7 @@ const firebaseConfig = {
           deps: [HttpClient]
       }
     }),
-    AngularFireModule.initializeApp(firebaseConfig,'demo104'),
+    AngularFireModule.initializeApp(environment.firebase,'demo104'),
     AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
@@ -107,6 +101,7 @@ const firebaseConfig = {
     SplashScreen,
     GoogleMaps,
     Calendar,
+    Camera,
     Globalization,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],

@@ -66,11 +66,7 @@ export class HomePage {
     
     this.loadMap();
   }
-
-  /*ionViewDidLoad(){
-    this.loadMap();
-  }*/
-
+  
   loadMap(){
     let mapOptions: GoogleMapOptions = {
       camera: {
