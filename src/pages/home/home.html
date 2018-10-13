@@ -8,49 +8,11 @@
 <ion-content padding>
     <div *ngIf="!results">
         <span class="title">{{"Inicio.universidades_destacadas" | translate}}</span>
-        <div class="columns">
-            <figure (click)="viewUniversity()">
-                <img src="https://k31.kn3.net/taringa/A/3/2/1/D/2/Clanlec/B5F.jpg" alt="" srcset="">
-            </figure>
-            <figure (click)="viewUniversity()" (click)="viewUniversity()">
-                <img src="https://s3-media3.fl.yelpcdn.com/bphoto/4dOlCPL1NMuUemm4rYEXMg/o.jpg" alt="" srcset=""></figure>
-            <figure (click)="viewUniversity()">
-                <img src="http://www.educacionyculturaaz.com/wp-content/uploads/2014/12/udlap_Universidad_de_las_Am%C3%A9ricas_Puebla_.jpg">
-            </figure>
-
-            <figure (click)="viewUniversity()">
-                <img src="http://www.unionpuebla.mx/sites/default/files/styles/galeria/public/field/image/itp_convocatoria.jpg?itok=yL6snYY6">
-            </figure>
-
-            <figure (click)="viewUniversity()">
-                <img src="http://www.heraldoleon.mx/wp-content/uploads/2018/01/universidad-de-guanajuato.jpg">
-            </figure>
-
-            <figure (click)="viewUniversity()">
-                <img src="https://www.contrapuntonews.com/wp-content/uploads/2017/06/Guanajuato_Universidad-de-Guanajuato.jpg">
-            </figure>
-
-            <figure (click)="viewUniversity()">
-                <img src="http://s2.glbimg.com/VOI6oVG-EZJEbHhb7J7beX1AdhM=/620x430/e.glbimg.com/og/ed/f/original/2017/03/27/gettyimages-609456460.jpg">
-            </figure>
-
-            <figure (click)="viewUniversity()">
-                <img src="https://www.nvinoticias.com/sites/default/files/styles/node/public/image_15_252.jpg?itok=9gWzHjMj">
-            </figure>
-
-            <figure>
-                <img src="https://i1.wp.com/www.sopitas.com/wp-content/uploads/2018/07/universidades-mexico-mejores-latinoamerica.jpg">
-            </figure>
-
-            <figure (click)="viewUniversity()">
-                <img src="http://jetnews.com.mx/wp-content/uploads/2016/04/jet-news-mejores-universidades-universidad-nacional-autonoma-de-mexico-unam.jpg">
-
-            </figure>
-
-            <figure (click)="viewUniversity()">
-                <img src="http://www.udg.mx/sites/default/files/img_noticias/170217_cucea_archivo_0.jpg">
-            </figure>
-        </div>
+        <ion-slides autoplay="2200" loop slidesPerView="2" spaceBetween="12">
+            <ion-slide *ngFor="let university of universities" text-center>
+                <img src="{{university.img}}" (click)="testViewUniversity(university.id)">
+            </ion-slide>
+        </ion-slides>
 
         <br><br>
         <span class="title">{{"Inicio.universidades_cercanas" | translate}}</span>

@@ -27,9 +27,10 @@ import { database } from 'firebase';
   templateUrl: 'create-university.html',
 })
 export class CreateUniversityPage {
+
   base64Image:any;
   photos:any;
-  //vars
+  
   nameUniversity:String;
   address:String;
   phoneUniversity:String;
