@@ -59,6 +59,7 @@ Active member of IEEE and president of IEEE Student Branch of the Technological 
 
 # Installation
 `npm install`
+
 `ionic cordova run android`
 # Language
  - Español
