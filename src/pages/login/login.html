@@ -12,17 +12,17 @@
 
     <div class="container-form">
         <div *ngIf="login">
-            <input type="email" class="input-blank input-border_down" placeholder="{{'Login.Email' | translate}}">
-            <input type="password" class="input-blank" placeholder="{{'Login.Password' | translate}}">
+            <input [(ngModel)]="email" type="email" class="input-blank input-border_down" placeholder="{{'Login.Email' | translate}}">
+            <input [(ngModel)]="password" type="password" class="input-blank" placeholder="{{'Login.Password' | translate}}">
             <br><br>
             <button (click)="procesarLogin()" class="btn btn-action">{{"Login.Login" | translate}}</button>
             <br><br><br>
         </div>
         <div *ngIf="!login ">
-            <input type="text" class="input-blank input-border_down" placeholder="{{'Login.Nombre' | translate}}">
-            <input type="tel" class="input-blank input-border_down" placeholder="{{'Login.Telefono' | translate}}">
-            <input type="email" class="input-blank input-border_down" placeholder="{{'Login.Email' | translate}}">
-            <input type="password" class="input-blank" placeholder="{{'Login.Password' | translate}}">
+            <input [(ngModel)]="name" type="text" class="input-blank input-border_down" placeholder="{{'Login.Nombre' | translate}}">
+            <input [(ngModel)]="phone" type="tel" class="input-blank input-border_down" placeholder="{{'Login.Telefono' | translate}}">
+            <input [(ngModel)]="email_r" type="email" class="input-blank input-border_down" placeholder="{{'Login.Email' | translate}}">
+            <input [(ngModel)]="password_r" type="password" class="input-blank" placeholder="{{'Login.Password' | translate}}">
             <br><br>
             <button (click)="procesarRegistro()" class="btn btn-action">{{"Login.Registro" | translate}}</button>
             <br><br><br>

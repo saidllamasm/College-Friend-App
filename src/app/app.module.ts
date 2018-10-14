@@ -37,7 +37,11 @@ import { Calendar } from '@ionic-native/calendar';
 
 import { Globalization } from '@ionic-native/globalization';
 
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
+
+import { AngularFireAuth } from 'angularfire2/auth';
+
+import {TwitterConnect} from '@ionic-native/twitter-connect';
 
 import { environment } from '../environments/environment';
 
@@ -105,6 +109,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     Camera,
     Globalization,
     Facebook,
+    AngularFireAuth,
+    TwitterConnect,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
   schemas: [
