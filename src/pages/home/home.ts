@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
-import { SlidesPage } from './../slides/slides';
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Calendar } from '@ionic-native/calendar';
@@ -17,10 +14,7 @@ import {
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
-  GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker
+  GoogleMapOptions
 } from '@ionic-native/google-maps';
 
 @NgModule({
@@ -289,4 +283,5 @@ export class HomePage {
   createUniversity(){
     this.navCtrl.setRoot(CreateUniversityPage);
   }
+
 }

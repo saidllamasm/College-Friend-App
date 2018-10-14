@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 
-import firebase from 'firebase';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
+import { database } from 'firebase';
+import * as firebase from "firebase";
 import { Facebook } from '@ionic-native/facebook'
 import { AngularFireAuth } from 'angularfire2/auth';
 import {TwitterConnect} from '@ionic-native/twitter-connect';
 import {auth} from 'firebase';
-
+import { environment } from '../../environments/environment';
 /**
  * Generated class for the LoginPage page.
  *
@@ -21,6 +24,8 @@ import {auth} from 'firebase';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  users: AngularFireList<any>;
+
   email : string ;
   password : string ;
   email_r : string ;
@@ -35,8 +40,10 @@ export class LoginPage {
     public facebook: Facebook,
     public twitterConnect: TwitterConnect,
     public afAuth: AngularFireAuth,
-    private platform: Platform
+    private platform: Platform,
+    database: AngularFireDatabase,
   ) {
+    this.users = database.list('UsuariosT');
   }
 
   procesarTwitter(){
@@ -44,6 +51,8 @@ export class LoginPage {
        this.twitterConnect.login().then(res => {
         const twitterCredential = auth.TwitterAuthProvider.credential(res.token, res.secret);
         this.afAuth.auth.signInWithCredential(twitterCredential).then(user => {
+          this.saveUserFirebase(user.email, user.displayName, user.phoneNumber);
+          console.log(JSON.stringify(user));
           this.navCtrl.setRoot(TabsPage)
         }).catch(error => {
          console.log(error);
@@ -56,6 +65,8 @@ export class LoginPage {
        this.afAuth.auth
         .signInWithPopup(new auth.TwitterAuthProvider())
         .then((res) => {
+          this.saveUserFirebase(res.user.email, res.user.displayName, res.user.phoneNumber);
+          console.log(JSON.stringify(res));
           this.navCtrl.setRoot(TabsPage)
         }).catch(error => {
          //observer.error(error);
@@ -87,26 +98,31 @@ export class LoginPage {
 			password: this.password_r
     };
       this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password).then(
-        () => this.navCtrl.setRoot(TabsPage),
+        () => {
+          this.saveUserFirebase(credentials.email, this.name, this.phone);
+          this.navCtrl.setRoot(TabsPage);
+        },
         error =>  alert(error.message)
       );
     
     
   }
 
-  procesarFacebook(){
-    return this.facebook.login(['email'])
-    .then( response => {
-      const facebookCredential = firebase.auth.FacebookAuthProvider
-        .credential(response.authResponse.accessToken);
-
-      firebase.auth().signInWithCredential(facebookCredential)
-        .then( success => { 
-          console.log("Firebase success: " + JSON.stringify(success)); 
+  procesarFacebook(): Promise<any> {
+    AngularFireModule.initializeApp(environment.firebase);
+    //if (this.platform.is('cordova')) {
+      return this.facebook.login(['email', 'public_profile']).then(res => {
+        const fbCredential = auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+        this.afAuth.auth.signInWithCredential(fbCredential).then(user => {
+          this.saveUserFirebase(user.email, user.displayName, user.phoneNumber);
           this.navCtrl.setRoot(TabsPage);
+        }).catch(error => {
+         console.log(error);
+         alert(JSON.stringify(error));
         });
-
-    }).catch((error) => { alert(JSON.stringify(error)); });
+        //alert(JSON.stringify(res));
+      })
+    //}
   }
 
   activeFormRegistro(){
@@ -115,5 +131,22 @@ export class LoginPage {
   disactiveFormRegistro(){
     this.login = false;
   }
+
+  saveUserFirebase(email, nombre, telefono){
+    const newUser = this.users.push({});
+    newUser.set({
+      email : email,
+      nombre : nombre,
+      telefono : telefono,
+      reputacion: 'novato',
+      rol :'usuario',
+      estado :'pendiente',
+      configuracion : {
+        buscando : 'true',
+        notificaciones : 'true'
+      },
+      timestamp : database.ServerValue.TIMESTAMP
+  });
+}
 
 }
