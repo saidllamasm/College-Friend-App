@@ -1,3 +1,4 @@
+import { Facebook } from '@ionic-native/facebook';
 import { NgModule, ErrorHandler, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -50,7 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TabsPage,
     HomePage,
     // for debug
-    OpinionsPage,
+/*    OpinionsPage,
     SavedPage,
     ProfilePage,
     HomePage,
@@ -62,7 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     InboxSinglePage,
     ChatPage,
     LoginPage,
-    CreateUniversityPage
+    CreateUniversityPage*/
   ],
   imports: [
     BrowserModule,
@@ -103,6 +104,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     Calendar,
     Camera,
     Globalization,
+    Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
   schemas: [

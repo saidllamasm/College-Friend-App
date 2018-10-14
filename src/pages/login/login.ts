@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 
+import firebase from 'firebase';
+import { Facebook } from '@ionic-native/facebook'
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -19,7 +22,11 @@ export class LoginPage {
 
   login : boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public facebook: Facebook
+  ) {
   }
 
   procesarTwitter(){
@@ -32,7 +39,17 @@ export class LoginPage {
 
   }
   procesarFacebook(){
+    return this.facebook.login(['email'])
+    .then( response => {
+      const facebookCredential = firebase.auth.FacebookAuthProvider
+        .credential(response.authResponse.accessToken);
 
+      firebase.auth().signInWithCredential(facebookCredential)
+        .then( success => { 
+          console.log("Firebase success: " + JSON.stringify(success)); 
+        });
+
+    }).catch((error) => { alert(JSON.stringify(error)); });
   }
 
   activeFormRegistro(){

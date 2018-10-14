@@ -16,8 +16,8 @@ import { SlidesPage } from './../pages/slides/slides';
 export class MyApp {
   
   //rootPage:any = SlidesPage;
-  rootPage:any = TabsPage;
-  //rootPage:any = LoginPage;
+  //rootPage:any = TabsPage;
+  rootPage:any = LoginPage;
   //rootPage:any = CreateUniversityPage;
 
   constructor(

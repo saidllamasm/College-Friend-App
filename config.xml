@@ -89,5 +89,10 @@
     <plugin name="cordova-plugin-calendar" spec="^5.1.2" />
     <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
+    <plugin name="cordova-plugin-facebook4" spec="^3.1.0">
+        <variable name="APP_ID" value="550798048679259" />
+        <variable name="APP_NAME" value="CollegeFriendApp" />
+        <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.37.0" />
+    </plugin>
     <engine name="android" spec="7.0.0" />
 </widget>
