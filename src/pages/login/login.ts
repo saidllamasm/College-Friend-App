@@ -38,6 +38,7 @@ export class LoginPage {
   procesarRegistro(){
 
   }
+  
   procesarFacebook(){
     return this.facebook.login(['email'])
     .then( response => {
@@ -47,6 +48,7 @@ export class LoginPage {
       firebase.auth().signInWithCredential(facebookCredential)
         .then( success => { 
           console.log("Firebase success: " + JSON.stringify(success)); 
+          this.navCtrl.setRoot(TabsPage);
         });
 
     }).catch((error) => { alert(JSON.stringify(error)); });

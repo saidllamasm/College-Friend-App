@@ -51,7 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TabsPage,
     HomePage,
     // for debug
-/*    OpinionsPage,
+    OpinionsPage,
     SavedPage,
     ProfilePage,
     HomePage,
@@ -63,7 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     InboxSinglePage,
     ChatPage,
     LoginPage,
-    CreateUniversityPage*/
+    CreateUniversityPage
   ],
   imports: [
     BrowserModule,
