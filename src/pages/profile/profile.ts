@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import md5 from 'crypto-md5';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Storage } from '@ionic/storage';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the ProfilePage page.
@@ -18,29 +19,24 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  email: any;
-  password: any;
-  profile : any = {};
-
+  
   edited : boolean = false;
+  data:AngularFireList<any>;
 
   profilePicture: any = "https://www.gravatar.com/avatar/"
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    afDatabase: AngularFireDatabase,
-    private storage: Storage
+    public afDatabase: AngularFireDatabase,
+    private storage: Storage,
+    public afAuth: AngularFireAuth
   ) {
-    let dir_base = "";
-    this.storage.get('uid').then((val) => {
-      console.log('UID:', val);
-      //dir_base = "/UsuariosT/"+val+"/";
-      this.profile = afDatabase.list("/UsuariosT/-LOpQmApsZ0wINnf_Q52/").valueChanges();
-      /*this.profilePicture = "https://www.gravatar.com/avatar/" + md5(this.profile.email, 'hex')+"?s=400";
-      this.email = this.profile.email;*/
-      console.log(JSON.stringify(this.profile));
-    });
+    //this.profilePicture = "https://www.gravatar.com/avatar/" + md5(this.profile.email, 'hex')+"?s=400";
+    this.afAuth.authState.subscribe(user => {
+      this.data =  this.afDatabase.list('UsuariosT/'+user.uid);
+      
+    })
   }
 
   activeEdit(){
@@ -52,7 +48,11 @@ export class ProfilePage {
   }
 
   exit(){
-
+    this.afAuth.auth.signOut();
+    this.storage.clear().then(() => {
+      this.navCtrl.setRoot(LoginPage);
+    }).catch(error => console.log(error + ' in clear db'));
+    
   }
 
 }

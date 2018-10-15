@@ -7,8 +7,6 @@ An amazing application to talk about public and private universities.
 
 ![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 
-![Inline docs](http://inch-ci.org/github/saidl14s/College-Friend-App.svg?branch=master)
-
 
 # Table of content
 - [Project description](#project-description)

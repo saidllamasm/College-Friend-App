@@ -5,11 +5,10 @@ import { TabsPage } from '../tabs/tabs';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { database } from 'firebase';
-import * as firebase from "firebase";
 import { Facebook } from '@ionic-native/facebook'
 import { AngularFireAuth } from 'angularfire2/auth';
 import {TwitterConnect} from '@ionic-native/twitter-connect';
-import {auth} from 'firebase';
+import { auth } from 'firebase';
 import { Storage } from '@ionic/storage';
 
 import { environment } from '../../environments/environment';
@@ -49,35 +48,6 @@ export class LoginPage {
     this.users = database.list('UsuariosT');
   }
 
-  procesarTwitter(){
-      if (this.platform.is('cordova')) {
-       this.twitterConnect.login().then(res => {
-        const twitterCredential = auth.TwitterAuthProvider.credential(res.token, res.secret);
-        this.afAuth.auth.signInWithCredential(twitterCredential).then(user => {
-          this.saveUserFirebase(user.email, user.displayName, user.phoneNumber, 'Twitter');
-          console.log(JSON.stringify(user));
-          this.navCtrl.setRoot(TabsPage)
-        }).catch(error => {
-         console.log(error);
-         alert(JSON.stringify(error));
-        });
-       }).catch((error) => {
-        alert(JSON.stringify(error));
-       });
-      } else {
-       this.afAuth.auth
-        .signInWithPopup(new auth.TwitterAuthProvider())
-        .then((res) => {
-          this.saveUserFirebase(res.user.email, res.user.displayName, res.user.phoneNumber, 'Twitter');
-          console.log(JSON.stringify(res));
-          this.navCtrl.setRoot(TabsPage)
-        }).catch(error => {
-         //observer.error(error);
-         alert(JSON.stringify(error));
-       });
-      }
-    }
-
   // login with email and password
   procesarLogin(){
     let credentials = {
@@ -91,8 +61,6 @@ export class LoginPage {
         () => this.navCtrl.setRoot(TabsPage),
         error =>  alert(error.message)
       );
-    
-    //this.navCtrl.setRoot(TabsPage);
   }
 
   procesarRegistro(){
@@ -100,33 +68,80 @@ export class LoginPage {
 			email: this.email_r,
 			password: this.password_r
     };
-      this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password).then(
-        () => {
-          this.saveUserFirebase(credentials.email, this.name, this.phone, 'email');
-          this.navCtrl.setRoot(TabsPage);
-        },
-        error =>  alert(error.message)
-      );
-    
-    
+      this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password)
+      .then( (firebaseUser) =>  {
+        alert(firebaseUser.user.uid);
+        this.saveUserFirebase(firebaseUser.user.uid ,credentials.email, this.name, this.phone, 'email');
+        this.navCtrl.setRoot(TabsPage);
+      }).catch(function(error) {
+        console.error("Error: ", error);
+    });
   }
 
   procesarFacebook(): Promise<any> {
     AngularFireModule.initializeApp(environment.firebase);
-    //if (this.platform.is('cordova')) {
       return this.facebook.login(['email', 'public_profile']).then(res => {
         const fbCredential = auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
         this.afAuth.auth.signInWithCredential(fbCredential).then(user => {
-          console.log(user);
-          this.saveUserFirebase(user.email, user.displayName, user.phoneNumber, 'Facebook');
+          console.log(JSON.stringify(user));
+          this.saveUserFirebase(user.uid, user.email, user.displayName, user.phoneNumber, 'Facebook');
           this.navCtrl.setRoot(TabsPage);
         }).catch(error => {
-         console.log(error);
+         console.log(JSON.stringify(error));
          alert(JSON.stringify(error));
         });
-        //alert(JSON.stringify(res));
-      })
-    //}
+      });
+  }
+
+  procesarTwitter(){
+    if (this.platform.is('cordova')) {
+      this.twitterConnect.login().then(res => {
+        const twitterCredential = auth.TwitterAuthProvider.credential(res.token, res.secret);
+        this.afAuth.auth.signInWithCredential(twitterCredential).then(user => {
+          this.saveUserFirebase(user.uid,user.email, user.displayName, user.phoneNumber, 'Twitter');
+          console.log(JSON.stringify(user));
+          this.navCtrl.setRoot(TabsPage)
+        }).catch(error => {
+          console.log(JSON.stringify(error));
+          alert(JSON.stringify(error));
+        });
+      }).catch((error) => {
+        alert(JSON.stringify(error));
+      });
+    } else {
+      this.afAuth.auth
+        .signInWithPopup(new auth.TwitterAuthProvider())
+        .then((res) => {
+          this.saveUserFirebase(res.user.uid, res.user.email, res.user.displayName, res.user.phoneNumber, 'Twitter');
+          console.log(JSON.stringify(res));
+          this.navCtrl.setRoot(TabsPage)
+        }).catch(error => {
+          alert(JSON.stringify(error));
+      });
+    }
+  }
+
+  saveLocalUID(uid){
+    this.storage.set('uid', uid);
+  }
+
+  saveUserFirebase(uid, email, nombre, telefono, metodo){
+    let newUser = {
+        email : email,
+        nombre : nombre,
+        telefono : telefono,
+        reputacion: 'novato',
+        rol :'usuario',
+        metodo: metodo, 
+        estado :'pendiente',
+        configuracion : {
+          buscando : 'true',
+          notificaciones : 'true'
+        },
+        timestamp : database.ServerValue.TIMESTAMP
+      };
+    this.users.update(uid, newUser);
+    this.saveLocalUID(uid);
   }
 
   activeFormRegistro(){
@@ -135,26 +150,5 @@ export class LoginPage {
   disactiveFormRegistro(){
     this.login = false;
   }
-
-  saveUserFirebase(email, nombre, telefono, metodo){
-    // set a key/value
-    const newUser = this.users.push({});
-    newUser.set({
-      email : email,
-      nombre : nombre,
-      telefono : telefono,
-      reputacion: 'novato',
-      rol :'usuario',
-      metodo: metodo, 
-      estado :'pendiente',
-      configuracion : {
-        buscando : 'true',
-        notificaciones : 'true'
-      },
-      timestamp : database.ServerValue.TIMESTAMP
-  });
-  this.storage.set('uid', newUser.key);
-  alert(newUser.key);
-}
 
 }

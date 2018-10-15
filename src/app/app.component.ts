@@ -1,35 +1,32 @@
-import { CreateUniversityPage } from './../pages/create-university/create-university';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
 import { Globalization } from '@ionic-native/globalization';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 import { TabsPage } from '../pages/tabs/tabs';
-import { LoginPage } from './../pages/login/login';
 import { SlidesPage } from './../pages/slides/slides';
+import { Storage } from '@ionic/storage';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   
-  //rootPage:any = SlidesPage;
-  //rootPage:any = TabsPage;
-  rootPage:any = LoginPage;
-  //rootPage:any = CreateUniversityPage;
+  rootPage:any;
 
   constructor(
     public platform: Platform, 
     statusBar: StatusBar, 
     splashScreen: SplashScreen, 
     translate: TranslateService,
-    private globalization: Globalization
+    private globalization: Globalization,
+    private storage: Storage,
+    public afAuth: AngularFireAuth
   ) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
 
       this.globalization.getPreferredLanguage()
         .then(res => {
@@ -85,6 +82,13 @@ export class MyApp {
       if (this.platform.is('android')) {
         statusBar.backgroundColorByHexString('#0055CB');
       }
+      this.afAuth.authState.subscribe(user => {
+        if(user){
+          this.rootPage = TabsPage;
+        }else{
+          this.rootPage = SlidesPage;  
+        }
+      });
       
       statusBar.styleLightContent();
       splashScreen.hide();
