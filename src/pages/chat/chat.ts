@@ -16,10 +16,19 @@ import { InboxSinglePage } from '../inbox-single/inbox-single';
 })
 export class ChatPage {
 
+  messages : boolean = true;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   openConversation(){
     this.navCtrl.setRoot(InboxSinglePage);
+  }
+
+  changeViewMessages(){
+    this.messages = true;
+  }
+  changeViewRequests(){
+    this.messages = false;
   }
 }

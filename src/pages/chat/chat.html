@@ -18,12 +18,18 @@
             <span class="number">21 {{"Chat.Conversaciones" | translate}} </span>
         </div>
     </div>
-    <div class="tabs-actions">
-        <button class="btn-actions ">Mensajes</button>
-        <button class="btn-actions active ">Solicitudes</button>
-    </div>
+    <ion-grid no-padding>
+        <ion-row class="tabs-actions">
+            <ion-col>
+                <button (click)="changeViewMessages()" class="btn-actions " [ngClass]="{'active' : (messages)}">Mensajes</button>
+            </ion-col>
+            <ion-col>
+                <button (click)="changeViewRequests()" class="btn-actions " [ngClass]="{'active' : (!messages)}">Solicitudes</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
-    <div class="list-conversations">
+    <div class="list-conversations" *ngIf="messages ">
         <div class="single-conversation border-down" (click)="openConversation()">
             <ion-grid>
                 <ion-row>
@@ -64,6 +70,10 @@
                 </ion-row>
             </ion-grid>
         </div>
+    </div>
+
+    <div *ngIf="!messages ">
+        <h2>requests</h2>
     </div>
 
 </ion-content>
