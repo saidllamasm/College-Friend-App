@@ -99,5 +99,6 @@
         <variable name="TWITTER_KEY" value="MGZtamMDiTpZd6s40aEGCC8Av" />
         <variable name="TWITTER_SECRET" value="L7Rn6bZsCRITdE4fBWHFheUHpqrW4izgdMIBboIWTWEYdaf7Pp" />
     </plugin>
+    <plugin name="cordova-sqlite-storage" spec="^2.5.0" />
     <engine name="android" spec="7.0.0" />
 </widget>

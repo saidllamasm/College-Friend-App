@@ -43,6 +43,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import {TwitterConnect} from '@ionic-native/twitter-connect';
 
+import { IonicStorageModule } from '@ionic/storage';
+
 import { environment } from '../environments/environment';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -73,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     Ionic2RatingModule,
     TranslateModule.forRoot({
       loader: {
