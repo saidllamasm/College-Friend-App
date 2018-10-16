@@ -130,15 +130,15 @@ export class LoginPage {
         email : email,
         nombre : nombre,
         telefono : telefono,
-        reputacion: 'novato',
+        reputacion: 'novato',//
         rol :'usuario',
         metodo: metodo, 
         estado :'pendiente',
         configuracion : {
-          buscando : 'true',
-          notificaciones : 'true'
+          buscando : 'true', //
+          notificaciones : 'true' //
         },
-        timestamp : database.ServerValue.TIMESTAMP
+        //timestamp : database.ServerValue.TIMESTAMP
       };
     this.users.update(uid, newUser);
     this.saveLocalUID(uid);

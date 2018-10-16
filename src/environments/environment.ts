@@ -8,4 +8,4 @@ export const environment = {
         storageBucket: "college-friend-app.appspot.com",
         messagingSenderId: "330246446378"
     }
-  };
+};

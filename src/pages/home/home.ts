@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Calendar } from '@ionic-native/calendar';
 import { mapStyle } from './mapStyle';
 import { SingleUniversityPage } from '../single-university/single-university';
 import { Platform } from 'ionic-angular';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { CreateUniversityPage } from '../create-university/create-university';
+import { Storage } from '@ionic/storage';
 
 import {
   GoogleMaps,
@@ -36,27 +36,157 @@ export class HomePage {
 
   //calendario
   date: any;
-  daysInThisMonth: any;
-  daysInLastMonth: any;
-  daysInNextMonth: any;
-  monthNames: string[];
-  currentMonth: any;
   currentYear: any;
-  currentDate: any;
-  eventList: any;
-  selectedEvent: any;
-  isSelected: any;
+  monthNames: string[];
+  activities : string[];
+  universityDays : any;
   //end calenadario
 
   constructor(
     private navCtrl: NavController,
     private googleMaps: GoogleMaps,
     public statusBar: StatusBar,
-    private calendar: Calendar,
-    private alertCtrl: AlertController,
-    public plt: Platform
-  ) {
-    
+    public plt: Platform,
+    private storage: Storage
+  ){
+    this.loadMap();
+    this.loadUniversitiesForCalendar();
+    this.loadCalendar();
+    this.loadFakeData();
+  }
+
+  // construir el calendario
+  // carga todos los meses dependiendo el lenguaje de la plataforma
+  loadCalendar(){
+    this.storage.get('lang').then((val) => {
+      console.log('calendar lang '+val);
+      if(val == 'es'){
+        this.monthNames = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
+      } else if(val == 'fr'){
+        this.monthNames = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
+      } else if(val == 'pt'){
+        this.monthNames = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
+      } else {
+        this.monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      }
+    });
+  }
+  // me sirve para evaluar si el mes creado en el calendario tiene algun evento
+  // si tiene evento entonces aplicar estilo diferente
+  checkEvent(month){
+    let flag = false;
+    for(let i = 0; i < this.activities.length; i++){
+      if(this.activities[i].toString() == month){
+        flag =  true;
+      }
+    }
+    return flag;
+  }
+
+  //inicializa el mapa
+  loadMap(){
+    let mapOptions: GoogleMapOptions = {
+      camera: {
+        target: {
+          lat: 19.42847, // default location
+          lng: -99.12766 // default location
+        },
+        zoom: 11,
+        tilt: 30
+      },
+      styles: mapStyle 
+    };
+
+    this.map = this.googleMaps.create('map_canvas', mapOptions);
+
+    this.map.one(GoogleMapsEvent.MAP_READY)
+    .then(() => {
+      this.getPosition();
+    })
+    .catch(error =>{
+      alert("map error " +error);
+    });
+
+  }
+
+  // inserta marcadores en el mapa
+  insertMarker(title, icon, latLng){
+    this.map.addMarker({
+      title: title,
+      icon: icon,
+      position: latLng
+    });
+  }
+
+  //llamada a promesa para obtener la ubicacion real del usuario
+  getPosition(): void{
+    this.map.getMyLocation()
+    .then(response => {
+      this.map.moveCamera({
+        target: response.latLng
+      });
+      this.insertMarker('Mi ubicación', 'blue', response.latLng);
+    })
+    .catch(error =>{
+      console.log(error);
+    });
+  }
+
+  onModelChange(event){
+    alert(event);
+  }
+
+  testViewUniversity(id){
+    //alert(id);
+  }
+
+  viewUniversity(){
+    this.navCtrl.setRoot(SingleUniversityPage);
+  }
+
+  // me sirve para saber si hay una busqueda de universidad
+  viewResults(){
+    // comprobar contenido del input, si es vacio llamar a resetResults, sino proceder a resultados = true
+    if(this.txtSearch.length > 1)
+      this.results = true;
+    else 
+      this.resetResults(  );
+  }
+
+  // el campo de busqueda es vacio entonces regresar los items iniciales y ocultar resultados
+  resetResults(){
+    this.results = false;
+  }
+
+  createUniversity(){
+    this.navCtrl.setRoot(CreateUniversityPage);
+  }
+
+  viewUniversities(month){
+    console.log('load universities with start courses in : '+month);
+  }
+
+  // consulta a la db para obtener los inicios de cursos de las universidades registradas
+  loadUniversitiesForCalendar(){
+    this.date = new Date();
+    this.currentYear = this.date.getFullYear();
+    // load month with university
+    this.activities =["January","February","March"];
+  }
+
+  loadFakeData(){
+    this.universityDays = [
+      {
+        name:"Universidad de Guadalajara",
+        date:"Agosto 2018",
+        id:"1"
+      },
+      {
+        name:"Universida Autonoma de Mexico",
+        date:"Agosto 2018",
+        id:"1"
+      }
+    ];
     this.universities = [
       {
         img: "https://st2.depositphotos.com/1035886/8363/i/950/depositphotos_83635296-stock-photo-pennsylvania-state-university.jpg",
@@ -88,200 +218,7 @@ export class HomePage {
         title:"",
         id:"6"
       }
-
-    ]
-    this.loadMap();
-  }
-  
-  loadMap(){
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: 19.42847, // default location
-          lng: -99.12766 // default location
-        },
-        zoom: 18,
-        tilt: 30
-      },
-      styles: mapStyle 
-    };
-
-    this.map = this.googleMaps.create('map_canvas', mapOptions);
-
-    // Wait the MAP_READY before using any methods.
-    this.map.one(GoogleMapsEvent.MAP_READY)
-    .then(() => {
-      // Now you can use all methods safely.
-      this.getPosition();
-    })
-    .catch(error =>{
-      alert("map error " +error);
-    });
-
-  }
-
-  getPosition(): void{
-    this.map.getMyLocation()
-    .then(response => {
-      this.map.moveCamera({
-        target: response.latLng
-      });
-      this.map.addMarker({
-        title: 'My Position',
-        icon: 'blue',
-        animation: 'DROP',
-        position: response.latLng
-      });
-    })
-    .catch(error =>{
-      alert("error postion " +error);
-      console.log(error);
-    });
-  }
-
-  onModelChange(event){
-    alert(event);
-  }
-
-
-  // events for map
-  ionViewWillEnter() {
-    this.date = new Date();
-    this.monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    this.getDaysOfMonth();
-    this.loadEventThisMonth();
-  }
-
-  getDaysOfMonth() {
-    this.daysInThisMonth = new Array();
-    this.daysInLastMonth = new Array();
-    this.daysInNextMonth = new Array();
-    this.currentMonth = this.monthNames[this.date.getMonth()];
-    this.currentYear = this.date.getFullYear();
-    if(this.date.getMonth() === new Date().getMonth()) {
-      this.currentDate = new Date().getDate();
-    } else {
-      this.currentDate = 999;
-    }
-
-    var firstDayThisMonth = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
-    var prevNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth(), 0).getDate();
-    for(var i = prevNumOfDays-(firstDayThisMonth-1); i <= prevNumOfDays; i++) {
-      this.daysInLastMonth.push(i);
-    }
-
-    var thisNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDate();
-    for (var j = 0; j < thisNumOfDays; j++) {
-      this.daysInThisMonth.push(j+1);
-    }
-
-    var lastDayThisMonth = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDay();
-    // var nextNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+2, 0).getDate();
-    for (var k = 0; k < (6-lastDayThisMonth); k++) {
-      this.daysInNextMonth.push(k+1);
-    }
-    var totalDays = this.daysInLastMonth.length+this.daysInThisMonth.length+this.daysInNextMonth.length;
-    if(totalDays<36) {
-      for(var l = (7-lastDayThisMonth); l < ((7-lastDayThisMonth)+7); l++) {
-        this.daysInNextMonth.push(l);
-      }
-    }
-  }
-
-  loadEventThisMonth() {
-    this.eventList = new Array();
-    var startDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
-    var endDate = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0);
-    this.calendar.listEventsInRange(startDate, endDate).then(
-      (msg) => {
-        msg.forEach(item => {
-          this.eventList.push(item);
-        });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
-
-  checkEvent(day) {
-    var hasEvent = false;
-    var thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 00:00:00";
-    var thisDate2 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 23:59:59";
-    this.eventList.forEach(event => {
-      if(((event.startDate >= thisDate1) && (event.startDate <= thisDate2)) || ((event.endDate >= thisDate1) && (event.endDate <= thisDate2))) {
-        hasEvent = true;
-      }
-    });
-    return hasEvent;
-  }
-
-  selectDate(day) {
-    this.isSelected = false;
-    this.selectedEvent = new Array();
-    var thisDate1 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 00:00:00";
-    var thisDate2 = this.date.getFullYear()+"-"+(this.date.getMonth()+1)+"-"+day+" 23:59:59";
-    this.eventList.forEach(event => {
-      if(((event.startDate >= thisDate1) && (event.startDate <= thisDate2)) || ((event.endDate >= thisDate1) && (event.endDate <= thisDate2))) {
-        this.isSelected = true;
-        this.selectedEvent.push(event);
-      }
-    });
-  }
-
-  deleteEvent(evt) {
-    // console.log(new Date(evt.startDate.replace(/\s/, 'T')));
-    // console.log(new Date(evt.endDate.replace(/\s/, 'T')));
-    let alert = this.alertCtrl.create({
-      title: 'Confirm Delete',
-      message: 'Are you sure want to delete this event?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-            this.calendar.deleteEvent(evt.title, evt.location, evt.notes, new Date(evt.startDate.replace(/\s/, 'T')), new Date(evt.endDate.replace(/\s/, 'T'))).then(
-              (msg) => {
-                console.log(msg);
-                this.loadEventThisMonth();
-                this.selectDate(new Date(evt.startDate.replace(/\s/, 'T')).getDate());
-              },
-              (err) => {
-                console.log(err);
-              }
-            )
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-  testViewUniversity(id){
-    //alert(id);
-  }
-  viewUniversity(){
-    this.navCtrl.setRoot(SingleUniversityPage);
-  }
-
-  viewResults(){
-    // comprobar contenido del input, si es vacio llamar a resetResults, sino proceder a resultados = true
-    if(this.txtSearch.length > 1)
-      this.results = true;
-    else 
-      this.resetResults(  );
-  }
-  resetResults(){
-    this.results = false;
-  }
-
-  createUniversity(){
-    this.navCtrl.setRoot(CreateUniversityPage);
+    ];
   }
 
 }

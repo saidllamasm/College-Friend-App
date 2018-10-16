@@ -113,11 +113,18 @@ page-home {
     }
     .currentDate {
         font-weight: bold;
-        background-color: map-get($colors, dark);
+        background-color: map-get($colors, secondary);
         color: white;
-        border-radius: 30px;
+        border-radius: 20px;
+    }
+    .currentDate:hover {
+        border: 1px solid map-get($colors, secondary);
+        background-color: #fff;
+        color: map-get($colors, secondary);
     }
     .calendar-header {
+        padding: 5px;
+        font-weight: bold;
         background-color: map-get($colors, primary);
         ;
         -webkit-border-top-left-radius: 20px;
@@ -127,13 +134,7 @@ page-home {
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         color: #FFFFFF;
-    }
-    .event-bullet {
-        margin: 2px auto;
-        height: 5px;
-        width: 5px;
-        background-color: map-get($colors, primary);
-        border-radius: 30px;
+        font-size: 16px !important;
     }
     .selected-date {
         width: 20px;
@@ -161,8 +162,10 @@ page-home {
             background-color: map-get($colors, primary);
         }
         .calendar-date {
-            border-top: solid 1px map-get($colors, primary);
-            border-bottom: solid 1px map-get($colors, primary);
+            padding: 3px;
+            border: solid 1px map-get($colors, primary);
+            /*border-top: solid 1px map-get($colors, primary);
+            border-bottom: solid 1px map-get($colors, primary);*/
         }
     }
     .single-university-soon {

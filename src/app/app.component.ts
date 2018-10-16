@@ -53,6 +53,7 @@ export class MyApp {
             res.value == "es-VE" 
           ){
             translate.setDefaultLang("es");  
+            storage.set('lang', 'es');
           } else if(
             res.value == "fr" || 
             res.value == "fr-BE" || 
@@ -63,6 +64,7 @@ export class MyApp {
             res.value == "fr-MC"
           ){
             translate.setDefaultLang("fr");  
+            storage.set('lang', 'fr');
           } else if(
             res.value == "pt" || 
             res.value == "pt-BR" || 
@@ -70,8 +72,10 @@ export class MyApp {
             res.value == "pt-CH"
           ){ 
             translate.setDefaultLang("pt");
+            storage.set('lang', 'pt');
           } else {
             translate.setDefaultLang("en");
+            storage.set('lang', 'en');
           }
         } 
       )
