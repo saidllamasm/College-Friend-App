@@ -10,7 +10,7 @@
         <span class="title">{{"Inicio.universidades_destacadas" | translate}}</span>
         <ion-slides autoplay="2200" loop slidesPerView="2" spaceBetween="12">
             <ion-slide *ngFor="let university of universities" text-center>
-                <img src="{{university.img}}" (click)="testViewUniversity(university.id)">
+                <img [src]="university.imgsrc" (click)="testViewUniversity(university.id)">
             </ion-slide>
         </ion-slides>
 
@@ -18,28 +18,15 @@
         <span class="title">{{"Inicio.universidades_cercanas" | translate}}</span>
         <div id="map_canvas"></div>
         <div class="list-universities-nearby">
-            <div class="single-university">
+            <div class="single-university" *ngFor="let nearbyUniversity of nearbyUniversities" (click)="viewUniversity(nearbyUniversity.id)">
                 <ion-grid>
                     <ion-row>
                         <ion-col col-3>
-                            <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
+                            <img class="img-circle img-university" [src]="nearbyUniversity.imgsrc">
                         </ion-col>
                         <ion-col col-9>
-                            <span class="name-university">Academia de Música Fermatta</span>
-                            <rating [(ngModel)]="raSte" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </div>
-            <div class="single-university">
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-3>
-                            <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
-                        </ion-col>
-                        <ion-col col-9>
-                            <span class="name-university">Academia de Música Fermatta</span>
-                            <rating [(ngModel)]="raFte" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                            <span class="name-university">{{nearbyUniversity.name}}</span>
+                            <rating [(ngModel)]="raSte" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
@@ -49,28 +36,15 @@
         <span class="title">{{"Inicio.universidades_evaluadas" | translate}}</span>
         <br><br>
         <div class="list-universities-valuet">
-            <div class="single-university">
+            <div class="single-university" *ngFor="let featureUniversity of featuresUniversities" (click)="viewUniversity(featureUniversity.id)">
                 <ion-grid>
                     <ion-row>
                         <ion-col col-3>
-                            <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
+                            <img class="img-circle img-university" [src]="featureUniversity.imgsrc">
                         </ion-col>
                         <ion-col col-9>
-                            <span class="name-university">Academia de Música Fermatta</span>
-                            <rating [(ngModel)]="ratGe" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </div>
-            <div class="single-university">
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-3>
-                            <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
-                        </ion-col>
-                        <ion-col col-9>
-                            <span class="name-university">Academia de Música Fermatta</span>
-                            <rating [(ngModel)]="rate" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                            <span class="name-university">{{featureUniversity.name}}</span>
+                            <rating [(ngModel)]="ratGe" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                         </ion-col>
                     </ion-row>
                 </ion-grid>

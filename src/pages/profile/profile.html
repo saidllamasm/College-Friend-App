@@ -16,61 +16,63 @@
 
 
 <ion-content padding>
-    <ion-grid>
-        <ion-row>
-            <ion-col>
-                <label>{{"Perfil.user_name" | translate}}</label>
-                <input type="text" placeholder="Jesus Said Llamas Manriquez" [disabled]="!edited">
-            </ion-col>
-        </ion-row>
-        <br>
-        <ion-row>
-            <ion-col>
-                <label>{{"Perfil.user_phone" | translate}} </label>
-                <input type="tel" placeholder="341 124 4332" [disabled]="!edited">
-            </ion-col>
-        </ion-row>
-        <br>
-        <ion-row>
-            <ion-col>
-                <label>{{"Perfil.user_email" | translate}}</label>
-                <input type="email" placeholder="said@ieee.org" [disabled]="!edited">
-            </ion-col>
-        </ion-row>
-        <br>
-        <ion-row>
-            <ion-col>
-                <label>{{"Perfil.user_pass" | translate}}</label>
-                <input type="password" placeholder="*******" [disabled]="!edited">
-            </ion-col>
-        </ion-row>
-        <br>
-        <ion-row>
-            <ion-col>
-                <label>{{"Perfil.Ajustes.Ajustes" | translate}}</label>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="input">
-                    <ion-checkbox [disabled]="!edited" [(ngModel)]="pre-student"></ion-checkbox>
-                    <label for="pre-student">&nbsp; {{"Perfil.Ajustes.Miembro" | translate}}</label>
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <div class="input">
-                    <ion-checkbox [disabled]="!edited" [(ngModel)]="notifications"></ion-checkbox>
-                    <label for="notifications">&nbsp; {{"Perfil.Ajustes.Notificaciones" | translate}}</label>
-                </div>
-            </ion-col>
-        </ion-row>
-        <br>
-        <ion-row>
-            <ion-col>
-                <button *ngIf="edited" (click)="saved()" class="btn-save">{{"Perfil.Ajustes.Guardar" | translate}}</button>
-            </ion-col>
-        </ion-row>
+    <ion-grid *ngFor="let user of userData | async; let i=index">
+        <div *ngIf="i<1">
+            <ion-row>
+                <ion-col>
+                    <label>{{" Perfil.user_name " | translate}}</label>
+                    <input type="text " placeholder="{{user.nombre}}" [disabled]="!edited ">
+                </ion-col>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-col>
+                    <label>{{"Perfil.user_phone " | translate}} </label>
+                    <input type="tel " placeholder="{{user.telefono}}" [disabled]="!edited ">
+                </ion-col>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-col>
+                    <label>{{"Perfil.user_email " | translate}}</label>
+                    <input type="email " placeholder="{{user.email}}" [disabled]="!edited ">
+                </ion-col>
+            </ion-row>
+            <br>
+            <ion-row *ngIf="false">
+                <ion-col>
+                    <label>{{"Perfil.user_pass " | translate}}</label>
+                    <input type="password " placeholder="******* " [disabled]="!edited ">
+                </ion-col>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-col>
+                    <label>{{"Perfil.Ajustes.Ajustes " | translate}}</label>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <div class="input ">
+                        <ion-checkbox [disabled]="!edited " [(ngModel)]="pre-student "></ion-checkbox>
+                        <label for="pre-student ">&nbsp; {{"Perfil.Ajustes.Miembro " | translate}}</label>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <div class="input ">
+                        <ion-checkbox [disabled]="!edited " [(ngModel)]="notifications "></ion-checkbox>
+                        <label for="notifications ">&nbsp; {{"Perfil.Ajustes.Notificaciones " | translate}}</label>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <br>
+            <ion-row>
+                <ion-col>
+                    <button *ngIf="edited " (click)="saved() " class="btn-save ">{{"Perfil.Ajustes.Guardar " | translate}}</button>
+                </ion-col>
+            </ion-row>
+        </div>
     </ion-grid>
 </ion-content>

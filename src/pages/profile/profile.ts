@@ -5,7 +5,9 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
-
+import { Observable } from 'rxjs/Observable';
+import { UserCustom } from '../../model/user/user.model';
+ 
 /**
  * Generated class for the ProfilePage page.
  *
@@ -19,10 +21,11 @@ import { LoginPage } from '../login/login';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+
+  //info user
+  //
   
   edited : boolean = false;
-  data:AngularFireList<any>;
-
   profilePicture: any = "https://www.gravatar.com/avatar/"
 
   constructor(
@@ -30,12 +33,16 @@ export class ProfilePage {
     public navParams: NavParams,
     public afDatabase: AngularFireDatabase,
     private storage: Storage,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
   ) {
     //this.profilePicture = "https://www.gravatar.com/avatar/" + md5(this.profile.email, 'hex')+"?s=400";
     this.afAuth.authState.subscribe(user => {
-      this.data =  this.afDatabase.list('UsuariosT/'+user.uid);
-      
+      this.afDatabase.list<UserCustom>('/UsuariosT/'+user.uid+'/').valueChanges().subscribe((data) => { 
+        console.log(data);
+      },(err)=>{
+         console.log("problem : ", err)
+         alert(err);
+      });
     })
   }
 

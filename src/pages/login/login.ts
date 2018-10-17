@@ -4,7 +4,6 @@ import { TabsPage } from '../tabs/tabs';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
-import { database } from 'firebase';
 import { Facebook } from '@ionic-native/facebook'
 import { AngularFireAuth } from 'angularfire2/auth';
 import {TwitterConnect} from '@ionic-native/twitter-connect';
@@ -42,8 +41,7 @@ export class LoginPage {
     public twitterConnect: TwitterConnect,
     public afAuth: AngularFireAuth,
     private platform: Platform,
-    database: AngularFireDatabase,
-    private storage: Storage
+    database: AngularFireDatabase
   ) {
     this.users = database.list('UsuariosT');
   }
@@ -63,6 +61,7 @@ export class LoginPage {
       );
   }
 
+  // register new user with email and password
   procesarRegistro(){
     let credentials = {
 			email: this.email_r,
@@ -78,6 +77,7 @@ export class LoginPage {
     });
   }
 
+  // login with Faceboook
   procesarFacebook(): Promise<any> {
     AngularFireModule.initializeApp(environment.firebase);
       return this.facebook.login(['email', 'public_profile']).then(res => {
@@ -92,7 +92,7 @@ export class LoginPage {
         });
       });
   }
-
+  // login with Twiter
   procesarTwitter(){
     if (this.platform.is('cordova')) {
       this.twitterConnect.login().then(res => {
@@ -121,10 +121,7 @@ export class LoginPage {
     }
   }
 
-  saveLocalUID(uid){
-    this.storage.set('uid', uid);
-  }
-
+  // save user data to firebase 
   saveUserFirebase(uid, email, nombre, telefono, metodo){
     let newUser = {
         email : email,
@@ -141,9 +138,9 @@ export class LoginPage {
         //timestamp : database.ServerValue.TIMESTAMP
       };
     this.users.update(uid, newUser);
-    this.saveLocalUID(uid);
   }
 
+  //for ui controls
   activeFormRegistro(){
     this.login = true;
   }

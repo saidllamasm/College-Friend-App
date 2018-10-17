@@ -45,6 +45,8 @@ import {TwitterConnect} from '@ionic-native/twitter-connect';
 
 import { IonicStorageModule } from '@ionic/storage';
 
+import { UserListService } from '../services/user-list.service';
+
 import { environment } from '../environments/environment';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -84,7 +86,7 @@ export function HttpLoaderFactory(http: HttpClient) {
           deps: [HttpClient]
       }
     }),
-    AngularFireModule.initializeApp(environment.firebase,'demo104'),
+    AngularFireModule.initializeApp(environment.firebase,'college-friend-app'),
     AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
@@ -114,6 +116,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     Facebook,
     AngularFireAuth,
     TwitterConnect,
+    UserListService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
   schemas: [

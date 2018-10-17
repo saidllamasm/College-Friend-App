@@ -34,6 +34,14 @@ export class HomePage {
 
   map: GoogleMap;
 
+  //universidades destacas
+  featuresUniversities : any;
+  //
+
+  //universidades cercanas
+  nearbyUniversities : any;
+  //
+
   //calendario
   date: any;
   currentYear: any;
@@ -140,7 +148,7 @@ export class HomePage {
     //alert(id);
   }
 
-  viewUniversity(){
+  viewUniversity(id){
     this.navCtrl.setRoot(SingleUniversityPage);
   }
 
@@ -189,34 +197,48 @@ export class HomePage {
     ];
     this.universities = [
       {
-        img: "https://st2.depositphotos.com/1035886/8363/i/950/depositphotos_83635296-stock-photo-pennsylvania-state-university.jpg",
+        imgsrc: "https://st2.depositphotos.com/1035886/8363/i/950/depositphotos_83635296-stock-photo-pennsylvania-state-university.jpg",
         title:"",
         id:"1"
       },
       {
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSelwrji3FhHKyfTeD5iovsP3B1mpVnCIAFEugMZG1tONDXoWr",
+        imgsrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSelwrji3FhHKyfTeD5iovsP3B1mpVnCIAFEugMZG1tONDXoWr",
         title:"",
         id:"2"
       },
       {
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXTmxHvtYK_Zi7uDD5WVvuBPx3pprePBqw4qJDe-BVPG5LO040",
+        imgsrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXTmxHvtYK_Zi7uDD5WVvuBPx3pprePBqw4qJDe-BVPG5LO040",
         title:"",
         id:"3"
       },
       {
-        img: "http://periodicolafuente.com/wp-content/uploads/2016/10/las-mejores-universidades-en-Estados-Unidos-La-Fuente.jpg",
+        imgsrc: "http://periodicolafuente.com/wp-content/uploads/2016/10/las-mejores-universidades-en-Estados-Unidos-La-Fuente.jpg",
         title:"",
         id:"4"
       },
       {
-        img: "https://www.infoidiomas.com/wp-content/uploads/universidad_Pennsylvania.jpg",
+        imgsrc: "https://www.infoidiomas.com/wp-content/uploads/universidad_Pennsylvania.jpg",
         title:"",
         id:"5"
       },
       {
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGYDP-pUHdJ-J-xkgfb4_L_CI_q8EQdc-uzxPLWCCPKUYB4h1wEQ",
+        imgsrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGYDP-pUHdJ-J-xkgfb4_L_CI_q8EQdc-uzxPLWCCPKUYB4h1wEQ",
         title:"",
         id:"6"
+      }
+    ];
+    this.featuresUniversities = [
+      {
+        imgsrc : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGYDP-pUHdJ-J-xkgfb4_L_CI_q8EQdc-uzxPLWCCPKUYB4h1wEQ",
+        name :"Universidad de Chile",
+        id:"3"
+      }
+    ];
+    this.nearbyUniversities = [
+      {
+        imgsrc : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGYDP-pUHdJ-J-xkgfb4_L_CI_q8EQdc-uzxPLWCCPKUYB4h1wEQ",
+        name :"Universidad de Chile",
+        id:"3" 
       }
     ];
   }

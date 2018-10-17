@@ -3,7 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { OpinionsPage } from './opinions';
 // Import ionic2-rating module
 import { Ionic2RatingModule } from 'ionic2-rating';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
