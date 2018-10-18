@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ActionSheetController } from 'ionic-angular';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+
 import {
   GoogleMaps,
   GoogleMap,
@@ -45,10 +47,11 @@ export class CreateUniversityPage {
     private googleMaps: GoogleMaps,
     database: AngularFireDatabase,
     private camera: Camera,
-    private alertCtrl: ActionSheetController
+    private alertCtrl: ActionSheetController,
+    public afAuth: AngularFireAuth,
   ) {
     this.loadMap();
-    this.university = database.list('test');
+    this.university = database.list('UniversidadesT');
 
   }
 
@@ -116,20 +119,21 @@ export class CreateUniversityPage {
   }
 
   saveUniversity(){
-    const newUniversity = this.university.push({});
-    newUniversity.set({
-      id: newUniversity.key,
-      creador: 'SAID',
-      direccion: this.address,
-      estado:'pendiente',
-      gps:{
-        lat:'LAT',
-        lng:'LNG'
-      },
-      nombre: this.nameUniversity,
-      website:this.website,
-      telefono:this.phoneUniversity,
-      timestamp:database.ServerValue.TIMESTAMP
+    this.afAuth.authState.subscribe(user => {
+      const newUniversity = this.university.push({});
+      newUniversity.set({
+        uid_creador: user.uid,
+        direccion: this.address,
+        estado:'pendiente',
+        gps:{
+          lat:'LAT',
+          lng:'LNG'
+        },
+        nombre: this.nameUniversity,
+        website:this.website,
+        telefono:this.phoneUniversity,
+        timestamp:database.ServerValue.TIMESTAMP
+      });
     });
   }
 

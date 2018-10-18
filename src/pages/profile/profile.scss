@@ -9,8 +9,8 @@ page-profile {
     }
     img.photo-user {
         border-radius: 50%;
-        width: 140px;
-        height: 140px;
+        width: 130px;
+        height: 130px;
     }
     .ctrol-profile {
         width: 100%;
@@ -46,7 +46,7 @@ page-profile {
     }
     ion-icon {
         color: map-get($colors, primary);
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 600px;
     }
     .btn-save {

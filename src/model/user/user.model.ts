@@ -7,4 +7,8 @@ export interface UserCustom {
   reputacion: string;
   rol: string;
   telefono: string;
+  configuracion : {
+    buscando : boolean;
+    notificaciones : boolean;
+  }
 }

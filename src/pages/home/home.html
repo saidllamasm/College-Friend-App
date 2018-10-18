@@ -8,8 +8,8 @@
 <ion-content padding>
     <div *ngIf="!results">
         <span class="title">{{"Inicio.universidades_destacadas" | translate}}</span>
-        <ion-slides autoplay="2200" loop slidesPerView="2" spaceBetween="12">
-            <ion-slide *ngFor="let university of universities" text-center>
+        <ion-slides autoplay="2200" slidesPerView="2" spaceBetween="12">
+            <ion-slide *ngFor="let university of featuresUniversities" text-center>
                 <img [src]="university.imgsrc" (click)="testViewUniversity(university.id)">
             </ion-slide>
         </ion-slides>
@@ -36,14 +36,14 @@
         <span class="title">{{"Inicio.universidades_evaluadas" | translate}}</span>
         <br><br>
         <div class="list-universities-valuet">
-            <div class="single-university" *ngFor="let featureUniversity of featuresUniversities" (click)="viewUniversity(featureUniversity.id)">
+            <div class="single-university" *ngFor="let evaluateUniversity of evaluatesUniversities" (click)="viewUniversity(featureUniversity.id)">
                 <ion-grid>
                     <ion-row>
                         <ion-col col-3>
-                            <img class="img-circle img-university" [src]="featureUniversity.imgsrc">
+                            <img class="img-circle img-university" [src]="evaluateUniversity.imgsrc">
                         </ion-col>
                         <ion-col col-9>
-                            <span class="name-university">{{featureUniversity.name}}</span>
+                            <span class="name-university">{{evaluateUniversity.name}}</span>
                             <rating [(ngModel)]="ratGe" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                         </ion-col>
                     </ion-row>

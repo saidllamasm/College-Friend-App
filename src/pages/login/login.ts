@@ -123,7 +123,9 @@ export class LoginPage {
 
   // save user data to firebase 
   saveUserFirebase(uid, email, nombre, telefono, metodo){
-    let newUser = {
+    if(!this.userExist(uid)){
+      let newUser = {
+        key : uid,
         email : email,
         nombre : nombre,
         telefono : telefono,
@@ -132,14 +134,18 @@ export class LoginPage {
         metodo: metodo, 
         estado :'pendiente',
         configuracion : {
-          buscando : 'true', //
-          notificaciones : 'true' //
+          buscando : true, //
+          notificaciones : true //
         },
         //timestamp : database.ServerValue.TIMESTAMP
       };
-    this.users.update(uid, newUser);
+      this.users.update(uid, newUser);
+    } 
   }
 
+  userExist(uid){
+    return false;
+  }
   //for ui controls
   activeFormRegistro(){
     this.login = true;

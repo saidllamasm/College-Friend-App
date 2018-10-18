@@ -1,3 +1,4 @@
+import { University } from './../../model/university/university.model';
 import { NgModule } from '@angular/core';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -9,6 +10,7 @@ import { Platform } from 'ionic-angular';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { CreateUniversityPage } from '../create-university/create-university';
 import { Storage } from '@ionic/storage';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 import {
   GoogleMaps,
@@ -27,7 +29,6 @@ import {
   templateUrl: 'home.html'
 })
 export class HomePage {
-  universities:any;
   txtSearch : string = "";
 
   results: boolean = false;
@@ -36,6 +37,10 @@ export class HomePage {
 
   //universidades destacas
   featuresUniversities : any;
+  //
+
+  //universidades mas evaluadas
+  evaluatesUniversities : any;
   //
 
   //universidades cercanas
@@ -55,12 +60,14 @@ export class HomePage {
     private googleMaps: GoogleMaps,
     public statusBar: StatusBar,
     public plt: Platform,
-    private storage: Storage
+    private storage: Storage,
+    public afDatabase: AngularFireDatabase,
   ){
     this.loadMap();
     this.loadUniversitiesForCalendar();
     this.loadCalendar();
     this.loadFakeData();
+    //this.loadUniversitiesFeature();
   }
 
   // construir el calendario
@@ -182,20 +189,19 @@ export class HomePage {
     this.activities =["January","February","March"];
   }
 
-  loadFakeData(){
-    this.universityDays = [
-      {
-        name:"Universidad de Guadalajara",
-        date:"Agosto 2018",
-        id:"1"
-      },
-      {
-        name:"Universida Autonoma de Mexico",
-        date:"Agosto 2018",
-        id:"1"
-      }
-    ];
-    this.universities = [
+  loadUniversitiesFeature(){
+    this.afDatabase.list<University>('/UniversidadesT/').valueChanges().subscribe((res: University[]) => { 
+      res.forEach((item) => {
+          alert(item.nombre);
+      });
+    },(err)=>{
+       console.log("problem : ", err)
+       alert(err);
+    });
+  }
+
+  fakeFeatures(){
+    this.featuresUniversities = [
       {
         imgsrc: "https://st2.depositphotos.com/1035886/8363/i/950/depositphotos_83635296-stock-photo-pennsylvania-state-university.jpg",
         title:"",
@@ -227,18 +233,47 @@ export class HomePage {
         id:"6"
       }
     ];
-    this.featuresUniversities = [
+  }
+  fakeEvaluates(){
+
+  }
+  loadFakeData(){
+    this.fakeFeatures();
+    this.universityDays = [
       {
-        imgsrc : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGYDP-pUHdJ-J-xkgfb4_L_CI_q8EQdc-uzxPLWCCPKUYB4h1wEQ",
+        name:"Universidad de Guadalajara",
+        date:"Agosto 2018",
+        id:"1"
+      },
+      {
+        name:"Universida Autonoma de Mexico",
+        date:"Agosto 2018",
+        id:"1"
+      }
+    ];
+    
+    this.evaluatesUniversities = [
+      {
+        imgsrc : "https://upload.wikimedia.org/wikipedia/commons/9/99/San_Giovanni_Laterano_Rom.jpg",
         name :"Universidad de Chile",
+        id:"3"
+      },
+      {
+        imgsrc : "https://storage.googleapis.com/mmc-cdn-bucket/uploads/2017/02/aa4b297f-uasd-1.jpg",
+        name :"universidad de Santo Domingo",
         id:"3"
       }
     ];
     this.nearbyUniversities = [
       {
-        imgsrc : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGYDP-pUHdJ-J-xkgfb4_L_CI_q8EQdc-uzxPLWCCPKUYB4h1wEQ",
-        name :"Universidad de Chile",
+        imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
+        name :"Instituto Tecnológico de Ciudad Guzmán",
         id:"3" 
+      },
+      {
+        imgsrc: "https://cdn-az.allevents.in/banners/2ec9e7fae6b19132288b69c8f1d9e5c9",
+        name :"Universidad Pedagógica Nacional de Ciudad Guzmán",
+        id:"4"
       }
     ];
   }

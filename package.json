@@ -34,6 +34,8 @@
         "@ngx-translate/http-loader": "^3.0.1",
         "angularfire2": "^5.0.2",
         "cordova-android": "7.0.0",
+        "cordova-browser": "5.0.4",
+        "cordova-ios": "4.5.5",
         "cordova-plugin-calendar": "^5.1.2",
         "cordova-plugin-camera": "^4.0.3",
         "cordova-plugin-device": "^2.0.2",
@@ -99,7 +101,8 @@
             "cordova-sqlite-storage": {}
         },
         "platforms": [
-            "android"
+            "android",
+            "browser"
         ]
     }
 }

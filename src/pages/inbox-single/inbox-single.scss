@@ -1,6 +1,6 @@
 page-inbox-single {
-    ion-content {
-        background-color: #EAF2FF !important;
+    ion-content .scroll-content {
+        background-color: #f5f5f5;
     }
     .bg-primary {
         background-color: map-get($colors, primary);
@@ -9,6 +9,11 @@ page-inbox-single {
         color: #fff;
         font-size: 15px;
         padding-left: 10px;
+    }
+    ion-footer {
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.11);
+        background-color: #fff;
+        height: 255px;
     }
     .line-breaker {
         white-space: pre-line;
@@ -19,9 +24,9 @@ page-inbox-single {
     }
     .input-wrap textarea {
         flex: 1;
-        border-radius: 5px;
-        border: 1px solid map-get($colors, primary);
-        padding-top: 10px;
+        border: 0;
+        border-bottom: 1px #387ef5;
+        border-style: solid;
     }
     .message-wrap {
         padding: 0 10px;
@@ -113,21 +118,5 @@ page-inbox-single {
         border-bottom-width: 0;
         border-left-width: 0;
         right: -5px;
-    }
-    bg-primary {
-        background-color: map-get($colors, primary);
-        color: #fff;
-    }
-    .input-wrap button {
-        height: 45px;
-        color: #fff;
-        background-color: map-get($colors, primary);
-        border-radius: 50%;
-    }
-    .input-wrap button:hover {
-        height: 45px;
-        color: #fff!important;
-        background-color: map-get($colors, primary)!important;
-        border-radius: 50%;
     }
 }

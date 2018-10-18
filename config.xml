@@ -101,4 +101,5 @@
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="^2.5.0" />
     <engine name="android" spec="7.0.0" />
+    <engine name="browser" spec="~5.0.4" />
 </widget>
