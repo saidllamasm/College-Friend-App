@@ -83,11 +83,13 @@ export class CreateUniversityPage {
             (results) => {
               // recorrer todas las imagenes selecccionadas
               this.images = results;
-              for (var i = 0; i < results.length; i++) {
+              /*for (var i = 0; i < results.length; i++) {
                 let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours() + '_' + i;
-                this.uploadPics(results[i], id);
-              }
-            }, (err) => {console.log(err); alert(JSON.stringify(err));}
+                this.uploadPics(results[i] , id);
+              }*/
+            }, (err) => {
+              console.log(err);
+              alert(JSON.stringify(err));}
           );
         }
       }, (err) => {
@@ -117,8 +119,18 @@ export class CreateUniversityPage {
         website:this.website,
         telefono:this.phoneUniversity,
         timestamp:database.ServerValue.TIMESTAMP
+      }).then( () =>{
+        let toast = this.toastCtrl.create({
+          message: 'University was added successfully',
+          duration: 3000,
+          position: 'bottom'
+        }).present();
       });
     });
+    for (var i = 0; i < this.images.length; i++) {
+      let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
+      this.uploadPics(this.images[i] , id);
+    }
   }
 
 }
