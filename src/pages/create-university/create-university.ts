@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-import { ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
+
+import { ImagePicker } from '@ionic-native/image-picker';
 
 import {
   GoogleMaps,
@@ -11,11 +11,8 @@ import {
   GoogleMapOptions,
 } from '@ionic-native/google-maps';
 
-import { Camera, CameraOptions } from '@ionic-native/camera';
-
-
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
-import { database } from 'firebase';
+import { database, storage } from 'firebase';
 /**
  * Generated class for the CreateUniversityPage page.
  *
@@ -29,10 +26,8 @@ import { database } from 'firebase';
   templateUrl: 'create-university.html',
 })
 export class CreateUniversityPage {
+  images: any = [];
 
-  base64Image:any;
-  photos:any;
-  
   nameUniversity:String;
   address:String;
   phoneUniversity:String;
@@ -46,10 +41,11 @@ export class CreateUniversityPage {
     public navParams: NavParams,
     private googleMaps: GoogleMaps,
     database: AngularFireDatabase,
-    private camera: Camera,
-    private alertCtrl: ActionSheetController,
+    public toastCtrl: ToastController,
     public afAuth: AngularFireAuth,
+    public imagePicker: ImagePicker,
   ) {
+
     this.loadMap();
     this.university = database.list('UniversidadesT');
 
@@ -71,51 +67,39 @@ export class CreateUniversityPage {
   }
 
   addPicture(){
-    let alert = this.alertCtrl.create({
-      title: 'Add image',
-      buttons: [
-        {
-          text: 'Take photo',
-          handler: () => {
-            const options: CameraOptions = {
-              quality: 100,
-              destinationType: this.camera.DestinationType.DATA_URL,
-              encodingType: this.camera.EncodingType.JPEG,
-              mediaType: this.camera.MediaType.PICTURE,
-              correctOrientation: true,
-              sourceType:1 //Library
-            }
-            this.camera.getPicture(options).then((imageData) => {
-              let base64Image = 'data:image/jpeg;base64,' + imageData;
-            }, (err) => {
-              // Handle error
-              
-            });
-          }
-        },
-        {
-          text: 'Add photo',
-          handler: () => {
-            const options: CameraOptions = {
-              quality: 100,
-              destinationType: this.camera.DestinationType.DATA_URL,
-              encodingType: this.camera.EncodingType.JPEG,
-              mediaType: this.camera.MediaType.PICTURE,
-              correctOrientation: true,
-              sourceType:0 //Library
-            }
-            this.camera.getPicture(options).then((imageData) => {
-              let base64Image = 'data:image/jpeg;base64,' + imageData;
-            }, (err) => {
-              // Handle error
-              
-            });
-          }
+    this.imagePicker.hasReadPermission().then(
+      (result) => { // sin permisos
+        if(result == false){
+          // solicitar permiso para acceder a galeria
+          this.imagePicker.requestReadPermission();
         }
-      ]
-    });
-    alert.present();
-    
+        else if(result == true){ // con permiso
+          this.imagePicker.getPictures({
+            quality: 50,
+            width: 512,
+            height: 512,
+            outputType: 1 // retornar en base64
+          }).then(
+            (results) => {
+              // recorrer todas las imagenes selecccionadas
+              this.images = results;
+              for (var i = 0; i < results.length; i++) {
+                let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours() + '_' + i;
+                this.uploadPics(results[i], id);
+              }
+            }, (err) => {console.log(err); alert(JSON.stringify(err));}
+          );
+        }
+      }, (err) => {
+        console.log(err);
+        alert(err);
+      });
+  }
+
+  uploadPics( image , name){
+    const img = 'data:image/jpeg;base64,' + image; 
+    const pics = storage().ref('pictures/'+name); // test1, test2, ..., testX
+    pics.putString(img, 'data_url');
   }
 
   saveUniversity(){

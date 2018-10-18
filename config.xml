@@ -100,6 +100,9 @@
         <variable name="TWITTER_SECRET" value="L7Rn6bZsCRITdE4fBWHFheUHpqrW4izgdMIBboIWTWEYdaf7Pp" />
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="^2.5.0" />
+    <plugin name="cordova-plugin-telerik-imagepicker" spec="^2.2.2">
+        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="College images" />
+    </plugin>
     <engine name="android" spec="7.0.0" />
-    <engine name="browser" spec="~5.0.4" />
+    <engine name="browser" spec="5.0.4" />
 </widget>

@@ -12,6 +12,13 @@
         <ion-grid>
             <ion-row>
                 <ion-col>
+                    <div *ngFor="let image of images">
+                        <img src="{{image}}" />
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
                     <label>{{"Perfil.user_name" | translate}}</label>
                     <input [(ngModel)]="nameUniversity" type="text" placeholder="Instituto Tecnológico de Ciudad Guzmán">
                 </ion-col>
