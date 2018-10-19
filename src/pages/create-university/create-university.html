@@ -41,18 +41,20 @@
             <ion-row>
                 <ion-col>
                     <ion-row>
-                        <label>{{"Universidad.Ubicacion" | translate}}</label>
-                        <input [(ngModel)]="address" type="text" placeholder="Av. Santos #34 Guadalajara">
-                    </ion-row>
-                    <ion-row>
-                        <div id="map_canvas"></div>
+                        <div id="map_canvas">
+                            <table>
+                                <tr>
+                                    <td><input ion-input type="text" #search_address><button ion-button (click)="onButton1_click($event)">{{"Buscar" | translate}}</button></td>
+                                </tr>
+                            </table>
+                        </div>
                     </ion-row>
 
                 </ion-col>
             </ion-row>
             <ion-row>
                 <ion-col>
-                    <button (click)="saveUniversity()" class="btn btn-save">Save</button>
+                    <button (click)="saveUniversity()" class="btn btn-save">{{"Guardar" | translate}}</button>
                 </ion-col>
             </ion-row>
 

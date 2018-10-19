@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
+import { Component,ViewChild,ElementRef } from '@angular/core';
+import { IonicPage, NavController, ToastController, NavParams, LoadingController } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -8,11 +8,14 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import {
   GoogleMaps,
   GoogleMap,
-  GoogleMapOptions,
+  Geocoder,
+  GeocoderResult,
+  Marker
 } from '@ionic-native/google-maps';
 
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { database, storage } from 'firebase';
+import { AddressUniversity } from '../../model/address/address.model';
 /**
  * Generated class for the CreateUniversityPage page.
  *
@@ -32,38 +35,78 @@ export class CreateUniversityPage {
   address:String;
   phoneUniversity:String;
   website:String;
+  //geopoints : AddressUniversity;
+  positionLat : string;
+  positionLng : string;
+  locality : string;
+  addresses : string[];
 
   university: AngularFireList<any>;
   map: GoogleMap;
+  loading: any;
+  @ViewChild('search_address') search_address:ElementRef;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private googleMaps: GoogleMaps,
-    database: AngularFireDatabase,
     public toastCtrl: ToastController,
     public afAuth: AngularFireAuth,
+    database: AngularFireDatabase,
     public imagePicker: ImagePicker,
+    public loadingCtrl: LoadingController,
   ) {
-
-    this.loadMap();
+    //this.loadMap();
     this.university = database.list('UniversidadesT');
+  }
 
+  ionViewDidEnter() {
+
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    this.loadMap();
   }
 
   loadMap(){
-    let mapOptions: GoogleMapOptions = {
+    this.map = GoogleMaps.create('map_canvas', {
       camera: {
         target: {
-          lat: 19.42847, // default location
-          lng: -99.12766 // default location
+          lat: 43.0741704,
+          lng: -89.3809802
         },
         zoom: 18,
         tilt: 30
       }
-    };
+    });
+  }
 
-    this.map = this.googleMaps.create('map_canvas', mapOptions);
+  onButton1_click(event) {
+    this.loading.present();
+    this.map.clear();
+    this.address = this.search_address.nativeElement.value;
+    // Address -> latitude,longitude
+    Geocoder.geocode({
+      "address": this.search_address.nativeElement.value
+    })
+    .then((results: GeocoderResult[]) => {
+
+      this.loading.dismiss();
+      this.positionLat = ''+results[0].position.lat;
+      this.positionLng = ''+results[0].position.lng;
+      this.locality = results[0].locality;
+      this.addresses = results[0].extra.lines;
+
+      let marker: Marker = this.map.addMarkerSync({
+        'position': results[0].position,
+        'title':  JSON.stringify(results[0].position)
+      });
+      this.map.animateCamera({
+        'target': marker.getPosition(),
+        'zoom': 17
+      }).then(() => {
+        marker.showInfoWindow();
+      })
+    });
   }
 
   addPicture(){
@@ -105,23 +148,33 @@ export class CreateUniversityPage {
   }
 
   saveUniversity(){
+    //console.log(JSON.stringify(this.geopoints));
+
     this.afAuth.authState.subscribe(user => {
       const newUniversity = this.university.push({});
       newUniversity.set({
         uid_creador: user.uid,
-        direccion: this.address,
+        direccion: this.addresses,
+        ciudad : this.locality,
         estado:'pendiente',
         gps:{
-          lat:'LAT',
-          lng:'LNG'
+          lat: this.positionLat,
+          lng: this.positionLng
         },
         nombre: this.nameUniversity,
         website:this.website,
         telefono:this.phoneUniversity,
-        timestamp:database.ServerValue.TIMESTAMP
       }).then( () =>{
+        this.clearInputs();
         let toast = this.toastCtrl.create({
           message: 'University was added successfully',
+          duration: 3000,
+          position: 'bottom'
+        }).present();
+      }).catch(error =>{
+        console.log(error);
+        let toast = this.toastCtrl.create({
+          message: error,
           duration: 3000,
           position: 'bottom'
         }).present();
@@ -131,6 +184,17 @@ export class CreateUniversityPage {
       let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
       this.uploadPics(this.images[i] , id);
     }
+  }
+
+  clearInputs(){
+    this.nameUniversity = "";
+    this.address = "";
+    this.phoneUniversity = "";
+    this.website = "";
+    this.positionLng = "";
+    this.positionLat = "";
+    this.addresses = [];
+    this.locality ="";
   }
 
 }

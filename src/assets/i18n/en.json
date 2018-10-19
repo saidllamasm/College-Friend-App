@@ -77,5 +77,7 @@
     },
     "InboxSingle": {
         "MensajeAqui": "Message here"
-    }
+    },
+    "Buscar": "Search",
+    "Guardar": "Save"
 }
