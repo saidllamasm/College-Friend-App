@@ -56,7 +56,7 @@ export class CreateUniversityPage {
     public loadingCtrl: LoadingController
   ) {
     //this.loadMap();
-    this.university = database.list('UniversidadesT');
+    this.university = database.list('Universidades');
   }
 
   ionViewDidEnter() {
@@ -139,7 +139,7 @@ export class CreateUniversityPage {
 
   uploadPics( image , name, tokenUniversity){
     const img = 'data:image/jpeg;base64,' + image; 
-    const pics = storage().ref('pictures/'+name); // test1, test2, ..., testX
+    const pics = storage().ref('universidades/'+name); // test1, test2, ..., testX
     pics.putString(img, 'data_url').then(res =>{
       console.log(JSON.stringify(res.metadata) + " for univerisity "+tokenUniversity);
       const items = this.database.list('/Imagenes/Universidad/'+tokenUniversity+'/');
@@ -176,7 +176,6 @@ export class CreateUniversityPage {
           telefono:this.phoneUniversity,
           timestamp:database.ServerValue.TIMESTAMP
       }).key;
-      alert(newUniversity);
       /*newUniversity.then( () => {*/
       this.clearInputs();
       for (var i = 0; i < this.images.length; i++) {
@@ -188,15 +187,6 @@ export class CreateUniversityPage {
         duration: 3000,
         position: 'bottom'
       }).present();
-      /*
-      }).catch(error =>{
-        console.log(error);
-        let toast = this.toastCtrl.create({
-          message: error,
-          duration: 3000,
-          position: 'bottom'
-        }).present();
-      });*/
       
     });
   }
