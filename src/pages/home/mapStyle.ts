@@ -1,55 +1,103 @@
 export const mapStyle = [
     {
-        "featureType": "all",
-        "elementType": "all",
+        "featureType": "landscape",
         "stylers": [
             {
-                "hue": "#008eff"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": "0"
+                "hue": "#FFA800"
             },
             {
-                "lightness": "0"
+                "saturation": 0
+            },
+            {
+                "lightness": 0
+            },
+            {
+                "gamma": 1
             }
         ]
     },
     {
-        "featureType": "transit",
-        "elementType": "all",
+        "featureType": "road.highway",
         "stylers": [
             {
-                "visibility": "off"
+                "hue": "#53FF00"
+            },
+            {
+                "saturation": -73
+            },
+            {
+                "lightness": 40
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "stylers": [
+            {
+                "hue": "#FBFF00"
+            },
+            {
+                "saturation": 0
+            },
+            {
+                "lightness": 0
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "stylers": [
+            {
+                "hue": "#00FFFD"
+            },
+            {
+                "saturation": 0
+            },
+            {
+                "lightness": 30
+            },
+            {
+                "gamma": 1
             }
         ]
     },
     {
         "featureType": "water",
-        "elementType": "all",
         "stylers": [
             {
-                "visibility": "simplified"
+                "hue": "#00BFFF"
             },
             {
-                "saturation": "-60"
+                "saturation": 6
             },
             {
-                "lightness": "-20"
+                "lightness": 8
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "stylers": [
+            {
+                "hue": "#679714"
+            },
+            {
+                "saturation": 33.4
+            },
+            {
+                "lightness": -25.4
+            },
+            {
+                "gamma": 1
             }
         ]
     }

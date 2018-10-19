@@ -13,8 +13,9 @@ import {
   Marker
 } from '@ionic-native/google-maps';
 
-import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireList, AngularFireDatabase, snapshotChanges } from 'angularfire2/database';
 import { database, storage } from 'firebase';
+
 /**
  * Generated class for the CreateUniversityPage page.
  *
@@ -50,9 +51,9 @@ export class CreateUniversityPage {
     public navParams: NavParams,
     public toastCtrl: ToastController,
     public afAuth: AngularFireAuth,
-    database: AngularFireDatabase,
+    public database: AngularFireDatabase,
     public imagePicker: ImagePicker,
-    public loadingCtrl: LoadingController,
+    public loadingCtrl: LoadingController
   ) {
     //this.loadMap();
     this.university = database.list('UniversidadesT');
@@ -125,10 +126,6 @@ export class CreateUniversityPage {
             (results) => {
               // recorrer todas las imagenes selecccionadas
               this.images = results;
-              /*for (var i = 0; i < results.length; i++) {
-                let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours() + '_' + i;
-                this.uploadPics(results[i] , id);
-              }*/
             }, (err) => {
               console.log(err);
               alert(JSON.stringify(err));}
@@ -140,35 +137,58 @@ export class CreateUniversityPage {
       });
   }
 
-  uploadPics( image , name){
+  uploadPics( image , name, tokenUniversity){
     const img = 'data:image/jpeg;base64,' + image; 
     const pics = storage().ref('pictures/'+name); // test1, test2, ..., testX
-    pics.putString(img, 'data_url');
+    pics.putString(img, 'data_url').then(res =>{
+      console.log(JSON.stringify(res.metadata) + " for univerisity "+tokenUniversity);
+      const items = this.database.list('/Imagenes/Universidad/'+tokenUniversity+'/');
+      items.push({}).set({
+        path : ''+ res.metadata.fullPath + '',
+        hash : ''+res.metadata.md5Hash+'',
+        estado : 'pendiente'
+      }).then( () =>{
+        let toast = this.toastCtrl.create({
+          message: 'Upload success',
+          duration: 1000,
+          position: 'bottom'
+        }).present();
+      });
+    }).catch(err =>{
+      console.log(JSON.stringify(err));
+      alert(err);
+    });
   }
 
   saveUniversity(){
     this.afAuth.authState.subscribe(user => {
-      const newUniversity = this.university.push({});
-      newUniversity.set({
-        uid_creador: user.uid,
-        direccion: this.addresses,
-        ciudad : this.locality,
-        estado:'pendiente',
-        gps:{
-          lat: this.positionLat,
-          lng: this.positionLng
-        },
-        nombre: this.nameUniversity,
-        website:this.website,
-        telefono:this.phoneUniversity,
-        timestamp:database.ServerValue.TIMESTAMP
-      }).then( () =>{
-        this.clearInputs();
-        let toast = this.toastCtrl.create({
-          message: 'University was added successfully',
-          duration: 3000,
-          position: 'bottom'
-        }).present();
+      const newUniversity = this.university.push({
+          uid_creador: user.uid,
+          direccion: this.addresses,
+          ciudad : this.locality,
+          estado:'pendiente',
+          gps:{
+            lat: this.positionLat,
+            lng: this.positionLng
+          },
+          nombre: this.nameUniversity,
+          website:this.website,
+          telefono:this.phoneUniversity,
+          timestamp:database.ServerValue.TIMESTAMP
+      }).key;
+      alert(newUniversity);
+      /*newUniversity.then( () => {*/
+      this.clearInputs();
+      for (var i = 0; i < this.images.length; i++) {
+        let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
+        this.uploadPics(this.images[i] , id, newUniversity);
+      }
+      let toast = this.toastCtrl.create({
+        message: 'University was added successfully',
+        duration: 3000,
+        position: 'bottom'
+      }).present();
+      /*
       }).catch(error =>{
         console.log(error);
         let toast = this.toastCtrl.create({
@@ -176,12 +196,9 @@ export class CreateUniversityPage {
           duration: 3000,
           position: 'bottom'
         }).present();
-      });
+      });*/
+      
     });
-    for (var i = 0; i < this.images.length; i++) {
-      let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
-      this.uploadPics(this.images[i] , id);
-    }
   }
 
   clearInputs(){

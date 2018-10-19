@@ -12,6 +12,8 @@ import { CreateUniversityPage } from '../create-university/create-university';
 import { Storage } from '@ionic/storage';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
+import { Observable } from 'rxjs/Observable';
+
 import {
   GoogleMaps,
   GoogleMap,
@@ -29,6 +31,9 @@ import {
   templateUrl: 'home.html'
 })
 export class HomePage {
+
+  files: Observable<any[]>;
+
   txtSearch : string = "";
 
   results: boolean = false;
@@ -64,10 +69,17 @@ export class HomePage {
     public afDatabase: AngularFireDatabase,
   ){
     this.loadMap();
-    this.loadUniversitiesForCalendar();
-    this.loadCalendar();
-    this.loadFakeData();
+    //this.loadUniversitiesForCalendar();
+    //this.loadCalendar();
+    //this.loadFakeData();
     //this.loadUniversitiesFeature();
+  }
+
+  testLoadFiles(){
+    let ref = this.afDatabase.list('UniversidadesT');
+    return ref.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
   }
 
   // construir el calendario

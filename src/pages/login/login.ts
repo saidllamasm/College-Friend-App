@@ -8,7 +8,6 @@ import { Facebook } from '@ionic-native/facebook'
 import { AngularFireAuth } from 'angularfire2/auth';
 import {TwitterConnect} from '@ionic-native/twitter-connect';
 import { auth } from 'firebase';
-import { Storage } from '@ionic/storage';
 
 import { environment } from '../../environments/environment';
 /**
@@ -136,8 +135,7 @@ export class LoginPage {
         configuracion : {
           buscando : true, //
           notificaciones : true //
-        },
-        //timestamp : database.ServerValue.TIMESTAMP
+        }
       };
       this.users.update(uid, newUser);
     } 
