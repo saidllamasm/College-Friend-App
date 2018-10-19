@@ -15,7 +15,6 @@ import {
 
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { database, storage } from 'firebase';
-import { AddressUniversity } from '../../model/address/address.model';
 /**
  * Generated class for the CreateUniversityPage page.
  *
@@ -148,8 +147,6 @@ export class CreateUniversityPage {
   }
 
   saveUniversity(){
-    //console.log(JSON.stringify(this.geopoints));
-
     this.afAuth.authState.subscribe(user => {
       const newUniversity = this.university.push({});
       newUniversity.set({
@@ -164,6 +161,7 @@ export class CreateUniversityPage {
         nombre: this.nameUniversity,
         website:this.website,
         telefono:this.phoneUniversity,
+        timestamp:database.ServerValue.TIMESTAMP
       }).then( () =>{
         this.clearInputs();
         let toast = this.toastCtrl.create({
