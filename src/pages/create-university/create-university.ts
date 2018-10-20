@@ -144,8 +144,10 @@ export class CreateUniversityPage {
       console.log(JSON.stringify(res.metadata) + " for univerisity "+tokenUniversity);
       const items = this.database.list('/Imagenes/Universidad/'+tokenUniversity+'/');
       items.push({}).set({
+        name : ''+res.metadata.name + '',
         path : ''+ res.metadata.fullPath + '',
         hash : ''+res.metadata.md5Hash+'',
+        content_type : ''+res.metadata.contentType+'',
         estado : 'pendiente'
       }).then( () =>{
         let toast = this.toastCtrl.create({
@@ -162,20 +164,25 @@ export class CreateUniversityPage {
 
   saveUniversity(){
     this.afAuth.authState.subscribe(user => {
-      const newUniversity = this.university.push({
-          uid_creador: user.uid,
-          direccion: this.addresses,
-          ciudad : this.locality,
-          estado:'pendiente',
-          gps:{
-            lat: this.positionLat,
-            lng: this.positionLng
-          },
-          nombre: this.nameUniversity,
-          website:this.website,
-          telefono:this.phoneUniversity,
-          timestamp:database.ServerValue.TIMESTAMP
-      }).key;
+      let data = {
+        uid_creador: user.uid,
+        direccion: this.addresses,
+        ciudad : this.locality,
+        estado:'pendiente',
+        gps:{
+          lat: this.positionLat,
+          lng: this.positionLng
+        },
+        nombre: this.nameUniversity,
+        website:this.website,
+        telefono:this.phoneUniversity,
+        timestamp:database.ServerValue.TIMESTAMP,
+        id : 'default'
+      }
+      let newUniversity = this.university.push( data ).key;
+      data.id = newUniversity;
+      alert('verify id: '+data.id+ ' vs '+newUniversity);
+      this.university.update( newUniversity, data);
       /*newUniversity.then( () => {*/
       this.clearInputs();
       for (var i = 0; i < this.images.length; i++) {

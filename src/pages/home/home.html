@@ -8,9 +8,10 @@
 <ion-content padding>
     <div *ngIf="!results">
         <span class="title">{{"Inicio.universidades_destacadas" | translate}}</span>
-        <ion-slides autoplay="2200" slidesPerView="2" spaceBetween="12">
-            <ion-slide *ngFor="let university of featuresUniversities" text-center>
-                <img [src]="university.imgsrc" (click)="testViewUniversity(university.id)">
+        <ion-slides>
+            <!---->
+            <ion-slide *ngFor="let university of featuresUniversities " text-center>
+                <img [src]="university.imgsrc" (click)="viewUniversity(university.id)">
             </ion-slide>
         </ion-slides>
 
@@ -18,7 +19,8 @@
         <span class="title">{{"Inicio.universidades_cercanas" | translate}}</span>
         <div id="map_canvas"></div>
         <div class="list-universities-nearby">
-            <div class="single-university" *ngFor="let nearbyUniversity of nearbyUniversities" (click)="viewUniversity(nearbyUniversity.id)">
+            <div class="single-university" *ngFor="let nearbyUniversity of nearbyUniversities">
+                <!-- (click)="viewUniversity(nearbyUniversity.id)"-->
                 <ion-grid>
                     <ion-row>
                         <ion-col col-3>
@@ -26,7 +28,7 @@
                         </ion-col>
                         <ion-col col-9>
                             <span class="name-university">{{nearbyUniversity.name}}</span>
-                            <rating [(ngModel)]="raSte" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                            <rating [(ngModel)]="nearbyUniversity.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
@@ -44,7 +46,7 @@
                         </ion-col>
                         <ion-col col-9>
                             <span class="name-university">{{evaluateUniversity.name}}</span>
-                            <rating [(ngModel)]="ratGe" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                            <rating readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
@@ -63,10 +65,11 @@
         <div class="calendar-body">
             <ion-grid>
                 <ion-row class="calendar-date">
-                    <ion-col col-4 *ngFor="let month of monthNames" class="last-month">
+                    <!--<ion-col col-4 *ngFor="let month of monthNames" class="last-month">
                         <span (click)="viewUniversities(month)" class="currentDate" *ngIf="checkEvent(month)">{{month}}</span>
                         <span *ngIf="!checkEvent(month)">{{month}}</span>
                     </ion-col>
+                    -->
                 </ion-row>
             </ion-grid>
         </div>
@@ -94,9 +97,7 @@
     </div>
 
 
-
-
-    <!---->
+    <!-- for searchs-->
     <div *ngIf="results">
         <span class="title">{{"Inicio.Resultados" | translate}}</span>
         <div class="result-single">

@@ -42,7 +42,7 @@ export class LoginPage {
     private platform: Platform,
     database: AngularFireDatabase
   ) {
-    this.users = database.list('UsuariosT');
+    this.users = database.list('Usuarios');
   }
 
   // login with email and password

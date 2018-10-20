@@ -1,5 +1,5 @@
 export interface University {
-    key?: string;
+    id: string;
     direccion: string;
     estado : string;
     gps : {
@@ -9,4 +9,4 @@ export interface University {
     nombre: string;
     uid_creador: string;
     website: string;
-  }
+};

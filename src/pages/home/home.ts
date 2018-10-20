@@ -1,7 +1,8 @@
 import { University } from './../../model/university/university.model';
+import { ImageUniversity } from './../../model/image/image.model';
 import { NgModule } from '@angular/core';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { StatusBar } from '@ionic-native/status-bar';
 import { mapStyle } from './mapStyle';
@@ -12,7 +13,6 @@ import { CreateUniversityPage } from '../create-university/create-university';
 import { Storage } from '@ionic/storage';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
-import { Observable } from 'rxjs/Observable';
 
 import {
   GoogleMaps,
@@ -20,6 +20,7 @@ import {
   GoogleMapsEvent,
   GoogleMapOptions
 } from '@ionic-native/google-maps';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -32,8 +33,6 @@ import {
 })
 export class HomePage {
 
-  files: Observable<any[]>;
-
   txtSearch : string = "";
 
   results: boolean = false;
@@ -41,7 +40,7 @@ export class HomePage {
   map: GoogleMap;
 
   //universidades destacas
-  featuresUniversities : any;
+  featuresUniversities : any[];
   //
 
   //universidades mas evaluadas
@@ -57,7 +56,7 @@ export class HomePage {
   currentYear: any;
   monthNames: string[];
   activities : string[];
-  universityDays : any;
+  universityDays : any[];
   //end calenadario
 
   constructor(
@@ -67,24 +66,23 @@ export class HomePage {
     public plt: Platform,
     private storage: Storage,
     public afDatabase: AngularFireDatabase,
+    public navParams: NavParams,
+    private sanitization:DomSanitizer
   ){
     this.loadMap();
+    this.featuresUniversities = [];
+    this.loadUniversitiesFeature();
     //this.loadUniversitiesForCalendar();
-    //this.loadCalendar();
+    this.loadCalendar();
     //this.loadFakeData();
-    //this.loadUniversitiesFeature();
-  }
-
-  testLoadFiles(){
-    let ref = this.afDatabase.list('UniversidadesT');
-    return ref.snapshotChanges().map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    });
+    
   }
 
   // construir el calendario
   // carga todos los meses dependiendo el lenguaje de la plataforma
   loadCalendar(){
+    this.date = new Date();
+    this.currentYear = this.date.getFullYear();
     this.storage.get('lang').then((val) => {
       console.log('calendar lang '+val);
       if(val == 'es'){
@@ -100,7 +98,7 @@ export class HomePage {
   }
   // me sirve para evaluar si el mes creado en el calendario tiene algun evento
   // si tiene evento entonces aplicar estilo diferente
-  checkEvent(month){
+  /*checkEvent(month){
     let flag = false;
     for(let i = 0; i < this.activities.length; i++){
       if(this.activities[i].toString() == month){
@@ -108,7 +106,7 @@ export class HomePage {
       }
     }
     return flag;
-  }
+  }*/
 
   //inicializa el mapa
   loadMap(){
@@ -159,16 +157,9 @@ export class HomePage {
     });
   }
 
-  onModelChange(event){
-    alert(event);
-  }
-
-  testViewUniversity(id){
-    //alert(id);
-  }
-
   viewUniversity(id){
-    this.navCtrl.setRoot(SingleUniversityPage);
+    alert(id);
+    this.navCtrl.push(SingleUniversityPage,{id_university : id });
   }
 
   // me sirve para saber si hay una busqueda de universidad
@@ -186,7 +177,7 @@ export class HomePage {
   }
 
   createUniversity(){
-    this.navCtrl.setRoot(CreateUniversityPage);
+    this.navCtrl.push(CreateUniversityPage);
   }
 
   viewUniversities(month){
@@ -195,63 +186,34 @@ export class HomePage {
 
   // consulta a la db para obtener los inicios de cursos de las universidades registradas
   loadUniversitiesForCalendar(){
-    this.date = new Date();
-    this.currentYear = this.date.getFullYear();
     // load month with university
     this.activities =["January","February","March"];
   }
 
   loadUniversitiesFeature(){
-    this.afDatabase.list<University>('/UniversidadesT/').valueChanges().subscribe((res: University[]) => { 
+    this.afDatabase.list<University>('/Universidades/').valueChanges().subscribe((res: University[]) => { 
       res.forEach((item) => {
-          alert(item.nombre);
+        console.log(item.id+" :university");
+        this.afDatabase.object('Imagenes/Universidad/' + item.id).valueChanges().subscribe((images : ImageUniversity) =>{
+          //console.log(item.id+' IMPORTANT '+JSON.stringify(images));
+          //console.log('ms : '+JSON.parse(images));
+          let key = Object.keys(images)[0];
+          let nombre = images[key].name;
+          this.featuresUniversities.push({
+            imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
+            id : item.id
+          });
+        });
       });
     },(err)=>{
        console.log("problem : ", err)
        alert(err);
     });
   }
-
-  fakeFeatures(){
-    this.featuresUniversities = [
-      {
-        imgsrc: "https://st2.depositphotos.com/1035886/8363/i/950/depositphotos_83635296-stock-photo-pennsylvania-state-university.jpg",
-        title:"",
-        id:"1"
-      },
-      {
-        imgsrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSelwrji3FhHKyfTeD5iovsP3B1mpVnCIAFEugMZG1tONDXoWr",
-        title:"",
-        id:"2"
-      },
-      {
-        imgsrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXTmxHvtYK_Zi7uDD5WVvuBPx3pprePBqw4qJDe-BVPG5LO040",
-        title:"",
-        id:"3"
-      },
-      {
-        imgsrc: "http://periodicolafuente.com/wp-content/uploads/2016/10/las-mejores-universidades-en-Estados-Unidos-La-Fuente.jpg",
-        title:"",
-        id:"4"
-      },
-      {
-        imgsrc: "https://www.infoidiomas.com/wp-content/uploads/universidad_Pennsylvania.jpg",
-        title:"",
-        id:"5"
-      },
-      {
-        imgsrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGYDP-pUHdJ-J-xkgfb4_L_CI_q8EQdc-uzxPLWCCPKUYB4h1wEQ",
-        title:"",
-        id:"6"
-      }
-    ];
-  }
-  fakeEvaluates(){
-
-  }
+  
   loadFakeData(){
-    this.fakeFeatures();
-    this.universityDays = [
+   //  this.fakeFeatures();
+    /*this.universityDays = [
       {
         name:"Universidad de Guadalajara",
         date:"Agosto 2018",
@@ -275,16 +237,24 @@ export class HomePage {
         name :"universidad de Santo Domingo",
         id:"3"
       }
-    ];
+    ];*/
     this.nearbyUniversities = [
       {
         imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
         name :"Instituto Tecnológico de Ciudad Guzmán",
+        rate : 2,
         id:"3" 
       },
       {
         imgsrc: "https://cdn-az.allevents.in/banners/2ec9e7fae6b19132288b69c8f1d9e5c9",
         name :"Universidad Pedagógica Nacional de Ciudad Guzmán",
+        rate : 4,
+        id:"4"
+      },
+      {
+        imgsrc: "https://cdn-az.allevents.in/banners/2ec9e7fae6b19132288b69c8f1d9e5c9",
+        name :"Universidad Pedagógica Nacional de Ciudad Guzmán",
+        rate : 2.5,
         id:"4"
       }
     ];
