@@ -8,7 +8,7 @@
 <ion-content padding>
     <div *ngIf="!results">
         <span class="title">{{"Inicio.universidades_destacadas" | translate}}</span>
-        <ion-slides>
+        <ion-slides loop slidesPerView="3" spaceBetween="16" loop>
             <!---->
             <ion-slide *ngFor="let university of featuresUniversities " text-center>
                 <img [src]="university.imgsrc" (click)="viewUniversity(university.id)">
