@@ -74,7 +74,7 @@ export class HomePage {
     this.loadUniversitiesFeature();
     //this.loadUniversitiesForCalendar();
     this.loadCalendar();
-    //this.loadFakeData();
+    this.loadFakeData();
     
   }
 
@@ -213,7 +213,7 @@ export class HomePage {
   
   loadFakeData(){
    //  this.fakeFeatures();
-    /*this.universityDays = [
+    this.universityDays = [
       {
         name:"Universidad de Guadalajara",
         date:"Agosto 2018",
@@ -237,7 +237,7 @@ export class HomePage {
         name :"universidad de Santo Domingo",
         id:"3"
       }
-    ];*/
+    ];
     this.nearbyUniversities = [
       {
         imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
