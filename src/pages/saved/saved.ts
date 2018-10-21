@@ -16,6 +16,8 @@ import { SingleUniversityPage } from '../single-university/single-university';
   templateUrl: 'saved.html',
 })
 export class SavedPage {
+  
+  Favorites : any[];
 
   constructor(
     public navCtrl: NavController,
@@ -23,9 +25,37 @@ export class SavedPage {
     public statusBar: StatusBar
   ) {
     statusBar.backgroundColorByHexString('#0055CB');
+    this.loadFakeData();
   }
 
-  goToUniversity(){
-    this.navCtrl.setRoot(SingleUniversityPage);
+  deleteFav(id){
+    alert(id);
+  }
+
+  loadFakeData(){
+    this.Favorites = [
+      {
+        imgsrc : "https://mw2.google.com/mw-panoramio/photos/medium/21232128.jpg",
+        name:"Instituto Tecnológico de Ciudad Guzman",
+        address:"Avenida Tecnológico #100 Ciudad Guzmán, Mpio. de Zapotlán el Grande, Jalisco, México.",
+        id:"2"
+      },
+      {
+        imgsrc : "https://upload.wikimedia.org/wikipedia/commons/9/99/San_Giovanni_Laterano_Rom.jpg",
+        name:"Universidad de Guadalajara",
+        address:"Avenida Tecnológico #100 Ciudad Guzmán, Mpio. de Zapotlán el Grande, Jalisco, México.",
+        id:"3"
+      },
+      {
+        imgsrc : "https://www.itleon.edu.mx/images/tecnoticias/Ago-dic15/21-1/4.jpg",
+        name:"Instituto Tecnológico de León",
+        address:"Avenida Tecnológico #100 Ciudad Guzmán, Mpio. de Zapotlán el Grande, Jalisco, México.",
+        id:"4"
+      }
+    ];
+  }
+
+  goToUniversity(id){
+    this.navCtrl.push(SingleUniversityPage, {id_university : id });
   }
 }

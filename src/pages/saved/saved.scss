@@ -1,34 +1,48 @@
 page-saved {
-    ion-card {
-        position: relative;
-        text-align: center;
-    }
-    ion-card img {
+    ion-card,
+    img {
         border-radius: 10px;
     }
-    .info-img {
-        position: absolute;
-        align-self: auto;
-        top: 30%;
-        font-size: 2.0em;
-        vertical-align: middle;
-        width: 100%;
-        height: 40%;
-        background: rgba(56, 128, 255, 0.502);
+    .single-university {
+        position: relative;
     }
-    .card-title {
+    .centered {
+        border-radius: 5px;
+        padding: 10px;
         position: absolute;
-        top: 36%;
-        font-size: 2.0em;
-        width: 100%;
-        font-weight: bold;
-        color: #fff;
+        top: 50%;
+        left: 50%;
+        width: 75%;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0055cb+0,3880ff+100 */
+        background: #0055cb;
+        /* Old browsers */
+        background: -moz-linear-gradient(-45deg, #0055cb 0%, #3880ff 100%);
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, #0055cb 0%, #3880ff 100%);
+        /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, #0055cb 0%, #3880ff 100%);
+        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     }
-    .card-subtitle {
-        font-size: 1.0em;
+    button {
+        background: none;
         position: absolute;
-        top: 52%;
-        width: 100%;
-        color: #fff;
+        top: 10px;
+        right: 0px;
+        float: right;
+        margin-right: 10px;
+        color: map-get($colors, danger);
+        font-size: 30px!important;
+    }
+    h1 {
+        font-size: 16px!important;
+    }
+    p,
+    h1 {
+        color: white!important;
+    }
+    p {
+        font-size: 11px!important;
     }
 }

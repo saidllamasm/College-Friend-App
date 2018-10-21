@@ -6,33 +6,15 @@
 -->
 
 <ion-content class="card-background-page">
-
-    <ion-card (click)="goToUniversity()">
-        <img src="https://fthmb.tqn.com/8TjMWgxEUflhAqnzYLbOw6xSX-Y=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/Universidaddemiami-5b11be298e1b6e0036f2a6ed.jpg" />
-        <div class="info-img"></div>
-        <div class="card-title">São Paulo</div>
-        <div class="card-subtitle">41 Listings</div>
-    </ion-card>
-
-    <ion-card (click)="goToUniversity()">
-        <img src="http://static6.uk.businessinsider.com/image/599d877ef35227890f8b4576-1190-625/the-28-universities-that-have-produced-the-most-european-billionaires.jpg" />
-        <div class="info-img"></div>
-        <div class="card-title">São Paulo</div>
-        <div class="card-subtitle">41 Listings</div>
-    </ion-card>
-
-    <ion-card (click)="goToUniversity()">
-        <img src="https://amqueretaro.com/wp-content/uploads/2017/09/unam-750x430.png" />
-        <div class="info-img"></div>
-        <div class="card-title">São Paulo</div>
-        <div class="card-subtitle">41 Listings</div>
-    </ion-card>
-
-    <ion-card (click)="goToUniversity()">
-        <img src="https://www.admisiones.org/app/resources/img/universidades/uvm_06_958.jpg" />
-        <div class="info-img"></div>
-        <div class="card-title">São Paulo</div>
-        <div class="card-subtitle">41 Listings</div>
-    </ion-card>
-
+    <div class="list-favs" *ngFor="let fav of Favorites">
+        <ion-card class="single-university" (click)="goToUniversity(fav.id)">
+            <button (click)="deleteFav(fav.id)"><i class="fa fa-heart"></i></button>
+            <img [src]="fav.imgsrc">
+            <div class="centered">
+                <h1>{{fav.name}}</h1>
+                <br>
+                <p>{{fav.address}}</p>
+            </div>
+        </ion-card>
+    </div>
 </ion-content>
