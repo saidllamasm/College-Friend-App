@@ -56,31 +56,19 @@ page-home {
         width: 100%;
         //background: map-get($colors, light);
     }
-    .single-university {
-        border: 2px solid #F5F5F5;
-    }
-    .list-universities-nearby,
-    .list-universities-valuet {
-        margin-bottom: 15px;
-    }
-    .img-circle {
-        border-radius: 50%;
-    }
-    .img-university {
-        height: 60px;
-        width: 60px;
-        background-repeat: no-repeat;
-        background-size: contain;
-    }
     .name-university {
         color: #707070;
         font-size: 14px;
     }
     // ranking
+    page-home ul.rating li {
+        padding: 0px!important;
+    }
     ul {
         padding: 0px;
+        margin: 2px!important;
         &.rating li {
-            padding: 0px 5px !important;
+            padding: 0px !important;
             background: none;
             color: map-get($colors, primary);
             ;
@@ -88,6 +76,15 @@ page-home {
                 font-size: 30px;
             }
         }
+    }
+    .min-rating ion-icon {
+        font-size: 20px!important;
+        margin: 0px!important;
+        padding: 0px!important;
+    }
+    .min {
+        background: red;
+        color: red;
     }
     //calendario
     [col-1] {
@@ -312,5 +309,42 @@ page-home {
             -webkit-transform: translateY(-8px);
             transform: translateY(-8px);
         }
+    }
+    // universidades cercanas al usuario
+    .single-university-cercana {
+        border: 1px solid #d4d4d4;
+        border-top: none;
+        text-align: left;
+    }
+    .single-university-cercana,
+    .single-university-cercana img {
+        border-radius: 5px 5px 0px 0px;
+    }
+    .single-university-cercana img {
+        height: 95px!important;
+    }
+    .container-u-info {
+        padding: 5px;
+    }
+    .title-u-cercana {
+        margin: 10px 10px 0px 10px;
+        color: #707070;
+        text-align: left;
+    }
+    // universidades mas evaluadas
+    .list-universities-valuet {
+        margin-bottom: 15px;
+    }
+    .single-university {
+        border: 2px solid #F5F5F5;
+    }
+    .img-circle {
+        border-radius: 50%;
+    }
+    .img-university {
+        height: 60px;
+        width: 60px;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
 }

@@ -9,7 +9,6 @@
     <div *ngIf="!results">
         <span class="title">{{"Inicio.universidades_destacadas" | translate}}</span>
         <ion-slides loop slidesPerView="3" spaceBetween="16" loop>
-            <!---->
             <ion-slide *ngFor="let university of featuresUniversities " text-center>
                 <img [src]="university.imgsrc" (click)="viewUniversity(university.id)">
             </ion-slide>
@@ -18,23 +17,48 @@
         <br><br>
         <span class="title">{{"Inicio.universidades_cercanas" | translate}}</span>
         <div id="map_canvas"></div>
-        <div class="list-universities-nearby">
-            <div class="single-university" *ngFor="let nearbyUniversity of nearbyUniversities">
-                <!-- (click)="viewUniversity(nearbyUniversity.id)"-->
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-3>
-                            <img class="img-circle img-university" [src]="nearbyUniversity.imgsrc">
-                        </ion-col>
-                        <ion-col col-9>
-                            <span class="name-university">{{nearbyUniversity.name}}</span>
-                            <rating [(ngModel)]="nearbyUniversity.rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </div>
+        <div class="container-universities-cercanas">
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <div class="single-university-cercana">
+                            <img src="http://www.up.edu.mx/sites/default/files//styles/gh_12col/public/images/posgrados/filo_antigua.jpg?itok=1trVGDwB" alt="">
+                            <p class="title-u-cercana">hi</p>
+                            <rating class="min-rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="single-university-cercana">
+                            <img src="http://www.up.edu.mx/sites/default/files//styles/gh_12col/public/images/posgrados/filo_antigua.jpg?itok=1trVGDwB" alt="">
+                            <p class="title-u-cercana">hi</p>
+                            <rating class="min-rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div class="single-university-cercana">
+                            <img src="http://www.up.edu.mx/sites/default/files//styles/gh_12col/public/images/posgrados/filo_antigua.jpg?itok=1trVGDwB" alt="">
+
+                            <p class="title-u-cercana">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga rem dolorum, s</p>
+                            <rating class=" min-rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="single-university-cercana">
+                            <img src="http://www.up.edu.mx/sites/default/files//styles/gh_12col/public/images/posgrados/filo_antigua.jpg?itok=1trVGDwB" alt="">
+                            <p class="title-u-cercana">hi</p>
+                            <rating class="min-rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </div>
+
         <br><br>
+
+        <!--init verificado-->
         <span class="title">{{"Inicio.universidades_evaluadas" | translate}}</span>
         <br><br>
         <div class="list-universities-valuet">
@@ -52,6 +76,7 @@
                 </ion-grid>
             </div>
         </div>
+        <!--end verificado-->
         <br><br>
         <span class="title">{{"Inicio.inicio_proximo" | translate}}</span>
         <br><br>
