@@ -22,42 +22,12 @@
         <div class="container-universities-cercanas">
             <ion-grid>
                 <ion-row>
-                    <ion-col>
+                    <ion-col *ngFor="let nearbyUniversity of nearbyUniversities" (click)="viewUniversity(featureUniversity.id)">
                         <div class="single-university-cercana">
-                            <img src="http://www.up.edu.mx/sites/default/files//styles/gh_12col/public/images/posgrados/filo_antigua.jpg?itok=1trVGDwB" alt="">
+                            <img [src]="nearbyUniversity.imgsrc">
                             <div class="info-container">
-                                <p class="title-u-cercana">hi</p>
-                                <rating class="min-rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
-                            </div>
-                        </div>
-                    </ion-col>
-                    <ion-col>
-                        <div class="single-university-cercana">
-                            <img src="http://www.up.edu.mx/sites/default/files//styles/gh_12col/public/images/posgrados/filo_antigua.jpg?itok=1trVGDwB" alt="">
-                            <div class="info-container">
-                                <p class="title-u-cercana">hi</p>
-                                <rating class="min-rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
-                            </div>
-                        </div>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col>
-                        <div class="single-university-cercana">
-                            <img src="http://www.up.edu.mx/sites/default/files//styles/gh_12col/public/images/posgrados/filo_antigua.jpg?itok=1trVGDwB" alt="">
-                            <div class="info-container">
-                                <p class="title-u-cercana">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga rem dolorum, s</p>
-                                <rating class="min-rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
-                            </div>
-                        </div>
-                    </ion-col>
-
-                    <ion-col>
-                        <div class="single-university-cercana">
-                            <img src="http://www.up.edu.mx/sites/default/files//styles/gh_12col/public/images/posgrados/filo_antigua.jpg?itok=1trVGDwB" alt="">
-                            <div class="info-container">
-                                <p class="title-u-cercana">hi</p>
-                                <rating class="min-rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                                <p class="title-u-cercana">{{nearbyUniversity.name}}</p>
+                                <rating [(ngModel)]="nearbyUniversity.rate" class="min-rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                             </div>
                         </div>
                     </ion-col>
@@ -69,7 +39,7 @@
 
         <!--init verified-->
         <span class="title">{{"Inicio.universidades_evaluadas" | translate}}</span>
-        <br><br>
+
         <div class="list-universities-valuet">
             <div class="single-university" *ngFor="let evaluateUniversity of evaluatesUniversities" (click)="viewUniversity(featureUniversity.id)">
                 <ion-grid>
@@ -79,13 +49,14 @@
                         </ion-col>
                         <ion-col col-9>
                             <span class="name-university">{{evaluateUniversity.name}}</span>
-                            <rating readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                            <rating class="no-space" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
             </div>
         </div>
         <!--end verified-->
+        <!-- init verified-->
         <br><br>
         <span class="title">{{"Inicio.inicio_proximo" | translate}}</span>
         <br><br>
@@ -93,7 +64,8 @@
             <div class="single-university-soon" *ngFor="let universityDay of universityDays">
                 <ion-grid>
                     <ion-row>
-                        <ion-col class="border-blue">
+                        <img class="img-soon" [src]="universityDay.imgsrc">
+                        <ion-col class="panel-info border-blue">
                             <div class="button-view center" (click)="viewUniversity(universityDays.id)">
                                 <ion-icon name="calendar"></ion-icon>
                             </div>
@@ -107,8 +79,7 @@
                 </ion-grid>
             </div>
         </div>
-        <!--content here list with months-->
-        <br><br>
+        <!-- end verified-->
 
     </div>
 

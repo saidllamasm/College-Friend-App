@@ -215,13 +215,21 @@ export class HomePage {
    //  this.fakeFeatures();
     this.universityDays = [
       {
+        imgsrc : "https://upload.wikimedia.org/wikipedia/commons/9/99/San_Giovanni_Laterano_Rom.jpg",
         name:"Universidad de Guadalajara",
-        date:"Agosto 2018",
+        date:"Agosto",
         id:"1"
       },
       {
+        imgsrc : "https://www.unam.mx/sites/default/files/images/menu/library-345273_1280.jpg",
         name:"Universida Autonoma de Mexico",
-        date:"Agosto 2018",
+        date:"Agosto",
+        id:"1"
+      },
+      {
+        imgsrc : "https://periodicocorreo.com.mx/wp-content/uploads/2017/01/UG.jpg",
+        name:"Universida de Guanajuato",
+        date:"Agosto",
         id:"1"
       }
     ];
@@ -246,8 +254,8 @@ export class HomePage {
         id:"3" 
       },
       {
-        imgsrc: "https://cdn-az.allevents.in/banners/2ec9e7fae6b19132288b69c8f1d9e5c9",
-        name :"Universidad Pedagógica Nacional de Ciudad Guzmán",
+        imgsrc: "https://www.am.com.mx/san-luis/wp-content/uploads/2018/02/f8e418upn21.jpg",
+        name :"Universidad Pedagógica Nacional",
         rate : 4,
         id:"4"
       },
@@ -255,7 +263,7 @@ export class HomePage {
         imgsrc: "https://cdn-az.allevents.in/banners/2ec9e7fae6b19132288b69c8f1d9e5c9",
         name :"Universidad Pedagógica Nacional de Ciudad Guzmán",
         rate : 2.5,
-        id:"4"
+        id:"6"
       }
     ];
   }

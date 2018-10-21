@@ -204,6 +204,7 @@ page-home {
     }
     .single-university-cercana img {
         height: 95px!important;
+        width: 100%;
     }
     .container-u-info {
         padding: 5px;
@@ -213,18 +214,23 @@ page-home {
         text-align: left;
     }
     // universidades mas evaluadas
-    .list-universities-valuet {
-        margin-bottom: 15px;
+    .no-space {
+        margin: 0px!important;
     }
     .single-university {
-        border: 2px solid #F5F5F5;
+        height: 70px;
+        border: 1px solid #F5F5F5;
+        margin-top: 10px;
+        -webkit-box-shadow: 0px 4px 5px -4px rgba(0, 0, 0, 0.45);
+        -moz-box-shadow: 0px 4px 5px -4px rgba(0, 0, 0, 0.45);
+        box-shadow: 0px 4px 5px -4px rgba(0, 0, 0, 0.45);
     }
     .img-circle {
         border-radius: 50%;
     }
     .img-university {
-        height: 60px;
-        width: 60px;
+        height: 50px;
+        width: 50px;
         background-repeat: no-repeat;
         background-size: contain;
     }
@@ -232,6 +238,10 @@ page-home {
     //calendario
     .center {
         text-align: center;
+    }
+    .panel-info {
+        bottom: 30px;
+        background: white;
     }
     .single-university-soon {
         padding: 0px;
@@ -280,5 +290,10 @@ page-home {
     }
     .border-blue {
         padding: 12px;
+    }
+    .img-soon {
+        border-radius: 5px 5px 0px 0px;
+        min-width: 100%;
+        max-height: 170px;
     }
 }
