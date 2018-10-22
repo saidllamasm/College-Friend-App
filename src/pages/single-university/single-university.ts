@@ -17,7 +17,9 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
   templateUrl: 'single-university.html',
 })
 export class SingleUniversityPage {
-
+  public name : string;
+  public address : string;
+  public userCreated : string;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -29,8 +31,13 @@ export class SingleUniversityPage {
       let id_university = this.navParams.get('id_university');
 
       this.afDatabase.list<University>('/Universidades/'+id_university+'/').valueChanges().subscribe((university: University[]) => {
-        alert(JSON.stringify(university));
+        //alert(JSON.stringify(university));
       });
+
+      this.name = "Instituto tecnologico de ciudad guzman";
+      this.address = 'Av afsdf';  
+      this.userCreated = "Said Llamas;"
+
   }
 
   goBack(){

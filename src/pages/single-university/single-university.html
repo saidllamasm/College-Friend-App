@@ -5,6 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
+    <button class="btnFav"><i class="fa fa-heart"></i></button>
     <img src="https://www.sintesis.mx/wp-content/uploads/2018/06/unam-docentes-.jpg">
     <div class="ctrol-header">
         <a class="link" href="">{{"Universidad.Sitioweb" | translate}}</a>
@@ -14,6 +15,105 @@
     </div>
 </ion-header>
 
+<ion-content #pageContent fullscreen padding>
+    <h1>{{name}}</h1>
+    <p>{{address}}</p>
+    <p>{{"Universidad.CreadoPor" | translate}} <span class="bold">{{userCreated}}</span></p>
+    <br>
+    <h2>{{"Universidad.Global" | translate}}</h2>
+    <div class="panel-score-main">
+        <ion-grid>
+            <ion-row>
+                <!--scores specifics-->
+                <ion-col col-9>
+                    <ion-row>
+                        <ion-col col-5>
+                            {{"Universidad.Facilidades" | translate}}
+                        </ion-col>
+                        <ion-col col-7>
+                            <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>
+                            {{"Universidad.Profesores" | translate}}
+                        </ion-col>
+                        <ion-col col-7>
+                            <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>
+                            {{"Universidad.Movilidad" | translate}}
+                        </ion-col>
+                        <ion-col col-7>
+                            <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>
+                            {{"Universidad.ActsExtra" | translate}}
+                        </ion-col>
+                        <ion-col col-7>
+                            <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>
+                            {{"Universidad.Apoyos" | translate}}
+                        </ion-col>
+                        <ion-col col-7>
+                            <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+                <!--score general-->
+                <ion-col>
+                    <div class="circle-number">
+                        <span class="number">3.5</span>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <br>
 
-<ion-content padding>
+    <!--cards for carrers-->
+    <ion-slides slidesPerView="2" spaceBetween="16" loop>
+
+        <ion-slide>
+            <!--1-->
+            <ion-card>
+                <ion-card-content>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col col-2>
+                                <img src="../../assets/imgs/engineer.svg" alt="">
+                            </ion-col>
+                            <ion-col col-1></ion-col>
+                            <ion-col>
+                                Ing. Sistemas Computacionales
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
+            <!--2-->
+            <ion-card>
+                <ion-card-content>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col col-2>
+                                <img src="../../assets/imgs/engineer.svg" alt="">
+                            </ion-col>
+                            <ion-col col-1></ion-col>
+                            <ion-col>
+                                Ing. Sistemas Computacionales
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
+        </ion-slide>
+    </ion-slides>
 </ion-content>

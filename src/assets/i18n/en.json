@@ -55,7 +55,16 @@
         "Telefono": "Phone",
         "Mapa": "Map",
         "Opinar": "review",
-        "Ubicacion": "Location"
+        "Ubicacion": "Location",
+        "Buscar": "Search",
+        "Guardar": "Save",
+        "CreadoPor": "Created by",
+        "Global": "Global score",
+        "Facilidades": "Instalaciones e Infraestructura",
+        "Profesores": "Profesores",
+        "Movilidad": "Mobility",
+        "ActsExtra": "Extra school activities",
+        "Apoyos": "Supports and scholarships"
     },
     "Opiniones": {
         "Opiniones": "Opinions"
@@ -77,7 +86,5 @@
     },
     "InboxSingle": {
         "MensajeAqui": "Message here"
-    },
-    "Buscar": "Search",
-    "Guardar": "Save"
+    }
 }

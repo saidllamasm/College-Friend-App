@@ -1,3 +1,4 @@
+import { SingleUniversityPage } from './../pages/single-university/single-university';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -89,8 +90,8 @@ export class MyApp {
       }
       this.afAuth.authState.subscribe(user => {
         if(user){
-          this.rootPage = TabsPage;
-          //this.rootPage = CreateUniversityPage;
+          //this.rootPage = TabsPage;
+          this.rootPage = SingleUniversityPage;
         }else{
           this.rootPage = SlidesPage;  
         }
