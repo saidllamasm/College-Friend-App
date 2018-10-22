@@ -64,7 +64,9 @@
         "Profesores": "Profesores",
         "Movilidad": "Mobility",
         "ActsExtra": "Extra school activities",
-        "Apoyos": "Supports and scholarships"
+        "Apoyos": "Supports and scholarships",
+        "Inicio": "Start of courses",
+        "Costo": "Registration fee"
     },
     "Opiniones": {
         "Opiniones": "Opinions"

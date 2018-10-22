@@ -80,6 +80,7 @@ Active member of IEEE and president of IEEE Student Branch of the Technological 
 - [https://blog.ng-classroom.com/blog/ionic2/google-maps-native/](https://blog.ng-classroom.com/blog/ionic2/google-maps-native/)
 
 - [https://www.djamware.com/post/5a0bb8f780aca75eadc12d6b/build-ionic-3-angular-5-calendar-ui-with-event-integration](https://www.djamware.com/post/5a0bb8f780aca75eadc12d6b/build-ionic-3-angular-5-calendar-ui-with-event-integration)
+-[https://www.joshmorony.com/build-a-simple-progress-bar-component-in-ionic-2/](https://www.joshmorony.com/build-a-simple-progress-bar-component-in-ionic-2/)
 
 # License
 **GNU GENERAL PUBLIC LICENSE

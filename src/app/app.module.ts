@@ -49,6 +49,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
 
 import { UserListService } from '../services/user-list.service';
 
+import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
+
 import { environment } from '../environments/environment';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -60,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MyApp,
     TabsPage,
     HomePage,
+    ProgressBarComponent,
     // for debug
     OpinionsPage,
     SavedPage,

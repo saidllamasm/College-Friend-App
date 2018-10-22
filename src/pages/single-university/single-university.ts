@@ -20,6 +20,16 @@ export class SingleUniversityPage {
   public name : string;
   public address : string;
   public userCreated : string;
+
+
+  // for costs progress bar
+  porcent : number;
+  mount : number;
+  min : number;
+  max : number;
+  color : string;
+  //
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -37,6 +47,18 @@ export class SingleUniversityPage {
       this.name = "Instituto tecnologico de ciudad guzman";
       this.address = 'Av afsdf';  
       this.userCreated = "Said Llamas;"
+
+      //progress
+      this.mount = 440;
+      this.min = 10;
+      this.max = 30;
+      this.porcent = 90;
+      if(this.porcent >= 80 )
+        this.color = "danger";
+      else if(this.porcent > 50 )
+        this.color = "warning";
+      else
+        this.color = "green"; 
 
   }
 

@@ -116,4 +116,39 @@
             </ion-card>
         </ion-slide>
     </ion-slides>
+
+    <!--init verified-->
+    <br><br>
+    <h2>{{"Universidad.Inicio" | translate}}</h2>
+    <div class="list-for-months">
+        <div class="single-month">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-1>
+                        <i class="check fa fa-check-circle"></i>
+                    </ion-col>
+                    <ion-col col-10>
+                        <span>Enero</span>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div class="single-month">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-1>
+                        <i class="check fa fa-check-circle"></i>
+                    </ion-col>
+                    <ion-col col-10>
+                        <span>Febrero</span>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
+    <!--end verified-->
+    <br><br>
+    <h2>{{"Universidad.Costo" | translate}}</h2>
+    <progress-bar [color]="color" [porcent]="porcent" [mount]="mount" [min]="min" [max]="max"></progress-bar>
+
 </ion-content>
