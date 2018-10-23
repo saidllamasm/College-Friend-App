@@ -1,12 +1,13 @@
+import { InboxSinglePage } from './../inbox-single/inbox-single';
 import { CallNumber } from '@ionic-native/call-number';
 import { University } from './../../model/university/university.model';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams, Platform,AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { AlertController } from 'ionic-angular';
 import { WriteReviewPage } from '../write-review/write-review';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the SingleUniversityPage page.
@@ -34,6 +35,8 @@ export class SingleUniversityPage {
   //
   public listCarrers = [];
   public listMonths = [];
+  public listReviews = [];
+  public listIms = [];
 
   // for costs progress bar
   porcent : number;
@@ -43,6 +46,8 @@ export class SingleUniversityPage {
   color : string;
   //
 
+  monthNames: string[];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -51,9 +56,13 @@ export class SingleUniversityPage {
     private alertCtrl: AlertController,
     private platform : Platform,
     private callNumber: CallNumber,
-    private iab: InAppBrowser
+    private iab: InAppBrowser,
+    private storage: Storage,
     ) {
       statusBar.backgroundColorByHexString('#0055CB');
+      this.getReviews();
+      this.getImagesFeature();
+
       this.id_university = this.navParams.get('id_university');
 
       this.afDatabase.list<University>('/Universidades/'+this.id_university+'/').valueChanges().subscribe((university : any[]) => {
@@ -98,6 +107,96 @@ export class SingleUniversityPage {
 
   }
 
+  getImagesFeature(){
+    this.listIms.push(
+      {
+        imgsrc : 'http://ejesur.com.mx/wp-content/uploads/2017/05/592877894acc6650689262.jpg',
+      }
+    );
+    this.listIms.push({
+      imgsrc : 'https://www.animalpolitico.com/wp-content/uploads/2018/03/UNAM_1_2-e1519923027696.jpg'
+    });
+  }
+
+  initChat(id){
+    this.navCtrl.push(InboxSinglePage);
+  }
+  notFav(id){
+    // confirmar de problemas con el comentario?
+  }
+
+  fav(id){
+
+  }
+
+  getReviews(){
+    
+    this.listReviews.push(
+      { 
+      id_review : '1', // key de la review
+      id_username : '1', // usuario que posteo el comentario
+      username : 'said',
+      time : 'September 2018',
+      imgsrc : 'https://www.sintesis.mx/wp-content/uploads/2018/06/unam-docentes-.jpg',
+      content : 'Holas sdads.',
+      images : [
+        {
+          imgurl : 'http://www.abogadoschwitzer.com/wp-content/uploads/2016/12/KSU_Hale_library-1024x768.jpg'
+        },
+        {
+          imgurl : 'http://www.abogadoschwitzer.com/wp-content/uploads/2016/12/KSU_Hale_library-1024x768.jpg'
+        }
+      ]
+    });
+  }
+
+  addMonth(){
+    this.storage.get('lang').then((val) => {
+      console.log('calendar lang '+val);
+      if(val == 'es'){
+        this.monthNames = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
+      } else if(val == 'fr'){
+        this.monthNames = ["EneroFR","FebreroFR","MarzoFR","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
+      } else if(val == 'pt'){
+        this.monthNames = ["EneroPT","FebreroPT","MarzoPT","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
+      } else {
+        this.monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      }
+      let alert = this.alertCtrl.create({
+        title: 'Register new month'      
+      });
+      this.monthNames.forEach(element => {
+  
+        alert.addInput({
+          type:'checkbox',
+          label: element,
+          value: element,
+          checked: true
+        });  
+      });
+      alert.addButton(
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+      );  
+      alert.addButton(
+        {
+          text: 'Save',
+          handler: data => {
+            console.log(' Save ');
+          }
+        },
+      ); 
+      alert.present();
+    });
+  }
+
+
+  //ratings
   addGeneral(){
     let alert = this.alertCtrl.create({
       title: 'Add param',
@@ -134,8 +233,6 @@ export class SingleUniversityPage {
   }
 
   openBrowser(){
-    //window.open(this.website, '_system', 'location=no');
-    //this.iab.create(this.website);
     this.iab.create('http://'+this.website);
   }
 

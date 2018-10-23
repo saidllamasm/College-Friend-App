@@ -6,7 +6,11 @@
 -->
 <ion-header>
     <button class="btnFav"><i class="fa fa-heart"></i></button>
-    <img src="https://www.sintesis.mx/wp-content/uploads/2018/06/unam-docentes-.jpg">
+    <ion-slides autoplay class="slide-featureimg">
+        <ion-slide *ngFor="let imag of listIms">
+            <img class="img-feature" [src]="imag.imgsrc">
+        </ion-slide>
+    </ion-slides>
     <div class="ctrol-header">
         <button (click)="openBrowser()" class="link" href="">{{"Universidad.Sitioweb" | translate}}</button>
         <button (click)="openCall()" class="link" href="">{{"Universidad.Telefono" | translate}}</button>
@@ -129,11 +133,11 @@
                     </ion-row>
                 </ion-grid>
             </div>
-            <div class="single-month">
+            <div class="single-month" (click)="addMonth()">
                 <ion-grid>
                     <ion-row>
                         <ion-col col-1>
-                            <i class="check fa fa-check-circle"></i>
+                            <i class="check fa fa-plus"></i>
                         </ion-col>
                         <ion-col col-10>
                             <span>Add month</span>
@@ -169,140 +173,42 @@
     </div>
     <div class="content-general" padding>
         <div class="content-reviews" *ngIf="showReviews">
-            <div class="single-review">
+            <div class="single-review" *ngFor="let review of listReviews">
                 <ion-grid>
                     <ion-row>
                         <ion-col col-2>
-                            <img class="img-circle" src="http://profiletalent.com.au/wp-content/uploads/2017/05/profile-talent-ant-simpson-feature.jpg" alt="">
+                            <img class="img-circle" [src]="review.imgsrc" alt="">
                         </ion-col>
                         <ion-col>
-                            <span class="txtName">Jesus Said Llamas</span>
+                            <span class="txtName">{{review.username}}</span>
                             <br>
-                            <span class="txtDate">September</span>
+                            <span class="txtDate">{{review.time}}</span>
                         </ion-col>
                     </ion-row>
                     <ion-row>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam veniam unde mollitia iure optio commodi, officia magni? Dicta, fuga deserunt vel, praesentium natus asperiores harum excepturi consequatur cumque nihil velit?</p>
+                        <p>{{review.content}}</p>
                     </ion-row>
                     <ion-row>
                         <ion-slides class="slide-img-userUniversities" slidesPerView="2" spaceBetween="16">
-                            <ion-slide>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/KUStrongHallJayhawkMarch2006.jpg" alt="" srcset="">
-                            </ion-slide>
-                            <ion-slide>
-                                <img src="http://www.kuonlinedirectory.org/historic/wp-content/uploads/Strong650.jpg" alt="">
-                            </ion-slide>
-                            <ion-slide>
-                                <img src="http://ku.imodules.com/s/1312/images/editor/web-news-images/2014/strong-hall_web.jpg" alt="" srcset="">
+                            <ion-slide *ngFor="let image of review.images">
+                                <img [src]="image.imgurl">
                             </ion-slide>
                         </ion-slides>
                     </ion-row>
                     <ion-row>
                         <ion-col col-1>
-                            <button class="ctrol-Action">
+                            <button (click)="notFav(review.id_review)" class="ctrol-Action">
                                 <ion-icon name="thumbs-down"></ion-icon>
                             </button>
                         </ion-col>
                         <ion-col col-1>
-                            <button class="ctrol-Action">
+                            <button (click)="Fav(review.id_review)" class="ctrol-Action">
                                 <ion-icon name="thumbs-up"></ion-icon>
                             </button>
                         </ion-col>
                         <ion-col col-6></ion-col>
                         <ion-col col-4>
-                            <button class="ctrol-Action btn-chat">{{"Tabs.Chat" | translate}}</button>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </div>
-            <div class="single-review">
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-2>
-                            <img class="img-circle" src="http://profiletalent.com.au/wp-content/uploads/2017/05/profile-talent-ant-simpson-feature.jpg" alt="">
-                        </ion-col>
-                        <ion-col>
-                            <span class="txtName">Jesus Said Llamas</span>
-                            <br>
-                            <span class="txtDate">September</span>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam veniam unde mollitia iure optio commodi, officia magni? Dicta, fuga deserunt vel, praesentium natus asperiores harum excepturi consequatur cumque nihil velit?</p>
-                    </ion-row>
-                    <ion-row>
-                        <ion-slides class="slide-img-userUniversities" slidesPerView="2" spaceBetween="16">
-                            <ion-slide>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/KUStrongHallJayhawkMarch2006.jpg" alt="" srcset="">
-                            </ion-slide>
-                            <ion-slide>
-                                <img src="http://www.kuonlinedirectory.org/historic/wp-content/uploads/Strong650.jpg" alt="">
-                            </ion-slide>
-                            <ion-slide>
-                                <img src="http://ku.imodules.com/s/1312/images/editor/web-news-images/2014/strong-hall_web.jpg" alt="" srcset="">
-                            </ion-slide>
-                        </ion-slides>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-1>
-                            <button class="ctrol-Action">
-                                    <ion-icon name="thumbs-down"></ion-icon>
-                                </button>
-                        </ion-col>
-                        <ion-col col-1>
-                            <button class="ctrol-Action">
-                                    <ion-icon name="thumbs-up"></ion-icon>
-                                </button>
-                        </ion-col>
-                        <ion-col col-6></ion-col>
-                        <ion-col col-4>
-                            <button class="ctrol-Action btn-chat">{{"Tabs.Chat" | translate}}</button>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </div>
-            <div class="single-review">
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-2>
-                            <img class="img-circle" src="http://profiletalent.com.au/wp-content/uploads/2017/05/profile-talent-ant-simpson-feature.jpg" alt="">
-                        </ion-col>
-                        <ion-col>
-                            <span class="txtName">Jesus Said Llamas</span>
-                            <br>
-                            <span class="txtDate">September</span>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam veniam unde mollitia iure optio commodi, officia magni? Dicta, fuga deserunt vel, praesentium natus asperiores harum excepturi consequatur cumque nihil velit?</p>
-                    </ion-row>
-                    <ion-row>
-                        <ion-slides class="slide-img-userUniversities" slidesPerView="2" spaceBetween="16">
-                            <ion-slide>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/KUStrongHallJayhawkMarch2006.jpg" alt="" srcset="">
-                            </ion-slide>
-                            <ion-slide>
-                                <img src="http://www.kuonlinedirectory.org/historic/wp-content/uploads/Strong650.jpg" alt="">
-                            </ion-slide>
-                            <ion-slide>
-                                <img src="http://ku.imodules.com/s/1312/images/editor/web-news-images/2014/strong-hall_web.jpg" alt="" srcset="">
-                            </ion-slide>
-                        </ion-slides>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-1>
-                            <button class="ctrol-Action">
-                                        <ion-icon name="thumbs-down"></ion-icon>
-                                    </button>
-                        </ion-col>
-                        <ion-col col-1>
-                            <button class="ctrol-Action">
-                                        <ion-icon name="thumbs-up"></ion-icon>
-                                    </button>
-                        </ion-col>
-                        <ion-col col-6></ion-col>
-                        <ion-col col-4>
-                            <button class="ctrol-Action btn-chat">{{"Tabs.Chat" | translate}}</button>
+                            <button (click)="initChat(review.id_username)" class="ctrol-Action btn-chat">{{"Tabs.Chat" | translate}}</button>
                         </ion-col>
                     </ion-row>
                 </ion-grid>

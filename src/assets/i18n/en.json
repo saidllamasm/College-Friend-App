@@ -45,7 +45,7 @@
         "Sitioweb": "Website",
         "Telefono": "Phone",
         "Mapa": "Map",
-        "Opinar": "review",
+        "Opinar": "write review",
         "Ubicacion": "Location",
         "Buscar": "Search",
         "Guardar": "Save",
@@ -87,5 +87,19 @@
     "Escribir": {
         "Para": "Write opinion for",
         "Guardar": "add comment"
+    },
+    "Meses": {
+        "Enero": "Enero",
+        "Febrero": "Febrero",
+        "Marzo": "Marzo",
+        "Abril": "Abril",
+        "Mayo": "Mayo",
+        "Junio": "Junio",
+        "Julio": "Julio",
+        "Agosto": "Agosto",
+        "Septiembre": "Septiembre",
+        "Octubre": "Octubre",
+        "Noviembre": "Noviembre",
+        "Diciembre": "Diciembre"
     }
 }

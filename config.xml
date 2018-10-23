@@ -103,12 +103,12 @@
     <plugin name="cordova-plugin-telerik-imagepicker" spec="^2.2.2">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="College images" />
     </plugin>
-    <engine name="android" spec="7.0.0" />
-    <engine name="browser" spec="5.0.4" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^4.2.2">
         <variable name="OKHTTP_VERSION" value="3.+" />
         <variable name="LOCATION_USAGE_DESCRIPTION" value="This app requires access to your location for navigation purposes" />
     </plugin>
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
+    <engine name="android" spec="7.0.0" />
+    <engine name="browser" spec="5.0.4" />
 </widget>
