@@ -27,6 +27,7 @@
         "@ionic-native/globalization": "^4.15.0",
         "@ionic-native/google-maps": "^4.14.0",
         "@ionic-native/image-picker": "^4.16.0",
+        "@ionic-native/launch-navigator": "^4.16.0",
         "@ionic-native/splash-screen": "~4.12.0",
         "@ionic-native/status-bar": "^4.12.2",
         "@ionic-native/twitter-connect": "^4.15.0",
@@ -37,9 +38,11 @@
         "cordova-android": "7.0.0",
         "cordova-browser": "5.0.4",
         "cordova-ios": "4.5.5",
+        "cordova-plugin-actionsheet": "^2.3.3",
         "cordova-plugin-calendar": "^5.1.2",
         "cordova-plugin-camera": "^4.0.3",
         "cordova-plugin-device": "^2.0.2",
+        "cordova-plugin-dialogs": "^2.0.1",
         "cordova-plugin-facebook4": "^3.1.0",
         "cordova-plugin-globalization": "^1.11.0",
         "cordova-plugin-googlemaps": "^2.4.6",
@@ -60,6 +63,7 @@
         "rxjs-compat": "^6.3.3",
         "sw-toolbox": "3.6.0",
         "twitter-connect-plugin": "git+https://github.com/chroa/twitter-connect-plugin.git",
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": "^4.2.2",
         "zone.js": "0.8.26"
     },
     "devDependencies": {
@@ -103,6 +107,10 @@
             "cordova-sqlite-storage": {},
             "cordova-plugin-telerik-imagepicker": {
                 "PHOTO_LIBRARY_USAGE_DESCRIPTION": "College images"
+            },
+            "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+                "OKHTTP_VERSION": "3.+",
+                "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
             }
         },
         "platforms": [

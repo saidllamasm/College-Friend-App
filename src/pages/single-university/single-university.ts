@@ -1,6 +1,6 @@
 import { University } from './../../model/university/university.model';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AlertController } from 'ionic-angular';
@@ -20,10 +20,12 @@ import { WriteReviewPage } from '../write-review/write-review';
 })
 export class SingleUniversityPage {
   public id_university;
-  public showReviews = false; //cambiar a true en produccion
+  public showReviews = true; //cambiar a true en produccion
   public name : string;
   public address : string;
   public userCreated : string;
+  public lat;
+  public lng;
 
 
   // for costs progress bar
@@ -39,19 +41,25 @@ export class SingleUniversityPage {
     public navParams: NavParams,
     public afDatabase: AngularFireDatabase,
     public statusBar: StatusBar,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private platform : Platform
     ) {
       statusBar.backgroundColorByHexString('#0055CB');
       this.id_university = this.navParams.get('id_university');
 
-      this.afDatabase.list<University>('/Universidades/'+this.id_university+'/').valueChanges().subscribe((university: University[]) => {
+      this.afDatabase.list<University>('/Universidades/'+this.id_university+'/').valueChanges().subscribe((university : any[]) => {
+        console.log(JSON.stringify(university));
+        this.name = '' +university[5];
+        this.address = ''+university[1];
+        this.lat = ''+university[3].lat;
+        this.lng = ''+university[3].lng;
+        university.forEach(element => {
+          //alert(element);
+        });
         //alert(JSON.stringify(university));
       });
 
-      this.name = "Instituto tecnologico de ciudad guzman";
-      this.address = 'Av afsdf';  
-      this.userCreated = "Said Llamas;"
-
+      
       //progress
       this.mount = 440;
       this.min = 120;
@@ -99,6 +107,24 @@ export class SingleUniversityPage {
       id_university : this.id_university,
       name_university : this.name
     });  
+  }
+
+  openCall(){
+    if(this.platform.is('ios')){
+      window.open('twitter://user?screen_name=gajotres', '_system', 'location=no');
+    } else {
+      window.open('https://twitter.com/gajotres', '_system', 'location=no');
+    }
+  }
+
+  openMap(){
+    let destination = this.lat + ',' + this.lng;
+    if(this.platform.is('ios')){
+      window.open('maps://?q=' + destination, '_system');
+    } else {
+      let label = encodeURI(this.name);
+      window.open('geo:0,0?q=' + destination + '(' + label + ')', '_system');
+    }
   }
 
   goBack(){

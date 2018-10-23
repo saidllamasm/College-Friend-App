@@ -89,8 +89,8 @@ export class MyApp {
       }
       this.afAuth.authState.subscribe(user => {
         if(user){
-          //this.rootPage = TabsPage;
-          this.rootPage = SingleUniversityPage;
+          this.rootPage = TabsPage;
+          //this.rootPage = SingleUniversityPage;
         }else{
           this.rootPage = SlidesPage;  
         }

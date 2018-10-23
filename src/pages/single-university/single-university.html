@@ -8,9 +8,9 @@
     <button class="btnFav"><i class="fa fa-heart"></i></button>
     <img src="https://www.sintesis.mx/wp-content/uploads/2018/06/unam-docentes-.jpg">
     <div class="ctrol-header">
-        <a class="link" href="">{{"Universidad.Sitioweb" | translate}}</a>
-        <a class="link" href="">{{"Universidad.Telefono" | translate}}</a>
-        <a class="link" href="">{{"Universidad.Mapa" | translate}}</a>
+        <button (click)="openBrowser()" class="link" href="">{{"Universidad.Sitioweb" | translate}}</button>
+        <button (click)="openCall()" class="link" href="">{{"Universidad.Telefono" | translate}}</button>
+        <button (click)="openMap()" class="link" href="">{{"Universidad.Mapa" | translate}}</button>
         <button (click)="openWriteReviewPage()" class="btn-review" href="">{{"Universidad.Opinar" | translate}}</button>
     </div>
 </ion-header>
