@@ -17,6 +17,7 @@ import { InboxSinglePage } from '../pages/inbox-single/inbox-single';
 import { ChatPage } from './../pages/chat/chat';
 import { CreateUniversityPage } from './../pages/create-university/create-university';
 import { LoginPage } from '../pages/login/login';
+import { WriteReviewPage } from '../pages/write-review/write-review';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -50,6 +51,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { UserListService } from '../services/user-list.service';
 
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
+import { ImagePlaceholderComponent } from '../components/image-placeholder/image-placeholder';
 
 import { environment } from '../environments/environment';
 
@@ -63,7 +65,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     TabsPage,
     HomePage,
     ProgressBarComponent,
+    ImagePlaceholderComponent,
     // for debug
+    WriteReviewPage,
     OpinionsPage,
     SavedPage,
     ProfilePage,
@@ -110,7 +114,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     InboxSinglePage,
     ChatPage,
     LoginPage,
-    CreateUniversityPage
+    CreateUniversityPage,
+    WriteReviewPage,
+    ImagePlaceholderComponent
   ],
   providers: [
     StatusBar,

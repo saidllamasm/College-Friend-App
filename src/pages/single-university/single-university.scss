@@ -59,8 +59,10 @@ page-single-university {
         font-size: 13px;
         color: #d4d4d4;
     }
-    ion-slide {
-        width: 80%!important;
+    .slide-carrers {
+        ion-slide {
+            width: 80%!important;
+        }
     }
     ion-card {
         margin-bottom: 20px!important;
@@ -79,5 +81,71 @@ page-single-university {
         span {
             color: #707070;
         }
+    }
+    .tabs-reviews {
+        width: 100%;
+        background-color: map-get($colors, dark);
+    }
+    .btn-tab {
+        width: 100%;
+        text-align: center;
+        color: white;
+        border: none!important;
+        background: none!important;
+        border-top: 1px !important;
+    }
+    .btn-tab.active {
+        //border-top: 1px solid map-get($colors, light)!important;
+    }
+    .img-circle {
+        height: 40px !important;
+        width: 40px !important;
+        border-radius: 50%;
+    }
+    .slide-img-userUniversities {
+        ion-slide {
+            height: 120px!important;
+        }
+    }
+    .ctrol-Action {
+        width: 100%;
+        border: none!important;
+        background: none!important;
+    }
+    .btn-chat {
+        padding: 4px;
+        border-radius: 5px;
+        background-color: map-get($colors, secondary) !important;
+        color: white;
+        font-size: 14px;
+        text-transform: lowercase;
+    }
+    .single-review {
+        border-bottom: 1px solid #70707066;
+    }
+    .ctrol-Action {
+        ion-icon {
+            font-size: 18px;
+        }
+    }
+    .single-review {
+        margin-bottom: 10px;
+    }
+    .panel {
+        border: 1px solid map-get($colors, primary);
+        border-radius: 5px;
+    }
+    .panel-header {
+        color: white;
+        background: map-get($colors, primary);
+        padding: 3px;
+    }
+    .panel-content {
+        padding: 5px;
+    }
+    .btn-add {
+        background: none;
+        color: white;
+        font-size: 14px;
     }
 }

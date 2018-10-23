@@ -29,15 +29,6 @@
         "ContenidoResNo": "Help us see this university next time",
         "TituloResNo": "Without result"
     },
-    "Semana": {
-        "Lunes": "Su",
-        "Martes": "Mo",
-        "Miercoles": "Tu",
-        "Jueves": "We",
-        "Viernes": "Th",
-        "Sabado": "Fr",
-        "Domingo": "Sa"
-    },
     "Perfil": {
         "user_name": "Name",
         "user_phone": "Phone number",
@@ -60,13 +51,17 @@
         "Guardar": "Save",
         "CreadoPor": "Created by",
         "Global": "Global score",
+        "Carreras": "university careers",
         "Facilidades": "Instalaciones e Infraestructura",
         "Profesores": "Profesores",
         "Movilidad": "Mobility",
         "ActsExtra": "Extra school activities",
         "Apoyos": "Supports and scholarships",
         "Inicio": "Start of courses",
-        "Costo": "Registration fee"
+        "Costo": "Registration cost",
+        "Puntajes": "Scores",
+        "Opiniones": "Reviews",
+        "General": "General"
     },
     "Opiniones": {
         "Opiniones": "Opinions"
@@ -88,5 +83,9 @@
     },
     "InboxSingle": {
         "MensajeAqui": "Message here"
+    },
+    "Escribir": {
+        "Para": "Write opinion for",
+        "Guardar": "add comment"
     }
 }

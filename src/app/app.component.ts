@@ -10,7 +10,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SlidesPage } from './../pages/slides/slides';
 import { Storage } from '@ionic/storage';
-import { CreateUniversityPage } from '../pages/create-university/create-university';
 
 @Component({
   templateUrl: 'app.html'

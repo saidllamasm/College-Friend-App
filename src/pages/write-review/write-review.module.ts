@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { SingleUniversityPage } from './single-university';
-
-import { Ionic2RatingModule } from 'ionic2-rating';
+import { WriteReviewPage } from './write-review';
 
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -10,11 +8,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
-    SingleUniversityPage,
+    WriteReviewPage,
   ],
   imports: [
-    IonicPageModule.forChild(SingleUniversityPage),
-    Ionic2RatingModule,
+    IonicPageModule.forChild(WriteReviewPage),
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -25,7 +22,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
   ],
 })
 
-export class SingleUniversityPageModule {}
+export class WriteReviewPageModule {}
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

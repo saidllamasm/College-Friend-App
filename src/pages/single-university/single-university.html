@@ -11,144 +11,370 @@
         <a class="link" href="">{{"Universidad.Sitioweb" | translate}}</a>
         <a class="link" href="">{{"Universidad.Telefono" | translate}}</a>
         <a class="link" href="">{{"Universidad.Mapa" | translate}}</a>
-        <a class="btn-review" href="">{{"Universidad.Opinar" | translate}}</a>
+        <button (click)="openWriteReviewPage()" class="btn-review" href="">{{"Universidad.Opinar" | translate}}</button>
     </div>
 </ion-header>
 
-<ion-content #pageContent fullscreen padding>
-    <h1>{{name}}</h1>
-    <p>{{address}}</p>
-    <p>{{"Universidad.CreadoPor" | translate}} <span class="bold">{{userCreated}}</span></p>
-    <br>
-    <h2>{{"Universidad.Global" | translate}}</h2>
-    <div class="panel-score-main">
+<ion-content>
+    <div class="content-general" padding>
+        <h1>{{name}}</h1>
+        <p>{{address}}</p>
+        <p>{{"Universidad.CreadoPor" | translate}} <span class="bold">{{userCreated}}</span></p>
+        <br>
+        <h2>{{"Universidad.Global" | translate}}</h2>
+        <div class="panel-score-main">
+            <ion-grid>
+                <ion-row>
+                    <!--scores specifics-->
+                    <ion-col col-9>
+                        <ion-row>
+                            <ion-col col-5>
+                                {{"Universidad.Facilidades" | translate}}
+                            </ion-col>
+                            <ion-col col-7>
+                                <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-5>
+                                {{"Universidad.Profesores" | translate}}
+                            </ion-col>
+                            <ion-col col-7>
+                                <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-5>
+                                {{"Universidad.Movilidad" | translate}}
+                            </ion-col>
+                            <ion-col col-7>
+                                <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-5>
+                                {{"Universidad.ActsExtra" | translate}}
+                            </ion-col>
+                            <ion-col col-7>
+                                <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-5>
+                                {{"Universidad.Apoyos" | translate}}
+                            </ion-col>
+                            <ion-col col-7>
+                                <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                    <!--score general-->
+                    <ion-col>
+                        <div class="circle-number">
+                            <span class="number">3.5</span>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <br>
+
+        <!--cards for carrers-->
+        <h2>{{"Universidad.Carreras" | translate}}</h2>
+        <ion-slides class="slide-carrers" slidesPerView="2" spaceBetween="16">
+
+            <ion-slide>
+                <!--1-->
+                <ion-card>
+                    <ion-card-content>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-2>
+                                    <img src="../../assets/imgs/engineer.svg" alt="">
+                                </ion-col>
+                                <ion-col col-1></ion-col>
+                                <ion-col>
+                                    Ing. Sistemas Computacionales
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+
+            <ion-slide>
+                <!--1-->
+                <ion-card>
+                    <ion-card-content>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-2>
+                                    <img src="../../assets/imgs/engineer.svg" alt="">
+                                </ion-col>
+                                <ion-col col-1></ion-col>
+                                <ion-col>
+                                    Ing. Sistemas Computacionales
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+
+            <ion-slide>
+                <!--1-->
+                <ion-card>
+                    <ion-card-content>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-2>
+                                    <img src="../../assets/imgs/engineer.svg" alt="">
+                                </ion-col>
+                                <ion-col col-1></ion-col>
+                                <ion-col>
+                                    Ing. Sistemas Computacionales
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-content>
+                </ion-card>
+            </ion-slide>
+        </ion-slides>
+
+        <!--init verified-->
+        <br><br>
+        <h2>{{"Universidad.Inicio" | translate}}</h2>
+        <div class="list-for-months">
+            <div class="single-month">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-1>
+                            <i class="check fa fa-check-circle"></i>
+                        </ion-col>
+                        <ion-col col-10>
+                            <span>Enero</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <div class="single-month">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-1>
+                            <i class="check fa fa-check-circle"></i>
+                        </ion-col>
+                        <ion-col col-10>
+                            <span>Febrero</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
+        <!--end verified-->
+        <!--init verified-->
+        <br><br>
+        <h2>{{"Universidad.Costo" | translate}}</h2>
+        <progress-bar [color]="color" [porcent]="porcent" [mount]="mount" [min]="min" [max]="max"></progress-bar>
+        <br><br>
+    </div>
+    <!--end verified-->
+    <div class="tabs-reviews" center text-center>
         <ion-grid>
             <ion-row>
-                <!--scores specifics-->
-                <ion-col col-9>
-                    <ion-row>
-                        <ion-col col-5>
-                            {{"Universidad.Facilidades" | translate}}
-                        </ion-col>
-                        <ion-col col-7>
-                            <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>
-                            {{"Universidad.Profesores" | translate}}
-                        </ion-col>
-                        <ion-col col-7>
-                            <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>
-                            {{"Universidad.Movilidad" | translate}}
-                        </ion-col>
-                        <ion-col col-7>
-                            <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>
-                            {{"Universidad.ActsExtra" | translate}}
-                        </ion-col>
-                        <ion-col col-7>
-                            <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>
-                            {{"Universidad.Apoyos" | translate}}
-                        </ion-col>
-                        <ion-col col-7>
-                            <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                        </ion-col>
-                    </ion-row>
-                </ion-col>
-                <!--score general-->
                 <ion-col>
-                    <div class="circle-number">
-                        <span class="number">3.5</span>
-                    </div>
+                    <button class="btn-tab active" (click)="activeReviews()">
+                        {{"Universidad.Opiniones" | translate}}
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button class="btn-tab" (click)="disableReviews()">
+                        {{"Universidad.Puntajes" | translate}}
+                    </button>
+
                 </ion-col>
             </ion-row>
         </ion-grid>
     </div>
-    <br>
-
-    <!--cards for carrers-->
-    <ion-slides slidesPerView="2" spaceBetween="16" loop>
-
-        <ion-slide>
-            <!--1-->
-            <ion-card>
-                <ion-card-content>
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col col-2>
-                                <img src="../../assets/imgs/engineer.svg" alt="">
-                            </ion-col>
-                            <ion-col col-1></ion-col>
-                            <ion-col>
-                                Ing. Sistemas Computacionales
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </ion-card-content>
-            </ion-card>
-            <!--2-->
-            <ion-card>
-                <ion-card-content>
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col col-2>
-                                <img src="../../assets/imgs/engineer.svg" alt="">
-                            </ion-col>
-                            <ion-col col-1></ion-col>
-                            <ion-col>
-                                Ing. Sistemas Computacionales
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </ion-card-content>
-            </ion-card>
-        </ion-slide>
-    </ion-slides>
-
-    <!--init verified-->
-    <br><br>
-    <h2>{{"Universidad.Inicio" | translate}}</h2>
-    <div class="list-for-months">
-        <div class="single-month">
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-1>
-                        <i class="check fa fa-check-circle"></i>
-                    </ion-col>
-                    <ion-col col-10>
-                        <span>Enero</span>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+    <div class="content-general" padding>
+        <div class="content-reviews" *ngIf="showReviews">
+            <div class="single-review">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-2>
+                            <img class="img-circle" src="http://profiletalent.com.au/wp-content/uploads/2017/05/profile-talent-ant-simpson-feature.jpg" alt="">
+                        </ion-col>
+                        <ion-col>
+                            <span class="txtName">Jesus Said Llamas</span>
+                            <br>
+                            <span class="txtDate">September</span>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam veniam unde mollitia iure optio commodi, officia magni? Dicta, fuga deserunt vel, praesentium natus asperiores harum excepturi consequatur cumque nihil velit?</p>
+                    </ion-row>
+                    <ion-row>
+                        <ion-slides class="slide-img-userUniversities" slidesPerView="2" spaceBetween="16">
+                            <ion-slide>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/KUStrongHallJayhawkMarch2006.jpg" alt="" srcset="">
+                            </ion-slide>
+                            <ion-slide>
+                                <img src="http://www.kuonlinedirectory.org/historic/wp-content/uploads/Strong650.jpg" alt="">
+                            </ion-slide>
+                            <ion-slide>
+                                <img src="http://ku.imodules.com/s/1312/images/editor/web-news-images/2014/strong-hall_web.jpg" alt="" srcset="">
+                            </ion-slide>
+                        </ion-slides>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1>
+                            <button class="ctrol-Action">
+                                <ion-icon name="thumbs-down"></ion-icon>
+                            </button>
+                        </ion-col>
+                        <ion-col col-1>
+                            <button class="ctrol-Action">
+                                <ion-icon name="thumbs-up"></ion-icon>
+                            </button>
+                        </ion-col>
+                        <ion-col col-6></ion-col>
+                        <ion-col col-4>
+                            <button class="ctrol-Action btn-chat">{{"Tabs.Chat" | translate}}</button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <div class="single-review">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-2>
+                            <img class="img-circle" src="http://profiletalent.com.au/wp-content/uploads/2017/05/profile-talent-ant-simpson-feature.jpg" alt="">
+                        </ion-col>
+                        <ion-col>
+                            <span class="txtName">Jesus Said Llamas</span>
+                            <br>
+                            <span class="txtDate">September</span>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam veniam unde mollitia iure optio commodi, officia magni? Dicta, fuga deserunt vel, praesentium natus asperiores harum excepturi consequatur cumque nihil velit?</p>
+                    </ion-row>
+                    <ion-row>
+                        <ion-slides class="slide-img-userUniversities" slidesPerView="2" spaceBetween="16">
+                            <ion-slide>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/KUStrongHallJayhawkMarch2006.jpg" alt="" srcset="">
+                            </ion-slide>
+                            <ion-slide>
+                                <img src="http://www.kuonlinedirectory.org/historic/wp-content/uploads/Strong650.jpg" alt="">
+                            </ion-slide>
+                            <ion-slide>
+                                <img src="http://ku.imodules.com/s/1312/images/editor/web-news-images/2014/strong-hall_web.jpg" alt="" srcset="">
+                            </ion-slide>
+                        </ion-slides>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1>
+                            <button class="ctrol-Action">
+                                    <ion-icon name="thumbs-down"></ion-icon>
+                                </button>
+                        </ion-col>
+                        <ion-col col-1>
+                            <button class="ctrol-Action">
+                                    <ion-icon name="thumbs-up"></ion-icon>
+                                </button>
+                        </ion-col>
+                        <ion-col col-6></ion-col>
+                        <ion-col col-4>
+                            <button class="ctrol-Action btn-chat">{{"Tabs.Chat" | translate}}</button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <div class="single-review">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-2>
+                            <img class="img-circle" src="http://profiletalent.com.au/wp-content/uploads/2017/05/profile-talent-ant-simpson-feature.jpg" alt="">
+                        </ion-col>
+                        <ion-col>
+                            <span class="txtName">Jesus Said Llamas</span>
+                            <br>
+                            <span class="txtDate">September</span>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam veniam unde mollitia iure optio commodi, officia magni? Dicta, fuga deserunt vel, praesentium natus asperiores harum excepturi consequatur cumque nihil velit?</p>
+                    </ion-row>
+                    <ion-row>
+                        <ion-slides class="slide-img-userUniversities" slidesPerView="2" spaceBetween="16">
+                            <ion-slide>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/KUStrongHallJayhawkMarch2006.jpg" alt="" srcset="">
+                            </ion-slide>
+                            <ion-slide>
+                                <img src="http://www.kuonlinedirectory.org/historic/wp-content/uploads/Strong650.jpg" alt="">
+                            </ion-slide>
+                            <ion-slide>
+                                <img src="http://ku.imodules.com/s/1312/images/editor/web-news-images/2014/strong-hall_web.jpg" alt="" srcset="">
+                            </ion-slide>
+                        </ion-slides>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1>
+                            <button class="ctrol-Action">
+                                        <ion-icon name="thumbs-down"></ion-icon>
+                                    </button>
+                        </ion-col>
+                        <ion-col col-1>
+                            <button class="ctrol-Action">
+                                        <ion-icon name="thumbs-up"></ion-icon>
+                                    </button>
+                        </ion-col>
+                        <ion-col col-6></ion-col>
+                        <ion-col col-4>
+                            <button class="ctrol-Action btn-chat">{{"Tabs.Chat" | translate}}</button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
         </div>
-        <div class="single-month">
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-1>
-                        <i class="check fa fa-check-circle"></i>
-                    </ion-col>
-                    <ion-col col-10>
-                        <span>Febrero</span>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+        <div class="content-scores" *ngIf="!showReviews">
+            <div class="panel">
+                <div class="panel-header">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col col-8>{{"Universidad.General" | translate}}</ion-col>
+                            <ion-col col-4 right text-right> <button class="btn-add" (click)="addGeneral()"><i class="fa fa-plus"></i></button></ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </div>
+                <div class="panel-content">
+                    <div class="single-rating">
+                        <ion-row>
+                            <ion-col col-4>
+                                Prestigio
+                            </ion-col>
+                            <ion-col col-8>
+                                <rating class="no-space" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-4>
+                                Prestigio
+                            </ion-col>
+                            <ion-col col-8>
+                                <rating class="no-space" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-4>
+                                Prestigio
+                            </ion-col>
+                            <ion-col col-8>
+                                <rating class="no-space" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!--end verified-->
-    <br><br>
-    <h2>{{"Universidad.Costo" | translate}}</h2>
-    <progress-bar [color]="color" [porcent]="porcent" [mount]="mount" [min]="min" [max]="max"></progress-bar>
-
 </ion-content>
