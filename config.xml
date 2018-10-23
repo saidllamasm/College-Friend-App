@@ -109,4 +109,6 @@
         <variable name="OKHTTP_VERSION" value="3.+" />
         <variable name="LOCATION_USAGE_DESCRIPTION" value="This app requires access to your location for navigation purposes" />
     </plugin>
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
+    <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
 </widget>

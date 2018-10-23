@@ -148,4 +148,16 @@ page-single-university {
         color: white;
         font-size: 14px;
     }
+    .bg-gradient ion-card {
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        background: #0055cb;
+        /* Old browsers */
+        background: -moz-linear-gradient(-45deg, #0055cb 0%, #3880ff 100%);
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, #0055cb 0%, #3880ff 100%);
+        /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, #0055cb 0%, #3880ff 100%);
+    }
 }

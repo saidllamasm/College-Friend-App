@@ -46,7 +46,11 @@ import {TwitterConnect} from '@ionic-native/twitter-connect';
 
 import { IonicStorageModule } from '@ionic/storage';
 
+import { CallNumber } from '@ionic-native/call-number';
+
 import { ImagePicker } from '@ionic-native/image-picker';
+
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { UserListService } from '../services/user-list.service';
 
@@ -130,6 +134,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TwitterConnect,
     UserListService,
     ImagePicker,
+    CallNumber,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
   schemas: [

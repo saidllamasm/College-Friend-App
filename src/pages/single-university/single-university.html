@@ -83,56 +83,28 @@
         <h2>{{"Universidad.Carreras" | translate}}</h2>
         <ion-slides class="slide-carrers" slidesPerView="2" spaceBetween="16">
 
-            <ion-slide>
+            <ion-slide class="bg-gradient" *ngFor="let carrers of listCarrers ">
                 <!--1-->
                 <ion-card>
                     <ion-card-content>
                         <ion-grid>
                             <ion-row>
-                                <ion-col col-2>
-                                    <img src="../../assets/imgs/engineer.svg" alt="">
-                                </ion-col>
-                                <ion-col col-1></ion-col>
-                                <ion-col>
-                                    Ing. Sistemas Computacionales
+                                <ion-col text-center center>
+                                    {{carrers.nombre}}
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
                     </ion-card-content>
                 </ion-card>
             </ion-slide>
-
-            <ion-slide>
+            <ion-slide class="bg-gradient">
                 <!--1-->
                 <ion-card>
                     <ion-card-content>
                         <ion-grid>
                             <ion-row>
-                                <ion-col col-2>
-                                    <img src="../../assets/imgs/engineer.svg" alt="">
-                                </ion-col>
-                                <ion-col col-1></ion-col>
-                                <ion-col>
-                                    Ing. Sistemas Computacionales
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </ion-card-content>
-                </ion-card>
-            </ion-slide>
-
-            <ion-slide>
-                <!--1-->
-                <ion-card>
-                    <ion-card-content>
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col col-2>
-                                    <img src="../../assets/imgs/engineer.svg" alt="">
-                                </ion-col>
-                                <ion-col col-1></ion-col>
-                                <ion-col>
-                                    Ing. Sistemas Computacionales
+                                <ion-col text-center center>
+                                    Add carrer
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
@@ -145,14 +117,14 @@
         <br><br>
         <h2>{{"Universidad.Inicio" | translate}}</h2>
         <div class="list-for-months">
-            <div class="single-month">
+            <div class="single-month" *ngFor="let month of listMonths">
                 <ion-grid>
                     <ion-row>
                         <ion-col col-1>
                             <i class="check fa fa-check-circle"></i>
                         </ion-col>
                         <ion-col col-10>
-                            <span>Enero</span>
+                            <span>{{month.nombre}}</span>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
@@ -164,7 +136,7 @@
                             <i class="check fa fa-check-circle"></i>
                         </ion-col>
                         <ion-col col-10>
-                            <span>Febrero</span>
+                            <span>Add month</span>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
