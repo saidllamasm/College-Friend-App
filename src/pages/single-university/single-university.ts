@@ -27,6 +27,8 @@ export class SingleUniversityPage {
   public langGeneral = '';
 
   carrers: AngularFireList<any>;
+  monthsAF: AngularFireList<any>;
+
   public id_university;
   public showReviews = true; //cambiar a true en produccion
   public name : string;
@@ -52,7 +54,7 @@ export class SingleUniversityPage {
   color : string;
   //
 
-  monthNames: string[];
+  monthNames = [];
 
   constructor(
     public navCtrl: NavController,
@@ -95,6 +97,7 @@ export class SingleUniversityPage {
           if (university[2].hasOwnProperty(ip)) {
             if(university[2][ip] == true){
               this.listMonths.push({nombre : this.getNameMonth(ip) });// .push('2');// = university[0];
+              this.monthNames.push(this.getNameMonth(ip));
             }
           }
         }
@@ -311,26 +314,47 @@ export class SingleUniversityPage {
   addMonth(){
     this.storage.get('lang').then((val) => {
       console.log('calendar lang '+val);
+      let monthNamesBase : string [];
+      let titleMondal = "";
       if(val == 'es'){
-        this.monthNames = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
+        monthNamesBase = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
+        titleMondal = 'Registrar nuevo mes';
       } else if(val == 'fr'){
-        this.monthNames = ["EneroFR","FebreroFR","MarzoFR","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
+        titleMondal = 'Register new month';
+        monthNamesBase = ["EneroFR","FebreroFR","MarzoFR","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
       } else if(val == 'pt'){
-        this.monthNames = ["EneroPT","FebreroPT","MarzoPT","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
+        titleMondal = 'Register new month';
+        monthNamesBase = ["EneroPT","FebreroPT","MarzoPT","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
       } else {
-        this.monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        titleMondal = 'Register new month';
+        monthNamesBase = ["January","February","March","April","May","June","July","August","September","October","November","December"];
       }
       let alert = this.alertCtrl.create({
-        title: 'Register new month'      
+        title: titleMondal
       });
-      this.monthNames.forEach(element => {
-  
-        alert.addInput({
-          type: 'checkbox',
-          label: element,
-          value: element,
-          checked: true
-        });  
+      let index = 1;
+      monthNamesBase.forEach(element => {
+        let added = false;
+        this.monthNames.forEach(lmBase => {
+          if(element == lmBase){
+            added = true;
+            alert.addInput({
+              type: 'checkbox',
+              label: element,
+              value: ''+index,
+              checked: true
+            });
+          }
+        });
+        if(!added){
+          alert.addInput({
+            type: 'checkbox',
+            label: element,
+            value: ''+index,
+            checked: false
+          });
+        }
+        index++;
       });
       alert.addButton(
         {
@@ -345,7 +369,12 @@ export class SingleUniversityPage {
         {
           text: 'Save',
           handler: data => {
-            console.log(' Save ');
+            let MonthsAF = { 1 : false, 2 : false, 3 : false, 4 : false, 5 : false, 6 : false,  7 : false, 8 : false, 9 : false, 10 : false, 11 : false, 12 : false };
+            data.forEach(element => {
+              MonthsAF[element] = true;
+            });
+            this.monthsAF = this.afDatabase.list('Universidades/'+this.id_university+'/');
+            this.monthsAF.update('cursos', MonthsAF);
           }
         },
       ); 
@@ -403,9 +432,9 @@ export class SingleUniversityPage {
   //no utilizado pero lo conservo para versines posteriores
   openTwitter(){
     if(this.platform.is('ios')){
-      window.open('twitter://user?screen_name=gajotres', '_system', 'location=no');
+      window.open('twitter://user?screen_name=said_llamas', '_system', 'location=no');
     } else {
-      window.open('https://twitter.com/gajotres', '_system', 'location=no');
+      window.open('https://twitter.com/said_llamas', '_system', 'location=no');
     }
   }
 
