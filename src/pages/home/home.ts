@@ -18,7 +18,9 @@ import {
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
-  GoogleMapOptions
+  GoogleMapOptions,
+  Geocoder,
+  GeocoderResult
 } from '@ionic-native/google-maps';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -67,7 +69,7 @@ export class HomePage {
     private storage: Storage,
     public afDatabase: AngularFireDatabase,
     public navParams: NavParams,
-    private sanitization:DomSanitizer
+    private sanitization:DomSanitizer,
   ){
     this.loadMap();
     this.featuresUniversities = [];
@@ -151,9 +153,24 @@ export class HomePage {
         target: response.latLng
       });
       this.insertMarker('Mi ubicación', 'blue', response.latLng);
+      this.searchUniversitiesNearbt(response.latLng);
     })
     .catch(error =>{
       console.log(error);
+    });
+  }
+
+  searchUniversitiesNearbt(latLng){
+    Geocoder.geocode({
+      "position": latLng
+    }).then((results: GeocoderResult[]) => {
+      if (results.length == 0) {
+        // Not found
+        return null;
+      }
+      let address: any = [
+        results[0].locality || ""].join(", ");
+        alert(address);
     });
   }
 

@@ -85,7 +85,7 @@
 
         <!--cards for carrers-->
         <h2>{{"Universidad.Carreras" | translate}}</h2>
-        <ion-slides class="slide-carrers" slidesPerView="2" spaceBetween="16">
+        <ion-slides class="slide-carrers" slidesPerView="1.4" spaceBetween="20">
 
             <ion-slide class="bg-gradient" *ngFor="let carrers of listCarrers ">
                 <!--1-->
@@ -101,7 +101,7 @@
                     </ion-card-content>
                 </ion-card>
             </ion-slide>
-            <ion-slide class="bg-gradient">
+            <ion-slide class="bg-gradient" (click)="addCarrer()">
                 <!--1-->
                 <ion-card>
                     <ion-card-content>
@@ -115,6 +115,7 @@
                     </ion-card-content>
                 </ion-card>
             </ion-slide>
+
         </ion-slides>
 
         <!--init verified-->

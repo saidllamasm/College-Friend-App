@@ -4,7 +4,7 @@ import { University } from './../../model/university/university.model';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController, NavParams, Platform,AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
 import { WriteReviewPage } from '../write-review/write-review';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
@@ -24,6 +24,7 @@ import { UserCustom } from '../../model/user/user.model';
   templateUrl: 'single-university.html',
 })
 export class SingleUniversityPage {
+  carrers: AngularFireList<any>;
   public id_university;
   public showReviews = true; //cambiar a true en produccion
   public name : string;
@@ -114,6 +115,38 @@ export class SingleUniversityPage {
       else
         this.color = "green"; 
 
+  }
+
+  addCarrer(){
+    let alert = this.alertCtrl.create({
+      title: 'Register new carrer',
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Name'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Add',
+          handler: data => {
+            this.carrers = this.afDatabase.list('Universidades/'+this.id_university+'/');
+            var id = Math.floor((Math.random() * 100) + 1) + ''+Math.floor((Math.random() * 100) + 1) +''+Math.floor((Math.random() * 100) + 1) + ''+Math.floor((Math.random() * 100) + 1) ;
+            let newCarrer = {};
+            newCarrer[id] = data.name;
+            this.carrers.update('carreras', newCarrer);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   getImagesFeature(){
