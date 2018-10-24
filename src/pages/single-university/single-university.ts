@@ -24,6 +24,8 @@ import { UserCustom } from '../../model/user/user.model';
   templateUrl: 'single-university.html',
 })
 export class SingleUniversityPage {
+  public langGeneral = '';
+
   carrers: AngularFireList<any>;
   public id_university;
   public showReviews = true; //cambiar a true en produccion
@@ -64,7 +66,8 @@ export class SingleUniversityPage {
     private storage: Storage,
     ) {
       statusBar.backgroundColorByHexString('#0055CB');
-      
+      this.langGeneral = ''+this.getLenguaje().then((res)=>{
+      });
 
       this.id_university = this.navParams.get('id_university');
       this.getImagesFeature();
@@ -90,7 +93,9 @@ export class SingleUniversityPage {
         //load months
         for (var ip in university[2]) {
           if (university[2].hasOwnProperty(ip)) {
-            this.listMonths.push({nombre : university[2][ip]});// .push('2');// = university[0];
+            if(university[2][ip] == true){
+              this.listMonths.push({nombre : this.getNameMonth(ip) });// .push('2');// = university[0];
+            }
           }
         }
 
@@ -117,6 +122,86 @@ export class SingleUniversityPage {
 
   }
 
+
+  getLenguaje = async() =>{
+    let lng = await this.loadLng();
+    return lng;
+  }
+
+  loadLng = () => {
+    return new Promise((resolve, reject) => {
+      this.storage.get('lang').then((val) => {
+        console.log(val);
+        resolve (val);
+      });
+    });
+
+  }
+  
+  getNameMonth(id){
+    var mth = "null";
+    if(this.langGeneral == 'es'){
+      //alert('es '+id);
+      if(id == '1'){
+        mth = 'Enero';
+      } else if(id == '2') {
+        mth = 'Febrero';
+      } else if(id == '3') {
+        mth = 'Marzo';
+      } else if(id == '4') {
+        mth = 'Abril';
+      } else if(id == '5') {
+        mth = 'Mayo';
+      } else if(id == '6') {
+        mth = 'Junio';
+      } else if(id == '7') {
+        mth = 'Julio';
+      } else if(id == '8') {
+        mth = 'Agosto';
+      } else if(id == '9') {
+        mth = 'Septiembre';
+      } else if(id == '10') {
+        mth = 'Octubre';
+      } else if(id == '11') {
+        mth = 'Noviembre';
+      } else if(id == '12') {
+        mth = 'Diciembre';
+      }
+    } else if(this.langGeneral == 'fr'){
+      //alert('fr '+id);
+    } else if(this.langGeneral == 'pt'){
+      //alert('pt '+id);
+    } else {
+      //alert('en '+id);
+      if(id == '1'){
+        mth = 'January';
+      } else if(id == '2') {
+        mth = 'February';
+      } else if(id == '3') {
+        mth = 'March';
+      } else if(id == '4') {
+        mth = 'April';
+      } else if(id == '5') {
+        mth = 'May';
+      } else if(id == '6') {
+        mth = 'June';
+      } else if(id == '7') {
+        mth = 'July';
+      } else if(id == '8') {
+        mth = 'August';
+      } else if(id == '9') {
+        mth = 'September';
+      } else if(id == '10') {
+        mth = 'October';
+      } else if(id == '11') {
+        mth = 'November';
+      } else if(id == '12') {
+        mth = 'December';
+      }
+    }
+    return mth;
+  }
+
   addCarrer(){
     let alert = this.alertCtrl.create({
       title: 'Register new carrer',
@@ -138,7 +223,7 @@ export class SingleUniversityPage {
           text: 'Add',
           handler: data => {
             this.carrers = this.afDatabase.list('Universidades/'+this.id_university+'/');
-            var id = Math.floor((Math.random() * 100) + 1) + ''+Math.floor((Math.random() * 100) + 1) +''+Math.floor((Math.random() * 100) + 1) + ''+Math.floor((Math.random() * 100) + 1) ;
+            var id = Math.floor((Math.random() * 150) + 1) + ''+Math.floor((Math.random() * 150) + 1) + ''+Math.floor((Math.random() * 150) + 1) +''+Math.floor((Math.random() * 1000) + 1) + ''+Math.floor((Math.random() * 1000) + 1) ;
             let newCarrer = {};
             newCarrer[id] = data.name;
             this.carrers.update('carreras', newCarrer);
@@ -241,7 +326,7 @@ export class SingleUniversityPage {
       this.monthNames.forEach(element => {
   
         alert.addInput({
-          type:'checkbox',
+          type: 'checkbox',
           label: element,
           value: element,
           checked: true

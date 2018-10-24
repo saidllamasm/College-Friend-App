@@ -83,6 +83,7 @@ export class MyApp {
       .catch(e => {
         translate.setDefaultLang("en");
         console.log("error detected lang "+e)
+        storage.set('lang', 'en');
       });
       if (this.platform.is('android')) {
         statusBar.backgroundColorByHexString('#0055CB');
