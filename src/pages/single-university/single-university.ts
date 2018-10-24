@@ -26,11 +26,19 @@ import { UserCustom } from '../../model/user/user.model';
 export class SingleUniversityPage {
   public langGeneral = '';
 
+  public rateInstalaciones = '0';
+  public rateProfesores = '0'; 
+  public rateUbicacion = '0';
+  public rateActividades = '0';
+  public rateBecas = '0';
+  public rateGeneral = '0.0';
+
+
   carrers: AngularFireList<any>;
   monthsAF: AngularFireList<any>;
 
   public id_university;
-  public showReviews = true; //cambiar a true en produccion
+  
   public name : string;
   public address : string;
   public userCreated : string;
@@ -45,14 +53,6 @@ export class SingleUniversityPage {
   public listReviews = [];
   public tmpReviews = [];
   public listIms = [];
-
-  // for costs progress bar
-  porcent : number;
-  mount : number;
-  min : number;
-  max : number;
-  color : string;
-  //
 
   monthNames = [];
 
@@ -80,6 +80,14 @@ export class SingleUniversityPage {
         this.address = ''+university[3];
         this.lat = ''+university[5].lat;
         this.lng = ''+university[5].lng;
+        this.rateInstalaciones = ''+university[9].instalaciones;
+        this.rateProfesores = ''+university[9].profesores;
+        this.rateUbicacion = ''+university[9].ubicacion;
+        this.rateActividades = ''+university[9].actividades;
+        this.rateBecas = ''+university[9].becas;
+        let gral = university[9].instalaciones + university[9].profesores + university[9].ubicacion + university[9].actividades + university[9].becas;  
+        this.rateGeneral = ''+(gral/5);
+        this.setRateGeneralFirebase(gral);
         this.tmpReviews = university[8];
         this.phone = ''+university[10];
         this.website = ''+university[13];
@@ -103,28 +111,54 @@ export class SingleUniversityPage {
         }
 
         
-        let i = 0;
+        /*let i = 0;
         for(; i < university.length; i++){
           console.log(i+') '+university[i]);
-        }
+        }*/
         //alert(JSON.stringify(university));
       });
 
-      
-      //progress
-      this.mount = 440;
-      this.min = 120;
-      this.max = 2330;
-      this.porcent = 45;
-      if(this.porcent >= 80 )
-        this.color = "danger";
-      else if(this.porcent > 50 )
-        this.color = "warning";
-      else
-        this.color = "green"; 
-
+  }
+  //rate events
+  onModelInstalaciones($event){
+    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
+      {
+        instalaciones : $event
+      }
+    );
+  }
+  onModelProfesores($event){
+    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
+      {
+        profesores : $event
+      }
+    );
+  }
+  onModelUbicacion($event){
+    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
+      {
+        ubicacion : $event
+      }
+    );
+  }
+  onModelActividades($event){
+    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
+      {
+        actividades : $event
+      }
+    );
+  }
+  onModelBecas($event){
+    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
+      {
+        becas : $event
+      }
+    );
   }
 
+  setRateGeneralFirebase(rate){
+
+  }
 
   getLenguaje = async() =>{
     let lng = await this.loadLng();
@@ -450,14 +484,6 @@ export class SingleUniversityPage {
 
   goBack(){
       this.navCtrl.pop();
-  }
-
-  disableReviews(){
-    this.showReviews = false;
-  }
-
-  activeReviews(){
-    this.showReviews = true;
   }
 
 }

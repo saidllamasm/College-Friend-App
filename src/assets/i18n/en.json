@@ -52,16 +52,13 @@
         "CreadoPor": "Created by",
         "Global": "Global score",
         "Carreras": "university careers",
-        "Facilidades": "Instalaciones e Infraestructura",
-        "Profesores": "Profesores",
-        "Movilidad": "Mobility",
-        "ActsExtra": "Extra school activities",
-        "Apoyos": "Supports and scholarships",
         "Inicio": "Start of courses",
         "Costo": "Registration cost",
         "Puntajes": "Scores",
         "Opiniones": "Reviews",
-        "General": "General"
+        "General": "General",
+        "AñadirCarrera": "add university career",
+        "EditarMeses": "Edit months"
     },
     "Opiniones": {
         "Opiniones": "Opinions"
@@ -101,5 +98,12 @@
         "Octubre": "Octubre",
         "Noviembre": "Noviembre",
         "Diciembre": "Diciembre"
+    },
+    "Ratings": {
+        "Instalaciones": "Facilities and infrastructure",
+        "Profesores": "Teachers",
+        "Ubicacion": "Location",
+        "Actividades": "Extracurricular activities",
+        "Becas": "Scholarships and supports"
     }
 }
