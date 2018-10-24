@@ -34,7 +34,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  public cityActual : string = "";
   txtSearch : string = "";
 
   results: boolean = false;
@@ -50,7 +50,7 @@ export class HomePage {
   //
 
   //universidades cercanas
-  nearbyUniversities : any;
+  nearbyUniversities : any[];
   //
 
   //calendario
@@ -71,44 +71,14 @@ export class HomePage {
     public navParams: NavParams,
     private sanitization:DomSanitizer,
   ){
-    this.loadMap();
+    this.nearbyUniversities = [];
     this.featuresUniversities = [];
+
+    this.loadMap();
     this.loadUniversitiesFeature();
-    //this.loadUniversitiesForCalendar();
-    this.loadCalendar();
-    this.loadFakeData();
+    //this.loadFakeData();
     
   }
-
-  // construir el calendario
-  // carga todos los meses dependiendo el lenguaje de la plataforma
-  loadCalendar(){
-    this.date = new Date();
-    this.currentYear = this.date.getFullYear();
-    this.storage.get('lang').then((val) => {
-      console.log('calendar lang '+val);
-      if(val == 'es'){
-        this.monthNames = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
-      } else if(val == 'fr'){
-        this.monthNames = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
-      } else if(val == 'pt'){
-        this.monthNames = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octobre","Noviembre","Diciembre"];
-      } else {
-        this.monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-      }
-    });
-  }
-  // me sirve para evaluar si el mes creado en el calendario tiene algun evento
-  // si tiene evento entonces aplicar estilo diferente
-  /*checkEvent(month){
-    let flag = false;
-    for(let i = 0; i < this.activities.length; i++){
-      if(this.activities[i].toString() == month){
-        flag =  true;
-      }
-    }
-    return flag;
-  }*/
 
   //inicializa el mapa
   loadMap(){
@@ -153,14 +123,14 @@ export class HomePage {
         target: response.latLng
       });
       this.insertMarker('Mi ubicación', 'blue', response.latLng);
-      this.searchUniversitiesNearbt(response.latLng);
+      this.searchUniversitiesNearby(response.latLng);
     })
     .catch(error =>{
       console.log(error);
     });
   }
 
-  searchUniversitiesNearbt(latLng){
+  searchUniversitiesNearby(latLng){
     Geocoder.geocode({
       "position": latLng
     }).then((results: GeocoderResult[]) => {
@@ -171,7 +141,28 @@ export class HomePage {
       let address: any = [
         results[0].locality || ""].join(", ");
         alert(address);
+        this.cityActual = ''+address;
+        this.loadUniversitiesNearby(address);
     });
+  }
+
+  loadUniversitiesNearby(city){
+    let tmpNombre, tmpRate, tmpId;
+    var ref = this.afDatabase.database.ref("Universidades").orderByChild('ciudad').equalTo(city).on("child_added", function(snapshot) {
+      //alert(snapshot.val().nombre);
+      console.log('nearby: '+snapshot.val().nombre);
+      tmpNombre = snapshot.val().nombre;
+      tmpRate = snapshot.val().scores.global;
+      tmpId = snapshot.val().id;
+
+    });
+    this.nearbyUniversities.push({
+      imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
+      name : tmpNombre,
+      rate : tmpRate, // snapshot.val().scores.global,
+      id: tmpId// snapshot.val().id
+    });
+    
   }
 
   viewUniversity(id){
@@ -199,12 +190,6 @@ export class HomePage {
 
   viewUniversities(month){
     console.log('load universities with start courses in : '+month);
-  }
-
-  // consulta a la db para obtener los inicios de cursos de las universidades registradas
-  loadUniversitiesForCalendar(){
-    // load month with university
-    this.activities =["January","February","March"];
   }
 
   loadUniversitiesFeature(){
@@ -261,26 +246,6 @@ export class HomePage {
         imgsrc : "https://storage.googleapis.com/mmc-cdn-bucket/uploads/2017/02/aa4b297f-uasd-1.jpg",
         name :"universidad de Santo Domingo",
         id:"3"
-      }
-    ];
-    this.nearbyUniversities = [
-      {
-        imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
-        name :"Instituto Tecnológico de Ciudad Guzmán",
-        rate : 2,
-        id:"3" 
-      },
-      {
-        imgsrc: "https://www.am.com.mx/san-luis/wp-content/uploads/2018/02/f8e418upn21.jpg",
-        name :"Universidad Pedagógica Nacional",
-        rate : 4,
-        id:"4"
-      },
-      {
-        imgsrc: "https://cdn-az.allevents.in/banners/2ec9e7fae6b19132288b69c8f1d9e5c9",
-        name :"Universidad Pedagógica Nacional de Ciudad Guzmán",
-        rate : 2.5,
-        id:"6"
       }
     ];
   }

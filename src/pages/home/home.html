@@ -17,12 +17,12 @@
         <!--end verified-->
 
         <br><br>
-        <span class="title">{{"Inicio.universidades_cercanas" | translate}}</span>
+        <span class="title">{{"Inicio.universidades_cercanas" | translate}} {{cityActual}}</span>
         <div id="map_canvas"></div>
         <div class="container-universities-cercanas">
             <ion-grid>
                 <ion-row>
-                    <ion-col *ngFor="let nearbyUniversity of nearbyUniversities" (click)="viewUniversity(featureUniversity.id)">
+                    <ion-col *ngFor="let nearbyUniversity of nearbyUniversities " (click)="viewUniversity(nearbyUniversity.id)">
                         <div class="single-university-cercana">
                             <img [src]="nearbyUniversity.imgsrc">
                             <div class="info-container">
