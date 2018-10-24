@@ -158,7 +158,7 @@ export class HomePage {
   }
 
   viewUniversity(id){
-    alert(id);
+    //alert(id);
     this.navCtrl.push(SingleUniversityPage,{id_university : id });
   }
 

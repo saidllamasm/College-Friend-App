@@ -43,7 +43,7 @@ export class ProfilePage {
   ) {
     
     this.afAuth.authState.subscribe(user => {
-      this.afDatabase.list<UserCustom>('/UsuariosT/').valueChanges().subscribe((res: UserCustom[]) => { 
+      this.afDatabase.list<UserCustom>('/Usuarios/').valueChanges().subscribe((res: UserCustom[]) => { 
         this.uuid = user.uid;
         res.forEach((item) => {
             if(item.key == user.uid){
@@ -87,7 +87,7 @@ export class ProfilePage {
   saved(){
     // save to firebase
     if(this.methodEmail == true){
-      this.afDatabase.object('/UsuariosT/' + this.uuid).update(
+      this.afDatabase.object('/Usuarios/' + this.uuid).update(
         {
           configuracion : {
             buscando : this.pre_student,
@@ -99,7 +99,7 @@ export class ProfilePage {
         }
       );
     } else {
-      this.afDatabase.object('/UsuariosT/' + this.uuid).update(
+      this.afDatabase.object('/Usuarios/' + this.uuid).update(
         {
           configuracion : {
             buscando : this.pre_student,

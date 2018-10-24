@@ -8,7 +8,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { WriteReviewPage } from '../write-review/write-review';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
-
+import { ImageUniversity } from '../../model/image/image.model';
+import md5 from 'crypto-md5';
+import { UserCustom } from '../../model/user/user.model';
 /**
  * Generated class for the SingleUniversityPage page.
  *
@@ -36,6 +38,7 @@ export class SingleUniversityPage {
   public listCarrers = [];
   public listMonths = [];
   public listReviews = [];
+  public tmpReviews = [];
   public listIms = [];
 
   // for costs progress bar
@@ -60,24 +63,30 @@ export class SingleUniversityPage {
     private storage: Storage,
     ) {
       statusBar.backgroundColorByHexString('#0055CB');
-      this.getReviews();
-      this.getImagesFeature();
+      
 
       this.id_university = this.navParams.get('id_university');
+      this.getImagesFeature();
 
+      // get basic info
       this.afDatabase.list<University>('/Universidades/'+this.id_university+'/').valueChanges().subscribe((university : any[]) => {
         this.name = '' +university[7];
         this.address = ''+university[3];
         this.lat = ''+university[5].lat;
         this.lng = ''+university[5].lng;
+        this.tmpReviews = university[8];
         this.phone = ''+university[10];
         this.website = ''+university[13];
+        this.getReviews();
 
+        //load carrers
         for (var ip in university[0]) {
           if (university[0].hasOwnProperty(ip)) {
             this.listCarrers.push({nombre : university[0][ip]});// .push('2');// = university[0];
           }
         }
+
+        //load months
         for (var ip in university[2]) {
           if (university[2].hasOwnProperty(ip)) {
             this.listMonths.push({nombre : university[2][ip]});// .push('2');// = university[0];
@@ -108,19 +117,19 @@ export class SingleUniversityPage {
   }
 
   getImagesFeature(){
-    this.listIms.push(
-      {
-        imgsrc : 'http://ejesur.com.mx/wp-content/uploads/2017/05/592877894acc6650689262.jpg',
-      }
-    );
-    this.listIms.push({
-      imgsrc : 'https://www.animalpolitico.com/wp-content/uploads/2018/03/UNAM_1_2-e1519923027696.jpg'
+    this.afDatabase.object('Imagenes/Universidad/' + this.id_university).valueChanges().subscribe((images : ImageUniversity ) =>{
+      let key = Object.keys(images)[0];
+      let nombre = images[key].name;
+      this.listIms.push({
+        imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media'
+      });
     });
   }
 
   initChat(id){
     this.navCtrl.push(InboxSinglePage);
   }
+
   notFav(id){
     // confirmar de problemas con el comentario?
   }
@@ -130,24 +139,55 @@ export class SingleUniversityPage {
   }
 
   getReviews(){
-    
-    this.listReviews.push(
-      { 
-      id_review : '1', // key de la review
-      id_username : '1', // usuario que posteo el comentario
-      username : 'said',
-      time : 'September 2018',
-      imgsrc : 'https://www.sintesis.mx/wp-content/uploads/2018/06/unam-docentes-.jpg',
-      content : 'Holas sdads.',
-      images : [
-        {
-          imgurl : 'http://www.abogadoschwitzer.com/wp-content/uploads/2016/12/KSU_Hale_library-1024x768.jpg'
-        },
-        {
-          imgurl : 'http://www.abogadoschwitzer.com/wp-content/uploads/2016/12/KSU_Hale_library-1024x768.jpg'
-        }
-      ]
+    console.log('REVIEWS: ');
+    /*console.log(this.tmpReviews);
+    console.log(JSON.stringify(this.tmpReviews));*/
+    for (var review in this.tmpReviews) {
+      this.afDatabase.list<University>('/Universidades/'+this.id_university+'/'+'reviews/'+review+'/').valueChanges().subscribe((opinion : any[]) => {
+        this.getNameUser(review).then((infoUser : UserCustom) => { 
+          //console.log(infoUser.nombre);
+          this.listReviews.push({
+            id_username : review,
+            imgsrc : "https://www.gravatar.com/avatar/" + md5(infoUser.email, 'hex')+"?s=400",
+            username : infoUser.nombre,
+            content : opinion[2],//opinion
+            //opinion[1]//interacciones
+            time : this.timeConverter(opinion[3]), //time
+            images : [
+              {
+                imgurl : 'http://www.abogadoschwitzer.com/wp-content/uploads/2016/12/KSU_Hale_library-1024x768.jpg'
+              },
+              {
+                imgurl : 'http://www.abogadoschwitzer.com/wp-content/uploads/2016/12/KSU_Hale_library-1024x768.jpg'
+              }
+            ]
+          });
+        })
+        
+      });
+    }
+  }
+
+  getNameUser(idUser){
+    return new Promise((resolve, reject) => {
+      this.afDatabase.object('Usuarios/' + idUser+'/').valueChanges().subscribe((info : UserCustom ) =>{
+        resolve(info); // ¡Todo salió bien!
+      });
     });
+  }
+
+
+  timeConverter(UNIX_timestamp){
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    return time;
   }
 
   addMonth(){
