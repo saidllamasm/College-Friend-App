@@ -1,8 +1,6 @@
 # College Friend App - Let's talk about universities
 An amazing application to talk about public and private universities.
 
-<img src="http://api.saidllamas.com/img/bg-blue.png" width="250px">
-
 <img src="http://api.saidllamas.com/img/facebook-bg.png" width="100%">
 
 ![GitHub (pre-)release](https://img.shields.io/github/release/saidl14s/College-Friend-App/all.svg)
