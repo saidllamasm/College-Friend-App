@@ -36,8 +36,10 @@ export class SingleUniversityPage {
 
   carrers: AngularFireList<any>;
   monthsAF: AngularFireList<any>;
+  userAF : AngularFireList<any>;
 
-  public id_university;
+  public id_university; //id esta universidad 
+  public id_userlogin; // id este usuario
   
   public name : string;
   public address : string;
@@ -72,6 +74,7 @@ export class SingleUniversityPage {
       });
 
       this.id_university = this.navParams.get('id_university');
+      this.id_userlogin = this.navParams.get('id_userlogin');
       this.getImagesFeature();
 
       // get basic info
@@ -172,7 +175,6 @@ export class SingleUniversityPage {
         resolve (val);
       });
     });
-
   }
   
   getNameMonth(id){
@@ -286,7 +288,11 @@ export class SingleUniversityPage {
   }
 
   notFav(id){
-    // confirmar de problemas con el comentario?
+    this.userAF = this.afDatabase.list('Usuarios/'+this.id_userlogin+'/');
+    var idGen = Math.floor((Math.random() * 150) + 1) + ''+Math.floor((Math.random() * 150) + 1) + ''+Math.floor((Math.random() * 150) + 1) +''+Math.floor((Math.random() * 1000) + 1) + ''+Math.floor((Math.random() * 1000) + 1) ;
+    let newCarrer = {};
+    newCarrer[idGen] = id
+    this.userAF.update('favs', newCarrer);
   }
 
   fav(id){

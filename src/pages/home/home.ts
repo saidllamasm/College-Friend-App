@@ -13,7 +13,6 @@ import { CreateUniversityPage } from '../create-university/create-university';
 import { Storage } from '@ionic/storage';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
-
 import {
   GoogleMaps,
   GoogleMap,
@@ -34,6 +33,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  public idLoginUser = '';
   public cityActual : string = "";
   txtSearch : string = "";
 
@@ -61,23 +61,33 @@ export class HomePage {
   universityDays : any[];
   //end calenadario
 
+  public langGeneral = '';
+
   constructor(
     private navCtrl: NavController,
     private googleMaps: GoogleMaps,
     public statusBar: StatusBar,
     public plt: Platform,
-    private storage: Storage,
     public afDatabase: AngularFireDatabase,
     public navParams: NavParams,
     private sanitization:DomSanitizer,
+    private storage: Storage,
   ){
+
     this.nearbyUniversities = [];
     this.featuresUniversities = [];
+
+    this.storage.get('id_userlogin').then((val) => {
+      alert(val);
+      this.idLoginUser = val;
+    });
+
+    alert(this.idLoginUser);
 
     this.loadMap();
     this.loadUniversitiesFeature();
     //this.loadFakeData();
-    
+
   }
 
   //inicializa el mapa
@@ -167,7 +177,7 @@ export class HomePage {
 
   viewUniversity(id){
     //alert(id);
-    this.navCtrl.push(SingleUniversityPage,{id_university : id });
+    this.navCtrl.push(SingleUniversityPage,{id_university : id , id_userlogin : 'sd' });
   }
 
   // me sirve para saber si hay una busqueda de universidad

@@ -1,6 +1,6 @@
 import { SingleUniversityPage } from './../pages/single-university/single-university';
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,6 +10,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SlidesPage } from './../pages/slides/slides';
 import { Storage } from '@ionic/storage';
+import { LoginPassedPage } from '../pages/login-passed/login-passed';
 
 @Component({
   templateUrl: 'app.html'
@@ -90,7 +91,12 @@ export class MyApp {
       }
       this.afAuth.authState.subscribe(user => {
         if(user){
+          //user.uid
+          //this.rootPage = LoginPassedPage;
+          storage.set('id_userlogin', user.uid );
           this.rootPage = TabsPage;
+          //this.navCtrl.push(TabsPage, {id_userlogin : 'user.uid'});
+          //this.navCtrl.setRoot(TabsPage, {id_userlogin: user.uid});
           //this.rootPage = SingleUniversityPage;
         }else{
           this.rootPage = SlidesPage;  
