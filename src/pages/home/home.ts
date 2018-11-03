@@ -53,6 +53,10 @@ export class HomePage {
   nearbyUniversities : any[];
   //
 
+  // univeirsidades inicioo prox
+  universityMonthsList : any[];
+  //
+
   //calendario
   date: any;
   currentYear: any;
@@ -74,6 +78,7 @@ export class HomePage {
     private storage: Storage,
   ){
 
+    this.universityMonthsList = [];
     this.nearbyUniversities = [];
     this.featuresUniversities = [];
 
@@ -156,6 +161,25 @@ export class HomePage {
     });
   }
 
+  loadUniversitiesNextStart(){
+    let tmpNombre, tmpId;
+    var monthD = new Date().getMonth();
+    //alert(monthD);
+    var ref = this.afDatabase.database.ref("Universidades").orderByChild('cursos/'+monthD).equalTo(true).on("child_added", function(snapshot) {
+      //alert(snapshot.val().nombre);
+      //alert('month success load uniersities');
+      console.log('prox: '+snapshot.val().nombre);
+      tmpNombre = snapshot.val().nombre;
+      tmpId = snapshot.val().id;
+      this.universityMonthsList.push({
+        imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
+        name : tmpNombre,
+        id: tmpId// snapshot.val().id
+      });
+    });
+   
+  }
+
   loadUniversitiesNearby(city){
     let tmpNombre, tmpRate, tmpId;
     var ref = this.afDatabase.database.ref("Universidades").orderByChild('ciudad').equalTo(city).on("child_added", function(snapshot) {
@@ -177,7 +201,7 @@ export class HomePage {
 
   viewUniversity(id){
     //alert(id);
-    this.navCtrl.push(SingleUniversityPage,{id_university : id , id_userlogin : 'sd' });
+    this.navCtrl.push(SingleUniversityPage,{id_university : id});
   }
 
   // me sirve para saber si hay una busqueda de universidad

@@ -11,69 +11,70 @@
 
 <ion-content>
     <div class="header">
-        <img class="img-round img-profile" src="https://www.gravatar.com/avatar/a2054c801b081f625bd2881471715701" alt="" srcset="">
+        <img class="img-round img-profile" [src]="userPicture" alt="" srcset="">
         <div class="info">
-            <span class="name">Jesus said Llamas Manriquez</span>
+            <span class="name">{{username}}</span>
             <div class="separator"></div>
-            <span class="number">21 {{"Chat.Conversaciones" | translate}} </span>
+            <span class="number">{{numberChats}} {{"Chat.Conversaciones" | translate}} </span>
         </div>
     </div>
     <ion-grid no-padding>
         <ion-row class="tabs-actions">
             <ion-col>
-                <button (click)="changeViewMessages()" class="btn-actions " [ngClass]="{'active' : (messages)}">Mensajes</button>
+                <button (click)="changeViewMessages()" class="btn-actions " [ngClass]="{'active' : (messages)}">{{"Chat.Mensajes" | translate}}</button>
             </ion-col>
             <ion-col>
-                <button (click)="changeViewRequests()" class="btn-actions " [ngClass]="{'active' : (!messages)}">Solicitudes</button>
+                <button (click)="changeViewRequests()" class="btn-actions " [ngClass]="{'active' : (!messages)}">{{"Chat.Solicitudes" | translate}}</button>
             </ion-col>
         </ion-row>
     </ion-grid>
 
     <div class="list-conversations" *ngIf="messages ">
-        <div class="single-conversation border-down" (click)="openConversation()">
+
+        <div class="single-conversation border-down" (click)="openConversation(msj.idchat)" *ngFor="let msj of MessageList">
             <ion-grid>
                 <ion-row>
                     <ion-col col-3>
-                        <img class="img-circle img-inbox" src="https://pbs.twimg.com/profile_images/854424193483583488/BJiy2IFJ_400x400.jpg">
+                        <img class="img-circle img-inbox" [src]="msj.profileTo">
                     </ion-col>
                     <ion-col col-9>
                         <ion-row>
                             <ion-col col-9>
-                                <span class="name-inbox">Juan Martinez</span>
+                                <span class="name-inbox">{{msj.nameTo}}</span>
                             </ion-col>
                             <ion-col col-3>
-                                <span class="hour-inbox">9:50pm</span>
+                                <span class="hour-inbox">{{msj.date}}</span>
                             </ion-col>
                         </ion-row>
-                        <span class="message-abs">Lorem ipsum dolor sit amet consectetur adipisicing elit. </span>
+                        <span class="message-abs">{{msj.abstract}}</span>
                     </ion-col>
                 </ion-row>
             </ion-grid>
         </div>
-        <div class="single-conversation border-down" (click)="openConversation()">
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-3>
-                        <img class="img-circle img-inbox" src="https://persona.ie/wp-content/uploads/2017/04/persona_0000_Jason-Keegan.jpg">
-                    </ion-col>
-                    <ion-col col-9>
-                        <ion-row>
-                            <ion-col col-9>
-                                <span class="name-inbox">Juan Martinez</span>
-                            </ion-col>
-                            <ion-col col-3>
-                                <span class="hour-inbox">4:24pm</span>
-                            </ion-col>
-                        </ion-row>
-                        <span class="message-abs">Lorem ipsum dolor sit amet consectetur adipisicing elit. </span>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </div>
+
     </div>
 
-    <div *ngIf="!messages ">
-        <h2>requests</h2>
+    <div class="list-conversations" *ngIf="!messages ">
+        <div class="single-conversation border-down" (click)="openConversation(msj.idchat)" *ngFor="let msj of MessageListRequests">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-3>
+                        <img class="img-circle img-inbox" [src]="msj.profileTo">
+                    </ion-col>
+                    <ion-col col-9>
+                        <ion-row>
+                            <ion-col col-9>
+                                <span class="name-inbox">{{msj.nameTo}}</span>
+                            </ion-col>
+                            <ion-col col-3>
+                                <span class="hour-inbox">{{msj.date}}</span>
+                            </ion-col>
+                        </ion-row>
+                        <span class="message-abs">{{msj.abstract}}</span>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
     </div>
 
 </ion-content>

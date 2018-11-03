@@ -61,12 +61,12 @@
         <span class="title">{{"Inicio.inicio_proximo" | translate}}</span>
         <br><br>
         <div class="comming-soon">
-            <div class="single-university-soon" *ngFor="let universityDay of universityDays">
+            <div class="single-university-soon" *ngFor="let universityDay of universityMonthsList">
                 <ion-grid>
                     <ion-row>
                         <img class="img-soon" [src]="universityDay.imgsrc">
                         <ion-col class="panel-info border-blue">
-                            <div class="button-view center" (click)="viewUniversity(universityDays.id)">
+                            <div class="button-view center" (click)="viewUniversity(universityDay.id)">
                                 <ion-icon name="calendar"></ion-icon>
                             </div>
                             <div class="content-soon center">

@@ -77,7 +77,9 @@
         "Password": "Password"
     },
     "Chat": {
-        "Conversaciones": "Conversations"
+        "Conversaciones": "Conversations",
+        "Mensajes": "Mensajes",
+        "Solicitudes": "Requests"
     },
     "InboxSingle": {
         "MensajeAqui": "Message here"
