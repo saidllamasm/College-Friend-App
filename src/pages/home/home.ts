@@ -78,11 +78,11 @@ export class HomePage {
     this.featuresUniversities = [];
 
     this.storage.get('id_userlogin').then((val) => {
-      alert(val);
+      //alert(val);
       this.idLoginUser = val;
     });
 
-    alert(this.idLoginUser);
+    //alert(this.idLoginUser);
 
     this.loadMap();
     this.loadUniversitiesFeature();

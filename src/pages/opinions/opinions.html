@@ -11,42 +11,32 @@
 
 <ion-content>
     <div class="header">
-        <img class="img-round img-profile" src="https://www.gravatar.com/avatar/a2054c801b081f625bd2881471715701" alt="" srcset="">
+        <img class="img-round img-profile" [src]="userPicture" alt="" srcset="">
         <div class="info">
-            <span class="name">Jesus said Llamas Manriquez</span>
+            <span class="name">{{username}}</span>
             <div class="separator"></div>
-            <span class="number">21 {{"Opiniones.Opiniones" | translate}} </span>
+            <span class="number">{{numberOpinions}} {{"Opiniones.Opiniones" | translate}} </span>
         </div>
     </div>
     <div class="panel">
         <div class="container-review">
             <div class="list-universities-valuet">
-                <div class="single-university" (click)="test()">
+
+                <div class="single-university" (click)="openOpinionSinglePage()" *ngFor="let fav of Opinions">
                     <ion-grid>
                         <ion-row>
                             <ion-col col-3>
-                                <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
+                                <img class="img-circle img-university" [src]="fav.imgsrc">
                             </ion-col>
                             <ion-col col-9>
-                                <span class="name-university">Academia de Música Fermatta</span>
-                                <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
+                                <span class="name-university">{{fav.name}}</span>
+                                <rating [(ngModel)]="fav.rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
                 </div>
-                <div class="single-university" (click)="testOpenPageError()">
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col col-3>
-                                <img class="img-circle img-university" src="https://mitofago.com.mx/sites/default/files/styles/1200x630/public/03_0.jpg">
-                            </ion-col>
-                            <ion-col col-9>
-                                <span class="name-university">Academia de Música Fermatta</span>
-                                <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelChange($event)"></rating>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </div>
+
+
             </div>
         </div>
     </div>

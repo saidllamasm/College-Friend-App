@@ -7,9 +7,9 @@
 
 <ion-content class="card-background-page">
     <div class="list-favs" *ngFor="let fav of Favorites">
-        <ion-card class="single-university" (click)="goToUniversity(fav.id)">
+        <ion-card class="single-university">
             <button (click)="deleteFav(fav.id)"><i class="fa fa-heart"></i></button>
-            <img [src]="fav.imgsrc">
+            <img [src]="fav.imgsrc" (click)="goToUniversity(fav.id)">
             <div class="centered">
                 <h1>{{fav.name}}</h1>
                 <br>

@@ -14,12 +14,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'opinion-single.html',
 })
 export class OpinionSinglePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public universityName = '';
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) {
+    
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad OpinionSinglePage');
-  }
-
 }

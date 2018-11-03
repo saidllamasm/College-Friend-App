@@ -10,5 +10,11 @@ export interface UserCustom {
   configuracion : {
     buscando : boolean;
     notificaciones : boolean;
+  },
+  favs : {
+    token_university : string;
+  }
+  reviews : {
+    token_review : string;
   }
 }

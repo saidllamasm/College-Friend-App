@@ -2,7 +2,13 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SingleUniversityPage } from '../single-university/single-university';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { UserCustom } from '../../model/user/user.model';
+import { Storage } from '@ionic/storage';
 
+import { University } from './../../model/university/university.model';
+import { ImageUniversity } from '../../model/image/image.model';
 /**
  * Generated class for the SavedPage page.
  *
@@ -16,43 +22,55 @@ import { SingleUniversityPage } from '../single-university/single-university';
   templateUrl: 'saved.html',
 })
 export class SavedPage {
-  
-  Favorites : any[];
+  uuid : string ;
+  public Favorites  = [];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public statusBar: StatusBar
+    public statusBar: StatusBar,
+    public afAuth: AngularFireAuth,
+    public afDatabase: AngularFireDatabase,
+    private storage: Storage
   ) {
     statusBar.backgroundColorByHexString('#0055CB');
-    this.loadFakeData();
+
+    this.afAuth.authState.subscribe(user => {
+      this.afDatabase.list<UserCustom>('/Usuarios/').valueChanges().subscribe((res: UserCustom[]) => { 
+        this.uuid = user.uid;
+        res.forEach((item) => {
+            if(item.key == user.uid){
+              for(var i in item.favs) {
+                this.afDatabase.list<University>('/Universidades/'+i+'/').valueChanges().subscribe((university : any[]) => {
+                  //alert(university[6]+university[7]);
+
+                  //load image
+                  this.afDatabase.object('Imagenes/Universidad/' + i).valueChanges().subscribe((images : ImageUniversity ) =>{
+                    let key = Object.keys(images)[0];
+                    let nombre = images[key].name;
+                    this.Favorites.push({
+                      imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
+                      name: university[7],
+                      address: university[1],
+                      id: university[6]
+                    });
+                  });
+                  //end load image
+                });
+              }
+              //console.log(univers[0].token_university);
+            } 
+        });
+      },(err)=>{
+         console.log("problem : ", err)
+         alert(err);
+      });
+    })
+    //this.loadFakeData();
   }
 
   deleteFav(id){
-    alert(id);
-  }
-
-  loadFakeData(){
-    this.Favorites = [
-      {
-        imgsrc : "https://mw2.google.com/mw-panoramio/photos/medium/21232128.jpg",
-        name:"Instituto Tecnológico de Ciudad Guzman",
-        address:"Avenida Tecnológico #100 Ciudad Guzmán, Mpio. de Zapotlán el Grande, Jalisco, México.",
-        id:"2"
-      },
-      {
-        imgsrc : "https://upload.wikimedia.org/wikipedia/commons/9/99/San_Giovanni_Laterano_Rom.jpg",
-        name:"Universidad de Guadalajara",
-        address:"Avenida Tecnológico #100 Ciudad Guzmán, Mpio. de Zapotlán el Grande, Jalisco, México.",
-        id:"3"
-      },
-      {
-        imgsrc : "https://www.itleon.edu.mx/images/tecnoticias/Ago-dic15/21-1/4.jpg",
-        name:"Instituto Tecnológico de León",
-        address:"Avenida Tecnológico #100 Ciudad Guzmán, Mpio. de Zapotlán el Grande, Jalisco, México.",
-        id:"4"
-      }
-    ];
+    this.afDatabase.object('/Usuarios/' + this.uuid+'/favs/'+id).remove();
   }
 
   goToUniversity(id){
