@@ -52,6 +52,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
+import { IonicImageViewerModule } from 'ionic-img-viewer';
+
 import { UserListService } from '../services/user-list.service';
 
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
@@ -92,6 +94,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     Ionic2RatingModule,
+    IonicImageViewerModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

@@ -8,7 +8,7 @@
     <button class="btnFav"><i class="fa fa-heart"></i></button>
     <ion-slides autoplay class="slide-featureimg">
         <ion-slide *ngFor="let imag of listIms">
-            <img class="img-feature" [src]="imag.imgsrc">
+            <img class="img-feature" [src]="imag.imgsrc" imageViewer>
         </ion-slide>
     </ion-slides>
     <div class="ctrol-header">
@@ -169,7 +169,7 @@
                 <ion-row>
                     <ion-slides class="slide-img-userUniversities" slidesPerView="2" spaceBetween="16">
                         <ion-slide *ngFor="let image of review.images">
-                            <img [src]="image.imgurl">
+                            <img [src]="image.imgurl" imageViewer>
                         </ion-slide>
                     </ion-slides>
                 </ion-row>
