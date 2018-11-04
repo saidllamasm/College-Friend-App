@@ -95,7 +95,7 @@ export class HomePage {
 
     this.loadMap();
     this.loadUniversitiesFeature();
-    //this.loadUniversitiesNextStart();
+    this.loadUniversitiesNextStart();
     //this.loadFakeData();
 
   }
@@ -167,22 +167,23 @@ export class HomePage {
   }
 
   loadUniversitiesNextStart(){
-    let tmpNombre, tmpId;
+    let unives = [];
     var monthD = new Date().getMonth()+1;
     //alert(monthD);
     this.afDatabase.database.ref("Universidades").orderByChild('cursos/'+monthD).equalTo(true).on("value", function(snapshot) {
+      "use strict";
       //alert(snapshot.val().nombre);
       //alert('month success load uniersities');
-      console.log('prox: '+snapshot.val().nombre);
-      tmpNombre = snapshot.val().nombre;
-      tmpId = snapshot.val().id;
-      this.universityMonthsList.push({
-        imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
-        name : tmpNombre,
-        id: tmpId// snapshot.val().id
+      snapshot.forEach(function(data) {
+        unives.push({
+          imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
+          name : data.val().nombre,
+          date : monthD,
+          id: data.val().id// snapshot.val().id
+        });
       });
     });
-   
+    this.universityMonthsList = unives;
   }
 
   searchUniversityWithName($event){
