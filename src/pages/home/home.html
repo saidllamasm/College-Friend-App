@@ -1,7 +1,7 @@
 <ion-header>
     <div class="search-toolbar">
         <i class="fa fa-search " aria-hidden="true"></i>
-        <input [(ngModel)]="txtSearch" type="text" class="txt-search" placeholder="{{ 'Inicio.buscar_universidad' | translate}}" (onchange)="viewResults()" (keydown)="viewResults()" (keypress)="viewResults()">
+        <ion-input (keyup)="searchUniversityWithName($event)" type="text" class="txt-search" placeholder="{{ 'Inicio.buscar_universidad' | translate}}"></ion-input>
     </div>
 </ion-header>
 
@@ -87,101 +87,31 @@
     <!-- for searchs-->
     <div *ngIf="results">
         <span class="title">{{"Inicio.Resultados" | translate}}</span>
-        <div class="result-single">
+        <div class="result-single" *ngFor="let result of resultUniversities ">
             <ion-card>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-PAoJLgZVF5T0y2DjY9ZElKgm4OpHkXsGdMXEhCswBWBa_fng" />
+                <img [src]="result.imgsrc" />
                 <ion-card-content>
                     <ion-card-title>
-                        <span>Nine Inch Nails Live</span>
+                        <span>{{result.nombre}}</span>
                     </ion-card-title>
                     <p class="card-text">
-                        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+                        {{result.address}}
                     </p>
                 </ion-card-content>
                 <ion-row>
                     <ion-col col-9>
-                        <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                        <rating [(ngModel)]="result.rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                     </ion-col>
                     <ion-col col-3 center text-center>
                         <ion-note>
-                            <button (click)="viewUniversity()" class="btn-show">{{"Inicio.Ver" | translate}}</button>
-                        </ion-note>
-                    </ion-col>
-                </ion-row>
-            </ion-card>
-        </div>
-        <div class="result-single">
-            <ion-card>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-PAoJLgZVF5T0y2DjY9ZElKgm4OpHkXsGdMXEhCswBWBa_fng" />
-                <ion-card-content>
-                    <ion-card-title>
-                        <span>Nine Inch Nails Live</span>
-                    </ion-card-title>
-                    <p class="card-text">
-                        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-                    </p>
-                </ion-card-content>
-                <ion-row>
-                    <ion-col col-9>
-                        <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
-                    </ion-col>
-                    <ion-col col-3 center text-center>
-                        <ion-note>
-                            <button (click)="viewUniversity()" class="btn-show">{{"Inicio.Ver" | translate}}</button>
-                        </ion-note>
-                    </ion-col>
-                </ion-row>
-            </ion-card>
-        </div>
-        <div class="result-single">
-            <ion-card>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-PAoJLgZVF5T0y2DjY9ZElKgm4OpHkXsGdMXEhCswBWBa_fng" />
-                <ion-card-content>
-                    <ion-card-title>
-                        <span>Nine Inch Nails Live</span>
-                    </ion-card-title>
-                    <p class="card-text">
-                        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-                    </p>
-                </ion-card-content>
-                <ion-row>
-                    <ion-col col-9>
-                        <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
-                    </ion-col>
-                    <ion-col col-3 center text-center>
-                        <ion-note>
-                            <button (click)="viewUniversity()" class="btn-show">{{"Inicio.Ver" | translate}}</button>
-                        </ion-note>
-                    </ion-col>
-                </ion-row>
-            </ion-card>
-        </div>
-        <div class="result-single">
-            <ion-card>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-PAoJLgZVF5T0y2DjY9ZElKgm4OpHkXsGdMXEhCswBWBa_fng" />
-                <ion-card-content>
-                    <ion-card-title>
-                        <span>Nine Inch Nails Live</span>
-                    </ion-card-title>
-                    <p class="card-text">
-                        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-                    </p>
-                </ion-card-content>
-                <ion-row>
-                    <ion-col col-9>
-                        <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
-                    </ion-col>
-                    <ion-col col-3 center text-center>
-                        <ion-note>
-                            <button (click)="viewUniversity()" class="btn-show">{{"Inicio.Ver" | translate}}</button>
+                            <button (click)="viewUniversity(result.id)" class="btn-show">{{"Inicio.Ver" | translate}}</button>
                         </ion-note>
                     </ion-col>
                 </ion-row>
             </ion-card>
         </div>
 
-
-        <ion-card class="bg-error">
+        <ion-card class="bg-error" *ngIf="searchNull">
             <ion-card-content>
                 <ion-card-title>
                     <ion-icon class="icon-white" name="sad"></ion-icon><span class="title-error">&nbsp;&nbsp;{{"Inicio.TituloResNo" | translate}}</span>
@@ -201,7 +131,7 @@
             </ion-row>
         </ion-card>
 
-        <ion-card class="bg-warning">
+        <ion-card class="bg-warning" *ngIf="!searchNull">
             <ion-card-content>
                 <ion-card-title>
                     <ion-icon class="icon-white" name="happy"></ion-icon><span class="title-error">&nbsp;&nbsp;{{"Inicio.TituloResEnd" | translate}}</span>

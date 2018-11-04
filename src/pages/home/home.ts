@@ -38,6 +38,7 @@ export class HomePage {
   txtSearch : string = "";
 
   results: boolean = false;
+  searchNull : boolean = false;
 
   map: GoogleMap;
 
@@ -55,6 +56,10 @@ export class HomePage {
 
   // univeirsidades inicioo prox
   universityMonthsList : any[];
+  //
+
+  // resultado 
+  resultUniversities : any[];
   //
 
   //calendario
@@ -78,6 +83,7 @@ export class HomePage {
     private storage: Storage,
   ){
 
+    this.resultUniversities = [];
     this.universityMonthsList = [];
     this.nearbyUniversities = [];
     this.featuresUniversities = [];
@@ -165,7 +171,7 @@ export class HomePage {
     let tmpNombre, tmpId;
     var monthD = new Date().getMonth();
     //alert(monthD);
-    var ref = this.afDatabase.database.ref("Universidades").orderByChild('cursos/'+monthD).equalTo(true).on("child_added", function(snapshot) {
+    this.afDatabase.database.ref("Universidades").orderByChild('cursos/'+monthD).equalTo(true).on("value", function(snapshot) {
       //alert(snapshot.val().nombre);
       //alert('month success load uniersities');
       console.log('prox: '+snapshot.val().nombre);
@@ -180,9 +186,44 @@ export class HomePage {
    
   }
 
+  searchUniversityWithName($event){
+    let st = ''+$event.target.value;
+    let resf = false;
+    let unis = [];
+    let nulo = true;
+    if(st.length > 2){
+      resf = true;
+      this.afDatabase.database.ref('Universidades').orderByChild('nombre').startAt(st.toUpperCase()).endAt(st.toLowerCase()+'\uf8ff').on("value", function(snapshot) {
+          if(snapshot.val() != null ){
+            nulo = false;
+            //alert('encontre algo');
+            snapshot.forEach(function(data) {
+              let rat = '3'; //  data.val().scores
+                unis.push({
+                  imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
+                  nombre :  data.val().nombre,
+                  address : data.val().direccion[0],
+                  rating : rat,
+                  id: snapshot.val().id// snapshot.val().id
+                });
+            });
+          }else{
+            nulo = true;
+            console.log('no hay resultados para : '+st);
+          }
+      });
+      
+    }else{
+      resf = false;
+    }
+    this.results = resf;
+    this.resultUniversities = unis;
+    this.searchNull = nulo;
+  }
+
   loadUniversitiesNearby(city){
     let tmpNombre, tmpRate, tmpId;
-    var ref = this.afDatabase.database.ref("Universidades").orderByChild('ciudad').equalTo(city).on("child_added", function(snapshot) {
+    this.afDatabase.database.ref("Universidades").orderByChild('ciudad').equalTo(city).on("value", function(snapshot) {
       //alert(snapshot.val().nombre);
       console.log('nearby: '+snapshot.val().nombre);
       tmpNombre = snapshot.val().nombre;
@@ -202,20 +243,6 @@ export class HomePage {
   viewUniversity(id){
     //alert(id);
     this.navCtrl.push(SingleUniversityPage,{id_university : id});
-  }
-
-  // me sirve para saber si hay una busqueda de universidad
-  viewResults(){
-    // comprobar contenido del input, si es vacio llamar a resetResults, sino proceder a resultados = true
-    if(this.txtSearch.length > 1)
-      this.results = true;
-    else 
-      this.resetResults(  );
-  }
-
-  // el campo de busqueda es vacio entonces regresar los items iniciales y ocultar resultados
-  resetResults(){
-    this.results = false;
   }
 
   createUniversity(){

@@ -1,4 +1,13 @@
 {
+    "Slides": {
+        "Inicio": "Start",
+        "Creado": "Powered by",
+        "Como": "How Does It",
+        "Trabaja": "Work",
+        "Que": "What is",
+        "ContentOne": "",
+        "ContentTwo": ""
+    },
     "Tabs": {
         "Inicio": "Home",
         "Opiniones": "Opinions",
@@ -9,36 +18,95 @@
     "Inicio": {
         "buscar_universidad": "Search Universities",
         "universidades_destacadas": "Featured Universities",
-        "universidades_cercanas": "Nearby Universities",
+        "universidades_cercanas": "Universities in",
         "universidades_evaluadas": "Most Valued Universities",
-        "inicio_proximo": "Start of courses soon"
-    },
-    "Semana": {
-        "Lunes": "Su",
-        "Martes": "Mo",
-        "Miercoles": "Tu",
-        "Jueves": "We",
-        "Viernes": "Th",
-        "Sabado": "Fr",
-        "Domingo": "Sa"
+        "inicio_proximo": "Start of courses soon",
+        "Resultados": "Results",
+        "Ver": "Show",
+        "Crear": "Create",
+        "TituloResEnd": "Here the results end…",
+        "ContenidoResEnd": "If it was not what you were looking for help us to register it",
+        "ContenidoResNo": "Help us see this university next time",
+        "TituloResNo": "Without result"
     },
     "Perfil": {
         "user_name": "Name",
         "user_phone": "Phone number",
         "user_email": "Email address",
+        "user_pass": "Password",
         "Ajustes": {
             "Ajustes": "Settings",
             "Miembro": "looking for university",
-            "Notificaciones": "receive notifications"
+            "Notificaciones": "receive notifications",
+            "Guardar": "Save"
         }
     },
     "Universidad": {
-        "Sitio_web": "Website",
+        "Sitioweb": "Website",
         "Telefono": "Phone",
         "Mapa": "Map",
-        "Opinar": "review"
+        "Opinar": "write review",
+        "Ubicacion": "Location",
+        "Buscar": "Search",
+        "Guardar": "Save",
+        "CreadoPor": "Created by",
+        "Global": "Global score",
+        "Carreras": "university careers",
+        "Inicio": "Start of courses",
+        "Costo": "Registration cost",
+        "Puntajes": "Scores",
+        "Opiniones": "Reviews",
+        "General": "General",
+        "AñadirCarrera": "add university career",
+        "EditarMeses": "Edit months"
     },
     "Opiniones": {
-        "Opiniones": "Opinions"
+        "Opiniones": "Opinions",
+        "Actualizar": "Update review a"
+    },
+    "Errores": {
+        "Error": "An error has occurred",
+        "Mensaje": "… our programmers are working to solve it"
+    },
+    "Login": {
+        "Nombre": "Full Name",
+        "Telefono": "Phone Number",
+        "Login": "Login",
+        "Registro": "Register",
+        "Email": "Email Address",
+        "Password": "Password"
+    },
+    "Chat": {
+        "Conversaciones": "Conversations",
+        "Mensajes": "Mensajes",
+        "Solicitudes": "Requests"
+    },
+    "InboxSingle": {
+        "MensajeAqui": "Message here"
+    },
+    "Escribir": {
+        "Para": "Write opinion for",
+        "Guardar": "add comment"
+    },
+    "Meses": {
+        "Enero": "Enero",
+        "Febrero": "Febrero",
+        "Marzo": "Marzo",
+        "Abril": "Abril",
+        "Mayo": "Mayo",
+        "Junio": "Junio",
+        "Julio": "Julio",
+        "Agosto": "Agosto",
+        "Septiembre": "Septiembre",
+        "Octubre": "Octubre",
+        "Noviembre": "Noviembre",
+        "Diciembre": "Diciembre"
+    },
+    "Ratings": {
+        "Instalaciones": "Facilities and infrastructure",
+        "Profesores": "Teachers",
+        "Ubicacion": "Location",
+        "Actividades": "Extracurricular activities",
+        "Becas": "Scholarships and supports"
     }
 }

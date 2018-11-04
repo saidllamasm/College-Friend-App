@@ -1,21 +1,20 @@
-$comfortaa-font-path: $font-path !default;
 @font-face {
     font-family: "Comfortaa";
     font-style: normal;
     font-weight: 300;
-    src: local("Comfortaa Light"), local("Comfortaa-Regular"), url("comfortaa-light.ttf") format("truetype");
+    src: url("../assets/comfortaa-light.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "Comfortaa";
     font-style: normal;
     font-weight: 400;
-    src: local("Roboto"), local("Comfortaa-Regular"), url("comfortaa-regular.ttf") format("truetype");
+    src: url("../assets/comfortaa-regular.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "Comfortaa";
     font-style: normal;
     font-weight: 700;
-    src: local("Comfortaa Bold"), local("Comfortaa-Bold"), url("comfortaa-bold.ttf") format("truetype");
+    src: url("../assets/comfortaa-bold.ttf") format("truetype");
 }
