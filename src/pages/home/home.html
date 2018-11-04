@@ -57,7 +57,7 @@
         <!--end verified-->
         <!-- init verified-->
         <br><br>
-        <span class="title">{{"Inicio.inicio_proximo" | translate}}</span>
+        <span class="title">{{"Inicio.inicio_proximo" | translate}} {{monthNm}}</span>
         <br><br>
         <div class="comming-soon">
             <div class="single-university-soon" *ngFor="let universityDay of universityMonthsList">
@@ -70,8 +70,6 @@
                             </div>
                             <div class="content-soon center">
                                 <span class="title-soon">{{universityDay.name}}</span>
-                                <br>
-                                <span class="date-soon">{{universityDay.date}}</span>
                             </div>
                         </ion-col>
                     </ion-row>

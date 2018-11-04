@@ -33,6 +33,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  public monthNm  = '';
   loads = 0;
   public idLoginUser = '';
   public cityActual : string = "";
@@ -169,16 +170,14 @@ export class HomePage {
   loadUniversitiesNextStart(){
     let unives = [];
     var monthD = new Date().getMonth()+1;
-    //alert(monthD);
+    const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    this.monthNm = monthNames[(new Date()).getMonth()];
     this.afDatabase.database.ref("Universidades").orderByChild('cursos/'+monthD).equalTo(true).on("value", function(snapshot) {
       "use strict";
-      //alert(snapshot.val().nombre);
-      //alert('month success load uniersities');
       snapshot.forEach(function(data) {
         unives.push({
           imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
           name : data.val().nombre,
-          date : monthD,
           id: data.val().id// snapshot.val().id
         });
       });
