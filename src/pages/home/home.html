@@ -9,13 +9,12 @@
     <div *ngIf="!results">
         <!--init verified-->
         <span class="title">{{"Inicio.universidades_destacadas" | translate}}</span>
-        <ion-slides loop slidesPerView="3" spaceBetween="16" loop>
+        <ion-slides loop slidesPerView="2.6" spaceBetween="16" loop>
             <ion-slide *ngFor="let university of featuresUniversities " text-center>
                 <img [src]="university.imgsrc" (click)="viewUniversity(university.id)">
             </ion-slide>
         </ion-slides>
         <!--end verified-->
-
         <br><br>
         <span class="title">{{"Inicio.universidades_cercanas" | translate}} {{cityActual}}</span>
         <div id="map_canvas"></div>
@@ -41,7 +40,7 @@
         <span class="title">{{"Inicio.universidades_evaluadas" | translate}}</span>
 
         <div class="list-universities-valuet">
-            <div class="single-university" *ngFor="let evaluateUniversity of evaluatesUniversities" (click)="viewUniversity(featureUniversity.id)">
+            <div class="single-university" *ngFor="let evaluateUniversity of evaluatesUniversities" (click)="viewUniversity(evaluateUniversity.id)">
                 <ion-grid>
                     <ion-row>
                         <ion-col col-3>

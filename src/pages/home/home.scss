@@ -170,20 +170,6 @@ page-home {
     .bg-3 {
         background-color: yellow;
     }
-    ion-slide {
-        min-width: 35% !important;
-        img {
-            margin-top: 15px;
-            border-radius: 5px;
-            height: 220px!important;
-            min-width: 100% !important;
-            transition: all .2s;
-        }
-        img:hover {
-            -webkit-transform: translateY(-8px);
-            transform: translateY(-8px);
-        }
-    }
     // universidades cercanas al usuario
     .info-container {
         margin: 10px!important;
@@ -295,5 +281,18 @@ page-home {
         border-radius: 5px 5px 0px 0px;
         min-width: 100%;
         max-height: 170px;
+    }
+    // slides
+    ion-slide {
+        img {
+            margin-top: 15px;
+            border-radius: 5px;
+            height: 220px!important;
+            transition: all .2s;
+        }
+        img:hover {
+            -webkit-transform: translateY(-8px);
+            transform: translateY(-8px);
+        }
     }
 }

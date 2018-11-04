@@ -33,6 +33,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  loads = 0;
   public idLoginUser = '';
   public cityActual : string = "";
   txtSearch : string = "";
@@ -90,13 +91,11 @@ export class HomePage {
 
     this.storage.get('id_userlogin').then((val) => {
       //alert(val);
-      this.idLoginUser = val;
     });
-
-    //alert(this.idLoginUser);
 
     this.loadMap();
     this.loadUniversitiesFeature();
+    //this.loadUniversitiesNextStart();
     //this.loadFakeData();
 
   }
@@ -169,7 +168,7 @@ export class HomePage {
 
   loadUniversitiesNextStart(){
     let tmpNombre, tmpId;
-    var monthD = new Date().getMonth();
+    var monthD = new Date().getMonth()+1;
     //alert(monthD);
     this.afDatabase.database.ref("Universidades").orderByChild('cursos/'+monthD).equalTo(true).on("value", function(snapshot) {
       //alert(snapshot.val().nombre);
@@ -204,7 +203,7 @@ export class HomePage {
                   nombre :  data.val().nombre,
                   address : data.val().direccion[0],
                   rating : rat,
-                  id: snapshot.val().id// snapshot.val().id
+                  id: data.val().id// snapshot.val().id
                 });
             });
           }else{
@@ -239,7 +238,7 @@ export class HomePage {
     });
     
   }
-
+  
   viewUniversity(id){
     //alert(id);
     this.navCtrl.push(SingleUniversityPage,{id_university : id});
@@ -249,30 +248,31 @@ export class HomePage {
     this.navCtrl.push(CreateUniversityPage);
   }
 
-  viewUniversities(month){
-    console.log('load universities with start courses in : '+month);
+  // sin escuchador de cambios
+  loadUniversitiesFeature(){
+    this.featuresUniversities= [];
+    this.afDatabase.database.ref('/Universidades/').once('value').then( (snapshot) => {
+      "use strict";
+      snapshot.forEach(element => {
+        this.getImages(element.val().id);
+      });
+    });
+    
+    
+    //this.featuresUniversities = unis;
   }
 
-  loadUniversitiesFeature(){
-    this.afDatabase.list<University>('/Universidades/').valueChanges().subscribe((res: University[]) => { 
-      res.forEach((item) => {
-        console.log(item.id+" :university");
-        this.afDatabase.object('Imagenes/Universidad/' + item.id).valueChanges().subscribe((images : ImageUniversity) =>{
-          //console.log(item.id+' IMPORTANT '+JSON.stringify(images));
-          //console.log('ms : '+JSON.parse(images));
-          let key = Object.keys(images)[0];
-          let nombre = images[key].name;
-          this.featuresUniversities.push({
-            imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
-            id : item.id
-          });
-        });
+  getImages(id){
+    this.afDatabase.database.ref('Imagenes/Universidad/' + id).once('value').then( (snapshot) => {
+      let key = Object.keys(snapshot.val())[0];
+      let nombre = snapshot.val()[key].name;
+      this.featuresUniversities.push({
+        imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
+        id:id
       });
-    },(err)=>{
-       console.log("problem : ", err)
-       alert(err);
     });
   }
+
   
   loadFakeData(){
    //  this.fakeFeatures();
