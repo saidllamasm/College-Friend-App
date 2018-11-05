@@ -89,6 +89,7 @@ export class HomePage {
     this.universityMonthsList = [];
     this.nearbyUniversities = [];
     this.featuresUniversities = [];
+    this.evaluatesUniversities = [];
 
     this.storage.get('id_userlogin').then((val) => {
       //alert(val);
@@ -96,7 +97,9 @@ export class HomePage {
 
     this.loadMap();
     this.loadUniversitiesFeature();
+    this.loadUniversitiesMostEvaluet();
     this.loadUniversitiesNextStart();
+
     //this.loadFakeData();
 
   }
@@ -273,42 +276,23 @@ export class HomePage {
     });
   }
 
-  
-  loadFakeData(){
-   //  this.fakeFeatures();
-    this.universityDays = [
-      {
-        imgsrc : "https://upload.wikimedia.org/wikipedia/commons/9/99/San_Giovanni_Laterano_Rom.jpg",
-        name:"Universidad de Guadalajara",
-        date:"Agosto",
-        id:"1"
-      },
-      {
-        imgsrc : "https://www.unam.mx/sites/default/files/images/menu/library-345273_1280.jpg",
-        name:"Universida Autonoma de Mexico",
-        date:"Agosto",
-        id:"1"
-      },
-      {
-        imgsrc : "https://periodicocorreo.com.mx/wp-content/uploads/2017/01/UG.jpg",
-        name:"Universida de Guanajuato",
-        date:"Agosto",
-        id:"1"
+
+  loadUniversitiesMostEvaluet(){
+    this.afDatabase.database.ref('Universidades').orderByChild('scores/global').once('value').then( (snapshot) => {
+      console.log(snapshot.val());
+      for(var ip in snapshot.val()){
+        this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
+          for(var ip2 in snpImg.val()){
+            this.evaluatesUniversities.push({
+              imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip2].name+'?alt=media',
+              name : snapshot.val()[ip].nombre,
+              rating : snapshot.val()[ip].scores.global,
+              id: snapshot.val()[ip].id
+            });
+          }
+        });
       }
-    ];
-    
-    this.evaluatesUniversities = [
-      {
-        imgsrc : "https://upload.wikimedia.org/wikipedia/commons/9/99/San_Giovanni_Laterano_Rom.jpg",
-        name :"Universidad de Chile",
-        id:"3"
-      },
-      {
-        imgsrc : "https://storage.googleapis.com/mmc-cdn-bucket/uploads/2017/02/aa4b297f-uasd-1.jpg",
-        name :"universidad de Santo Domingo",
-        id:"3"
-      }
-    ];
+    });
   }
 
 }

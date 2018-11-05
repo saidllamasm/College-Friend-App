@@ -48,7 +48,7 @@
                         </ion-col>
                         <ion-col col-9>
                             <span class="name-university">{{evaluateUniversity.name}}</span>
-                            <rating class="no-space" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+                            <rating [(ngModel)]="evaluateUniversity.rating" class="no-space" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
