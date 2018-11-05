@@ -42,13 +42,17 @@ export class OpinionsPage {
         "use strict";
         console.log(snapshot.val()); 
         for(var ip in snapshot.val()){
-          this.afDatabase.database.ref("Universidades/"+ip).on("value", function(snp) {
-            universities.push({
-              imgsrc : 'https://latam.businesschief.com/public/uploads/large/large_10_UAEM.jpg',
-              name : snp.val().nombre,
-              rating : snp.val().scores.global,
-              id : snp.val().id
-             });
+          this.afDatabase.database.ref("Universidades/"+ip).once('value').then( (snp) => {
+            this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
+              for(var ip in snpImg.val()){
+                  universities.push({
+                    imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip].name+'?alt=media',
+                    name : snp.val().nombre,
+                    rating : snp.val().scores.global,
+                    id : snp.val().id
+                  });
+              }
+            });
           });
         }
       });

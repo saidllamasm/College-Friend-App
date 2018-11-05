@@ -35,7 +35,6 @@ export class SavedPage {
 
     this.afAuth.authState.subscribe(user => {
       this.uuid = user.uid;
-      let universities = [];
       this.afDatabase.database.ref("Usuarios/"+user.uid+"/favs/").once('value').then( (snapshot) => {
         "use strict";
         //console.log(snapshot.val());
