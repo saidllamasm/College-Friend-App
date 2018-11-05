@@ -1,4 +1,3 @@
-import { SingleUniversityPage } from './../pages/single-university/single-university';
 import { Component } from '@angular/core';
 import { Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -10,7 +9,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SlidesPage } from './../pages/slides/slides';
 import { Storage } from '@ionic/storage';
-import { LoginPassedPage } from '../pages/login-passed/login-passed';
 
 @Component({
   templateUrl: 'app.html'

@@ -61,10 +61,6 @@ import { ImagePlaceholderComponent } from '../components/image-placeholder/image
 
 import { environment } from '../environments/environment';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-};
-
 @NgModule({
   declarations: [
     MyApp,
@@ -102,7 +98,6 @@ export function HttpLoaderFactory(http: HttpClient) {
           deps: [HttpClient]
       }
     }),
-    //AngularFireModule.initializeApp(environment.firebase,'college-friend-app'),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule
   ],
@@ -145,4 +140,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     NO_ERRORS_SCHEMA
   ]
 })
+
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+};

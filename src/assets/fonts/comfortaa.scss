@@ -2,19 +2,40 @@
     font-family: "Comfortaa";
     font-style: normal;
     font-weight: 300;
-    src: url("../assets/comfortaa-light.ttf") format("truetype");
+    src: url('../assets/Comfortaa-Light.eot');
+    /* IE9 Compat Modes */
+    src: url('../assets/Comfortaa-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../assets/Comfortaa-Light.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../assets/Comfortaa-Light.woff') format('font-woff'), /* Pretty Modern Browsers */
+    url('../assets/Comfortaa-Light.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../assets/Comfortaa-Light.svg#Comfortaa-Light') format('svg');
+    /* Legacy iOS */
 }
 
 @font-face {
     font-family: "Comfortaa";
     font-style: normal;
     font-weight: 400;
-    src: url("../assets/comfortaa-regular.ttf") format("truetype");
+    src: url('../assets/font/Comfortaa-Regular.eot');
+    /* IE9 Compat Modes */
+    src: url('../assets/Comfortaa-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../assets/Comfortaa-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../assets/Comfortaa-Regular.woff') format('font-woff'), /* Pretty Modern Browsers */
+    url('../assets/Comfortaa-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../assets/Comfortaa-Regular.svg#Comfortaa-Regular') format('svg');
+    /* Legacy iOS */
 }
 
 @font-face {
     font-family: "Comfortaa";
     font-style: normal;
     font-weight: 700;
-    src: url("../assets/comfortaa-bold.ttf") format("truetype");
+    src: url('../assets/Comfortaa-Bold.eot');
+    /* IE9 Compat Modes */
+    src: url('../assets/Comfortaa-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../assets/Comfortaa-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../assets/Comfortaa-Bold.woff') format('font-woff'), /* Pretty Modern Browsers */
+    url('../assets/Comfortaa-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../assets/Comfortaa-Bold.svg#Comfortaa-Bold') format('svg');
+    /* Legacy iOS */
 }
