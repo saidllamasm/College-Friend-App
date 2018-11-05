@@ -22,7 +22,7 @@
         <div class="container-review">
             <div class="list-universities-valuet">
 
-                <div class="single-university" (click)="openOpinionSinglePage()" *ngFor="let fav of Opinions">
+                <div class="single-university" *ngFor="let fav of Opinions" (click)="openOpinionSinglePage(fav.id)">
                     <ion-grid>
                         <ion-row>
                             <ion-col col-3>

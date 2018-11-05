@@ -34,58 +34,31 @@ export class OpinionsPage {
     public afDatabase: AngularFireDatabase,
   ) {
     this.afAuth.authState.subscribe(user => {
-      this.afDatabase.list<UserCustom>('/Usuarios/').valueChanges().subscribe((res: UserCustom[]) => { 
-        this.uuid = user.uid;
-        this.username = user.displayName ;
-        this.userPicture = "https://www.gravatar.com/avatar/" + md5(user.email, 'hex')+"?s=400";
-        this.numberOpinions = 10;
-        res.forEach((item) => {
-            if(item.key == user.uid){
-              for(var i in item.reviews) {
-                this.afDatabase.list<University>('/Universidades/'+i+'/').valueChanges().subscribe((university : any[]) => {
-                  //alert(university[6]+university[7]);
-
-                  //load image
-                  this.afDatabase.object('Imagenes/Universidad/' + i).valueChanges().subscribe((images : ImageUniversity ) =>{
-                    let key = Object.keys(images)[0];
-                    let nombre = images[key].name;
-                    this.Opinions.push({
-                      imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
-                      name: university[7],
-                      rating: '0',
-                      id: university[6]
-                    });
-                  });
-                  //end load image
-                });
-              }
-              //console.log(univers[0].token_university);
-            } 
-        });
-      },(err)=>{
-         console.log("problem : ", err)
-         alert(err);
+      this.uuid = user.uid;
+      this.username = user.displayName ;
+      this.userPicture = "https://www.gravatar.com/avatar/" + md5(user.email, 'hex')+"?s=400";
+      let universities = [];
+      this.afDatabase.database.ref("Usuarios/"+user.uid+"/reviews/").once('value').then( (snapshot) => {
+        "use strict";
+        console.log(snapshot.val()); 
+        for(var ip in snapshot.val()){
+          this.afDatabase.database.ref("Universidades/"+ip).on("value", function(snp) {
+            //calcular rating
+            universities.push({
+              imgsrc : 'https://latam.businesschief.com/public/uploads/large/large_10_UAEM.jpg',
+              name : snp.val().nombre,
+              rating : snp.val().scores.global,
+              id : snp.val().id
+             });
+          });
+        }
       });
-    })
-    
-
-    //this.loadFakeData();
-  }
-
-  loadFakeData(){
-    this.Opinions = [
-      {
-        imgsrc : 'https://latam.businesschief.com/public/uploads/large/large_10_UAEM.jpg',
-        name :'ITAM',
-        rating : '3',
-        id : '-LPExtFttoD2K0tPYZeC'
-
-      }
-    ]
+      this.Opinions = universities;
+      
+    });
   }
 
   openOpinionSinglePage(id){
-    //this.navCtrl.setRoot(OpinionSinglePage);
     this.navCtrl.push(OpinionSinglePage,{id_review : id });
   }
 }

@@ -67,7 +67,7 @@ export class ProfilePage {
               this.txtUserPhone = item.telefono;
               this.txtUserEmail = item.email;
               this.profilePicture = "https://www.gravatar.com/avatar/" + md5(this.txtUserEmail, 'hex')+"?s=400";
-              console.log(item);
+              
             } 
         });
       },(err)=>{
@@ -105,7 +105,7 @@ export class ProfilePage {
             buscando : this.pre_student,
             notificaciones: this.notifications
           },
-          nombre : this.txtUserName,
+          //nombre : this.txtUserName,
           telefono : this.txtUserPhone
         }
       );

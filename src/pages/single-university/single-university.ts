@@ -24,6 +24,9 @@ import { UserCustom } from '../../model/user/user.model';
   templateUrl: 'single-university.html',
 })
 export class SingleUniversityPage {
+  public nameUserCreated = 'default';
+  public userProfileCreated = '';
+  public creatorUID = [{}];
   public langGeneral = '';
 
   public rateInstalaciones = '0';
@@ -41,9 +44,9 @@ export class SingleUniversityPage {
   public id_university; //id esta universidad 
   public id_userlogin; // id este usuario
   
-  public name : string;
-  public address : string;
-  public userCreated : string;
+  public name = 'default';
+  public address = 'default';
+  public userCreated = 'default';
   public lat;
   public lng;
   public phone;
@@ -74,90 +77,57 @@ export class SingleUniversityPage {
       });
 
       this.id_university = this.navParams.get('id_university');
-      this.id_userlogin = this.navParams.get('id_userlogin');
       this.getImagesFeature();
-
+      
       // get basic info
-      this.afDatabase.list<University>('/Universidades/'+this.id_university+'/').valueChanges().subscribe((university : any[]) => {
-        this.name = '' +university[7];
-        this.address = ''+university[3];
-        this.lat = ''+university[5].lat;
-        this.lng = ''+university[5].lng;
-        this.rateInstalaciones = ''+university[9].instalaciones;
-        this.rateProfesores = ''+university[9].profesores;
-        this.rateUbicacion = ''+university[9].ubicacion;
-        this.rateActividades = ''+university[9].actividades;
-        this.rateBecas = ''+university[9].becas;
-        let gral = university[9].instalaciones + university[9].profesores + university[9].ubicacion + university[9].actividades + university[9].becas;  
+      this.afDatabase.database.ref('/Universidades/'+this.id_university+'/').once('value').then( (snapshot) => {
+        console.log(snapshot.val());
+        "use strict";
+        this.name = snapshot.val().nombre;
+        this.address = snapshot.val().direccion[0];
+        this.lat = snapshot.val().gps.lat;
+        this.lng = snapshot.val().gps.lng;
+        this.rateInstalaciones = snapshot.val().scores.instalaciones;
+        this.rateProfesores = snapshot.val().scores.profesores;
+        this.rateUbicacion = snapshot.val().scores.ubicacion;
+        this.rateActividades = snapshot.val().scores.actividades;
+        this.rateBecas = snapshot.val().scores.becas;
+        let gral = snapshot.val().scores.instalaciones + snapshot.val().scores.profesores + snapshot.val().scores.ubicacion + snapshot.val().scores.actividades + snapshot.val().scores.becas;
         this.rateGeneral = ''+(gral/5);
         this.setRateGeneralFirebase(gral);
-        this.tmpReviews = university[8];
-        this.phone = ''+university[10];
-        this.website = ''+university[13];
+        this.tmpReviews = snapshot.val().reviews;
+        this.phone = snapshot.val().telefono;
+        this.website = snapshot.val().website;
         this.getReviews();
+        let user = snapshot.val().uid_creador;
+        this.afDatabase.database.ref('/Usuarios/'+user+'/').once('value').then( (snp) => {
+          this.nameUserCreated = snp.val().nombre;
+          this.userProfileCreated = "https://www.gravatar.com/avatar/" + md5(snp.val().email, 'hex')+"?s=400";
+        });
+        //this.creatorUID = this.getInfoUser(user);
 
+        
         //load carrers
-        for (var ip in university[0]) {
-          if (university[0].hasOwnProperty(ip)) {
-            this.listCarrers.push({nombre : university[0][ip]});// .push('2');// = university[0];
-          }
+        for (var ip in snapshot.val().carreras) {
+          this.listCarrers.push({nombre : snapshot.val().carreras[ip]});
         }
 
         //load months
-        for (var ip in university[2]) {
-          if (university[2].hasOwnProperty(ip)) {
-            if(university[2][ip] == true){
-              this.listMonths.push({nombre : this.getNameMonth(ip) });// .push('2');// = university[0];
-              this.monthNames.push(this.getNameMonth(ip));
-            }
+        for (var ip in snapshot.val().cursos) {
+          if(snapshot.val().cursos[ip] == true){
+            this.listMonths.push({nombre : this.getNameMonth(ip) });// .push('2');// = university[0];
+            this.monthNames.push(this.getNameMonth(ip));
           }
         }
-
-        
-        /*let i = 0;
-        for(; i < university.length; i++){
-          console.log(i+') '+university[i]);
-        }*/
-        //alert(JSON.stringify(university));
       });
+      
 
   }
-  //rate events
-  onModelInstalaciones($event){
-    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
-      {
-        instalaciones : $event
-      }
-    );
+
+  getInfoUser(id){
+    return [{ id: id, name : 'said', email: 'saidllamas14@gmail.com'}];
   }
-  onModelProfesores($event){
-    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
-      {
-        profesores : $event
-      }
-    );
-  }
-  onModelUbicacion($event){
-    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
-      {
-        ubicacion : $event
-      }
-    );
-  }
-  onModelActividades($event){
-    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
-      {
-        actividades : $event
-      }
-    );
-  }
-  onModelBecas($event){
-    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
-      {
-        becas : $event
-      }
-    );
-  }
+
 
   setRateGeneralFirebase(rate){
 
@@ -288,11 +258,6 @@ export class SingleUniversityPage {
   }
 
   notFav(id){
-    this.userAF = this.afDatabase.list('Usuarios/'+this.id_userlogin+'/');
-    var idGen = Math.floor((Math.random() * 150) + 1) + ''+Math.floor((Math.random() * 150) + 1) + ''+Math.floor((Math.random() * 150) + 1) +''+Math.floor((Math.random() * 1000) + 1) + ''+Math.floor((Math.random() * 1000) + 1) ;
-    let newCarrer = {};
-    newCarrer[idGen] = id
-    this.userAF.update('favs', newCarrer);
   }
 
   fav(id){
@@ -300,28 +265,29 @@ export class SingleUniversityPage {
   }
 
   getReviews(){
-    console.log('REVIEWS: ');
     /*console.log(this.tmpReviews);
     console.log(JSON.stringify(this.tmpReviews));*/
     for (var review in this.tmpReviews) {
       this.afDatabase.list<University>('/Universidades/'+this.id_university+'/'+'reviews/'+review+'/').valueChanges().subscribe((opinion : any[]) => {
+        let imagesTMP = [];
+        this.afDatabase.object('Imagenes/Opiniones/' + review).valueChanges().subscribe((span) =>{
+          //imagesTMP.push({imgurl : imgsc.name});
+          for (var ip in span) {
+            imagesTMP.push({imgurl : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+span[ip].name+'?alt=media' });
+          }
+          //alert( imgsc.name);
+        });
         this.getNameUser(review).then((infoUser : UserCustom) => { 
           //console.log(infoUser.nombre);
           this.listReviews.push({
+            id_review: review,
             id_username : review,
             imgsrc : "https://www.gravatar.com/avatar/" + md5(infoUser.email, 'hex')+"?s=400",
             username : infoUser.nombre,
             content : opinion[2],//opinion
             //opinion[1]//interacciones
             time : this.timeConverter(opinion[3]), //time
-            images : [
-              {
-                imgurl : 'http://www.abogadoschwitzer.com/wp-content/uploads/2016/12/KSU_Hale_library-1024x768.jpg'
-              },
-              {
-                imgurl : 'http://www.abogadoschwitzer.com/wp-content/uploads/2016/12/KSU_Hale_library-1024x768.jpg'
-              }
-            ]
+            images : imagesTMP
           });
         })
         
@@ -487,9 +453,5 @@ export class SingleUniversityPage {
       window.open('geo:0,0?q=' + destination + '(' + label + ')', '_system');
     }
   }
-
-  goBack(){
-      this.navCtrl.pop();
-  }
-
+  
 }
