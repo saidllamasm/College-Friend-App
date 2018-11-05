@@ -9,6 +9,7 @@ import { WriteReviewPage } from '../write-review/write-review';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
 import { ImageUniversity } from '../../model/image/image.model';
+import { AngularFireAuth } from 'angularfire2/auth';
 import md5 from 'crypto-md5';
 import { UserCustom } from '../../model/user/user.model';
 /**
@@ -71,6 +72,7 @@ export class SingleUniversityPage {
     private callNumber: CallNumber,
     private iab: InAppBrowser,
     private storage: Storage,
+    public afAuth: AngularFireAuth
     ) {
       statusBar.backgroundColorByHexString('#0055CB');
       this.langGeneral = ''+this.getLenguaje().then((res)=>{
@@ -126,6 +128,18 @@ export class SingleUniversityPage {
 
   getInfoUser(id){
     return [{ id: id, name : 'said', email: 'saidllamas14@gmail.com'}];
+  }
+
+  addFav(){
+    let idUnv = this.navParams.get('id_university');
+    this.afAuth.authState.subscribe(user => {
+      let uid = user.uid;
+      let newFavorite = {};
+      newFavorite[idUnv] = true;
+      this.afDatabase.object('/Usuarios/' + uid+'/favs/').update(newFavorite);
+    });
+
+    
   }
 
 

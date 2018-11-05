@@ -22,6 +22,6 @@ export class OpinionSinglePage {
     public navParams: NavParams
   ) {
     this.id_university = this.navParams.get('id_review');
-    alert(this.navParams.get('id_review'));
+    //alert(this.navParams.get('id_review'));
   }
 }

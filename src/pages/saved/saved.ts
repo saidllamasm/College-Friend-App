@@ -5,7 +5,6 @@ import { SingleUniversityPage } from '../single-university/single-university';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { UserCustom } from '../../model/user/user.model';
-import { Storage } from '@ionic/storage';
 
 import { University } from './../../model/university/university.model';
 import { ImageUniversity } from '../../model/image/image.model';
@@ -22,7 +21,7 @@ import { ImageUniversity } from '../../model/image/image.model';
   templateUrl: 'saved.html',
 })
 export class SavedPage {
-  uuid : string ;
+  uuid = '' ;
   public Favorites  = [];
 
   constructor(
@@ -30,43 +29,39 @@ export class SavedPage {
     public navParams: NavParams,
     public statusBar: StatusBar,
     public afAuth: AngularFireAuth,
-    public afDatabase: AngularFireDatabase,
-    private storage: Storage
+    public afDatabase: AngularFireDatabase
   ) {
     statusBar.backgroundColorByHexString('#0055CB');
 
     this.afAuth.authState.subscribe(user => {
-      this.afDatabase.list<UserCustom>('/Usuarios/').valueChanges().subscribe((res: UserCustom[]) => { 
-        this.uuid = user.uid;
-        res.forEach((item) => {
-            if(item.key == user.uid){
-              for(var i in item.favs) {
-                this.afDatabase.list<University>('/Universidades/'+i+'/').valueChanges().subscribe((university : any[]) => {
-                  //alert(university[6]+university[7]);
-
-                  //load image
-                  this.afDatabase.object('Imagenes/Universidad/' + i).valueChanges().subscribe((images : ImageUniversity ) =>{
-                    let key = Object.keys(images)[0];
-                    let nombre = images[key].name;
-                    this.Favorites.push({
-                      imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
-                      name: university[7],
-                      address: university[1],
-                      id: university[6]
-                    });
-                  });
-                  //end load image
+      this.uuid = user.uid;
+      let universities = [];
+      this.afDatabase.database.ref("Usuarios/"+user.uid+"/favs/").once('value').then( (snapshot) => {
+        "use strict";
+        //console.log(snapshot.val());
+        for(var ip in snapshot.val()){
+          this.afDatabase.database.ref("Universidades/"+ip).once('value').then( (snp) => {
+            console.log(snp.val());
+            this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
+              console.log(snpImg.val());
+              for(var ip in snpImg.val()){
+                
+                this.Favorites.push({
+                  imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip].name+'?alt=media',
+                  name: snp.val().nombre,
+                  address: snp.val().direccion[0],
+                  id: snp.val().id
                 });
               }
-              //console.log(univers[0].token_university);
-            } 
-        });
-      },(err)=>{
-         console.log("problem : ", err)
-         alert(err);
+            });
+          });
+        }
+        
       });
-    })
-    //this.loadFakeData();
+      //this.Opinions = universities;
+      
+    });
+    
   }
 
   deleteFav(id){

@@ -6,7 +6,7 @@
 -->
 <ion-header>
     <!--header-->
-    <button class="btnFav"><i class="fa fa-heart"></i></button>
+    <button (click)="addFav()" class="btnFav"><i class="fa fa-heart"></i></button>
     <ion-slides autoplay class="slide-featureimg">
         <ion-slide *ngFor="let imag of listIms">
             <img class="img-feature" [src]="imag.imgsrc" imageViewer>

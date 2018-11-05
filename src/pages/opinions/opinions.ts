@@ -43,7 +43,6 @@ export class OpinionsPage {
         console.log(snapshot.val()); 
         for(var ip in snapshot.val()){
           this.afDatabase.database.ref("Universidades/"+ip).on("value", function(snp) {
-            //calcular rating
             universities.push({
               imgsrc : 'https://latam.businesschief.com/public/uploads/large/large_10_UAEM.jpg',
               name : snp.val().nombre,
