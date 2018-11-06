@@ -1,30 +1,25 @@
-<!--
-  Generated template for the SingleUniversityPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-    <!--header-->
-    <button (click)="addFav()" class="btnFav"><i class="fa fa-heart"></i></button>
-    <ion-slides autoplay class="slide-featureimg">
-        <ion-slide *ngFor="let imag of listIms">
-            <img class="img-feature" [src]="imag.imgsrc" imageViewer>
-        </ion-slide>
-    </ion-slides>
-    <div class="ctrol-header">
+    <header-resize [scrollArea]="content" headerHeight="200">
+        <ion-slides autoplay class="slide-featureimg">
+            <ion-slide *ngFor="let imag of listIms">
+                <img class="img-feature" [src]="imag.imgsrc" imageViewer>
+            </ion-slide>
+        </ion-slides>
+    </header-resize>
+    <ion-toolbar mode="md">
         <button (click)="openBrowser()" class="link" href="">{{"Universidad.Sitioweb" | translate}}</button>
         <button (click)="openCall()" class="link" href="">{{"Universidad.Telefono" | translate}}</button>
         <button (click)="openMap()" class="link" href="">{{"Universidad.Mapa" | translate}}</button>
         <button (click)="openWriteReviewPage()" class="btn-review" href="">{{"Universidad.Opinar" | translate}}</button>
-    </div>
-    <!--end header-->
+    </ion-toolbar>
+
+    <!--<button (click)="addFav()" class="btnFav"><i class="fa fa-heart"></i></button>-->
 </ion-header>
 
-<ion-content padding>
+<ion-content fullscreen #content padding>
 
-    <h1>{{name}}</h1>
-    <p>{{address}}</p>
+    <h4>{{name}}</h4>
+    <p class="txtAddress">{{address}}</p>
     <div class="info-creator">
         <ion-grid>
             <ion-row>
@@ -40,7 +35,7 @@
     </div>
 
     <br>
-    <h2>{{"Universidad.Global" | translate}}</h2>
+    <h5>{{"Universidad.Global" | translate}}</h5>
     <div class="panel-score-main">
         <ion-grid>
             <ion-row>
@@ -51,7 +46,7 @@
                             {{"Ratings.Instalaciones" | translate}}
                         </ion-col>
                         <ion-col col-7>
-                            <rating [(ngModel)]="rateInstalaciones" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelInstalaciones($event)"></rating>
+                            <rating [(ngModel)]="rateInstalaciones" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                         </ion-col>
                     </ion-row>
                     <ion-row>
@@ -59,7 +54,7 @@
                             {{"Ratings.Profesores" | translate}}
                         </ion-col>
                         <ion-col col-7>
-                            <rating [(ngModel)]="rateProfesores" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelProfesores($event)"></rating>
+                            <rating [(ngModel)]="rateProfesores" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                         </ion-col>
                     </ion-row>
                     <ion-row>
@@ -67,7 +62,7 @@
                             {{"Ratings.Ubicacion" | translate}}
                         </ion-col>
                         <ion-col col-7>
-                            <rating [(ngModel)]="rateUbicacion" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelUbicacion($event)"></rating>
+                            <rating [(ngModel)]="rateUbicacion" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                         </ion-col>
                     </ion-row>
                     <ion-row>
@@ -75,7 +70,7 @@
                             {{"Ratings.Actividades" | translate}}
                         </ion-col>
                         <ion-col col-7>
-                            <rating [(ngModel)]="rateActividades" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelActividades($event)"></rating>
+                            <rating [(ngModel)]="rateActividades" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                         </ion-col>
                     </ion-row>
                     <ion-row>
@@ -83,15 +78,25 @@
                             {{"Ratings.Becas" | translate}}
                         </ion-col>
                         <ion-col col-7>
-                            <rating [(ngModel)]="rateBecas" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelBecas($event)"></rating>
+                            <rating [(ngModel)]="rateBecas" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
                         </ion-col>
                     </ion-row>
                 </ion-col>
                 <!--score general-->
                 <ion-col>
-                    <div class="circle-number">
-                        <span class="number">{{rateGeneral}}</span>
-                    </div>
+                    <ion-row>&nbsp;</ion-row>
+                    <ion-row>&nbsp;</ion-row>
+                    <ion-row>&nbsp;</ion-row>
+                    <ion-row>&nbsp;</ion-row>
+                    <ion-row>&nbsp;</ion-row>
+                    <ion-row>&nbsp;</ion-row>
+                    <ion-row>&nbsp;</ion-row>
+                    <ion-row>
+                        <div class="circle-number">
+                            <span class="number">{{rateGeneral}}</span>
+                        </div>
+                    </ion-row>
+                    <ion-row></ion-row>
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -99,7 +104,7 @@
     <br>
 
     <!--cards for carrers-->
-    <h2>{{"Universidad.Carreras" | translate}}</h2>
+    <h5>{{"Universidad.Carreras" | translate}}</h5>
     <ion-slides class="slide-carrers" slidesPerView="1.4" spaceBetween="20">
 
         <ion-slide class="bg-gradient" *ngFor="let carrers of listCarrers ">
@@ -109,7 +114,7 @@
                     <ion-grid>
                         <ion-row>
                             <ion-col text-center center>
-                                {{carrers.nombre}}
+                                <span class="white">  {{carrers.nombre}}</span>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
@@ -123,7 +128,7 @@
                     <ion-grid>
                         <ion-row>
                             <ion-col text-center center>
-                                {{"Universidad.AñadirCarrera" | translate}}
+                                <span class="white"> {{"Universidad.AñadirCarrera" | translate}}</span>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
@@ -135,7 +140,7 @@
 
     <!--init verified-->
     <br><br>
-    <h2>{{"Universidad.Inicio" | translate}}</h2>
+    <h5>{{"Universidad.Inicio" | translate}}</h5>
     <div class="list-for-months">
         <div class="single-month" *ngFor="let month of listMonths">
             <ion-grid>
@@ -165,7 +170,7 @@
     <!--end verified-->
     <!--init verified-->
     <br><br>
-    <h2>{{"Tabs.Opiniones" | translate}}</h2>
+    <h5>{{"Tabs.Opiniones" | translate}}</h5>
     <!--end verified-->
     <div class="content-reviews">
         <div class="single-review" *ngFor="let review of listReviews">
@@ -181,7 +186,7 @@
                     </ion-col>
                 </ion-row>
                 <ion-row>
-                    <p>{{review.content}}</p>
+                    <p class="content-review">{{review.content}}</p>
                 </ion-row>
                 <ion-row>
                     <ion-slides class="slide-img-userUniversities" slidesPerView="2" spaceBetween="16">

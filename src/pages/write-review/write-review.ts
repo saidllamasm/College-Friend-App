@@ -4,6 +4,7 @@ import { ImagePlaceholderComponent } from '../../components/image-placeholder/im
 import { AngularFireAuth } from 'angularfire2/auth';
 import md5 from 'crypto-md5';
 import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
+import { database} from 'firebase';
 
 /**
  * Generated class for the WriteReviewPage page.
@@ -109,13 +110,10 @@ export class WriteReviewPage {
           dislikes : 0
         },
         opinion :  this.opinionContent,
-        timestamp: 'NOW'
+        timestamp: database.ServerValue.TIMESTAMP
       }
     );
 
-    // otro hilo para imagenes
-    // Imagenes/Opiniones/<tokenUser>/<tokenImg>/[data]
-   
 
   }
 }

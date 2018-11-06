@@ -54,12 +54,11 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 
-import { UserListService } from '../services/user-list.service';
-
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { ImagePlaceholderComponent } from '../components/image-placeholder/image-placeholder';
 
 import { environment } from '../environments/environment';
+import { HeaderResizeComponent } from '../components/header-resize/header-resize';
 
 @NgModule({
   declarations: [
@@ -68,6 +67,7 @@ import { environment } from '../environments/environment';
     HomePage,
     ProgressBarComponent,
     ImagePlaceholderComponent,
+    HeaderResizeComponent,
     // for debug
     WriteReviewPage,
     OpinionsPage,
@@ -130,7 +130,6 @@ import { environment } from '../environments/environment';
     Facebook,
     AngularFireAuth,
     TwitterConnect,
-    UserListService,
     ImagePicker,
     CallNumber,
     InAppBrowser,

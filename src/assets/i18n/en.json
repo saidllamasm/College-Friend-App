@@ -108,5 +108,12 @@
         "Ubicacion": "Location",
         "Actividades": "Extracurricular activities",
         "Becas": "Scholarships and supports"
+    },
+    "Tips": {
+        "Tip1": "No es posible actualizar tu correo si creaste tu cuenta desde una red social.",
+        "Tip2": "Si quieres actualizar tu nombre y usaste el login con redes sociales es necesario que lo actualices desde la red social con la que iniciaste sesion.",
+        "Tip3": "Para actualizar tu foto de perfil es necesario que te dirigas a gravatar.com y registres el mismo correo que usas en esta aplicacion.",
+        "Tip4": "Si se puede imaginar se puede programar",
+        "Tip5": "Powered by DamVeloper Team"
     }
 }

@@ -12,11 +12,10 @@ import { Component } from '@angular/core';
 })
 export class ImagePlaceholderComponent {
 
-  text: string;
+  public url;
 
   constructor() {
-    console.log('Hello ImagePlaceholderComponent Component');
-    this.text = 'Hello World';
+    this.url = 'http://placehold.it/80x80';
   }
 
 }

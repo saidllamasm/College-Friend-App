@@ -1,186 +1,159 @@
-page-single-university {
-    ion-header {
-        background: none;
-    }
-    .img-feature {
-        height: 200px;
-        min-width: 100%;
-    }
-    .ctrol-header {
-        background-color: map-get($colors, primary);
-        height: 50px;
-        padding: 10px;
-        margin-top: -5px;
-    }
-    button.link {
-        margin: 5px!important;
-        padding: 0px!important;
-        background: none !important;
-    }
-    .link {
-        height: 20px;
-        margin: 10px;
-        font-size: 14px;
-    }
-    .btn-review {
-        margin: 5px!important;
-        margin-top: 3px!important;
-        font-size: 14px!important;
-        //padding: 5px !important;
-        background: none !important;
-        border: 1px solid map-get($colors, primary);
-    }
-    .link,
-    .btn-review {
-        text-decoration: none;
-        color: #fff;
-    }
-    .btn-review {
-        font-size: 15px;
-        float: right;
-        border: 1px solid #fff;
-        padding: 5px;
-        border-radius: 5px;
-        color: #fff;
-    }
-    .btnFav {
-        z-index: 100;
-        background: none;
-        position: absolute;
-        top: 10px;
-        right: 0px;
-        float: right;
-        margin-right: 10px;
-        color: map-get($colors, danger);
-        font-size: 30px!important;
-    }
-    .circle-number {
-        background-color: map-get($colors, dark);
-        border-radius: 50%;
-        height: 50px;
-        width: 50px;
-        text-align: center;
-        padding-top: 10px;
-    }
-    .number {
-        height: 100%;
-        width: 100%;
-        font-size: 24px;
-        color: white;
-    }
-    ul.rating li {
-        padding: 0px!important;
-        color: map-get($colors, primary);
-        margin-top: -20px!important;
-    }
-    .panel-score-main {
-        font-size: 13px;
-        color: #d4d4d4;
-    }
-    ion-card {
-        margin-bottom: 20px!important;
-    }
-    i.check {
-        color: map-get($colors, secondary);
-        font-size: 18px;
-    }
-    .single-month {
-        border-radius: 5px;
-        border: 1px solid #d4d4d4;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    .single-month {
-        span {
+    page-single-university {
+        header-resize {
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+        * {
             color: #707070;
         }
-    }
-    .tabs-reviews {
-        width: 100%;
-        background-color: map-get($colors, dark);
-    }
-    .btn-tab {
-        width: 100%;
-        text-align: center;
-        color: white;
-        border: none!important;
-        background: none!important;
-        border-top: 1px !important;
-    }
-    .btn-tab.active {
-        //border-top: 1px solid map-get($colors, light)!important;
-    }
-    .img-circle {
-        height: 40px !important;
-        width: 40px !important;
-        border-radius: 50%;
-    }
-    .slide-img-userUniversities {
-        ion-slide {
-            height: 120px!important;
+        h5,
+        h4 {
+            text-transform: capitalize;
+            color: #707070;
         }
-    }
-    .ctrol-Action {
-        width: 100%;
-        border: none!important;
-        background: none!important;
-    }
-    .btn-chat {
-        padding: 4px;
-        border-radius: 5px;
-        background-color: map-get($colors, secondary) !important;
-        color: white;
-        font-size: 14px;
-        text-transform: lowercase;
-    }
-    .single-review {
-        border-bottom: 1px solid #70707066;
-    }
-    .ctrol-Action {
-        ion-icon {
+        h4 {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        h5 {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .toolbar-background-md {
+            background-color: #3880FF !important;
+        }
+        ion-toolbar button {
+            background: none!important;
+            color: #fff;
+        }
+        .link {
+            padding: 7px !important;
+        }
+        .btn-review {
+            padding: 7px !important;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            float: right;
+            margin-right: 10px;
+        }
+        .panel-score-main {
+            font-size: 11px;
+            color: #d4d4d4;
+        }
+        .profile-created {
+            height: 50px!important;
+            width: 50px!important;
+            border-radius: 50%;
+            float: right;
+            right: 10px;
+        }
+        .circle-number {
+            background-color: map-get($colors, dark);
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            text-align: center;
+            padding-top: 10px;
+        }
+        .number {
+            height: 100%;
+            width: 100%;
+            font-size: 24px;
+            color: white;
+        }
+        .img-circle {
+            height: 40px !important;
+            width: 40px !important;
+            border-radius: 50%;
+        }
+        .slide-carrers {
+            max-height: 100px;
+        }
+        .single-month {
+            border-radius: 5px;
+            border: 1px solid #d4d4d4;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .single-month {
+            span {
+                color: #707070;
+            }
+        }
+        i.check {
+            color: map-get($colors, secondary);
             font-size: 18px;
         }
+        .btn-add {
+            background: none;
+            color: white;
+            font-size: 14px;
+        }
+        .white {
+            color: #fff!important;
+        }
+        .bg-gradient ion-card {
+            color: white;
+            font-weight: bold;
+            background: #0055cb;
+            border-radius: 5px;
+            color: #fff!important;
+            /* Old browsers */
+            background: -moz-linear-gradient(-45deg, #0055cb 0%, #3880ff 100%);
+            /* FF3.6-15 */
+            background: -webkit-linear-gradient(-45deg, #0055cb 0%, #3880ff 100%);
+            /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(135deg, #0055cb 0%, #3880ff 100%);
+        }
+        .ctrol-Action {
+            width: 100%;
+            border: none!important;
+            background: none!important;
+        }
+        .btn-chat {
+            padding: 4px;
+            border-radius: 5px;
+            background-color: map-get($colors, secondary) !important;
+            color: white;
+            font-size: 14px;
+            text-transform: lowercase;
+        }
+        ul.rating li {
+            padding: 0px!important;
+            color: #3880FF !important;
+            margin-top: -20px!important;
+        }
+        .single-review {
+            border-bottom: 1px solid #70707066;
+            margin-bottom: 10px;
+        }
+        .ctrol-Action {
+            ion-icon {
+                font-size: 18px;
+            }
+        }
+        .txtName {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .txtDate {
+            font-size: 11px;
+            margin-top: 5px;
+        }
+        .content-review {
+            font-size: 13px;
+            color: #BFBFBF;
+        }
+        .txtAddress {
+            font-size: 13px;
+        }
     }
-    .single-review {
-        margin-bottom: 10px;
-    }
-    .panel {
-        border: 1px solid map-get($colors, primary);
-        border-radius: 5px;
-    }
-    .panel-header {
-        color: white;
-        background: map-get($colors, primary);
-        padding: 3px;
-    }
-    .panel-content {
-        padding: 5px;
-    }
-    .btn-add {
-        background: none;
-        color: white;
-        font-size: 14px;
-    }
-    .bg-gradient ion-card {
-        border-radius: 5px;
-        color: white;
-        font-weight: bold;
-        background: #0055cb;
-        /* Old browsers */
-        background: -moz-linear-gradient(-45deg, #0055cb 0%, #3880ff 100%);
-        /* FF3.6-15 */
-        background: -webkit-linear-gradient(-45deg, #0055cb 0%, #3880ff 100%);
-        /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(135deg, #0055cb 0%, #3880ff 100%);
-    }
-    .slide-carrers {
-        max-height: 100px;
-    }
-    .profile-created {
-        height: 50px!important;
-        width: 50px!important;
-        border-radius: 50%;
-        float: right;
-        right: 10px;
-    }
-}

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
 import md5 from 'crypto-md5';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { UserCustom } from '../../model/user/user.model';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
  
 /**
  * Generated class for the ProfilePage page.
@@ -40,6 +41,8 @@ export class ProfilePage {
     public afDatabase: AngularFireDatabase,
     private storage: Storage,
     public afAuth: AngularFireAuth,
+    private iab: InAppBrowser,
+    public toastCtrl: ToastController,
   ) {
     
     this.afAuth.authState.subscribe(user => {
@@ -78,10 +81,26 @@ export class ProfilePage {
   }
 
   activeEdit(){
-    if(this.edited)
-      this.edited = false;  
-    else
-    this.edited = true;
+    if(this.edited){
+      this.edited = false;
+      this.toastCtrl.create({
+        message: 'Informacion bloqueada',
+        duration: 1000,
+        position: 'bottom'
+      }).present();
+    }else{
+      this.edited = true;
+      this.toastCtrl.create({
+        message: 'Ahora puedes editar tu información',
+        duration: 1000,
+        position: 'bottom'
+      }).present();
+    }
+    
+  }
+
+  openGravatar(){
+    this.iab.create('https://en.gravatar.com/');
   }
 
   saved(){

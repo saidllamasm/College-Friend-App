@@ -8,15 +8,15 @@
 <ion-content padding>
     <div *ngIf="!results">
         <!--init verified-->
-        <span class="title">{{"Inicio.universidades_destacadas" | translate}}</span>
-        <ion-slides loop slidesPerView="2.6" spaceBetween="16" loop>
+        <h5>{{"Inicio.universidades_destacadas" | translate}}</h5>
+        <ion-slides loop slidesPerView="2.6" spaceBetween="16">
             <ion-slide *ngFor="let university of featuresUniversities " text-center>
                 <img [src]="university.imgsrc" (click)="viewUniversity(university.id)">
             </ion-slide>
         </ion-slides>
         <!--end verified-->
         <br><br>
-        <span class="title">{{"Inicio.universidades_cercanas" | translate}} {{cityActual}}</span>
+        <h5>{{"Inicio.universidades_cercanas" | translate}} {{cityActual}}</h5>
         <div id="map_canvas"></div>
         <div class="container-universities-cercanas">
             <ion-grid>
@@ -37,7 +37,7 @@
         <br><br>
 
         <!--init verified-->
-        <span class="title">{{"Inicio.universidades_evaluadas" | translate}}</span>
+        <h5>{{"Inicio.universidades_evaluadas" | translate}}</h5>
 
         <div class="list-universities-valuet">
             <div class="single-university" *ngFor="let evaluateUniversity of evaluatesUniversities" (click)="viewUniversity(evaluateUniversity.id)">
@@ -57,7 +57,7 @@
         <!--end verified-->
         <!-- init verified-->
         <br><br>
-        <span class="title">{{"Inicio.inicio_proximo" | translate}}</span>
+        <h5>{{"Inicio.inicio_proximo" | translate}}</h5>
         <br><br>
         <div class="comming-soon">
             <div class="single-university-soon" *ngFor="let universityDay of universityMonthsList">
