@@ -16,12 +16,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class OpinionSinglePage {
   public universityName = '';
   public id_university = '';
+  public username = '';
+  public dateToday = '';
+  public userPicture = '';
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams
   ) {
     this.id_university = this.navParams.get('id_review');
+    //obtener el usuario
     //alert(this.navParams.get('id_review'));
   }
 }

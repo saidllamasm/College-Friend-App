@@ -9,6 +9,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {TwitterConnect} from '@ionic-native/twitter-connect';
 import { auth } from 'firebase';
 
+
 import { environment } from '../../environments/environment';
 /**
  * Generated class for the LoginPage page.
@@ -40,7 +41,8 @@ export class LoginPage {
     public twitterConnect: TwitterConnect,
     public afAuth: AngularFireAuth,
     private platform: Platform,
-    database: AngularFireDatabase
+    database: AngularFireDatabase,
+    public afDatabase: AngularFireDatabase,
   ) {
     this.users = database.list('Usuarios');
   }
@@ -122,7 +124,8 @@ export class LoginPage {
 
   // save user data to firebase 
   saveUserFirebase(uid, email, nombre, telefono, metodo){
-    if(!this.userExist(uid)){
+    if( this.loadUsr( uid ) ){
+    //if(!this.getUserExist(uid)){
       let newUser = {
         key : uid,
         email : email,
@@ -138,12 +141,32 @@ export class LoginPage {
         }
       };
       this.users.update(uid, newUser);
-    } 
+      alert('acount created sucess');
+    } else{
+      alert('login sucess');
+    }
   }
 
-  userExist(uid){
-    return false;
+  getUserExist = async(uid) =>{
+    let lng = await this.loadUsr( uid );
+    alert('await ' +lng);
+    return lng;
   }
+
+  loadUsr = (uid) => {
+    return new Promise((resolve, reject) => {
+      this.afDatabase.database.ref('/Usuarios/'+uid+'/').once('value').then( (snapshot) => {
+        if(snapshot.val() != null){
+          resolve ( true ) ;
+        }else{
+          resolve( false );
+        }
+        
+      });
+      
+    });
+  }
+
   //for ui controls
   activeFormRegistro(){
     this.login = true;

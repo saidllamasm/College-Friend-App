@@ -32,33 +32,27 @@ export class SavedPage {
     public afDatabase: AngularFireDatabase
   ) {
     statusBar.backgroundColorByHexString('#0055CB');
-
     this.afAuth.authState.subscribe(user => {
       this.uuid = user.uid;
       this.afDatabase.database.ref("Usuarios/"+user.uid+"/favs/").once('value').then( (snapshot) => {
-        "use strict";
-        //console.log(snapshot.val());
         for(var ip in snapshot.val()){
-          this.afDatabase.database.ref("Universidades/"+ip).once('value').then( (snp) => {
-            console.log(snp.val());
+          this.afDatabase.database.ref("Universidades/"+ip).once('value').then( (snpUnivers) => {
+            alert(snpUnivers.val().nombre);
+            let unv = { nombre : snpUnivers.val().nombre, address : snpUnivers.val().direccion[0] , key : ip};
             this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
-              console.log(snpImg.val());
-              for(var ip in snpImg.val()){
-                
+              for(var ip2 in snpImg.val()){
                 this.Favorites.push({
-                  imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip].name+'?alt=media',
-                  name: snp.val().nombre,
-                  address: snp.val().direccion[0],
-                  id: snp.val().id
+                  imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip2].name+'?alt=media',
+                  name : unv.nombre,
+                  address: unv.address,
+                  id: unv.key
                 });
+                
               }
             });
           });
         }
-        
       });
-      //this.Opinions = universities;
-      
     });
     
   }

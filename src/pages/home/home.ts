@@ -100,6 +100,8 @@ export class HomePage {
     this.loadUniversitiesMostEvaluet();
     this.loadUniversitiesNextStart();
 
+    this.loadUniversitiesNearby('Ciudad Guzman');
+
     //this.loadFakeData();
 
   }
@@ -170,24 +172,6 @@ export class HomePage {
     });
   }
 
-  loadUniversitiesNextStart(){
-    let unives = [];
-    var monthD = new Date().getMonth()+1;
-    const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-    this.monthNm = monthNames[(new Date()).getMonth()];
-    this.afDatabase.database.ref("Universidades").orderByChild('cursos/'+monthD).equalTo(true).on("value", function(snapshot) {
-      "use strict";
-      snapshot.forEach(function(data) {
-        unives.push({
-          imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
-          name : data.val().nombre,
-          id: data.val().id// snapshot.val().id
-        });
-      });
-    });
-    this.universityMonthsList = unives;
-  }
-
   searchUniversityWithName($event){
     let st = ''+$event.target.value;
     let resf = false;
@@ -222,28 +206,8 @@ export class HomePage {
     this.resultUniversities = unis;
     this.searchNull = nulo;
   }
-
-  loadUniversitiesNearby(city){
-    let tmpNombre, tmpRate, tmpId;
-    this.afDatabase.database.ref("Universidades").orderByChild('ciudad').equalTo(city).on("value", function(snapshot) {
-      //alert(snapshot.val().nombre);
-      console.log('nearby: '+snapshot.val().nombre);
-      tmpNombre = snapshot.val().nombre;
-      tmpRate = snapshot.val().scores.global;
-      tmpId = snapshot.val().id;
-
-    });
-    this.nearbyUniversities.push({
-      imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
-      name : tmpNombre,
-      rate : tmpRate, // snapshot.val().scores.global,
-      id: tmpId// snapshot.val().id
-    });
-    
-  }
   
   viewUniversity(id){
-    //alert(id);
     this.navCtrl.push(SingleUniversityPage,{id_university : id});
   }
 
@@ -276,19 +240,57 @@ export class HomePage {
     });
   }
 
+  loadUniversitiesNearby(city){
+    this.afDatabase.database.ref('Universidades').orderByChild('ciudad').equalTo(city).once('value').then( (snapshot) => {
+      for(var ip in snapshot.val()){
+        let unv = { nombre : snapshot.val()[ip].nombre, rat : ''+ snapshot.val()[ip].scores.global , key : ip};
+        this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
+          for(var ip2 in snpImg.val()){
+            this.nearbyUniversities.push({
+              imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip2].name+'?alt=media',
+              name : unv.nombre,
+              rate: unv.rat,
+              id: unv.key
+            });
+            
+          }
+        });
+      }
+    });
+  }
 
   loadUniversitiesMostEvaluet(){
     this.afDatabase.database.ref('Universidades').orderByChild('scores/global').once('value').then( (snapshot) => {
-      console.log(snapshot.val());
       for(var ip in snapshot.val()){
+        let unv = { nombre : snapshot.val()[ip].nombre, rat : snapshot.val()[ip].scores.global , key : ip};
         this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
           for(var ip2 in snpImg.val()){
             this.evaluatesUniversities.push({
               imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip2].name+'?alt=media',
-              name : snapshot.val()[ip].nombre,
-              rating : snapshot.val()[ip].scores.global,
-              id: snapshot.val()[ip].id
+              name : unv.nombre,
+              rating: unv.rat,
+              id: unv.key
             });
+            
+          }
+        });
+      }
+    });
+  }
+
+  loadUniversitiesNextStart(){
+    var monthD = new Date().getMonth()+1; // en el servidor inicia en 1, ionic inicia en 0; enero = 0 
+    this.afDatabase.database.ref('Universidades').orderByChild('cursos/'+monthD).equalTo(true).once('value').then( (snapshot) => {
+      for(var ip in snapshot.val()){
+        let unv = { nombre : snapshot.val()[ip].nombre, key : ip};
+        this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
+          for(var ip2 in snpImg.val()){
+            this.universityMonthsList.push({
+              imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip2].name+'?alt=media',
+              name : unv.nombre,
+              id: unv.key
+            });
+            
           }
         });
       }

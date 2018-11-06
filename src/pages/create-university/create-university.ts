@@ -179,7 +179,12 @@ export class CreateUniversityPage {
         timestamp:database.ServerValue.TIMESTAMP,
         id : 'default',
         scores : {
-
+          actividades : 0,
+          becas : 0,
+          global : 0,
+          instalaciones : 0,
+          profesores : 0,
+          ubicacion : 0
         },
         reviews : {
 
@@ -201,7 +206,7 @@ export class CreateUniversityPage {
       }
       let newUniversity = this.university.push( data ).key;
       data.id = newUniversity;
-      alert('verify id: '+data.id+ ' vs '+newUniversity);
+      //alert('verify id: '+data.id+ ' vs '+newUniversity);
       this.university.update( newUniversity, data);
       /*newUniversity.then( () => {*/
       this.clearInputs();
