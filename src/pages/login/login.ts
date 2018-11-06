@@ -124,48 +124,31 @@ export class LoginPage {
 
   // save user data to firebase 
   saveUserFirebase(uid, email, nombre, telefono, metodo){
-    if( this.loadUsr( uid ) ){
-    //if(!this.getUserExist(uid)){
-      let newUser = {
-        key : uid,
-        email : email,
-        nombre : nombre,
-        telefono : telefono,
-        reputacion: 'novato',//
-        rol :'usuario',
-        metodo: metodo, 
-        estado :'pendiente',
-        configuracion : {
-          buscando : true, //
-          notificaciones : true //
-        }
-      };
-      this.users.update(uid, newUser);
-      alert('acount created sucess');
-    } else{
-      alert('login sucess');
-    }
-  }
-
-  getUserExist = async(uid) =>{
-    let lng = await this.loadUsr( uid );
-    alert('await ' +lng);
-    return lng;
-  }
-
-  loadUsr = (uid) => {
-    return new Promise((resolve, reject) => {
-      this.afDatabase.database.ref('/Usuarios/'+uid+'/').once('value').then( (snapshot) => {
-        if(snapshot.val() != null){
-          resolve ( true ) ;
-        }else{
-          resolve( false );
-        }
-        
-      });
+    this.afDatabase.database.ref('/Usuarios/'+uid+'/').once('value').then( (snapshot) => {
+      if(snapshot.val() != null){
+        alert('login sucess');
+      }else{
+        let newUser = {
+          key : uid,
+          email : email,
+          nombre : nombre,
+          telefono : telefono,
+          reputacion: 'novato',//
+          rol :'usuario',
+          metodo: metodo, 
+          estado :'pendiente',
+          configuracion : {
+            buscando : true, //
+            notificaciones : true //
+          }
+        };
+        this.users.update(uid, newUser);
+        alert('acount created sucess');
+      }
       
     });
   }
+
 
   //for ui controls
   activeFormRegistro(){

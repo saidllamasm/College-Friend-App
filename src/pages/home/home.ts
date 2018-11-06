@@ -100,7 +100,7 @@ export class HomePage {
     this.loadUniversitiesMostEvaluet();
     this.loadUniversitiesNextStart();
 
-    this.loadUniversitiesNearby('Ciudad Guzman');
+    //this.loadUniversitiesNearby('Ciudad Guzman');
 
     //this.loadFakeData();
 
@@ -148,7 +148,7 @@ export class HomePage {
       this.map.moveCamera({
         target: response.latLng
       });
-      this.insertMarker('Mi ubicación', 'blue', response.latLng);
+      //this.insertMarker('Mi ubicación', 'blue', response.latLng);
       this.searchUniversitiesNearby(response.latLng);
     })
     .catch(error =>{
@@ -166,7 +166,6 @@ export class HomePage {
       }
       let address: any = [
         results[0].locality || ""].join(", ");
-        alert(address);
         this.cityActual = ''+address;
         this.loadUniversitiesNearby(address);
     });
@@ -241,9 +240,12 @@ export class HomePage {
   }
 
   loadUniversitiesNearby(city){
+    
     this.afDatabase.database.ref('Universidades').orderByChild('ciudad').equalTo(city).once('value').then( (snapshot) => {
       for(var ip in snapshot.val()){
         let unv = { nombre : snapshot.val()[ip].nombre, rat : ''+ snapshot.val()[ip].scores.global , key : ip};
+        var cords ={lat: snapshot.val()[ip].gps.lat, lng: snapshot.val()[ip].gps.lng};
+        this.insertMarker(snapshot.val()[ip].nombre, 'blue', cords );
         this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
           for(var ip2 in snpImg.val()){
             this.nearbyUniversities.push({
