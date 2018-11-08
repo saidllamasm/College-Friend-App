@@ -66,39 +66,19 @@ export class WriteReviewPage {
 
   //rate events
   onModelInstalaciones($event){
-    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
-      {
-        instalaciones : $event
-      }
-    );
+    this.rateInstalaciones = $event;
   }
   onModelProfesores($event){
-    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
-      {
-        profesores : $event
-      }
-    );
+    this.rateProfesores = $event;
   }
   onModelUbicacion($event){
-    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
-      {
-        ubicacion : $event
-      }
-    );
+    this.rateUbicacion = $event;
   }
   onModelActividades($event){
-    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
-      {
-        actividades : $event
-      }
-    );
+    this.rateActividades = $event;
   }
   onModelBecas($event){
-    this.afDatabase.object('/Universidades/' + this.id_university+'/scores/').update(
-      {
-        becas : $event
-      }
-    );
+    this.rateBecas = $event;
   }
 
   saveReview(){
@@ -108,6 +88,13 @@ export class WriteReviewPage {
         interacciones: {
           likes : 0, 
           dislikes : 0
+        },
+        scores : {
+          actividades : this.rateActividades,
+          becas : this.rateBecas,
+          instalaciones : this.rateInstalaciones,
+          profesores : this.rateProfesores,
+          ubicacion : this.rateProfesores
         },
         opinion :  this.opinionContent,
         timestamp: database.ServerValue.TIMESTAMP

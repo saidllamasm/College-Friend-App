@@ -300,7 +300,7 @@ export class SingleUniversityPage {
             username : infoUser.nombre,
             content : opinion[2],//opinion
             //opinion[1]//interacciones
-            time : this.timeConverter(opinion[3]), //time
+            time : this.timeConverter(opinion[4]), //time
             images : imagesTMP
           });
         })
