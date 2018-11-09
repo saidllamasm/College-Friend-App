@@ -36,13 +36,47 @@ export class ChatPage {
     public afDatabase: AngularFireDatabase
   ) {
     this.afAuth.authState.subscribe(user => {
-      this.afDatabase.list<UserCustom>('/Usuarios/').valueChanges().subscribe((res: UserCustom[]) => { 
-        this.uuid = user.uid;
-        this.username = user.displayName ;
-        this.userPicture = "https://www.gravatar.com/avatar/" + md5(user.email, 'hex')+"?s=400";
+      this.uuid = user.uid;
+      this.username = user.displayName ;
+      this.userPicture = "https://www.gravatar.com/avatar/" + md5(user.email, 'hex')+"?s=400";
+      this.afDatabase.database.ref('/Chats/').once('value').then( (snapshot) => {
+        for(var ip in snapshot.val()){
+          if(snapshot.val()[ip].uidcreador == user.uid || snapshot.val()[ip].uiddestino == user.uid ){
+            if(snapshot.val()[ip].uidcreador == user.uid){
+              this.createMsj(ip, snapshot.val()[ip].uiddestino,  snapshot.val()[ip].timestamp,snapshot.val()[ip].lastmsj);
+            }else{
+              this.createMsj(ip, snapshot.val()[ip].uidcreador,  snapshot.val()[ip].timestamp,snapshot.val()[ip].lastmsj);
+                /*this.MessageList.push({
+                  profileTo : snapshot.val()[ip].uidcreador,
+                  nameTo : snapshot.val()[ip].uidcreador,
+                  date: snapshot.val()[ip].timestamp,
+                  abstract : snapshot.val()[ip].lastmsj,
+                  idchat: ip
+                });*/
+            }
+            
+            /*
+            load all messages
+            for (var ip2 in snapshot.val()[ip].mensajes) {
+              alert(snapshot.val()[ip].mensajes[ip2].contenido);
+            }*/
+          }
+        }
       });
     });
-    this.loadFakeDate();
+    //this.loadFakeDate();
+  }
+
+  createMsj(id, uid, timestamp, abs){
+    this.afDatabase.database.ref('/Usuarios/'+uid).once('value').then( (snapshot) => {
+      this.MessageList.push({
+        profileTo : "https://www.gravatar.com/avatar/" + md5(snapshot.val().email, 'hex')+"?s=400",
+        nameTo : snapshot.val().nombre,
+        date: timestamp,
+        abstract : abs,
+        idchat: id
+      });
+    });
   }
 
   loadFakeDate(){

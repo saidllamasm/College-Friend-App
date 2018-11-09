@@ -31,7 +31,7 @@
 
     <div class="list-conversations" *ngIf="messages ">
 
-        <div class="single-conversation border-down" (click)="openConversation(msj.idchat)" *ngFor="let msj of MessageList">
+        <div class="single-conversation border-down" *ngFor="let msj of MessageList" (click)="openConversation(msj.idchat)">
             <ion-grid>
                 <ion-row>
                     <ion-col col-3>

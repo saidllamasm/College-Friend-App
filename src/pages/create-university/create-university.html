@@ -12,8 +12,8 @@
         <ion-grid>
             <ion-row>
                 <ion-col>
-                    <div *ngFor="let image of images">
-                        <img src="{{image}}" />
+                    <div>
+                        <img *ngFor="let image of imagesTmp" [src]="image" class="tmpImg" height="100px" width="100px">
                     </div>
                 </ion-col>
             </ion-row>

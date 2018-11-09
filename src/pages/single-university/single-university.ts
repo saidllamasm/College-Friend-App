@@ -258,16 +258,29 @@ export class SingleUniversityPage {
   }
 
   getImagesFeature(){
+    this.afDatabase.database.ref('Imagenes/Universidad/' + this.id_university).once('value').then( (span) => {
+      for (var ip in span.val()) {
+        //alert(ip);
+        /*this.listIms.push({
+          imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+span[ip].name+'?alt=media'
+        });*/
+        //imagesTMP.push({imgurl : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+span[ip].name+'?alt=media' });
+      }
+    });
+  }
+  /*getImagesFeature(){
     this.afDatabase.object('Imagenes/Universidad/' + this.id_university).valueChanges().subscribe((images : ImageUniversity ) =>{
+
       let key = Object.keys(images)[0];
       let nombre = images[key].name;
       this.listIms.push({
         imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media'
       });
     });
-  }
+  }*/
 
   initChat(id){
+    // send id user with param: id_user
     this.navCtrl.push(InboxSinglePage);
   }
 

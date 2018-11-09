@@ -67,7 +67,10 @@
         <ion-row>
             <!--insert images by user -->
             <div class="container-pics">
-                <div #menucontainer></div>
+                <!--<div #menucontainer></div>-->
+                <div class="container-imgs">
+                    <img *ngFor="let image of imagesTmp" [src]="image" class="tmpImg" height="100px" width="100px">
+                </div>
                 <div class="btn-addPic" (click)="addPicture()">
                     <ion-icon class="icon" name="camera"></ion-icon>
                 </div>

@@ -30,6 +30,7 @@ import { database, storage } from 'firebase';
 })
 export class CreateUniversityPage {
   images: any = [];
+  imagesTmp : any[];
 
   nameUniversity:String;
   address:String;
@@ -56,6 +57,7 @@ export class CreateUniversityPage {
     public loadingCtrl: LoadingController
   ) {
     //this.loadMap();
+    this.imagesTmp= [];
     this.university = database.list('Universidades');
   }
 
@@ -126,9 +128,13 @@ export class CreateUniversityPage {
             (results) => {
               // recorrer todas las imagenes selecccionadas
               this.images = results;
+              for (var i = 0; i < this.images.length; i++) {
+                this.imagesTmp.push('data:image/jpeg;base64,' + this.images[i]); 
+              }
             }, (err) => {
               console.log(err);
-              alert(JSON.stringify(err));}
+              alert(JSON.stringify(err));
+            }
           );
         }
       }, (err) => {
@@ -216,7 +222,7 @@ export class CreateUniversityPage {
       }
       let toast = this.toastCtrl.create({
         message: 'University was added successfully',
-        duration: 3000,
+        duration: 1000,
         position: 'bottom'
       }).present();
       

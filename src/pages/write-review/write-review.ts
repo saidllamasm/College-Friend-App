@@ -1,10 +1,11 @@
 import { Component,ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ImagePlaceholderComponent } from '../../components/image-placeholder/image-placeholder';
+import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
+//import { ImagePlaceholderComponent } from '../../components/image-placeholder/image-placeholder';
 import { AngularFireAuth } from 'angularfire2/auth';
 import md5 from 'crypto-md5';
 import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
-import { database} from 'firebase';
+import { database, storage } from 'firebase';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 /**
  * Generated class for the WriteReviewPage page.
@@ -19,6 +20,8 @@ import { database} from 'firebase';
   templateUrl: 'write-review.html',
 })
 export class WriteReviewPage {
+  images: any = [];
+  imagesTmp : any[];
   public userUID = '';
   public id_university = ''; 
   public universityName = '';
@@ -40,11 +43,14 @@ export class WriteReviewPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public toastCtrl: ToastController,
     public afDatabase: AngularFireDatabase,
-    private componentFactoryResolver: ComponentFactoryResolver,
+    public imagePicker: ImagePicker,
+    //private componentFactoryResolver: ComponentFactoryResolver,
     public afAuth: AngularFireAuth,
   ) {
 
+    this.imagesTmp= [];
     this.id_university = this.navParams.get('id_university');
     this.universityName = this.navParams.get('name_university');
     this.dateToday =''+ new Date().toISOString();
@@ -57,10 +63,42 @@ export class WriteReviewPage {
   }
 
   addPicture(){
-    
+    this.imagePicker.hasReadPermission().then(
+      (result) => { // sin permisos
+        if(result == false){
+          // solicitar permiso para acceder a galeria
+          this.imagePicker.requestReadPermission();
+        }
+        else if(result == true){ // con permiso
+          this.imagePicker.getPictures({
+            quality: 50,
+            width: 512,
+            height: 512,
+            outputType: 1 // retornar en base64
+          }).then(
+            (results) => {
+              // recorrer todas las imagenes selecccionadas
+              this.images = results;
+              for (var i = 0; i < this.images.length; i++) {
+                this.imagesTmp.push('data:image/jpeg;base64,' + this.images[i]); 
+              }
+            }, (err) => {
+              console.log(err);
+              alert(JSON.stringify(err));
+            }
+          );
+        }
+      }, (err) => {
+        console.log(err);
+        alert(err);
+      });
+  }
+
+
+  /*addPicture(){
     const childComponent_var = this.componentFactoryResolver.resolveComponentFactory(ImagePlaceholderComponent);    
     this.menucontainer.createComponent(childComponent_var);
-  }
+  }*/
 
   // ratings
 
@@ -101,6 +139,34 @@ export class WriteReviewPage {
       }
     );
 
+    for (var i = 0; i < this.images.length; i++) {
+      let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
+      this.uploadPics(this.images[i] , id, this.userUID);
+    }
 
+  }
+
+  uploadPics( image , name, tokenReview){
+    const img = 'data:image/jpeg;base64,' + image; 
+    const pics = storage().ref('universidades/'+name); // test1, test2, ..., testX
+    pics.putString(img, 'data_url').then(res =>{
+      const items = this.afDatabase.list('Imagenes/Opiniones/'+tokenReview+'/');
+      items.push({}).set({
+        name : ''+res.metadata.name + '',
+        path : ''+ res.metadata.fullPath + '',
+        hash : ''+res.metadata.md5Hash+'',
+        content_type : ''+res.metadata.contentType+'',
+        estado : 'pendiente'
+      }).then( () =>{
+        let toast = this.toastCtrl.create({
+          message: 'Upload success',
+          duration: 1000,
+          position: 'bottom'
+        }).present();
+      });
+    }).catch(err =>{
+      console.log(JSON.stringify(err));
+      alert(err);
+    });
   }
 }

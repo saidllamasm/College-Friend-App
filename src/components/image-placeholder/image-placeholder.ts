@@ -15,7 +15,7 @@ export class ImagePlaceholderComponent {
   public url;
 
   constructor() {
-    this.url = 'http://placehold.it/80x80';
+    this.url = 'urlSrc';
   }
 
 }

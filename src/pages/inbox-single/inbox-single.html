@@ -5,18 +5,18 @@
   Ionic pages and navigation.
 -->
 <ion-header primary class="bg-primary">
-    <h4 class="title">{{thisUser}}</h4>
+    <h4 class="title">{{personName}}</h4>
 </ion-header>
 
 <ion-content>
 
     <div class="message-wrap">
-        <div *ngFor="let msg of msgList" class="message " [ngClass]="{ 'left' : msg.userId == idToUser, 'right' : msg.userId != idToUser} ">
+        <div *ngFor="let msg of msgList" class="message " [ngClass]="{ 'left' : msg.userId != idFromUser, 'right' : msg.userId == idFromUser} ">
             <img class="user-img" [src]="msg.userAvatar" alt="" src="">
             <ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner>
             <div class="msg-detail">
                 <div class="msg-info">
-                    <p>{{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time}}</p>
+                    <p>{{msg.userName}}&nbsp;{{msg.time}}</p>
                 </div>
                 <div class="msg-content">
                     <span class="triangle"></span>
