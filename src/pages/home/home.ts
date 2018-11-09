@@ -1,5 +1,3 @@
-import { University } from './../../model/university/university.model';
-import { ImageUniversity } from './../../model/image/image.model';
 import { NgModule } from '@angular/core';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -11,7 +9,7 @@ import { Platform } from 'ionic-angular';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { CreateUniversityPage } from '../create-university/create-university';
 import { Storage } from '@ionic/storage';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import {
   GoogleMaps,
@@ -21,7 +19,6 @@ import {
   Geocoder,
   GeocoderResult
 } from '@ionic-native/google-maps';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -81,7 +78,6 @@ export class HomePage {
     public plt: Platform,
     public afDatabase: AngularFireDatabase,
     public navParams: NavParams,
-    private sanitization:DomSanitizer,
     private storage: Storage,
   ){
 
@@ -264,17 +260,17 @@ export class HomePage {
   loadUniversitiesMostEvaluet(){
     this.afDatabase.database.ref('Universidades').orderByChild('scores/global').once('value').then( (snapshot) => {
       for(var ip in snapshot.val()){
+        //alert(snapshot.val()[ip].nombre);
         let unv = { nombre : snapshot.val()[ip].nombre, rat : snapshot.val()[ip].scores.global , key : ip};
         this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
-          for(var ip2 in snpImg.val()){
+          let key = Object.keys(snpImg.val())[0];
+          let nombre = snpImg.val()[key].name;
             this.evaluatesUniversities.push({
-              imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip2].name+'?alt=media',
+              imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
               name : unv.nombre,
               rating: unv.rat,
               id: unv.key
             });
-            
-          }
         });
       }
     });

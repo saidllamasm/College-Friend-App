@@ -126,7 +126,7 @@ export class LoginPage {
   saveUserFirebase(uid, email, nombre, telefono, metodo){
     this.afDatabase.database.ref('/Usuarios/'+uid+'/').once('value').then( (snapshot) => {
       if(snapshot.val() != null){
-        alert('login sucess');
+        console.log('login success');
       }else{
         let newUser = {
           key : uid,
