@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angul
 //import { ImagePlaceholderComponent } from '../../components/image-placeholder/image-placeholder';
 import { AngularFireAuth } from 'angularfire2/auth';
 import md5 from 'crypto-md5';
-import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { database, storage } from 'firebase';
 import { ImagePicker } from '@ionic-native/image-picker';
 
@@ -53,7 +53,9 @@ export class WriteReviewPage {
     this.imagesTmp= [];
     this.id_university = this.navParams.get('id_university');
     this.universityName = this.navParams.get('name_university');
-    this.dateToday =''+ new Date().toISOString();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var tod = new Date();
+    this.dateToday =''+ tod.getDay()+' '+ months[tod.getMonth()] +' '+tod.getFullYear();
     this.afAuth.authState.subscribe(user => {
       this.userUID = user.uid;
       this.userPicture = "https://www.gravatar.com/avatar/" + md5(user.email, 'hex')+"?s=400";
@@ -61,7 +63,7 @@ export class WriteReviewPage {
     });
     
   }
-
+  
   addPicture(){
     this.imagePicker.hasReadPermission().then(
       (result) => { // sin permisos

@@ -2,13 +2,12 @@ import { InboxSinglePage } from './../inbox-single/inbox-single';
 import { CallNumber } from '@ionic-native/call-number';
 import { University } from './../../model/university/university.model';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController, NavParams, Platform,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform,AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
 import { WriteReviewPage } from '../write-review/write-review';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Storage } from '@ionic/storage';
-import { ImageUniversity } from '../../model/image/image.model';
 import { AngularFireAuth } from 'angularfire2/auth';
 import md5 from 'crypto-md5';
 import { UserCustom } from '../../model/user/user.model';
@@ -54,6 +53,7 @@ export class SingleUniversityPage {
   public website;
 
   //
+  public timeCreated = '';
   public listCarrers = [];
   public listMonths = [];
   public listReviews = [];
@@ -94,9 +94,8 @@ export class SingleUniversityPage {
         this.rateUbicacion = snapshot.val().scores.ubicacion;
         this.rateActividades = snapshot.val().scores.actividades;
         this.rateBecas = snapshot.val().scores.becas;
-        let gral = snapshot.val().scores.instalaciones + snapshot.val().scores.profesores + snapshot.val().scores.ubicacion + snapshot.val().scores.actividades + snapshot.val().scores.becas;
-        this.rateGeneral = ''+(gral/5);
-        this.setRateGeneralFirebase(gral);
+        this.timeCreated = this.timeConverter(snapshot.val().timestamp).dia + ' '+this.timeConverter(snapshot.val().timestamp).mes + ' '+this.timeConverter(snapshot.val().timestamp).año,
+        this.rateGeneral = snapshot.val().scores.global;
         this.tmpReviews = snapshot.val().reviews;
         this.phone = snapshot.val().telefono;
         this.website = snapshot.val().website;
@@ -142,10 +141,6 @@ export class SingleUniversityPage {
     
   }
 
-
-  setRateGeneralFirebase(rate){
-
-  }
 
   getLenguaje = async() =>{
     let lng = await this.loadLng();

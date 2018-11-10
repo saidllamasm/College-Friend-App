@@ -5,6 +5,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { database, storage } from 'firebase';
+import md5 from 'crypto-md5';
 /**
  * Generated class for the OpinionSinglePage page.
  *
@@ -46,9 +47,15 @@ export class OpinionSinglePage {
     this.afDatabase.database.ref('Universidades/'+this.id_university).once('value').then( (snapshot) => {
       this.universityName = snapshot.val().nombre;
     });
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var tod = new Date();
+    this.dateToday =''+ tod.getDay()+' '+ months[tod.getMonth()] +' '+tod.getFullYear();
+
     //this.universityName = this.navParams.get('name');
     this.afAuth.authState.subscribe(user => {
       this.userUID = user.uid;
+      this.userPicture = "https://www.gravatar.com/avatar/" + md5(user.email, 'hex')+"?s=400";
+      this.username = user.displayName;
       this.afDatabase.database.ref('Universidades/'+this.id_university+'/reviews/'+user.uid).once('value').then( (snapshot) => {
         this.rateActividades = snapshot.val().scores.actividades;
         this.rateProfesores = snapshot.val().scores.profesores;

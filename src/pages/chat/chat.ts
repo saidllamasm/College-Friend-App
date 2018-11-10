@@ -67,12 +67,44 @@ export class ChatPage {
     //this.loadFakeDate();
   }
 
+  timeConverter(time){
+    var timestamp   = time.toString().substring(0,10),
+    date        = new Date(timestamp * 1000),
+    datevalues  = [
+                   date.getFullYear(), //0
+                   date.getMonth(), //1
+                   date.getDate(), //2
+                   date.getHours(), //3
+                   date.getMinutes(), //4
+                   date.getSeconds(), //5
+                ]; 
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var timeTraslate = {
+      segundo : datevalues[5],
+      minuto : datevalues[4],
+      hora  : datevalues[3],
+      dia : datevalues[2],
+      mes : months[datevalues[1]],
+      año : datevalues[0]
+    };
+    
+    return timeTraslate;
+  }
+
+  convertToMeridiano(hora){
+    if(hora > 12 )
+      return { hora : hora,  letra : 'PM'};
+    else
+      return { hora : hora,  letra : 'AM'};
+
+  }
+
   createMsj(id, uid, timestamp, abs){
     this.afDatabase.database.ref('/Usuarios/'+uid).once('value').then( (snapshot) => {
       this.MessageList.push({
         profileTo : "https://www.gravatar.com/avatar/" + md5(snapshot.val().email, 'hex')+"?s=400",
         nameTo : snapshot.val().nombre,
-        date: timestamp,
+        date: this.convertToMeridiano(this.timeConverter(timestamp).hora).hora  + ':'+this.timeConverter(timestamp).minuto + ' ' + this.convertToMeridiano(this.timeConverter(timestamp).hora).letra,
         abstract : abs,
         idchat: id
       });

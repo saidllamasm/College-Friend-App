@@ -82,6 +82,38 @@ export class InboxSinglePage {
       });
   }
 
+  timeConverter(time){
+    var timestamp   = time.toString().substring(0,10),
+    date        = new Date(timestamp * 1000),
+    datevalues  = [
+                   date.getFullYear(), //0
+                   date.getMonth(), //1
+                   date.getDate(), //2
+                   date.getHours(), //3
+                   date.getMinutes(), //4
+                   date.getSeconds(), //5
+                ]; 
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var timeTraslate = {
+      segundo : datevalues[5],
+      minuto : datevalues[4],
+      hora  : datevalues[3],
+      dia : datevalues[2],
+      mes : months[datevalues[1]],
+      año : datevalues[0]
+    };
+    
+    return timeTraslate;
+  }
+
+  convertToMeridiano(hora){
+    if(hora > 12 )
+      return { hora : 24-hora,  letra : 'PM'};
+    else
+      return { hora : hora,  letra : 'AM'};
+
+  }
+
   loadMessagesWithChat(){
     this.afDatabase.database.ref('/Chats/'+this.searchByChatToken).once('value').then( (snapshot) => {
       //"use strict";
@@ -91,7 +123,7 @@ export class InboxSinglePage {
             userId: snapshot.val().mensajes[ip].uiduser,
             userAvatar : "https://www.gravatar.com/avatar/" + md5(this.emailTo, 'hex')+"?s=400",
             status : "send",
-            time : snapshot.val().mensajes[ip].timestamp,
+            time : this.convertToMeridiano(this.timeConverter(snapshot.val().mensajes[ip].timestamp).hora).hora  + ':'+this.timeConverter(snapshot.val().mensajes[ip].timestamp).minuto + ' ' + this.convertToMeridiano(this.timeConverter(snapshot.val().mensajes[ip].timestamp).hora).letra,//,
             userName : this.nameTo.split(' ')[0],
             content: snapshot.val().mensajes[ip].contenido
           });
@@ -100,7 +132,7 @@ export class InboxSinglePage {
             userId: snapshot.val().mensajes[ip].uiduser,
             userAvatar : "https://www.gravatar.com/avatar/" + md5(this.emailFrom, 'hex')+"?s=400",
             status : "send",
-            time : snapshot.val().mensajes[ip].timestamp,
+            time : this.convertToMeridiano(this.timeConverter(snapshot.val().mensajes[ip].timestamp).hora).hora  + ':'+this.timeConverter(snapshot.val().mensajes[ip].timestamp).minuto + ' ' + this.convertToMeridiano(this.timeConverter(snapshot.val().mensajes[ip].timestamp).hora).letra,
             userName : this.nameFrom.split(' ')[0],
             content: snapshot.val().mensajes[ip].contenido
           });
