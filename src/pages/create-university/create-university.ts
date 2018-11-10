@@ -182,7 +182,7 @@ export class CreateUniversityPage {
         nombre: this.nameUniversity,
         website:this.website,
         telefono:this.phoneUniversity,
-        timestamp:database.ServerValue.TIMESTAMP,
+        timestamp: database.ServerValue.TIMESTAMP,
         id : 'default',
         scores : {
           actividades : 0,

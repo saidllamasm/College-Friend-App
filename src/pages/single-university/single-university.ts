@@ -302,7 +302,7 @@ export class SingleUniversityPage {
             username : infoUser.nombre,
             content : opinion[2],//opinion
             //opinion[1]//interacciones
-            time : this.timeConverter(opinion[4]), //time
+            time : this.timeConverter(opinion[4]).mes + ' '+this.timeConverter(opinion[4]).año, //time
             images : imagesTMP
           });
         })
@@ -320,17 +320,28 @@ export class SingleUniversityPage {
   }
 
 
-  timeConverter(UNIX_timestamp){
-    var a = new Date(UNIX_timestamp * 1000);
+  timeConverter(time){
+    var timestamp   = time.toString().substring(0,10),
+    date        = new Date(timestamp * 1000),
+    datevalues  = [
+                   date.getFullYear(), //0
+                   date.getMonth(), //1
+                   date.getDate(), //2
+                   date.getHours(), //3
+                   date.getMinutes(), //4
+                   date.getSeconds(), //5
+                ]; 
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    return time;
+    var timeTraslate = {
+      segundo : datevalues[5],
+      minuto : datevalues[4],
+      hora  : datevalues[3],
+      dia : datevalues[2],
+      mes : months[datevalues[1]],
+      año : datevalues[0]
+    };
+    
+    return timeTraslate;
   }
 
   addMonth(){
