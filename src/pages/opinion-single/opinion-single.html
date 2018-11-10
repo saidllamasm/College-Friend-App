@@ -22,46 +22,47 @@
         <!--ratings-->
         <ion-row>
             <ion-col col-5>
-                {{"Ratings.Instalaciones" | translate}}
+                <span>{{"Ratings.Instalaciones" | translate}}</span>
             </ion-col>
             <ion-col col-7>
-                <rating [(ngModel)]="rateInstalaciones" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelInstalaciones($event)"></rating>
+                <rating [(ngModel)]="rateInstalaciones" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col col-5>
-                {{"Ratings.Profesores" | translate}}
+                <span>{{"Ratings.Profesores" | translate}}</span>
             </ion-col>
             <ion-col col-7>
-                <rating [(ngModel)]="rateProfesores" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelProfesores($event)"></rating>
+                <rating [(ngModel)]="rateProfesores" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col col-5>
-                {{"Ratings.Ubicacion" | translate}}
+                <span>{{"Ratings.Ubicacion" | translate}}</span>
             </ion-col>
             <ion-col col-7>
-                <rating [(ngModel)]="rateUbicacion" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelUbicacion($event)"></rating>
+                <rating [(ngModel)]="rateUbicacion" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col col-5>
-                {{"Ratings.Actividades" | translate}}
+                <span>{{"Ratings.Actividades" | translate}}</span>
             </ion-col>
             <ion-col col-7>
-                <rating [(ngModel)]="rateActividades" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelActividades($event)"></rating>
+                <rating [(ngModel)]="rateActividades" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col col-5>
-                {{"Ratings.Becas" | translate}}
+                <span> {{"Ratings.Becas" | translate}}</span>
             </ion-col>
             <ion-col col-7>
-                <rating [(ngModel)]="rateBecas" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false" (ngModelChange)="onModelBecas($event)"></rating>
+                <rating [(ngModel)]="rateBecas" readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
             </ion-col>
         </ion-row>
         <!--end ratings-->
         <ion-row>
+            <br>
             <textarea [(ngModel)]="opinionContent" type="text" class="txtOpinion"></textarea>
         </ion-row>
         <ion-row>
@@ -75,7 +76,7 @@
 
         </ion-row>
         <ion-row>
-            <button (click)="saveReview()" class="btn-save">{{"Escribir.Guardar" | translate}}</button>
+            <button (click)="saveReview()" class="btn-save">{{"Escribir.Actualizar" | translate}}</button>
         </ion-row>
     </ion-grid>
 

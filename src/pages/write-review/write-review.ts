@@ -144,6 +144,12 @@ export class WriteReviewPage {
       this.uploadPics(this.images[i] , id, this.userUID);
     }
 
+    // save for user
+    let univ = {};
+    univ[this.id_university] = true;
+    this.afDatabase.list('/Usuarios/' + this.userUID +'').update('reviews', univ);
+
+
   }
 
   uploadPics( image , name, tokenReview){

@@ -89,8 +89,6 @@
                     <ion-row>&nbsp;</ion-row>
                     <ion-row>&nbsp;</ion-row>
                     <ion-row>&nbsp;</ion-row>
-                    <ion-row>&nbsp;</ion-row>
-                    <ion-row>&nbsp;</ion-row>
                     <ion-row>
                         <div class="circle-number">
                             <span class="number">{{rateGeneral}}</span>
@@ -189,9 +187,9 @@
                     <p class="content-review">{{review.content}}</p>
                 </ion-row>
                 <ion-row>
-                    <ion-slides class="slide-img-userUniversities" slidesPerView="2" spaceBetween="16">
-                        <ion-slide *ngFor="let image of review.images">
-                            <img [src]="image.imgurl" imageViewer>
+                    <ion-slides class="slide-img-userUniversities" slidesPerView="3.5" spaceBetween="5">
+                        <ion-slide class="reviews" *ngFor="let image of review.images">
+                            <img [src]="image.imgurl" class="img-rv" imageViewer>
                         </ion-slide>
                     </ion-slides>
                 </ion-row>

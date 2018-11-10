@@ -86,7 +86,8 @@
     },
     "Escribir": {
         "Para": "Write opinion for",
-        "Guardar": "add comment"
+        "Guardar": "add comment",
+        "Actualizar": "update comment"
     },
     "Meses": {
         "Enero": "Enero",

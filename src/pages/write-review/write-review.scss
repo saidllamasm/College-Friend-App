@@ -1,10 +1,17 @@
 page-write-review {
+    * {
+        color: #707070;
+        font-size: 12px;
+    }
     h2 {
         font-size: 17px;
         padding-bottom: 5px;
         border-bottom: 1px solid #7070701C;
     }
     .txtOpinion {
+        padding: 5px;
+        color: #707070;
+        margin-top: 20px;
         height: 200px;
         width: 100%;
         border-radius: 5px;
@@ -47,5 +54,20 @@ page-write-review {
     }
     .tmpImg {
         margin: 10px;
+    }
+    ul {
+        padding: 0px;
+        margin: 2px!important;
+        float: right;
+        &.rating li {
+            padding: 0px !important;
+            background: none;
+            color: map-get($colors, primary)!important;
+            ;
+            ion-icon {
+                font-size: 20px;
+                color: map-get($colors, primary)!important;
+            }
+        }
     }
 }

@@ -57,6 +57,7 @@
             right: 10px;
         }
         .circle-number {
+            float: right;
             background-color: map-get($colors, dark);
             border-radius: 50%;
             height: 50px;
@@ -127,10 +128,20 @@
             font-size: 14px;
             text-transform: lowercase;
         }
-        ul.rating li {
-            padding: 0px!important;
-            color: #3880FF !important;
-            margin-top: -20px!important;
+        ul {
+            padding: 0px;
+            margin-top: 0px!important;
+            float: right;
+            &.rating li {
+                padding: 0px !important;
+                background: none;
+                color: map-get($colors, primary)!important;
+                ;
+                ion-icon {
+                    font-size: 16px;
+                    color: map-get($colors, primary)!important;
+                }
+            }
         }
         .single-review {
             border-bottom: 1px solid #70707066;
@@ -155,5 +166,10 @@
         }
         .txtAddress {
             font-size: 13px;
+        }
+        ion-slide.reviews {
+            img {
+                height: 100px!important;
+            }
         }
     }

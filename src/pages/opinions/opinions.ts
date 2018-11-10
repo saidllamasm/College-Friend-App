@@ -44,14 +44,14 @@ export class OpinionsPage {
         for(var ip in snapshot.val()){
           this.afDatabase.database.ref("Universidades/"+ip).once('value').then( (snp) => {
             this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
-              for(var ip in snpImg.val()){
-                  universities.push({
-                    imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip].name+'?alt=media',
-                    name : snp.val().nombre,
-                    rating : snp.val().scores.global,
-                    id : snp.val().id
-                  });
-              }
+              let key = Object.keys(snpImg.val())[0];
+              let nombre = snpImg.val()[key].name;
+              universities.push({
+                imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
+                name : snp.val().nombre,
+                rating : snp.val().scores.global,
+                id : snp.val().id
+              });
             });
           });
         }
@@ -62,6 +62,6 @@ export class OpinionsPage {
   }
 
   openOpinionSinglePage(id){
-    this.navCtrl.push(OpinionSinglePage,{id_review : id });
+    this.navCtrl.push(OpinionSinglePage,{id_review : id});
   }
 }
