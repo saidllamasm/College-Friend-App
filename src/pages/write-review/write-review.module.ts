@@ -1,3 +1,4 @@
+import { Ionic2RatingModule } from 'ionic2-rating';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { WriteReviewPage } from './write-review';
@@ -12,6 +13,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
   ],
   imports: [
     IonicPageModule.forChild(WriteReviewPage),
+    Ionic2RatingModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

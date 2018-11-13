@@ -1,3 +1,5 @@
+import { ComponentsModule } from './../../components/components.module';
+import { HeaderResizeComponent } from './../../components/header-resize/header-resize';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { SingleUniversityPage } from './single-university';
@@ -15,6 +17,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
   imports: [
     IonicPageModule.forChild(SingleUniversityPage),
     Ionic2RatingModule,
+    //HeaderResizeComponent,
+    ComponentsModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

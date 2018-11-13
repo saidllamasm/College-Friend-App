@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
-import { ProgressBarComponent } from './progress-bar/progress-bar';
-import { ImagePlaceholderComponent } from './image-placeholder/image-placeholder';
 import { HeaderResizeComponent } from './header-resize/header-resize';
+import { IonicModule } from 'ionic-angular'
+import { CommonModule } from '@angular/common';
 @NgModule({
-	declarations: [ProgressBarComponent,
-    ImagePlaceholderComponent,
-    HeaderResizeComponent],
-	imports: [],
-	exports: [ProgressBarComponent,
-    ImagePlaceholderComponent,
-    HeaderResizeComponent]
+	declarations: [
+        HeaderResizeComponent
+    ],
+	imports: [
+        CommonModule ,
+        IonicModule
+    ],
+	exports: [
+        HeaderResizeComponent
+    ]
 })
 export class ComponentsModule {}

@@ -1,5 +1,7 @@
+//import { HeaderResizeComponent } from './../components/header-resize/header-resize';
+//import { ComponentsModule } from './../components/components.module';
 import { Facebook } from '@ionic-native/facebook';
-import { NgModule, ErrorHandler, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, ErrorHandler, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -54,20 +56,16 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 
-import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
-import { ImagePlaceholderComponent } from '../components/image-placeholder/image-placeholder';
-
 import { environment } from '../environments/environment';
-import { HeaderResizeComponent } from '../components/header-resize/header-resize';
+//import { HeaderResizeComponent } from '../components/header-resize/header-resize';
 
 @NgModule({
   declarations: [
     MyApp,
     TabsPage,
     HomePage,
-    ProgressBarComponent,
-    ImagePlaceholderComponent,
-    HeaderResizeComponent,
+    //HeaderResizeComponent,
+    //ComponentsModule
     // for debug
     WriteReviewPage,
     OpinionsPage,
@@ -90,6 +88,7 @@ import { HeaderResizeComponent } from '../components/header-resize/header-resize
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     Ionic2RatingModule,
+    //ComponentsModule,
     IonicImageViewerModule,
     TranslateModule.forRoot({
       loader: {
@@ -99,13 +98,15 @@ import { HeaderResizeComponent } from '../components/header-resize/header-resize
       }
     }),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    //ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     OpinionsPage,
     SavedPage,
+    //HeaderResizeComponent,
     ProfilePage,
     HomePage,
     TabsPage,
@@ -117,8 +118,7 @@ import { HeaderResizeComponent } from '../components/header-resize/header-resize
     ChatPage,
     LoginPage,
     CreateUniversityPage,
-    WriteReviewPage,
-    ImagePlaceholderComponent
+    WriteReviewPage
   ],
   providers: [
     StatusBar,
@@ -133,10 +133,14 @@ import { HeaderResizeComponent } from '../components/header-resize/header-resize
     ImagePicker,
     CallNumber,
     InAppBrowser,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {
+      provide: ErrorHandler,
+      useClass: IonicErrorHandler
+    }
   ],
   schemas: [
-    NO_ERRORS_SCHEMA
+    NO_ERRORS_SCHEMA,
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 
