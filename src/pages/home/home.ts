@@ -179,12 +179,11 @@ export class HomePage {
             nulo = false;
             //alert('encontre algo');
             snapshot.forEach(function(data) {
-              let rat = '3'; //  data.val().scores
                 unis.push({
                   imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
                   nombre :  data.val().nombre,
                   address : data.val().direccion[0],
-                  rating : rat,
+                  rating : data.val().scores.global,
                   id: data.val().id// snapshot.val().id
                 });
             });
@@ -197,6 +196,14 @@ export class HomePage {
     }else{
       resf = false;
     }
+    
+    unis.forEach(element => {
+      this.afDatabase.database.ref("Imagenes/Universidad/"+element.id).once('value').then( (snpImg) => {
+        let key = Object.keys(snpImg.val())[0];
+        let nombre = snpImg.val()[key].name;
+        element.imgsrc =  'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media';
+      });
+    });
     this.results = resf;
     this.resultUniversities = unis;
     this.searchNull = nulo;

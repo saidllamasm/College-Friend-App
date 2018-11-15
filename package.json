@@ -41,7 +41,7 @@
         "cordova": "^8.1.2",
         "cordova-android": "7.0.0",
         "cordova-browser": "5.0.4",
-        "cordova-ios": "4.5.5",
+        "cordova-ios": "^4.5.5",
         "cordova-plugin-actionsheet": "^2.3.3",
         "cordova-plugin-add-swift-support": "1.7.1",
         "cordova-plugin-calendar": "^5.1.2",
@@ -71,7 +71,8 @@
         "sw-toolbox": "3.6.0",
         "twitter-connect-plugin": "git+https://github.com/chroa/twitter-connect-plugin.git",
         "uk.co.workingedge.phonegap.plugin.launchnavigator": "^4.2.2",
-        "zone.js": "0.8.26"
+        "zone.js": "0.8.26",
+        "mx.ferreyra.callnumber": "~0.0.2"
     },
     "devDependencies": {
         "@ionic/app-scripts": "3.2.0",
@@ -84,12 +85,6 @@
     },
     "cordova": {
         "plugins": {
-            "cordova-plugin-googlemaps": {
-                "API_KEY_FOR_ANDROID": "AIzaSyCyLtkDZIChH8s7qvdMxmtzRn4NKPx4OOE",
-                "API_KEY_FOR_IOS": "AIzaSyCyLtkDZIChH8s7qvdMxmtzRn4NKPx4OOE",
-                "PLAY_SERVICES_VERSION": "15.0.1",
-                "ANDROID_SUPPORT_V4_VERSION": "27.+"
-            },
             "cordova-plugin-whitelist": {},
             "cordova-plugin-statusbar": {},
             "cordova-plugin-device": {},
@@ -120,11 +115,18 @@
                 "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
             },
             "mx.ferreyra.callnumber": {},
-            "cordova-plugin-inappbrowser": {}
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-googlemaps": {
+                "API_KEY_FOR_ANDROID": "AIzaSyCyLtkDZIChH8s7qvdMxmtzRn4NKPx4OOE",
+                "API_KEY_FOR_IOS": "AIzaSyCyLtkDZIChH8s7qvdMxmtzRn4NKPx4OOE",
+                "PLAY_SERVICES_VERSION": "15.0.1",
+                "ANDROID_SUPPORT_V4_VERSION": "27.+"
+            }
         },
         "platforms": [
             "android",
-            "browser"
+            "browser",
+            "ios"
         ]
     }
 }
