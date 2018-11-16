@@ -143,7 +143,7 @@ export class WriteReviewPage {
 
     for (var i = 0; i < this.images.length; i++) {
       let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
-      this.uploadPics(this.images[i] , id, this.userUID);
+      this.uploadPics(this.images[i] , id, this.userUID, this.id_university);
     }
 
     // save for user
@@ -154,11 +154,11 @@ export class WriteReviewPage {
 
   }
 
-  uploadPics( image , name, tokenReview){
+  uploadPics( image , name, tokenReview,tokenun){
     const img = 'data:image/jpeg;base64,' + image; 
     const pics = storage().ref('universidades/'+name); // test1, test2, ..., testX
     pics.putString(img, 'data_url').then(res =>{
-      const items = this.afDatabase.list('Imagenes/Opiniones/'+tokenReview+'/');
+      const items = this.afDatabase.list('Imagenes/Opiniones/'+tokenReview+'/'+tokenun+'/');
       items.push({}).set({
         name : ''+res.metadata.name + '',
         path : ''+ res.metadata.fullPath + '',

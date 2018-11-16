@@ -288,7 +288,7 @@ export class SingleUniversityPage {
       //alert(element.id_username);
       //alert(element.id_username);
       //this.afDatabase.database.ref('Imagenes/Opiniones/'+element.id_username+"/" + this.id_university).once('value').then( (span) => {
-        this.afDatabase.database.ref('Imagenes/Opiniones/'+element.id_username+'/').once('value').then( (span) => {
+        this.afDatabase.database.ref('Imagenes/Opiniones/'+element.id_username+'/'+this.id_university+'/').once('value').then( (span) => {
         "use strict";
         
         for (var ip in span.val()) {
