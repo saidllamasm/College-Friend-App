@@ -43,6 +43,17 @@ College Friend App seeks to create an active community of people who share infor
 
 **Technology Stack:** Ionic, Firebase, Digital Ocean with Debian.
 
+**Technical specifications** 
+ - Ionic Framework: 3.9.2
+ - Ionic App Scripts: 3.2.0
+ - Ionic CLI 4.1.2
+ - Angular Core: 5.2.11
+ - Angular Compiler CLI: 5.2.11
+ - Node: 9.10.1
+ - OS Platform: macOS
+ - NPM 5.6.0
+
+
 ## About me
 
 Hello, my name is Said Llamas, my specialty is project management in information technologies. I have several certifications in mobile programming, computer security, project management, algorithms and video games with augmented reality. I have solid knowledge in Java, C #, PHP, JavaScript, SQL. Experience in various frameworks such as Laravel, jQuery, Ajax. Experience with Wordpress, Joomla, Shopify, WHM, cPanel, VPS (Heroku and Digital Ocean).
