@@ -116,5 +116,8 @@
         "Tip3": "Para actualizar tu foto de perfil es necesario que te dirigas a gravatar.com y registres el mismo correo que usas en esta aplicacion.",
         "Tip4": "Si se puede imaginar se puede programar",
         "Tip5": "Powered by DamVeloper Team"
+    },
+    "Favoritos": {
+        "misFavs": "Mis favoritas"
     }
 }

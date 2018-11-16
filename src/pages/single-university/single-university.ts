@@ -125,9 +125,6 @@ export class SingleUniversityPage {
 
   }
 
-  getInfoUser(id){
-    return [{ id: id, name : 'said', email: 'saidllamas14@gmail.com'}];
-  }
 
   addFav(){
     let idUnv = this.navParams.get('id_university');
@@ -268,49 +265,39 @@ export class SingleUniversityPage {
     this.navCtrl.push(InboxSinglePage, {id_user : id});
   }
 
-  notFav(id){
-  }
-
-  fav(id){
-
-  }
-
   getReviews(){
-    /*console.log(this.tmpReviews);
-    console.log(JSON.stringify(this.tmpReviews));*/
     for (var review in this.tmpReviews) {
-      this.afDatabase.list<University>('/Universidades/'+this.id_university+'/'+'reviews/'+review+'/').valueChanges().subscribe((opinion : any[]) => {
-        let imagesTMP = [];
-        this.afDatabase.object('Imagenes/Opiniones/' + review).valueChanges().subscribe((span) =>{
-          //imagesTMP.push({imgurl : imgsc.name});
-          for (var ip in span) {
-            imagesTMP.push({imgurl : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+span[ip].name+'?alt=media' });
-          }
-          //alert( imgsc.name);
-        });
-        this.getNameUser(review).then((infoUser : UserCustom) => { 
-          //console.log(infoUser.nombre);
-          this.listReviews.push({
-            id_review: review,
-            id_username : review,
-            imgsrc : "https://www.gravatar.com/avatar/" + md5(infoUser.email, 'hex')+"?s=400",
-            username : infoUser.nombre,
-            content : opinion[2],//opinion
-            //opinion[1]//interacciones
-            time : this.timeConverter(opinion[4]).mes + ' '+this.timeConverter(opinion[4]).año, //time
-            images : imagesTMP
-          });
-        })
-        
+      //alert( this.tmpReviews[review].opinion );
+      this.listReviews.push({
+        id_username : review,
+        id_review : review,
+        content : this.tmpReviews[review].opinion,
+        //time : this.tmpReviews[review].opinion
+        time : this.timeConverter(this.tmpReviews[review].timestamp).mes + ' '+this.timeConverter(this.tmpReviews[review].timestamp).año, //time
       });
     }
-  }
-
-  getNameUser(idUser){
-    return new Promise((resolve, reject) => {
-      this.afDatabase.object('Usuarios/' + idUser+'/').valueChanges().subscribe((info : UserCustom ) =>{
-        resolve(info); // ¡Todo salió bien!
+    this.listReviews.forEach(element => {
+      //alert(element.id_username);
+      this.afDatabase.database.ref('Usuarios/' + element.id_username+'/').once('value').then( (span) => {
+        element.username  = span.val().nombre;
+        element.imgsrc  = "https://www.gravatar.com/avatar/" + md5(span.val().email, 'hex')+"?s=400";
       });
+    });
+    this.listReviews.forEach(element => {
+      let imagesTMP = [];
+      //alert(element.id_username);
+      //alert(element.id_username);
+      //this.afDatabase.database.ref('Imagenes/Opiniones/'+element.id_username+"/" + this.id_university).once('value').then( (span) => {
+        this.afDatabase.database.ref('Imagenes/Opiniones/'+element.id_username+'/').once('value').then( (span) => {
+        "use strict";
+        
+        for (var ip in span.val()) {
+          //alert(span.val()[ip].name);
+          imagesTMP.push({imgurl : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+span.val()[ip].name+'?alt=media' });
+        }
+        element.images = imagesTMP ;
+      });
+
     });
   }
 
