@@ -265,7 +265,7 @@ export class SingleUniversityPage {
 
   initChat(id){
     // send id user with param: id_user
-    this.navCtrl.push(InboxSinglePage);
+    this.navCtrl.push(InboxSinglePage, {id_user : id});
   }
 
   notFav(id){

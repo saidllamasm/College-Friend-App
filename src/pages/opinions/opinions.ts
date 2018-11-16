@@ -40,21 +40,26 @@ export class OpinionsPage {
       let universities = [];
       this.afDatabase.database.ref("Usuarios/"+user.uid+"/reviews/").once('value').then( (snapshot) => {
         "use strict";
-        console.log(snapshot.val()); 
+        //console.log(snapshot.val()); 
         for(var ip in snapshot.val()){
+          this.numberOpinions++;
           this.afDatabase.database.ref("Universidades/"+ip).once('value').then( (snp) => {
-            this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
-              let key = Object.keys(snpImg.val())[0];
-              let nombre = snpImg.val()[key].name;
-              universities.push({
-                imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
-                name : snp.val().nombre,
-                rating : snp.val().scores.global,
-                id : snp.val().id
+            universities.push({
+              imgsrc : "",//'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
+              name : snp.val().nombre,
+              rating : snp.val().scores.global,
+              id : snp.val().id
+            });
+            universities.forEach(element => {
+              this.afDatabase.database.ref("Imagenes/Universidad/"+element.id).once('value').then( (snpImg) => {
+                let key = Object.keys(snpImg.val())[0];
+                let nombre = snpImg.val()[key].name;
+                element.imgsrc =  'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media';
               });
             });
           });
         }
+        
       });
       this.Opinions = universities;
       

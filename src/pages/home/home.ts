@@ -180,7 +180,7 @@ export class HomePage {
             //alert('encontre algo');
             snapshot.forEach(function(data) {
                 unis.push({
-                  imgsrc : "http://becas-mexico.mx/wp-content/uploads/2017/10/becas-mexico-itcg-2017-2018.jpg",
+                  imgsrc : "",
                   nombre :  data.val().nombre,
                   address : data.val().direccion[0],
                   rating : data.val().scores.global,

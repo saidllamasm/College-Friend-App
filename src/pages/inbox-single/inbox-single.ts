@@ -58,7 +58,34 @@ export class InboxSinglePage {
       this.searchByUserUID = this.navParams.get('id_user');
       this.searchByChatToken = this.navParams.get('id_chat');
       if(this.searchByUserUID !== undefined){
-        alert('search user');
+        //alert('search user '+this.searchByUserUID);
+        this.afDatabase.database.ref('/Chats/').once('value').then( (snpChats) => {
+          for(var chat in snpChats.val()){
+            if(user.uid == snpChats.val()[chat].uiddestino || user.uid == snpChats.val()[chat].uidcreador){
+              if(this.searchByUserUID == snpChats.val()[chat].uiddestino || this.searchByUserUID == snpChats.val()[chat].uidcreador){
+                this.searchByChatToken = chat;
+                this.afDatabase.database.ref('/Usuarios/'+snpChats.val()[chat].uidcreador).once('value').then( (snpFrm) => {
+                  this.emailFrom = snpFrm.val().email;
+                  this.nameFrom = snpFrm.val().nombre;
+                  this.idFrom = snpFrm.val().key;
+                  this.afDatabase.database.ref('/Usuarios/'+snpChats.val()[chat].uiddestino).once('value').then( (snpTo) => {
+                    this.emailTo = snpTo.val().email;
+                    this.nameTo = snpTo.val().nombre;
+                    this.idTo = snpFrm.val().key;
+                    this.loadMessagesWithChat();
+                  });
+                });
+              }else{
+                // fatal error!!!!
+                alert('fatal error 401CS');
+              }
+            }else{
+              // comenzar nuevo chat?
+            }
+            
+            
+          }
+        });
       }else if(this.searchByChatToken !== undefined){
         this.afDatabase.database.ref('/Chats/'+this.searchByChatToken).once('value').then( (snpUsers) => {
           this.afDatabase.database.ref('/Usuarios/'+snpUsers.val().uidcreador).once('value').then( (snpFrm) => {
