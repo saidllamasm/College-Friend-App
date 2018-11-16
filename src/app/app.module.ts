@@ -1,4 +1,4 @@
-//import { HeaderResizeComponent } from './../components/header-resize/header-resize';
+import { HeaderResizeComponent } from './../components/header-resize/header-resize';
 //import { ComponentsModule } from './../components/components.module';
 import { Facebook } from '@ionic-native/facebook';
 import { NgModule, ErrorHandler, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -64,7 +64,7 @@ import { environment } from '../environments/environment';
     MyApp,
     TabsPage,
     HomePage,
-    //HeaderResizeComponent,
+    HeaderResizeComponent,
     //ComponentsModule
     // for debug
     WriteReviewPage,
