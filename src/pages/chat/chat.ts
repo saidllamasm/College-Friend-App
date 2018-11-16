@@ -41,6 +41,7 @@ export class ChatPage {
       this.userPicture = "https://www.gravatar.com/avatar/" + md5(user.email, 'hex')+"?s=400";
       this.afDatabase.database.ref('/Chats/').once('value').then( (snapshot) => {
         for(var ip in snapshot.val()){
+          this.numberChats++;
           if(snapshot.val()[ip].uidcreador == user.uid || snapshot.val()[ip].uiddestino == user.uid ){
             if(snapshot.val()[ip].uidcreador == user.uid){
               this.createMsj(ip, snapshot.val()[ip].uiddestino,  snapshot.val()[ip].timestamp,snapshot.val()[ip].lastmsj);

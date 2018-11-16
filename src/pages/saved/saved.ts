@@ -4,10 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SingleUniversityPage } from '../single-university/single-university';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { UserCustom } from '../../model/user/user.model';
-
-import { University } from './../../model/university/university.model';
-import { ImageUniversity } from '../../model/image/image.model';
 /**
  * Generated class for the SavedPage page.
  *
@@ -33,28 +29,32 @@ export class SavedPage {
   ) {
     statusBar.backgroundColorByHexString('#0055CB');
     this.afAuth.authState.subscribe(user => {
+      let unis =[];
       this.uuid = user.uid;
       this.afDatabase.database.ref("Usuarios/"+user.uid+"/favs/").once('value').then( (snapshot) => {
         for(var ip in snapshot.val()){
-          this.afDatabase.database.ref("Universidades/"+ip).once('value').then( (snpUnivers) => {
-            alert(snpUnivers.val().nombre);
-            let unv = { nombre : snpUnivers.val().nombre, address : snpUnivers.val().direccion[0] , key : ip};
-            this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
-              for(var ip2 in snpImg.val()){
-                this.Favorites.push({
-                  imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip2].name+'?alt=media',
-                  name : unv.nombre,
-                  address: unv.address,
-                  id: unv.key
-                });
-                
-              }
-            });
+          this.afDatabase.database.ref('/Universidades/'+ip).once('value').then( (snapshot) => {
+            "use strict";
+            this.getImages(snapshot.val().id, snapshot.val().nombre, snapshot.val().direccion[0]);
           });
         }
       });
+      
     });
     
+  }
+
+  getImages(id, nom,addrs){
+    this.afDatabase.database.ref('Imagenes/Universidad/' + id).once('value').then( (snapshot) => {
+      let key = Object.keys(snapshot.val())[0];
+      let nombre = snapshot.val()[key].name;
+      this.Favorites.push({
+        imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
+        id:id,
+        name:nom,
+        address:addrs
+      });
+    });
   }
 
   deleteFav(id){
