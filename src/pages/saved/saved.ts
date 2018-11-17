@@ -27,20 +27,6 @@ export class SavedPage {
     public afAuth: AngularFireAuth,
     public afDatabase: AngularFireDatabase
   ) {
-    statusBar.backgroundColorByHexString('#0055CB');
-    this.afAuth.authState.subscribe(user => {
-      let unis =[];
-      this.uuid = user.uid;
-      this.afDatabase.database.ref("Usuarios/"+user.uid+"/favs/").once('value').then( (snapshot) => {
-        for(var ip in snapshot.val()){
-          this.afDatabase.database.ref('/Universidades/'+ip).once('value').then( (snapshot) => {
-            "use strict";
-            this.getImages(snapshot.val().id, snapshot.val().nombre, snapshot.val().direccion[0]);
-          });
-        }
-      });
-      
-    });
     
   }
 
@@ -59,6 +45,25 @@ export class SavedPage {
 
   deleteFav(id){
     this.afDatabase.object('/Usuarios/' + this.uuid+'/favs/'+id).remove();
+  }
+
+  ionViewWillEnter(){
+    this.Favorites = [];
+    this.statusBar.backgroundColorByHexString('#0055CB');
+    this.afAuth.authState.subscribe(user => {
+      let unis =[];
+      this.uuid = user.uid;
+      this.afDatabase.database.ref("Usuarios/"+user.uid+"/favs/").once('value').then( (snapshot) => {
+        for(var ip in snapshot.val()){
+          this.afDatabase.database.ref('/Universidades/'+ip).once('value').then( (snapshot) => {
+            "use strict";
+            this.getImages(snapshot.val().id, snapshot.val().nombre, snapshot.val().direccion[0]);
+          });
+        }
+      });
+      
+    });
+    
   }
 
   goToUniversity(id){

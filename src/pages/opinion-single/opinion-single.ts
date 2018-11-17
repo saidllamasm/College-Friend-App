@@ -90,10 +90,12 @@ export class OpinionSinglePage {
       }
     );
 
-    /*for (var i = 0; i < this.images.length; i++) {
+    // antes de enviar a guardar eliminar todas las imagenes que ya se tienen registradas
+    
+    for (var i = 0; i < this.images.length; i++) {
       let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
       this.uploadPics(this.images[i] , id, this.userUID, this.id_university);
-    }*/
+    }
   }
 
   getPicsReview(){

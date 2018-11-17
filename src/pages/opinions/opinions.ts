@@ -33,6 +33,12 @@ export class OpinionsPage {
     public afAuth: AngularFireAuth,
     public afDatabase: AngularFireDatabase,
   ) {
+    
+  }
+
+  ionViewWillEnter(){
+    this.Opinions = [];
+    this.numberOpinions = 0;
     this.afAuth.authState.subscribe(user => {
       this.uuid = user.uid;
       this.username = user.displayName ;

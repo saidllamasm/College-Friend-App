@@ -5,7 +5,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import md5 from 'crypto-md5';
 
-import { UserCustom } from '../../model/user/user.model';
 /**
  * Generated class for the ChatPage page.
  *
@@ -35,6 +34,12 @@ export class ChatPage {
     public afAuth: AngularFireAuth,
     public afDatabase: AngularFireDatabase
   ) {
+    
+  }
+
+  ionViewWillEnter(){
+    this.MessageList = [];
+    this.numberChats = 0;
     this.afAuth.authState.subscribe(user => {
       this.uuid = user.uid;
       this.username = user.displayName ;
@@ -47,25 +52,11 @@ export class ChatPage {
               this.createMsj(ip, snapshot.val()[ip].uiddestino,  snapshot.val()[ip].timestamp,snapshot.val()[ip].lastmsj);
             }else{
               this.createMsj(ip, snapshot.val()[ip].uidcreador,  snapshot.val()[ip].timestamp,snapshot.val()[ip].lastmsj);
-                /*this.MessageList.push({
-                  profileTo : snapshot.val()[ip].uidcreador,
-                  nameTo : snapshot.val()[ip].uidcreador,
-                  date: snapshot.val()[ip].timestamp,
-                  abstract : snapshot.val()[ip].lastmsj,
-                  idchat: ip
-                });*/
             }
-            
-            /*
-            load all messages
-            for (var ip2 in snapshot.val()[ip].mensajes) {
-              alert(snapshot.val()[ip].mensajes[ip2].contenido);
-            }*/
           }
         }
       });
     });
-    //this.loadFakeDate();
   }
 
   timeConverter(time){
@@ -110,27 +101,6 @@ export class ChatPage {
         idchat: id
       });
     });
-  }
-
-  loadFakeDate(){
-    this.MessageList = [
-      {
-        profileTo : 'https://griffonagedotcom.files.wordpress.com/2016/07/profile-modern-2e.jpg',
-        nameTo : 'Juanito',
-        date: '3:00pm',
-        abstract : 'Hola said!',
-        idchat: 1
-      }
-    ];
-    this.MessageListRequests = [
-      {
-        profileTo : 'https://griffonagedotcom.files.wordpress.com/2016/07/profile-modern-2e.jpg',
-        nameTo : 'María',
-        date: '10:00pm',
-        abstract : 'Saludos!',
-        idchat: 1
-      }
-    ];
   }
 
   openConversation(id){
