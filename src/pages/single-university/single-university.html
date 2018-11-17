@@ -1,6 +1,10 @@
 <ion-header>
     <header-resize [scrollArea]="content" headerHeight="200">
         <ion-slides autoplay class="slide-featureimg">
+            <!--<button class="btnFav" (click)="fav()"><i class="fa fa-heart"></i></button>-->
+            <button *ngIf="isFav" class="btnFav" (click)="notFav()"><ion-icon name="heart"></ion-icon></button>
+            <button *ngIf="!isFav" class="btnFav" (click)="yesFav()"><ion-icon name="heart-outline"></ion-icon></button>
+
             <ion-slide *ngFor="let imag of listIms">
                 <img class="img-feature" [src]="imag.imgsrc" imageViewer>
             </ion-slide>

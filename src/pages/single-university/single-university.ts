@@ -24,6 +24,7 @@ import { UserCustom } from '../../model/user/user.model';
   templateUrl: 'single-university.html',
 })
 export class SingleUniversityPage {
+  public isFav = false;
   public nameUserCreated = 'default';
   public userProfileCreated = '';
   public creatorUID = [{}];
@@ -77,6 +78,7 @@ export class SingleUniversityPage {
       statusBar.backgroundColorByHexString('#0055CB');
       this.langGeneral = ''+this.getLenguaje().then((res)=>{
       });
+      this.getIsFav(); // para habilitar el icono especifico de fav
 
       this.id_university = this.navParams.get('id_university');
       this.getImagesFeature();
@@ -124,20 +126,6 @@ export class SingleUniversityPage {
       
 
   }
-
-
-  addFav(){
-    let idUnv = this.navParams.get('id_university');
-    this.afAuth.authState.subscribe(user => {
-      let uid = user.uid;
-      let newFavorite = {};
-      newFavorite[idUnv] = true;
-      this.afDatabase.object('/Usuarios/' + uid+'/favs/').update(newFavorite);
-    });
-
-    
-  }
-
 
   getLenguaje = async() =>{
     let lng = await this.loadLng();
@@ -463,4 +451,38 @@ export class SingleUniversityPage {
     }
   }
   
+  // para universidad favorita de usuario
+  getIsFav(){
+    let idUnv = this.navParams.get('id_university');
+    this.afAuth.authState.subscribe(user => {
+      this.afDatabase.database.ref('/Usuarios/'+user.uid+'/favs/').once('value').then( (snapshot) => {
+        for(var ip in snapshot.val()){
+          if(ip == idUnv){
+            this.isFav = true;
+          }
+        }
+      });
+    });
+  }
+
+  notFav(){
+    this.isFav = false;
+    let idUnv = this.navParams.get('id_university');
+    this.afAuth.authState.subscribe(user => {
+      let bd = '/Usuarios/' + user.uid+'/favs/'+idUnv;
+      this.afDatabase.object(bd).remove();
+    });
+  }
+  
+  yesFav(){
+    this.isFav = true;
+    let idUnv = this.navParams.get('id_university');
+    this.afAuth.authState.subscribe(user => {
+      let uid = user.uid;
+      let newFavorite = {};
+      newFavorite[idUnv] = true;
+      this.afDatabase.object('/Usuarios/' + uid+'/favs/').update(newFavorite);
+    });
+  }
+
 }

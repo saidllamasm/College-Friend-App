@@ -172,4 +172,15 @@
                 height: 100px!important;
             }
         }
+        .btnFav {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 4;
+            background: none!important;
+        }
+        .btnFav ion-icon {
+            color: map-get($colors, danger)!important;
+            font-size: 26px;
+        }
     }
