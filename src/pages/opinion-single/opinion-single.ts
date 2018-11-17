@@ -21,6 +21,7 @@ import md5 from 'crypto-md5';
 export class OpinionSinglePage {
   public userUID = '';
   images: any = [];
+  public imagesTmp = [];
 
   public universityName = '';
   public id_university = '';
@@ -54,6 +55,7 @@ export class OpinionSinglePage {
     //this.universityName = this.navParams.get('name');
     this.afAuth.authState.subscribe(user => {
       this.userUID = user.uid;
+      this.getPicsReview();
       this.userPicture = "https://www.gravatar.com/avatar/" + md5(user.email, 'hex')+"?s=400";
       this.username = user.displayName;
       this.afDatabase.database.ref('Universidades/'+this.id_university+'/reviews/'+user.uid).once('value').then( (snapshot) => {
@@ -92,6 +94,20 @@ export class OpinionSinglePage {
       let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
       this.uploadPics(this.images[i] , id, this.userUID, this.id_university);
     }*/
+  }
+
+  getPicsReview(){
+    this.afAuth.authState.subscribe(user => {
+      this.afDatabase.database.ref('Imagenes/Opiniones/' +user.uid+'/'+this.id_university+'/').once('value').then( (snpImg) => {
+        "use strict";
+        for(var ip in snpImg.val()){
+          var nm = 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip].name+'?alt=media';
+          this.imagesTmp.push(nm);
+        }
+      });
+
+    });
+    
   }
 
   uploadPics( image , name, tokenReview, tokenun){
