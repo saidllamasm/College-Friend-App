@@ -250,15 +250,17 @@ export class HomePage {
         var cords ={lat: snapshot.val()[ip].gps.lat, lng: snapshot.val()[ip].gps.lng};
         this.insertMarker(snapshot.val()[ip].nombre, 'blue', cords );
         this.afDatabase.database.ref("Imagenes/Universidad/"+ip).once('value').then( (snpImg) => {
-          for(var ip2 in snpImg.val()){
+          //for(var ip2 in snpImg.val()){
+            let key = Object.keys(snpImg.val())[0];
+          let nombre = snpImg.val()[key].name;
             this.nearbyUniversities.push({
-              imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+snpImg.val()[ip2].name+'?alt=media',
+              imgsrc : 'https://firebasestorage.googleapis.com/v0/b/college-friend-app.appspot.com/o/universidades%2F'+nombre+'?alt=media',
               name : unv.nombre,
               rate: unv.rat,
               id: unv.key
             });
             
-          }
+          //}
         });
       }
     });

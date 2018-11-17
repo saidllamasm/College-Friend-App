@@ -198,17 +198,22 @@
                     </ion-slides>
                 </ion-row>
                 <ion-row>
-                    <ion-col col-1>
-                        <button (click)="notFav(review.id_review)" class="ctrol-Action">
+                    <ion-col col-4>
+
+                        <rating [(ngModel)]="review.rate" class="min-rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+
+                        <!--<button (click)="notFav(review.id_review)" class="ctrol-Action">
                                 <ion-icon name="thumbs-down"></ion-icon>
-                            </button>
+                            </button>-->
                     </ion-col>
-                    <ion-col col-1>
-                        <button (click)="Fav(review.id_review)" class="ctrol-Action">
+                    <!--<ion-col col-1>-->
+                    <!--<button (click)="Fav(review.id_review)" class="ctrol-Action">
                                 <ion-icon name="thumbs-up"></ion-icon>
-                            </button>
+                            </button>-->
+                    <!--</ion-col>-->
+                    <ion-col col-4>
+                        <!--{{review.rate}}-->
                     </ion-col>
-                    <ion-col col-6></ion-col>
                     <ion-col col-4>
                         <button (click)="initChat(review.id_username)" class="ctrol-Action btn-chat">{{"Tabs.Chat" | translate}}</button>
                     </ion-col>

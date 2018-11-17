@@ -260,6 +260,11 @@ export class SingleUniversityPage {
         id_username : review,
         id_review : review,
         content : this.tmpReviews[review].opinion,
+        rate : ((this.tmpReviews[review].scores.actividades + 
+          this.tmpReviews[review].scores.becas + 
+          this.tmpReviews[review].scores.instalaciones + 
+          this.tmpReviews[review].scores.profesores + 
+          this.tmpReviews[review].scores.ubicacion) / 5),
         //time : this.tmpReviews[review].opinion
         time : this.timeConverter(this.tmpReviews[review].timestamp).mes + ' '+this.timeConverter(this.tmpReviews[review].timestamp).año, //time
       });
