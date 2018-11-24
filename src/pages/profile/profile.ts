@@ -44,7 +44,9 @@ export class ProfilePage {
     private iab: InAppBrowser,
     public toastCtrl: ToastController,
   ) {
-    
+  }
+
+  ionViewWillEnter(){
     this.afAuth.authState.subscribe(user => {
       this.afDatabase.list<UserCustom>('/Usuarios/').valueChanges().subscribe((res: UserCustom[]) => { 
         this.uuid = user.uid;

@@ -66,13 +66,14 @@
         "ionic-img-viewer": "^2.9.0",
         "ionic2-rating": "^1.2.2",
         "ionicons": "3.0.0",
+        "mx.ferreyra.callnumber": "~0.0.2",
+        "promise-polyfill": "^8.1.0",
         "rxjs": "^6.3.3",
         "rxjs-compat": "^6.3.3",
         "sw-toolbox": "3.6.0",
         "twitter-connect-plugin": "git+https://github.com/chroa/twitter-connect-plugin.git",
         "uk.co.workingedge.phonegap.plugin.launchnavigator": "^4.2.2",
-        "zone.js": "0.8.26",
-        "mx.ferreyra.callnumber": "~0.0.2"
+        "zone.js": "0.8.26"
     },
     "devDependencies": {
         "@ionic/app-scripts": "3.2.0",

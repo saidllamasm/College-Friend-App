@@ -81,6 +81,9 @@ export class HomePage {
     private storage: Storage,
   ){
 
+  }
+  
+  ionViewWillEnter(){
     this.resultUniversities = [];
     this.universityMonthsList = [];
     this.nearbyUniversities = [];
@@ -99,7 +102,6 @@ export class HomePage {
     //this.loadUniversitiesNearby('Ciudad Guzman');
 
     //this.loadFakeData();
-
   }
 
   //inicializa el mapa
