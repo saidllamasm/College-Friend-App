@@ -82,6 +82,7 @@ export class SingleUniversityPage {
   ionViewWillEnter(){
     this.listCarrers = [];
     this.listMonths = [];
+    this.listReviews = [];
     this.langGeneral = ''+this.getLenguaje().then((res)=>{
     });
     this.getIsFav(); // para habilitar el icono especifico de fav

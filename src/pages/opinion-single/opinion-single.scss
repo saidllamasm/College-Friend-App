@@ -70,4 +70,7 @@ page-opinion-single {
             }
         }
     }
+    img[src*='null'] {
+        display: none;
+    }
 }
