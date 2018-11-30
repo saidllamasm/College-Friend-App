@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, Alert } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
@@ -8,7 +9,6 @@ import { Facebook } from '@ionic-native/facebook'
 import { AngularFireAuth } from 'angularfire2/auth';
 import {TwitterConnect} from '@ionic-native/twitter-connect';
 import { auth } from 'firebase';
-
 
 import { environment } from '../../environments/environment';
 /**
@@ -26,6 +26,9 @@ import { environment } from '../../environments/environment';
 export class LoginPage {
   users: AngularFireList<any>;
 
+  formGroup : FormGroup;
+  formGroupLogin : FormGroup;
+
   email : string ;
   password : string ;
   email_r : string ;
@@ -33,6 +36,9 @@ export class LoginPage {
   name : string ;
   password_r : string ;
   login : boolean = true;
+  
+  // for validations
+
 
   constructor(
     public navCtrl: NavController,
@@ -43,8 +49,25 @@ export class LoginPage {
     private platform: Platform,
     database: AngularFireDatabase,
     public afDatabase: AngularFireDatabase,
+    public formBuilder: FormBuilder
   ) {
     this.users = database.list('Usuarios');
+
+    let PASSPATTERN = /^[A-Za-z0-9\s]+$/g;
+    let PHONEPATTERN = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+    let EMAILPATTERN = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    this.formGroupLogin = new FormGroup({
+      mailAddressLogin :  new FormControl('', [Validators.required, Validators.pattern( EMAILPATTERN )]),
+      passwordValLogin :new FormControl('', [Validators.required, Validators.pattern(PASSPATTERN), Validators.minLength(7)])
+   });
+
+    this.formGroup = new FormGroup({
+      firstName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ÑñáéíóúÁÉÍÓÚ]*'), Validators.minLength(7), Validators.maxLength(35)]),
+      phoneNmber : new FormControl('', [Validators.required, Validators.pattern(PHONEPATTERN), Validators.maxLength(10)]),
+      mailAddress :  new FormControl('', [Validators.required, Validators.pattern( EMAILPATTERN )]),
+      passwordVal :new FormControl('', [Validators.required, Validators.pattern(PASSPATTERN), Validators.minLength(7)])
+   });
   }
 
   // login with email and password
@@ -64,18 +87,24 @@ export class LoginPage {
 
   // register new user with email and password
   procesarRegistro(){
-    let credentials = {
-			email: this.email_r,
-			password: this.password_r
-    };
-      this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password)
-      .then( (firebaseUser) =>  {
-        alert(firebaseUser.user.uid);
-        this.saveUserFirebase(firebaseUser.user.uid ,credentials.email, this.name, this.phone, 'email');
-        this.navCtrl.setRoot(TabsPage);
-      }).catch(function(error) {
-        console.error("Error: ", error);
-    });
+    if (this.formGroup.valid) {
+        // Save your values, using this.form.get('myField').value;
+        alert('validate success');
+        let credentials = {
+          email: this.email_r,
+          password: this.password_r
+        };
+          this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password)
+          .then( (firebaseUser) =>  {
+            alert(firebaseUser.user.uid);
+            this.saveUserFirebase(firebaseUser.user.uid ,credentials.email, this.name, this.phone, 'email');
+            this.navCtrl.setRoot(TabsPage);
+          }).catch(function(error) {
+            console.error("Error: ", error);
+        });
+    }else{
+      //alert(this.formGroup.errors);
+    }
   }
 
   // login with Faceboook

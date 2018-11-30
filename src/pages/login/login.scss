@@ -87,4 +87,17 @@ page-login {
         margin: 0px!important;
         padding: 0px!important
     }
+    ion-item {
+        ion-label {
+            padding: 10px !important;
+            margin: 0px !important;
+        }
+        margin: 0px !important;
+        //padding: 0px !important;
+        color: map-get($colors, danger) !important;
+        font-size: 13px !important;
+        background: #f3f3f3!important;
+        border-radius: 60px;
+        margin-bottom: 10px;
+    }
 }

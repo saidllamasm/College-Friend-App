@@ -12,20 +12,97 @@
 
     <div class="container-form">
         <div *ngIf="login">
-            <input [(ngModel)]="email" type="email" class="input-blank input-border_down" placeholder="{{'Login.Email' | translate}}">
-            <input [(ngModel)]="password" type="password" class="input-blank" placeholder="{{'Login.Password' | translate}}">
-            <br><br>
-            <button (click)="procesarLogin()" class="btn btn-action">{{"Login.Login" | translate}}</button>
-            <br><br><br>
+            <form novalidate (ngSubmit)="procesarLogin()" [formGroup]="formGroupLogin">
+                <input formControlName="mailAddressLogin" [(ngModel)]="email" type="email" class="input-blank input-border_down" placeholder="{{'Login.Email' | translate}}">
+                <input formControlName="passwordValLogin" [(ngModel)]="password" type="password" class="input-blank" placeholder="{{'Login.Password' | translate}}">
+                <br><br>
+                <!--messages-->
+                <ion-item no-lines *ngIf="( formGroupLogin.get('mailAddressLogin').hasError('minlength') || formGroupLogin.get('mailAddressLogin').hasError('maxlength') || formGroupLogin.get('mailAddressLogin').hasError('pattern') || formGroupLogin.get('mailAddressLogin').hasError('required') ) && formGroupLogin.get('mailAddressLogin').touched">
+                    <div class="error" *ngIf="formGroupLogin.get('mailAddressLogin').hasError('required')  && formGroupLogin.get('mailAddressLogin').touched">
+                        * Please input your email address
+                    </div>
+                    <div class="error" *ngIf="formGroupLogin.get('mailAddressLogin').hasError('pattern') && formGroupLogin.get('mailAddressLogin').touched">
+                        * Ingrese una direccion de corrio valida
+                    </div>
+                </ion-item>
+                <br *ngIf="( formGroupLogin.get('mailAddressLogin').hasError('minlength') || formGroupLogin.get('mailAddressLogin').hasError('maxlength') || formGroupLogin.get('mailAddressLogin').hasError('pattern') || formGroupLogin.get('mailAddressLogin').hasError('required') ) && formGroupLogin.get('mailAddressLogin').touched">
+                <ion-item no-lines *ngIf="( formGroupLogin.get('passwordValLogin').hasError('minlength') || formGroupLogin.get('passwordValLogin').hasError('maxlength') || formGroupLogin.get('passwordValLogin').hasError('pattern') || formGroupLogin.get('passwordValLogin').hasError('required') ) && formGroupLogin.get('passwordValLogin').touched">
+                    <div class="error" *ngIf="formGroupLogin.get('passwordValLogin').hasError('required')  && formGroupLogin.get('passwordValLogin').touched">
+                        * Please input your password
+                    </div>
+                    <div class="error" *ngIf="formGroupLogin.get('passwordValLogin').hasError('minlength') && formGroupLogin.get('passwordValLogin').touched">
+                        * Minimum 7 characters
+                    </div>
+                    <div class="error" *ngIf="formGroupLogin.get('passwordValLogin').hasError('pattern') && formGroupLogin.get('passwordValLogin').touched">
+                        * Ingrese una contraseña valida
+                    </div>
+                </ion-item>
+                <br *ngIf="( formGroupLogin.get('passwordValLogin').hasError('minlength') || formGroupLogin.get('passwordValLogin').hasError('maxlength') || formGroupLogin.get('passwordValLogin').hasError('pattern') || formGroupLogin.get('passwordValLogin').hasError('required') ) && formGroupLogin.get('passwordValLogin').touched">
+                <!--end messages-->
+                <button type="submit" [disabled]="!formGroupLogin.valid" class="btn btn-action">{{"Login.Login" | translate}}</button>
+                <br><br><br>
+            </form>
         </div>
         <div *ngIf="!login ">
-            <input [(ngModel)]="name" type="text" class="input-blank input-border_down" placeholder="{{'Login.Nombre' | translate}}">
-            <input [(ngModel)]="phone" type="tel" class="input-blank input-border_down" placeholder="{{'Login.Telefono' | translate}}">
-            <input [(ngModel)]="email_r" type="email" class="input-blank input-border_down" placeholder="{{'Login.Email' | translate}}">
-            <input [(ngModel)]="password_r" type="password" class="input-blank" placeholder="{{'Login.Password' | translate}}">
-            <br><br>
-            <button (click)="procesarRegistro()" class="btn btn-action">{{"Login.Registro" | translate}}</button>
+            <form novalidate (ngSubmit)="procesarRegistro()" [formGroup]="formGroup">
+                <input [(ngModel)]="name" type="text" class="input-blank input-border_down" formControlName="firstName" placeholder="{{'Login.Nombre' | translate}}">
+                <input [(ngModel)]="phone" type="tel" class="input-blank input-border_down" formControlName="phoneNmber" placeholder="{{'Login.Telefono' | translate}}">
+                <input [(ngModel)]="email_r" type="email" class="input-blank input-border_down" formControlName="mailAddress" placeholder="{{'Login.Email' | translate}}">
+                <input [(ngModel)]="password_r" type="password" class="input-blank input-border_down" formControlName="passwordVal" placeholder="{{'Login.Password' | translate}}">
+                <br><br>
+                <!--messages-->
+                <ion-item no-lines *ngIf="( formGroup.get('firstName').hasError('minlength') || formGroup.get('firstName').hasError('maxlength') || formGroup.get('firstName').hasError('pattern') || formGroup.get('firstName').hasError('required') ) && formGroup.get('firstName').touched">
+                    <div class="error" *ngIf="formGroup.get('firstName').hasError('required')  && formGroup.get('firstName').touched">
+                        * Please input your name
+                    </div>
+                    <div class="error" *ngIf="formGroup.get('firstName').hasError('minlength') && formGroup.get('firstName').touched">
+                        * Minimum 7 characters
+                    </div>
+                    <div class="error" *ngIf="formGroup.get('firstName').hasError('maxlength') && formGroup.get('firstName').touched">
+                        * Maximum 30 characters
+                    </div>
+                    <div class="error" *ngIf="formGroup.get('firstName').hasError('pattern') && formGroup.get('firstName').touched">
+                        * Just use alphabet character
+                    </div>
+                </ion-item>
+                <br *ngIf="( formGroup.get('firstName').hasError('minlength') || formGroup.get('firstName').hasError('maxlength') || formGroup.get('firstName').hasError('pattern') || formGroup.get('firstName').hasError('required') ) && formGroup.get('firstName').touched">
+                <ion-item no-lines *ngIf="( formGroup.get('phoneNmber').hasError('minlength') || formGroup.get('phoneNmber').hasError('maxlength') || formGroup.get('phoneNmber').hasError('pattern') || formGroup.get('phoneNmber').hasError('required') ) && formGroup.get('phoneNmber').touched">
+                    <div class="error" *ngIf="formGroup.get('phoneNmber').hasError('required')  && formGroup.get('phoneNmber').touched">
+                        * Please input your phone number
+                    </div>
+                    <div class="error" *ngIf="formGroup.get('phoneNmber').hasError('maxlength') && formGroup.get('phoneNmber').touched">
+                        * Maximum 10 characters
+                    </div>
+                    <div class="error" *ngIf="formGroup.get('phoneNmber').hasError('pattern') && formGroup.get('phoneNmber').touched">
+                        * Ingrese un numero de telefono valido
+                    </div>
+                </ion-item>
+                <br *ngIf="( formGroup.get('phoneNmber').hasError('minlength') || formGroup.get('phoneNmber').hasError('maxlength') || formGroup.get('phoneNmber').hasError('pattern') || formGroup.get('phoneNmber').hasError('required') ) && formGroup.get('phoneNmber').touched">
+                <ion-item no-lines *ngIf="( formGroup.get('mailAddress').hasError('minlength') || formGroup.get('mailAddress').hasError('maxlength') || formGroup.get('mailAddress').hasError('pattern') || formGroup.get('mailAddress').hasError('required') ) && formGroup.get('mailAddress').touched">
+                    <div class="error" *ngIf="formGroup.get('mailAddress').hasError('required')  && formGroup.get('mailAddress').touched">
+                        * Please input your email address
+                    </div>
+                    <div class="error" *ngIf="formGroup.get('mailAddress').hasError('pattern') && formGroup.get('mailAddress').touched">
+                        * Ingrese una direccion de corrio valida
+                    </div>
+                </ion-item>
+                <br *ngIf="( formGroup.get('mailAddress').hasError('minlength') || formGroup.get('mailAddress').hasError('maxlength') || formGroup.get('mailAddress').hasError('pattern') || formGroup.get('mailAddress').hasError('required') ) && formGroup.get('mailAddress').touched">
+                <ion-item no-lines *ngIf="( formGroup.get('passwordVal').hasError('minlength') || formGroup.get('passwordVal').hasError('maxlength') || formGroup.get('passwordVal').hasError('pattern') || formGroup.get('passwordVal').hasError('required') ) && formGroup.get('passwordVal').touched">
+                    <div class="error" *ngIf="formGroup.get('passwordVal').hasError('required')  && formGroup.get('passwordVal').touched">
+                        * Please input your password
+                    </div>
+                    <div class="error" *ngIf="formGroup.get('passwordVal').hasError('pattern') && formGroup.get('passwordVal').touched">
+                        * Ingrese una contraseña valida
+                    </div>
+                </ion-item>
+                <br *ngIf="( formGroup.get('passwordVal').hasError('minlength') || formGroup.get('passwordVal').hasError('maxlength') || formGroup.get('passwordVal').hasError('pattern') || formGroup.get('passwordVal').hasError('required') ) && formGroup.get('passwordVal').touched">
+                <!--end messages-->
+                <!--<br><br>-->
+                <!--<button type="submit" (click)="procesarRegistro()" class="btn btn-action">{{"Login.Registro" | translate}}</button>-->
+                <button type="submit" [disabled]="!formGroup.valid" class="btn btn-action">{{"Login.Registro" | translate}}</button>
+            </form>
             <br><br><br>
+
         </div>
         <ion-grid>
             <ion-row>
