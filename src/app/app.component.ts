@@ -81,6 +81,7 @@ export class MyApp {
       )
       .catch(e => {
         translate.setDefaultLang("en");
+        //translate.setDefaultLang("es");
         console.log("error detected lang "+e)
         storage.set('lang', 'en');
       });

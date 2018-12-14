@@ -2,7 +2,7 @@ import { InboxSinglePage } from './../inbox-single/inbox-single';
 import { CallNumber } from '@ionic-native/call-number';
 import { University } from './../../model/university/university.model';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform,AlertController,ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
 import { WriteReviewPage } from '../write-review/write-review';
@@ -73,7 +73,8 @@ export class SingleUniversityPage {
     private callNumber: CallNumber,
     private iab: InAppBrowser,
     private storage: Storage,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    public toastCtrl: ToastController,
     ) {
       statusBar.backgroundColorByHexString('#0055CB');
       
@@ -103,8 +104,9 @@ export class SingleUniversityPage {
       this.rateUbicacion = snapshot.val().scores.ubicacion;
       this.rateActividades = snapshot.val().scores.actividades;
       this.rateBecas = snapshot.val().scores.becas;
-      this.timeCreated = this.timeConverter(snapshot.val().timestamp).dia + ' '+this.timeConverter(snapshot.val().timestamp).mes + ' '+this.timeConverter(snapshot.val().timestamp).año,
-      this.rateGeneral = snapshot.val().scores.global;
+      this.timeCreated = this.timeConverter(snapshot.val().timestamp).dia + ' '+this.timeConverter(snapshot.val().timestamp).mes + ' '+this.timeConverter(snapshot.val().timestamp).año;
+      var tmpS = ''+ snapshot.val().scores.global;
+      this.rateGeneral = tmpS.charAt(0) + tmpS.charAt(1) + tmpS.charAt(2);
       this.tmpReviews = snapshot.val().reviews;
       this.phone = snapshot.val().telefono;
       this.website = snapshot.val().website;
@@ -257,7 +259,20 @@ export class SingleUniversityPage {
 
   initChat(id){
     // send id user with param: id_user
-    this.navCtrl.push(InboxSinglePage, {id_user : id});
+    //VALIDATEHERE
+    this.afAuth.authState.subscribe(user => {
+      if(user.uid != id){
+        alert(user.uid);
+        alert(id);
+        this.navCtrl.push(InboxSinglePage, {id_user : id});
+      }else{
+        this.toastCtrl.create({
+          message: 'Error...',
+          duration: 1000,
+          position: 'bottom'
+        }).present();
+      }
+    });
   }
 
   getReviews(){
@@ -303,27 +318,35 @@ export class SingleUniversityPage {
 
 
   timeConverter(time){
-    var timestamp   = time.toString().substring(0,10),
-    date        = new Date(timestamp * 1000),
-    datevalues  = [
-                   date.getFullYear(), //0
-                   date.getMonth(), //1
-                   date.getDate(), //2
-                   date.getHours(), //3
-                   date.getMinutes(), //4
-                   date.getSeconds(), //5
-                ]; 
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var timeTraslate = {
-      segundo : datevalues[5],
-      minuto : datevalues[4],
-      hora  : datevalues[3],
-      dia : datevalues[2],
-      mes : months[datevalues[1]],
-      año : datevalues[0]
-    };
-    
-    return timeTraslate;
+    var val = "es";
+    //this.storage.get('lang').then((val) => {
+      var timestamp   = time.toString().substring(0,10),
+      date        = new Date(timestamp * 1000),
+      datevalues  = [
+                    date.getFullYear(), //0
+                    date.getMonth(), //1
+                    date.getDate(), //2
+                    date.getHours(), //3
+                    date.getMinutes(), //4
+                    date.getSeconds(), //5
+                  ]; 
+      var months = [];
+      if(val == "es"){
+        months = ['En','Feb','Mar','Abr','May','Jun','Jul','Agos','Sep','Oct','Nov','Dic'];
+      }else{
+        months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      }
+      var timeTraslate = {
+        segundo : datevalues[5],
+        minuto : datevalues[4],
+        hora  : datevalues[3],
+        dia : datevalues[2],
+        mes : months[datevalues[1]],
+        año : datevalues[0]
+      };
+      return timeTraslate;
+    //});
+    //return '';
   }
 
   addMonth(){

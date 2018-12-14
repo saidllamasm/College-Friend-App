@@ -9,55 +9,57 @@
         <button (click)="addPicture()" class="btn-addPic"><ion-icon class="icon" name="camera"></ion-icon> </button>
     </div>
     <div padding>
-        <ion-grid>
-            <ion-row>
-                <ion-col>
-                    <div>
-                        <img *ngFor="let image of imagesTmp" [src]="image" class="tmpImg" height="100px" width="100px">
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <label>{{"Perfil.user_name" | translate}}</label>
-                    <input [(ngModel)]="nameUniversity" type="text" placeholder="Instituto Tecnológico de Ciudad Guzmán">
-                </ion-col>
-            </ion-row>
-            <br>
-            <ion-row>
-                <ion-col>
-                    <label>{{"Universidad.Telefono" | translate}} </label>
-                    <input [(ngModel)]="phoneUniversity" type="tel" placeholder="+52 341 554 1352">
-                </ion-col>
-            </ion-row>
-            <br>
-            <ion-row>
-                <ion-col>
-                    <label>{{"Universidad.Sitioweb" | translate}}</label>
-                    <input [(ngModel)]="website" type="text" placeholder="www.itcg.edu.mx">
-                </ion-col>
-            </ion-row>
-            <br>
-            <ion-row>
-                <ion-col>
-                    <ion-row>
-                        <div id="map_canvas">
-                            <table>
-                                <tr>
-                                    <td><input ion-input type="text" #search_address><button ion-button (click)="onButton1_click($event)">{{"Buscar" | translate}}</button></td>
-                                </tr>
-                            </table>
+        <form novalidate (ngSubmit)="saveUniversity()" [formGroup]="formGroup">
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <div>
+                            <img *ngFor="let image of imagesTmp" [src]="image" class="tmpImg" height="100px" width="100px">
                         </div>
-                    </ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <label>{{"Perfil.user_name" | translate}}</label>
+                        <input formControlName="nombre" [(ngModel)]="nameUniversity" type="text" placeholder="Instituto Tecnológico de Ciudad Guzmán">
+                    </ion-col>
+                </ion-row>
+                <br>
+                <ion-row>
+                    <ion-col>
+                        <label>{{"Universidad.Telefono" | translate}} </label>
+                        <input formControlName="telefono" [(ngModel)]="phoneUniversity" type="tel" placeholder="+52 341 554 1352">
+                    </ion-col>
+                </ion-row>
+                <br>
+                <ion-row>
+                    <ion-col>
+                        <label>{{"Universidad.Sitioweb" | translate}}</label>
+                        <input formControlName="website" [(ngModel)]="website" type="text" placeholder="www.itcg.edu.mx">
+                    </ion-col>
+                </ion-row>
+                <br>
+                <ion-row>
+                    <ion-col>
+                        <ion-row>
+                            <div id="map_canvas">
+                                <table>
+                                    <tr>
+                                        <td><input formControlName="direccion" ion-input type="text" #search_address><button ion-button (click)="onButton1_click($event)">{{"Buscar" | translate}}</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </ion-row>
 
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <button (click)="saveUniversity()" class="btn btn-save">{{"Guardar" | translate}}</button>
-                </ion-col>
-            </ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <button type="submit" class="btn btn-save">{{"Guardar" | translate}}</button>
+                    </ion-col>
+                </ion-row>
 
-        </ion-grid>
+            </ion-grid>
+        </form>
     </div>
 </ion-content>

@@ -25,9 +25,9 @@
         "Ver": "Ver",
         "Crear": "Crear",
         "TituloResEnd": "Aquí los resultados terminan…",
-        "ContenidoResEnd": "If it was not what you were looking for help us to register it",
-        "ContenidoResNo": "Help us see this university next time",
-        "TituloResNo": "Without result"
+        "ContenidoResEnd": "Si no era lo que buscabas, ayúdanos a registrarlo.",
+        "ContenidoResNo": "Ayúdanos a ver esta universidad la próxima vez.",
+        "TituloResNo": "Sin resultados"
     },
     "Perfil": {
         "user_name": "Nombre",
@@ -47,26 +47,27 @@
         "Mapa": "Mapa",
         "Opinar": "opinar",
         "Ubicacion": "Ubicación",
-        "Buscar": "Search",
-        "Guardar": "Save",
-        "CreadoPor": "Created by",
-        "Global": "Global score",
-        "Carreras": "university careers",
-        "Inicio": "Start of courses",
+        "Buscar": "Buscar",
+        "Guardar": "Guardar",
+        "CreadoPor": "Creada por",
+        "Global": "Puntaje",
+        "Carreras": "Carreras universitarias",
+        "Inicio": "Inicio de clases",
         "Costo": "Registration cost",
-        "Puntajes": "Scores",
-        "Opiniones": "Reviews",
+        "Puntajes": "Puntajes",
+        "Opiniones": "Opiniones",
         "General": "General",
-        "AñadirCarrera": "add university career",
-        "EditarMeses": "Edit months"
+        "AñadirCarrera": "añadir una carrera",
+        "EditarMeses": "editar mes",
+        "Dia": "el"
     },
     "Opiniones": {
         "Opiniones": "Opiniones",
         "Actualizar": "Update review a"
     },
     "Errores": {
-        "Error": "An error has occurred",
-        "Mensaje": "… our programmers are working to solve it"
+        "Error": "Se ha producido un error",
+        "Mensaje": "… nuestros programadores están trabajando para resolverlo."
     },
     "Login": {
         "Nombre": "Nombre completo",

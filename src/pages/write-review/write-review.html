@@ -7,7 +7,6 @@
 
 <ion-content padding>
     <h2>{{"Escribir.Para" | translate}} {{universityName}}</h2>
-
     <ion-grid>
         <ion-row>
             <ion-col col-2>
@@ -61,8 +60,8 @@
             </ion-col>
         </ion-row>
         <!--end ratings-->
-        <ion-row>
-            <textarea [(ngModel)]="opinionContent" type="text" class="txtOpinion"></textarea>
+        <ion-row [formGroup]="formGroup">
+            <textarea formControlName="ops" [(ngModel)]="opinionContent" type="text" class="txtOpinion"></textarea>
         </ion-row>
         <ion-row>
             <!--insert images by user -->
@@ -81,5 +80,4 @@
             <button (click)="saveReview()" class="btn-save">{{"Escribir.Guardar" | translate}}</button>
         </ion-row>
     </ion-grid>
-
 </ion-content>

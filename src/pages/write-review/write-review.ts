@@ -6,7 +6,7 @@ import md5 from 'crypto-md5';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { database, storage } from 'firebase';
 import { ImagePicker } from '@ionic-native/image-picker';
-
+import { Validators, FormBuilder, FormGroup, FormControl, ValidationErrors} from '@angular/forms';
 /**
  * Generated class for the WriteReviewPage page.
  *
@@ -20,6 +20,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
   templateUrl: 'write-review.html',
 })
 export class WriteReviewPage {
+
+  formGroup : FormGroup;
   images: any = [];
   imagesTmp : any[];
   public userUID = '';
@@ -49,6 +51,10 @@ export class WriteReviewPage {
     //private componentFactoryResolver: ComponentFactoryResolver,
     public afAuth: AngularFireAuth,
   ) {
+
+    this.formGroup = new FormGroup({
+      ops: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(1400)]),
+    });
 
     this.imagesTmp= [];
     this.id_university = this.navParams.get('id_university');
@@ -97,12 +103,6 @@ export class WriteReviewPage {
   }
 
 
-  /*addPicture(){
-    const childComponent_var = this.componentFactoryResolver.resolveComponentFactory(ImagePlaceholderComponent);    
-    this.menucontainer.createComponent(childComponent_var);
-  }*/
-
-  // ratings
 
   //rate events
   onModelInstalaciones($event){
@@ -122,36 +122,63 @@ export class WriteReviewPage {
   }
 
   saveReview(){
-    this.afDatabase.object('/Universidades/' + this.id_university+'/reviews/'+this.userUID+'/').update(
-      {
-        estado : 'pendiente',
-        interacciones: {
-          likes : 0, 
-          dislikes : 0
-        },
-        scores : {
-          actividades : this.rateActividades,
-          becas : this.rateBecas,
-          instalaciones : this.rateInstalaciones,
-          profesores : this.rateProfesores,
-          ubicacion : this.rateProfesores
-        },
-        opinion :  this.opinionContent,
-        timestamp: database.ServerValue.TIMESTAMP
+    if(this.rateBecas != '0' &&
+     this.rateActividades != '0' &&
+     this.rateUbicacion != '0' &&
+     this.rateProfesores != '0' &&
+     this.rateInstalaciones != '0'
+     ){
+      if (this.formGroup.valid) {
+        this.afDatabase.object('/Universidades/' + this.id_university+'/reviews/'+this.userUID+'/').update(
+          {
+            estado : 'pendiente',
+            interacciones: {
+              likes : 0, 
+              dislikes : 0
+            },
+            scores : {
+              actividades : this.rateActividades,
+              becas : this.rateBecas,
+              instalaciones : this.rateInstalaciones,
+              profesores : this.rateProfesores,
+              ubicacion : this.rateProfesores
+            },
+            opinion :  this.opinionContent,
+            timestamp: database.ServerValue.TIMESTAMP
+          }
+        );
+    
+        for (var i = 0; i < this.images.length; i++) {
+          let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
+          this.uploadPics(this.images[i] , id, this.userUID, this.id_university);
+        }
+    
+        // save for user
+        let univ = {};
+        univ[this.id_university] = true;
+        this.afDatabase.list('/Usuarios/' + this.userUID +'').update('reviews', univ);
+        this.toastCtrl.create({
+          message: 'Opinion agregada',
+          duration: 1000,
+          position: 'bottom'
+        }).present();
+        //retroceder
+        this.navCtrl.pop();
+      }else{
+        this.toastCtrl.create({
+          message: 'Debes escribir mas en la opinion',
+          duration: 1000,
+          position: 'bottom'
+        }).present();
       }
-    );
-
-    for (var i = 0; i < this.images.length; i++) {
-      let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
-      this.uploadPics(this.images[i] , id, this.userUID, this.id_university);
+    }else{
+      this.toastCtrl.create({
+        message: 'Ratings vacios',
+        duration: 1000,
+        position: 'bottom'
+      }).present();
     }
-
-    // save for user
-    let univ = {};
-    univ[this.id_university] = true;
-    this.afDatabase.list('/Usuarios/' + this.userUID +'').update('reviews', univ);
-
-
+    
   }
 
   uploadPics( image , name, tokenReview,tokenun){

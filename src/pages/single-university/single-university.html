@@ -29,7 +29,7 @@
             <ion-row>
                 <ion-col col-9>
                     {{"Universidad.CreadoPor" | translate}}
-                    <span class="bold">{{nameUserCreated}}</span> at <span class="bold">{{timeCreated}}</span>
+                    <span class="bold">{{nameUserCreated}}</span> {{"Universidad.Dia" | translate}} <span class="bold">{{timeCreated}}</span>
                 </ion-col>
                 <ion-col col-3>
                     <img class="profile-created" [src]="userProfileCreated">
@@ -219,6 +219,7 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
+            <hr>
         </div>
     </div>
 </ion-content>

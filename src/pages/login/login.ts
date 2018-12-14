@@ -89,18 +89,19 @@ export class LoginPage {
   procesarRegistro(){
     if (this.formGroup.valid) {
         // Save your values, using this.form.get('myField').value;
-        alert('validate success');
+        //alert('validate success');
         let credentials = {
           email: this.email_r,
           password: this.password_r
         };
           this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password)
           .then( (firebaseUser) =>  {
-            alert(firebaseUser.user.uid);
+            //alert(firebaseUser.user.uid);
             this.saveUserFirebase(firebaseUser.user.uid ,credentials.email, this.name, this.phone, 'email');
             this.navCtrl.setRoot(TabsPage);
           }).catch(function(error) {
             console.error("Error: ", error);
+            alert(error);
         });
     }else{
       //alert(this.formGroup.errors);
@@ -172,7 +173,7 @@ export class LoginPage {
           }
         };
         this.users.update(uid, newUser);
-        alert('acount created sucess');
+        //alert('acount created sucess');
       }
       
     });

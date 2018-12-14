@@ -30,6 +30,7 @@ export class InboxSinglePage {
   searchByChatToken = 'null';
   searchByUserUID = 'null';
   userPicture = ''; // this profile
+  newChatInit = false;
 
 
   // for cache users
@@ -53,6 +54,10 @@ export class InboxSinglePage {
     public afAuth: AngularFireAuth,
     public afDatabase: AngularFireDatabase,
   ) {
+    
+  }
+
+  ionViewWillEnter(){
     this.afAuth.authState.subscribe(user => {
       this.idFromUser = user.uid;
       this.searchByUserUID = this.navParams.get('id_user');
@@ -76,8 +81,9 @@ export class InboxSinglePage {
                   });
                 });
               }else{
+                //error al recuperar mensajes
                 // fatal error!!!!
-                alert('fatal error 401CS');
+                //alert('fatal error 401CS');
               }
             }else{
               // comenzar nuevo chat?
@@ -142,6 +148,7 @@ export class InboxSinglePage {
   }
 
   loadMessagesWithChat(){
+    this.msgList = [];
     this.afDatabase.database.ref('/Chats/'+this.searchByChatToken).once('value').then( (snapshot) => {
       //"use strict";
       for(var ip in snapshot.val().mensajes){
@@ -192,8 +199,48 @@ export class InboxSinglePage {
   sendMsg(){
     this.afAuth.authState.subscribe(user => {
       if(this.searchByUserUID !== undefined){
-        alert('search user');
-      }else if(this.searchByChatToken !== undefined){
+        if(this.newChatInit == false){
+          let msj = {
+            uiduser: user.uid,
+            contenido:  this.editorMsg,
+            timestamp: database.ServerValue.TIMESTAMP,
+          };
+          let chat = {
+            "estado" : "aprobado",
+            "lastmsj" : this.editorMsg,
+            "timestamp" : database.ServerValue.TIMESTAMP,
+            "uidcreador" : user.uid,
+            "uiddestino" : this.searchByUserUID
+          }
+          this.msjDB = this.afDatabase.list('/Chats/');
+          var t = this.msjDB.push( chat ).key;
+          this.msjDB = this.afDatabase.list('/Chats/' + t +'/mensajes/');
+          this.msjDB.push( msj ).key;
+          this.editorMsg = '';
+          this.searchByChatToken = t;
+          this.loadMessagesWithChat();
+  
+          this.newChatInit = true;
+        }else{
+          alert('chat iniciado anteriormente');
+          let msj = {
+            uiduser: user.uid,
+            contenido:  this.editorMsg,
+            timestamp: database.ServerValue.TIMESTAMP,
+          };
+          this.msjDB = this.afDatabase.list('/Chats/' + this.searchByChatToken+'/mensajes/');
+          this.msjDB.push( msj ).key;
+          this.msjDB = this.afDatabase.list('/Chats');
+          this.msjDB.update(this.searchByChatToken, {lastmsj:this.editorMsg});
+          this.msjDB.update(this.searchByChatToken, {timestamp: database.ServerValue.TIMESTAMP});
+          //this.msjDB.update('timestamp', database.ServerValue.TIMESTAMP);
+          this.editorMsg = '';
+          //this.searchByChatToken = t;
+          //this.loadMessagesWithChat();
+        }
+        
+
+      }else if(this.searchByChatToken !== undefined ){
         let msj = {
           uiduser: user.uid,
           contenido:  this.editorMsg,

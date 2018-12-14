@@ -70,4 +70,7 @@ page-profile {
         color: map-get($colors, secondary);
         border: 1px solid map-get($colors, secondary);
     }
+    label.slide {
+        font-size: 10px;
+    }
 }

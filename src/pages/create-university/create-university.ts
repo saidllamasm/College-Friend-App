@@ -1,6 +1,7 @@
 import { Component,ViewChild,ElementRef } from '@angular/core';
 import { IonicPage, NavController, ToastController, NavParams, LoadingController } from 'ionic-angular';
 
+import { Validators, FormBuilder, FormGroup, FormControl, ValidationErrors} from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -29,6 +30,7 @@ import { database, storage } from 'firebase';
   templateUrl: 'create-university.html',
 })
 export class CreateUniversityPage {
+  formGroup : FormGroup;
   images: any = [];
   imagesTmp : any[];
 
@@ -54,11 +56,22 @@ export class CreateUniversityPage {
     public afAuth: AngularFireAuth,
     public database: AngularFireDatabase,
     public imagePicker: ImagePicker,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public formBuilder: FormBuilder
   ) {
     //this.loadMap();
     this.imagesTmp= [];
     this.university = database.list('Universidades');
+
+    let PHONEPATTERN = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+    let WEBSITEPATTER = /(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$/;
+
+    this.formGroup = new FormGroup({
+      nombre: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ÑñáéíóúÁÉÍÓÚ]*'), Validators.minLength(5), Validators.maxLength(60)]),
+      telefono : new FormControl('', [Validators.required, Validators.pattern(PHONEPATTERN), Validators.maxLength(10)]),
+      website : new FormControl('', [Validators.required, Validators.pattern(WEBSITEPATTER), Validators.minLength(4)]),
+      direccion: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 #ÑñáéíóúÁÉÍÓÚ]*'), Validators.minLength(3), Validators.maxLength(130)]),
+   });
   }
 
   ionViewDidEnter() {
@@ -169,64 +182,80 @@ export class CreateUniversityPage {
   }
 
   saveUniversity(){
-    this.afAuth.authState.subscribe(user => {
-      let data = {
-        uid_creador: user.uid,
-        direccion: this.addresses,
-        ciudad : this.locality,
-        estado:'pendiente',
-        gps:{
-          lat: this.positionLat,
-          lng: this.positionLng
-        },
-        nombre: this.nameUniversity,
-        website:this.website,
-        telefono:this.phoneUniversity,
-        timestamp: database.ServerValue.TIMESTAMP,
-        id : 'default',
-        scores : {
-          actividades : 0,
-          becas : 0,
-          global : 0,
-          instalaciones : 0,
-          profesores : 0,
-          ubicacion : 0
-        },
-        reviews : {
+    if (this.formGroup.valid) {
+      this.afAuth.authState.subscribe(user => {
+        let data = {
+          uid_creador: user.uid,
+          direccion: this.addresses,
+          ciudad : this.locality,
+          estado:'pendiente',
+          gps:{
+            lat: this.positionLat,
+            lng: this.positionLng
+          },
+          nombre: this.nameUniversity,
+          website:this.website,
+          telefono:this.phoneUniversity,
+          timestamp: database.ServerValue.TIMESTAMP,
+          id : 'default',
+          scores : {
+            actividades : 0,
+            becas : 0,
+            global : 0,
+            instalaciones : 0,
+            profesores : 0,
+            ubicacion : 0
+          },
+          reviews : {
 
-        },
-        cursos:{
-          1 : false,
-          2 : false,
-          3 : false,
-          4 : false,
-          5 : false,
-          6 : false,
-          7 : false,
-          8 : false,
-          9 : false,
-          10 : false,
-          11 : false,
-          12 : false
+          },
+          cursos:{
+            1 : false,
+            2 : false,
+            3 : false,
+            4 : false,
+            5 : false,
+            6 : false,
+            7 : false,
+            8 : false,
+            9 : false,
+            10 : false,
+            11 : false,
+            12 : false
+          }
         }
-      }
-      let newUniversity = this.university.push( data ).key;
-      data.id = newUniversity;
-      //alert('verify id: '+data.id+ ' vs '+newUniversity);
-      this.university.update( newUniversity, data);
-      /*newUniversity.then( () => {*/
-      this.clearInputs();
-      for (var i = 0; i < this.images.length; i++) {
-        let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
-        this.uploadPics(this.images[i] , id, newUniversity);
-      }
-      let toast = this.toastCtrl.create({
-        message: 'University was added successfully',
-        duration: 1000,
-        position: 'bottom'
-      }).present();
-      
-    });
+        let newUniversity = this.university.push( data ).key;
+        data.id = newUniversity;
+        //alert('verify id: '+data.id+ ' vs '+newUniversity);
+        this.university.update( newUniversity, data);
+        /*newUniversity.then( () => {*/
+        this.clearInputs();
+        for (var i = 0; i < this.images.length; i++) {
+          let id = ''+new Date().getDay() + '_' + new Date().getMonth() + '_' + new Date().getFullYear() + '_' + new Date().getMilliseconds() + '_' + new Date().getSeconds() + '_' + new Date().getMinutes() + '_' + new Date().getHours();
+          this.uploadPics(this.images[i] , id, newUniversity);
+        }
+        let toast = this.toastCtrl.create({
+          message: 'University was added successfully',
+          duration: 1000,
+          position: 'bottom'
+        }).present();
+        
+      });
+    }else{
+      Object.keys(this.formGroup.controls).forEach(key => {
+
+        const controlErrors: ValidationErrors = this.formGroup.get(key).errors;
+        if (controlErrors != null) {
+              Object.keys(controlErrors).forEach(keyError => {
+                this.toastCtrl.create({
+                  message: ' '+ key + ' ' +keyError ,
+                  duration: 1500,
+                  position: 'bottom'
+                }).present();
+              });
+            }
+          });
+    }
   }
 
   clearInputs(){
