@@ -262,8 +262,6 @@ export class SingleUniversityPage {
     //VALIDATEHERE
     this.afAuth.authState.subscribe(user => {
       if(user.uid != id){
-        alert(user.uid);
-        alert(id);
         this.navCtrl.push(InboxSinglePage, {id_user : id});
       }else{
         this.toastCtrl.create({

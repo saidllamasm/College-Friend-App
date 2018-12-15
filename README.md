@@ -37,7 +37,7 @@ College Friend App seeks to create an active community of people who share infor
 
 **Category:** Social Networking
 
-**App Platfrom:** Android, iOS, Web
+**App Platfrom:** Android 100%, iOS 60%, Web 0%
 
 **Referance:** Social media, Facebook
 
@@ -69,12 +69,18 @@ Active member of IEEE and president of IEEE Student Branch of the Technological 
 # Installation
 `npm install`
 
+`ionic cordova platform add android`
+
+`ionic cordova platform add ios`
+
 `ionic cordova run android`
+
+`ionic cordova run ios`
 # Language
- - Español
- - English
- - Português
- - Francais
+ - Español 90%
+ - English 84%
+ - Português 0%
+ - Francais 0%
 
 # Contributing
 # Credits
@@ -100,4 +106,4 @@ Version 3, 29 June 2007**
 
 
 ### Keywords:
-College, Student, School, Social, Network, Graduate, Friend, Inbox, Share, Picture, Ranking, Firebase, Ionic, Android, iOS.
+College, Student, School, Social, Network, Graduate, Friend, Inbox, Share, Picture, Ranking, Firebase, Ionic, Android.

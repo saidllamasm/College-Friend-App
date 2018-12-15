@@ -2,6 +2,7 @@
 # http://git-scm.com/docs/gitignore
 
 *.apk
+!INSTALL.apk
 *.jks
 *~
 *.sw[mnpcod]

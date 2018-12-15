@@ -67,7 +67,18 @@
     },
     "Errores": {
         "Error": "An error has occurred",
-        "Mensaje": "… our programmers are working to solve it"
+        "Mensaje": "… our programmers are working to solve it",
+        "EmailVacio": "Please enter an email address",
+        "EmailInvalido": "Please enter a valid email address",
+        "ContraseñaVacio": "Please enter a password",
+        "Min": "Minimum 7 characters",
+        "Max": "Maximum 30 characters",
+        "ContraseñaInv": "Please enter a valid password",
+        "UserVacio": "Please enter your name",
+        "UserInv": "Just use the character of the alphabet",
+        "PhoneVacio": "Please enter your phone number",
+        "Max10": "Maximum 10 characters",
+        "PhoneInv": "Enter a valid phone number"
     },
     "Login": {
         "Nombre": "Full Name",

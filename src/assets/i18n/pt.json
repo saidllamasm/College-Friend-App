@@ -1,44 +1,135 @@
 {
+    "Slides": {
+        "Inicio": "Inicio",
+        "Creado": "Powered by",
+        "Como": "How Does It",
+        "Trabaja": "Work",
+        "Que": "Welcome to",
+        "ContentOne": "Looking for a university? Get to the right application, enter and know your next university.",
+        "ContentTwo": "With the help of people like you and me, if you know a university, register it! and let the world know what you think of her."
+    },
     "Tabs": {
-        "Inicio": " ",
-        "Opiniones": " ",
-        "Guardado": " ",
-        "Chat": " ",
-        "Perfil": " "
+        "Inicio": "Home",
+        "Opiniones": "Opinions",
+        "Guardado": "Saved",
+        "Chat": "Chat",
+        "Perfil": "Profile"
     },
     "Inicio": {
-        "buscar_universidad": " ",
-        "universidades_destacadas": " ",
-        "universidades_cercanas": " ",
-        "universidades_evaluadas": " ",
-        "inicio_proximo": " "
-    },
-    "Semana": {
-        "Lunes": " ",
-        "Martes": " ",
-        "Miercoles": " ",
-        "Jueves": " ",
-        "Viernes": " ",
-        "Sabado": " ",
-        "Domingo": " "
+        "buscar_universidad": "Search Universities",
+        "universidades_destacadas": "Featured Universities",
+        "universidades_cercanas": "Universities in",
+        "universidades_evaluadas": "Most Valued Universities",
+        "inicio_proximo": "Start of courses soon",
+        "Resultados": "Results",
+        "Ver": "Show",
+        "Crear": "Create",
+        "TituloResEnd": "Here the results end…",
+        "ContenidoResEnd": "If it was not what you were looking for help us to register it",
+        "ContenidoResNo": "Help us see this university next time",
+        "TituloResNo": "Without result"
     },
     "Perfil": {
-        "user_name": " ",
-        "user_phone": " ",
-        "user_email": " ",
+        "user_name": "Name",
+        "user_phone": "Phone number",
+        "user_email": "Email address",
+        "user_pass": "Password",
         "Ajustes": {
-            "Ajustes": " ",
-            "Miembro": " ",
-            "Notificaciones": " "
+            "Ajustes": "Settings",
+            "Miembro": "looking for university",
+            "Notificaciones": "receive notifications",
+            "Guardar": "Save"
         }
     },
     "Universidad": {
-        "Sitio_web": " ",
-        "Telefono": " ",
-        "Mapa": " ",
-        "Opinar": " "
+        "Sitioweb": "Website",
+        "Telefono": "Phone",
+        "Mapa": "Map",
+        "Opinar": "write review",
+        "Ubicacion": "Location",
+        "Buscar": "Search",
+        "Guardar": "Save",
+        "CreadoPor": "Created by",
+        "Global": "Global score",
+        "Carreras": "university careers",
+        "Inicio": "Start of courses",
+        "Costo": "Registration cost",
+        "Puntajes": "Scores",
+        "Opiniones": "Reviews",
+        "General": "General",
+        "AñadirCarrera": "add university career",
+        "EditarMeses": "Edit months",
+        "Dia": "at"
     },
     "Opiniones": {
-        "Opiniones": " "
+        "Opiniones": "Opinions",
+        "Actualizar": "Update review a"
+    },
+    "Errores": {
+        "Error": "An error has occurred",
+        "Mensaje": "… our programmers are working to solve it",
+        "EmailVacio": "Please enter an email address",
+        "EmailInvalido": "Please enter a valid email address",
+        "ContraseñaVacio": "Please enter a password",
+        "Min": "Minimum 7 characters",
+        "Max": "Maximum 30 characters",
+        "ContraseñaInv": "Please enter a valid password",
+        "UserVacio": "Please enter your name",
+        "UserInv": "Just use the character of the alphabet",
+        "PhoneVacio": "Please enter your phone number",
+        "Max10": "Maximum 10 characters",
+        "PhoneInv": "Enter a valid phone number"
+    },
+    "Login": {
+        "Nombre": "Full Name",
+        "Telefono": "Phone Number",
+        "Login": "Login",
+        "Registro": "Register",
+        "Email": "Email Address",
+        "Password": "Password"
+    },
+    "Chat": {
+        "Conversaciones": "Conversations",
+        "Mensajes": "Messages",
+        "Solicitudes": "Requests"
+    },
+    "InboxSingle": {
+        "MensajeAqui": "Message here"
+    },
+    "Escribir": {
+        "Para": "Write opinion for",
+        "Guardar": "add comment",
+        "Actualizar": "update comment"
+    },
+    "Meses": {
+        "Enero": "January",
+        "Febrero": "February",
+        "Marzo": "March",
+        "Abril": "April",
+        "Mayo": "May",
+        "Junio": "June",
+        "Julio": "July",
+        "Agosto": "August",
+        "Septiembre": "September",
+        "Octubre": "October",
+        "Noviembre": "November",
+        "Diciembre": "December"
+    },
+    "Ratings": {
+        "Instalaciones": "Facilities and infrastructure",
+        "Profesores": "Teachers",
+        "Ubicacion": "Location",
+        "Actividades": "Extracurricular activities",
+        "Becas": "Scholarships and supports"
+    },
+    "Tips": {
+        "Tip1": "It is not possible to update your email if you created your account from a social network.",
+        "Tip2": "If you want to update your name and you used the login with social networks it is necessary that you update it from the social network with which you started session.",
+        "Tip3": "To update your profile picture it is necessary that you go to gravatar.com and register the same mail that you use in this application.",
+        "Tip4": "If you can imagine it can be programmed",
+        "Tip5": "Powered by DamVeloper Team"
+    },
+    "Favoritos": {
+        "misFavs": "My favourites"
     }
 }

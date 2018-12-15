@@ -67,7 +67,18 @@
     },
     "Errores": {
         "Error": "Se ha producido un error",
-        "Mensaje": "… nuestros programadores están trabajando para resolverlo."
+        "Mensaje": "… nuestros programadores están trabajando para resolverlo.",
+        "EmailVacio": "Por favor ingrese una dirección de correo electrónico",
+        "EmailInvalido": "Por favor ingrese una dirección de correo electrónico valida",
+        "ContraseñaVacio": "Por favor ingrese una contraseña",
+        "Min": "Mínimo 7 caracteres",
+        "Max": "Máximo 30 caracteres",
+        "ContraseñaInv": "Por favor ingrese una contraseña valida",
+        "UserVacio": "Por favor ingrese su nombre",
+        "UserInv": "Solo usa el cáracter del alfabeto",
+        "PhoneVacio": "Por favor ingrese su número de teléfono",
+        "Max10": "Máximo 10 caracteres",
+        "PhoneInv": "Ingrese un número de teléfono valido"
     },
     "Login": {
         "Nombre": "Nombre completo",

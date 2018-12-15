@@ -222,7 +222,6 @@ export class InboxSinglePage {
   
           this.newChatInit = true;
         }else{
-          alert('chat iniciado anteriormente');
           let msj = {
             uiduser: user.uid,
             contenido:  this.editorMsg,
